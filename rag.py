@@ -1,55 +1,66 @@
 import ollama
-from database import SessionLocal, CFTCSwap
+import json
+from tools import TOOL_MAP
 
-from sqlalchemy import or_
+def query_swapbot(user_query: str, messages: list):
+    """Handles a user query by deciding whether to use a tool or answer directly.
 
-# A simple set of stop words to improve keyword search quality
-STOP_WORDS = {
-    'a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'in', 
-    'is', 'it', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 
-    'when', 'where', 'who', 'will', 'with', 'the', 'tell', 'me'
-}
+    This function orchestrates the agentic loop:
+    1.  Ask the model to either answer the user or call a tool.
+    2.  If the model calls a tool, execute it.
+    3.  Send the tool's result back to the model to get a final answer.
 
-def query_swapbot(query_text):
-    """Performs a targeted database query and uses Ollama to answer a question."""
-    db = SessionLocal()
-    try:
-        # Extract keywords and filter out stop words
-        keywords = [word for word in query_text.lower().split() if word not in STOP_WORDS]
+    Args:
+        user_query (str): The user's latest query.
+        messages (list): The history of the conversation.
 
-        # Build a dynamic query to search for keywords in relevant fields
-        search_filters = []
-        searchable_cols = [CFTCSwap.asset_class, CFTCSwap.action, CFTCSwap.dissemination_id]
-        for keyword in keywords:
-            for col in searchable_cols:
-                search_filters.append(col.ilike(f'%{keyword}%'))
+    Returns:
+        str: The AI's final response to the user.
+    """
+    messages.append({'role': 'user', 'content': user_query})
 
-        if not search_filters:
-            return "Please provide keywords to search for."
+    # First call to the model to get its decision
+    response = ollama.chat(
+        model='mistral',
+        messages=messages,
+        tools=[tool['schema'] for tool in TOOL_MAP.values()],
+        tool_choice='auto'  # Let the model decide
+    )
+    messages.append(response['message'])
 
-        # Retrieve data using the constructed query
-        data = db.query(CFTCSwap).filter(or_(*search_filters)).limit(100).all() # Limit to 100 results
-
-        if not data:
-            return "No relevant data found for your query."
-
-        # Format the retrieved data for the LLM context
-        context = "\n".join([str(d.__dict__) for d in data])
-
-        prompt = f"""Based on the following data, please answer the question.
-
-Context:
-{context}
-
-Question: {query_text}
-
-Answer:"""
-
-        response = ollama.chat(
-            model='mistral',
-            messages=[{'role': 'user', 'content': prompt}],
-        )
+    # Check if the model decided to use a tool
+    if not response['message'].get('tool_calls'):
         return response['message']['content']
 
-    finally:
-        db.close()
+    # The model decided to use a tool, so we execute it
+    tool_calls = response['message']['tool_calls']
+    for tool_call in tool_calls:
+        tool_name = tool_call['function']['name']
+        tool_args = tool_call['function']['arguments']
+        
+        if tool_name in TOOL_MAP:
+            tool_function = TOOL_MAP[tool_name]['function']
+            
+            # Execute the tool and get the result
+            try:
+                tool_result = tool_function(**tool_args)
+                
+                # Append the tool's output to the conversation history
+                messages.append({
+                    'role': 'tool',
+                    'content': tool_result,
+                })
+            except Exception as e:
+                print(f"Error executing tool {tool_name}: {e}")
+                messages.append({
+                    'role': 'tool',
+                    'content': f'Error: Could not execute tool {tool_name}. Reason: {e}',
+                })
+
+    # Second call to the model with the tool's output
+    final_response = ollama.chat(
+        model='mistral',
+        messages=messages
+    )
+    messages.append(final_response['message'])
+    return final_response['message']['content']

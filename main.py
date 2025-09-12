@@ -10,6 +10,7 @@ from processor import process_zip_files, load_cftc_data_to_db
 from config import CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
 from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
 from startup import check_dependencies, check_ollama_service
+from worker import start_worker, stop_worker
 
 def main_menu():
     gamecock_ascii()
@@ -35,7 +36,8 @@ def main_menu():
         elif choice == '5':
             database_menu()
         elif choice == 'q':
-            print("Exiting...")
+            print("Stopping background worker and exiting...")
+            stop_worker()
             sys.exit()
         else:
             print("Invalid choice. Please try again.")
@@ -256,12 +258,26 @@ def process_cftc_submenu():
                 print(f"No data found for the selected companies in {source_dir}.")
 
 def query_swapbot_menu():
-    print("\n--- Query with SwapBot ---")
-    query = input("Enter your query: ").strip()
-    if query:
-        response = query_swapbot(query)
-        print("\nSwapBot Response:\n")
-        print(response)
+    print("\n--- Chat with SwapBot ---")
+    print("SwapBot is now in agent mode. You can ask it to perform actions.")
+    print("Type 'back' to return to the main menu.")
+
+    # Initialize the conversation history with a system prompt
+    messages = [{
+        'role': 'system',
+        'content': 'You are SwapBot, an expert financial data assistant. Your goal is to help users by answering questions and performing tasks. When a user\'s request is ambiguous, ask clarifying questions to understand their intent before using your tools. Be conversational and guide the user if they seem unsure. You can use tools to find companies, manage watchlists, download data, and check on background tasks.'
+
+    }]
+
+    while True:
+        user_query = input("\nYou: ").strip()
+        if user_query.lower() == 'back':
+            break
+        if not user_query:
+            continue
+
+        response = query_swapbot(user_query, messages)
+        print(f"\nSwapBot: {response}")
 
 def database_menu():
     while True:
@@ -323,4 +339,5 @@ def run_startup_checks():
 
 if __name__ == "__main__":
     run_startup_checks()
+    start_worker()
     main_menu()
