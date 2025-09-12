@@ -1,0 +1,326 @@
+import sys
+import os
+import subprocess
+from ui import gamecock_ascii, gamecat_ascii
+from data_sources import cftc, sec
+from company_manager import get_company_map, find_company
+from company_data import TARGET_COMPANIES, save_target_companies
+from rag import query_swapbot
+from processor import process_zip_files, load_cftc_data_to_db
+from config import CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
+from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
+from startup import check_dependencies, check_ollama_service
+
+def main_menu():
+    gamecock_ascii()
+    while True:
+        print("\n--- Main Menu ---")
+        print("1. Select Target Companies")
+        print("2. Download Data")
+        print("3. Process Downloaded Data")
+        print("4. Query with SwapBot")
+        print("5. Database Menu")
+        print("Q. Quit")
+
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            select_target_companies_menu()
+        elif choice == '2':
+            download_data_menu()
+        elif choice == '3':
+            process_data_menu()
+        elif choice == '4':
+            query_swapbot_menu()
+        elif choice == '5':
+            database_menu()
+        elif choice == 'q':
+            print("Exiting...")
+            sys.exit()
+        else:
+            print("Invalid choice. Please try again.")
+
+def select_target_companies_menu():
+    print("\n--- Select Target Companies ---")
+    company_map = get_company_map()
+    if company_map is None:
+        print("Could not retrieve company data. Please check your internet connection.")
+        return
+
+    while True:
+        print("\n1. Search for a company")
+        print("2. View target companies")
+        print("B. Back to Main Menu")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            search_term = input("Enter company name or ticker: ").strip()
+            if not search_term:
+                continue
+            
+            results = find_company(company_map, search_term)
+            if not results:
+                print("No companies found.")
+                continue
+
+            print("\nSearch Results:")
+            for i, company in enumerate(results):
+                print(f"{i+1}. {company['title']} ({company['ticker']}) - CIK: {company['cik_str']}")
+            
+            try:
+                selection = int(input("Select a company to add to targets (or 0 to cancel): ").strip())-1
+                if 0 <= selection < len(results):
+                    selected_company = results[selection]
+                    if any(c['cik_str'] == selected_company['cik_str'] for c in TARGET_COMPANIES):
+                        print(f"{selected_company['title']} is already in the target list.")
+                    else:
+                        TARGET_COMPANIES.append(selected_company)
+                        save_target_companies(TARGET_COMPANIES)
+                        print(f"Added {selected_company['title']} to target list.")
+            except ValueError:
+                print("Invalid selection.")
+
+        elif choice == '2':
+            if not TARGET_COMPANIES:
+                print("\nTarget list is empty.")
+            else:
+                print("\n--- Target Companies ---")
+                for company in TARGET_COMPANIES:
+                    print(f"- {company['title']} ({company['ticker']}) - CIK: {company['cik_str']}")
+
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+def download_data_menu():
+    while True:
+        print("\n--- Download Data Menu ---")
+        print("1. Download CFTC Data")
+        print("2. Download SEC Data")
+        print("B. Back to Main Menu")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            cftc_download_submenu()
+        elif choice == '2':
+            sec_download_submenu()
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+def cftc_download_submenu():
+    while True:
+        print("\n--- CFTC Download Menu ---")
+        print("1. Credit")
+        print("2. Commodities")
+        print("3. Rates")
+        print("4. Equity")
+        print("5. Forex")
+        print("A. All CFTC Data")
+        print("B. Back")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            cftc.download_cftc_credit_archives()
+        elif choice == '2':
+            cftc.download_cftc_commodities_archives()
+        elif choice == '3':
+            cftc.download_cftc_rates_archives()
+        elif choice == '4':
+            cftc.download_cftc_equities_archives()
+        elif choice == '5':
+            cftc.download_cftc_forex_archives()
+        elif choice == 'a':
+            print("Downloading all CFTC data...")
+            cftc.download_cftc_credit_archives()
+            cftc.download_cftc_commodities_archives()
+            cftc.download_cftc_rates_archives()
+            cftc.download_cftc_equities_archives()
+            cftc.download_cftc_forex_archives()
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+def sec_download_submenu():
+    while True:
+        print("\n--- SEC Download Menu ---")
+        print("1. Insider Transactions")
+        print("2. Exchange Metrics")
+        print("3. EDGAR Filings")
+        print("4. 13F Holdings")
+        print("5. N-MFP Filings")
+        print("6. Form D Filings")
+        print("7. N-CEN Filings")
+        print("8. N-PORT Filings")
+        print("A. All SEC Data")
+        print("B. Back")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            sec.download_insider_archives()
+        elif choice == '2':
+            sec.download_exchange_archives()
+        elif choice == '3':
+            sec.allyourbasearebelongtous()
+        elif choice == '4':
+            sec.download_13F_archives()
+        elif choice == '5':
+            sec.download_nmfp_archives()
+        elif choice == '6':
+            sec.download_formd_archives()
+        elif choice == '7':
+            sec.download_ncen_archives()
+        elif choice == '8':
+            sec.download_nport_archives()
+        elif choice == 'a':
+            print("Downloading all SEC data...")
+            sec.download_insider_archives()
+            sec.download_exchange_archives()
+            sec.allyourbasearebelongtous()
+            sec.download_13F_archives()
+            sec.download_nmfp_archives()
+            sec.download_formd_archives()
+            sec.download_ncen_archives()
+            sec.download_nport_archives()
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+def process_data_menu():
+    gamecat_ascii()
+    if not TARGET_COMPANIES:
+        print("\nWarning: No target companies selected. Processing may be slow and include all data.")
+        print("It is recommended to select target companies first from the main menu.")
+
+    while True:
+        print("\n--- Process and Load Data Menu ---")
+        print("1. Process CFTC Data")
+        print("2. Process SEC Data (Not fully implemented)")
+        print("B. Back to Main Menu")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            process_cftc_submenu()
+        elif choice == '2':
+            print("SEC data processing is not fully implemented yet.")
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+def process_cftc_submenu():
+    while True:
+        print("\n--- Process CFTC Data ---")
+        print("1. Credit")
+        print("2. Commodities")
+        print("3. Rates")
+        print("4. Equity")
+        print("5. Forex")
+        print("A. All CFTC Data")
+        print("B. Back")
+        choice = input("Enter your choice: ").strip().lower()
+
+        source_dirs = []
+        if choice == '1':
+            source_dirs.append(CFTC_CREDIT_SOURCE_DIR)
+        elif choice == '2':
+            source_dirs.append(CFTC_COMMODITIES_SOURCE_DIR)
+        elif choice == '3':
+            source_dirs.append(CFTC_RATES_SOURCE_DIR)
+        elif choice == '4':
+            source_dirs.append(CFTC_EQUITY_SOURCE_DIR)
+        elif choice == '5':
+            source_dirs.append(CFTC_FOREX_SOURCE_DIR)
+        elif choice == 'a':
+            print("Processing all CFTC data...")
+            source_dirs.extend([
+                CFTC_CREDIT_SOURCE_DIR, CFTC_COMMODITIES_SOURCE_DIR, 
+                CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
+            ])
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+            continue
+
+        for source_dir in source_dirs:
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(source_dir))}...")
+            df = process_zip_files(source_dir, TARGET_COMPANIES)
+            if not df.empty:
+                load_cftc_data_to_db(df)
+            else:
+                print(f"No data found for the selected companies in {source_dir}.")
+
+def query_swapbot_menu():
+    print("\n--- Query with SwapBot ---")
+    query = input("Enter your query: ").strip()
+    if query:
+        response = query_swapbot(query)
+        print("\nSwapBot Response:\n")
+        print(response)
+
+def database_menu():
+    while True:
+        print("\n--- Database Menu ---")
+        print("1. View Database Statistics")
+        print("2. Export Database to CSV")
+        print("3. Reset Database")
+        print("B. Back to Main Menu")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            stats = get_db_stats()
+            print("\nDatabase Statistics:")
+            for table, count in stats.items():
+                print(f"- {table}: {count} records")
+        elif choice == '2':
+            output_path = input("Enter output path for CSV (e.g., export.csv): ").strip()
+            if output_path:
+                export_db_to_csv(output_path)
+        elif choice == '3':
+            confirm = input("Are you sure you want to reset the database? This will delete all data. (y/n): ").strip().lower()
+            if confirm == 'y':
+                reset_database()
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
+
+
+
+
+def run_startup_checks():
+    """Performs all startup checks and handles missing dependencies."""
+    missing = check_dependencies()
+    if missing:
+        print("\nThe following required packages are missing:")
+        for pkg in missing:
+            print(f"- {pkg}")
+        
+        print("\nAttempting to install missing packages...")
+        try:
+            install_command = [sys.executable, '-m', 'pip', 'install'] + missing
+            # Run the installation command, showing output to the user
+            subprocess.run(install_command, check=True)
+            print("Dependencies installed successfully. Please wait for the application to restart.")
+            # Exit with a special code to signal the launcher to restart
+            sys.exit(10)
+        except subprocess.CalledProcessError as e:
+            print("\nError installing dependencies:")
+            print(e.stderr)
+            print("Please try running the following command manually:")
+            print(f"    pip install {' '.join(missing)}")
+            sys.exit(1)
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            sys.exit(1)
+
+    check_ollama_service()
+
+if __name__ == "__main__":
+    run_startup_checks()
+    main_menu()
