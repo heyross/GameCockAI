@@ -8,8 +8,8 @@ from rich.progress import Progress
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def download_file(url, destination_folder, rate_limit_delay=0):
-    """Downloads a file from a URL to a destination folder."""
+def download_file(url, destination_folder, retries=3, rate_limit_delay=0):
+    """Downloads a file from a URL with retries and intelligent error handling."""
     os.makedirs(destination_folder, exist_ok=True)
     filename = url.split('/')[-1]
     filepath = os.path.join(destination_folder, filename)
@@ -18,23 +18,32 @@ def download_file(url, destination_folder, rate_limit_delay=0):
         logging.info(f"Skipping download of {filename} as it already exists.")
         return True
 
-    try:
-        logging.info(f"Attempting to download: {filename}")
-        req = requests.get(url, stream=True)
-        req.raise_for_status()
+    for attempt in range(retries):
+        try:
+            logging.info(f"Attempting to download: {filename} (Attempt {attempt + 1}/{retries})")
+            with requests.get(url, stream=True, timeout=30) as req:
+                # Treat 404 and 500 errors as 'file not found' and don't retry
+                if req.status_code in [404, 500]:
+                    logging.info(f"File not found on server (status {req.status_code}): {filename}")
+                    return False
+                
+                req.raise_for_status() # Raise an exception for other bad status codes
 
-        with open(filepath, 'wb') as f:
-            for chunk in req.iter_content(chunk_size=8192):
-                f.write(chunk)
-        
-        logging.info(f"Successfully downloaded: {filename}")
-        if rate_limit_delay > 0:
-            time.sleep(rate_limit_delay)
-        return True
+                with open(filepath, 'wb') as f:
+                    for chunk in req.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                
+                logging.info(f"Successfully downloaded: {filename}")
+                if rate_limit_delay > 0:
+                    time.sleep(rate_limit_delay)
+                return True
 
-    except requests.RequestException as e:
-        logging.error(f"Failed to download {url}: {e}")
-        return False
+        except requests.exceptions.RequestException as e:
+            logging.warning(f"Download failed for {filename}: {e}. Retrying...")
+            time.sleep(2 ** attempt) # Exponential backoff
+
+    logging.error(f"Failed to download {filename} after {retries} attempts.")
+    return False
 
 def download_archives(urls, destination_folder, max_workers=16, rate_limit_delay=0):
     """Downloads a list of archives from URLs in parallel."""

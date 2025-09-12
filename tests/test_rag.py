@@ -1,70 +1,92 @@
 import unittest
+import json
 from unittest.mock import patch, MagicMock
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from database import Base, CFTCSwap
-from rag import query_swapbot
+# Assuming TOOL_MAP is imported in rag.py and we need to patch it there
+from rag import query_swapbot, TOOL_MAP
 
-class TestRag(unittest.TestCase):
-
-    def setUp(self):
-        """Set up an in-memory SQLite database for RAG testing."""
-        self.engine = create_engine('sqlite:///:memory:')
-        Base.metadata.create_all(self.engine)
-        self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
-
-        # Monkey-patch the SessionLocal in the rag module
-        self.patcher_rag = patch('rag.SessionLocal', self.SessionLocal)
-        self.patcher_rag.start()
-
-        # Populate the database with some test data
-        db = self.SessionLocal()
-        db.add(CFTCSwap(dissemination_id='1', asset_class='Credit', notional_amount=1000000))
-        db.add(CFTCSwap(dissemination_id='2', asset_class='Equity', notional_amount=500000))
-        db.add(CFTCSwap(dissemination_id='3', asset_class='Rates', notional_amount=2000000))
-        db.commit()
-        db.close()
-
-    def tearDown(self):
-        """Stop the patcher and drop all tables."""
-        self.patcher_rag.stop()
-        Base.metadata.drop_all(self.engine)
+class TestAgenticRag(unittest.TestCase):
 
     @patch('rag.ollama.chat')
-    def test_query_swapbot_retrieval_and_prompt(self, mock_ollama_chat):
-        """Test that SwapBot retrieves correct data and constructs the right prompt."""
-        # Mock the response from Ollama
-        mock_ollama_chat.return_value = {'message': {'content': 'Mocked response.'}}
+    def test_ai_uses_search_tool(self, mock_ollama_chat):
+        """Test that the AI correctly decides to use the search_companies tool."""
+        # --- Setup Mocks ---
+        # 1. Mock the tool function that will be called.
+        mock_search_function = MagicMock(return_value=json.dumps([{'title': 'Apple Inc.', 'ticker': 'AAPL'}]))
 
-        query = "Tell me about Credit swaps"
-        response = query_swapbot(query)
+        # 2. Patch the TOOL_MAP dictionary in the 'rag' module to use the mock function.
+        with patch.dict(TOOL_MAP, {'search_companies': {'function': mock_search_function, 'schema': {}}}):
+            
+            # 3. AI's first response: Decide to use the 'search_companies' tool.
+            mock_ollama_chat.side_effect = [
+                {
+                    'message': {
+                        'role': 'assistant',
+                        'tool_calls': [{
+                            'function': {
+                                'name': 'search_companies',
+                                'arguments': {'company_name': 'apple'}
+                            }
+                        }]
+                    }
+                },
+                # 4. AI's second response: Formulate a final answer based on the tool's output.
+                {
+                    'message': {
+                        'role': 'assistant',
+                        'content': 'I found a company called Apple Inc.'
+                    }
+                }
+            ]
 
-        # 1. Verify that Ollama was called
-        self.assertTrue(mock_ollama_chat.called)
+            # --- Run Test ---
+            messages = []
+            response = query_swapbot("find apple", messages)
 
-        # 2. Check the content of the prompt sent to Ollama
-        call_args = mock_ollama_chat.call_args
-        prompt = call_args[1]['messages'][0]['content']
-        
-        # Check that the context in the prompt contains data only for 'Credit'
-        self.assertIn('Credit', prompt)
-        self.assertNotIn('Equity', prompt)
-        self.assertNotIn('Rates', prompt)
-        self.assertIn('1000000', prompt)
+            # --- Assertions ---
+            # Verify that our mock tool was called with the correct arguments.
+            mock_search_function.assert_called_once_with(company_name='apple')
 
-        # 3. Check that the function returns the mocked response
-        self.assertEqual(response, 'Mocked response.')
+            # Verify that the final response is what we expect.
+            self.assertEqual(response, 'I found a company called Apple Inc.')
 
-    def test_query_swapbot_no_data(self):
-        """Test SwapBot's response when no relevant data is found."""
-        query = "Tell me about Forex swaps"
-        response = query_swapbot(query)
-        self.assertEqual(response, "No relevant data found for your query.")
+            # Verify that the conversation history is correctly maintained.
+            self.assertEqual(len(messages), 4) # User -> AI (tool) -> Tool -> AI (final)
+            self.assertEqual(messages[0]['role'], 'user')
+            self.assertEqual(messages[1]['role'], 'assistant')
+            self.assertIsNotNone(messages[1].get('tool_calls'))
+            self.assertEqual(messages[2]['role'], 'tool')
+            self.assertEqual(messages[3]['role'], 'assistant')
+
+    @patch('rag.ollama.chat')
+    def test_ai_answers_directly(self, mock_ollama_chat):
+        """Test that the AI can answer a simple question without using a tool."""
+        # --- Setup Mocks ---
+        # AI's response: Answer directly without calling a tool.
+        mock_ollama_chat.return_value = {
+            'message': {
+                'role': 'assistant',
+                'content': 'Hello! How can I help you today?',
+                'tool_calls': None
+            }
+        }
+
+        # --- Run Test ---
+        messages = []
+        response = query_swapbot("hello", messages)
+
+        # --- Assertions ---
+        # Verify that the response is the direct answer from the AI.
+        self.assertEqual(response, 'Hello! How can I help you today?')
+
+        # Verify that the conversation history contains just the user query and the AI's response.
+        self.assertEqual(len(messages), 2)
+        self.assertEqual(messages[0]['role'], 'user')
+        self.assertEqual(messages[1]['role'], 'assistant')
 
 if __name__ == '__main__':
     unittest.main()

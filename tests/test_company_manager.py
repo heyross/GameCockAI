@@ -15,10 +15,10 @@ class TestCompanyManager(unittest.TestCase):
     def test_get_company_map_success(self, mock_get):
         """Test successful retrieval and processing of the company map."""
         # Mock data similar to the SEC's JSON structure
-        mock_data = [
-            {'cik_str': 320193, 'ticker': 'AAPL', 'title': 'Apple Inc.'},
-            {'cik_str': 789019, 'ticker': 'MSFT', 'title': 'MICROSOFT CORP'}
-        ]
+        mock_data = {
+            '0': {'cik_str': 320193, 'ticker': 'AAPL', 'title': 'Apple Inc.'},
+            '1': {'cik_str': 789019, 'ticker': 'MSFT', 'title': 'MICROSOFT CORP'}
+        }
         mock_response = MagicMock()
         mock_response.raise_for_status.return_value = None
         mock_response.json.return_value = mock_data

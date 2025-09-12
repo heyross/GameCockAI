@@ -16,6 +16,7 @@ def get_company_map():
         # The keys are 'cik_str', 'ticker', and 'title'
         company_data = response.json()
         # The data is a dictionary of dictionaries, so we take the values
+        # The data is a dictionary of dictionaries; we need the values.
         df = pd.DataFrame.from_records(list(company_data.values()))
         df['cik_str'] = df['cik_str'].astype(str).str.zfill(10) # Pad CIKs to 10 digits
         return df

@@ -4,6 +4,6 @@ requests
 bs4
 tqdm
 SQLAlchemy
-ollama
+ollama>=0.2.0
 python-dotenv
 rich

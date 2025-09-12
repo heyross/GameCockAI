@@ -81,5 +81,26 @@ class TestProcessorDatabase(unittest.TestCase):
             stats_after_reset = get_db_stats()
             self.assertEqual(stats_after_reset['cftc_swap_data'], 0)
 
+    def test_export_db_to_csv(self):
+        """Test exporting the database to a CSV file."""
+        # 1. Load some data
+        db = self.SessionLocal()
+        db.add(CFTCSwap(dissemination_id='456', asset_class='Forex', notional_amount=2000))
+        db.commit()
+        db.close()
+
+        # 2. Export to CSV
+        csv_path = os.path.join(self.test_dir, "export.csv")
+        with patch('database.engine', self.engine):
+            export_db_to_csv(csv_path)
+
+        # 3. Verify the CSV content
+        self.assertTrue(os.path.exists(csv_path))
+        df = pd.read_csv(csv_path)
+        self.assertEqual(len(df), 1)
+        self.assertEqual(df.iloc[0]['asset_class'], 'Forex')
+        self.assertEqual(df.iloc[0]['notional_amount'], 2000.0)
+
+
 if __name__ == '__main__':
     unittest.main()

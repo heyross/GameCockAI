@@ -2,6 +2,8 @@ import importlib.util
 import subprocess
 import ollama
 import sys
+import re
+import requests
 
 # Mapping for packages where pip name differs from import name
 PACKAGE_TO_IMPORT_MAP = {
@@ -19,7 +21,8 @@ def check_dependencies():
         with open('requirements.txt', 'r') as f:
             for line in f:
                 package = line.strip()
-                package_name = package.split('==')[0]
+                # Use regex to handle various version specifiers (==, >=, <=, etc.)
+                package_name = re.split(r'[<>=]=?', package)[0].strip()
                 import_name = PACKAGE_TO_IMPORT_MAP.get(package_name, package_name)
                 if package and not importlib.util.find_spec(import_name):
                     missing_packages.append(package)
@@ -39,16 +42,14 @@ def check_ollama_service():
         ollama.list()
         print("Ollama service is running.")
         return True
-    except ollama.ResponseError as e:
-        if 'ollama is not running' in str(e):
-            print("\nOllama service is not running.")
-            print("Please start the Ollama service by running the following command in a separate terminal:")
-            print("\n    ollama serve\n")
-            print("Once the service is running, please restart this application.")
-            sys.exit(1)
-        else:
-            print(f"An unexpected error occurred with Ollama: {e}")
-            sys.exit(1)
+    except (ollama.ResponseError, requests.exceptions.ConnectionError) as e:
+        print("\n--- Ollama Service Not Found ---")
+        print("Could not connect to the Ollama service.")
+        print("Please ensure the Ollama application is running on your machine.")
+        print("If it is not running, you can start it with the following command in a separate terminal:")
+        print("\n    ollama serve\n")
+        input("Press Enter to exit.")
+        sys.exit(1)
     except Exception as e:
-        print(f"Failed to connect to Ollama. Ensure Ollama is installed and configured correctly. Error: {e}")
+        print(f"An unexpected error occurred while checking for Ollama: {e}")
         sys.exit(1)
