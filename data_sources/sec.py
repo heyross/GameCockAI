@@ -105,7 +105,7 @@ def download_insider_archives():
         "2024q3_form345.zip",
     ]
     urls = [f"{base_url}{file_name}" for file_name in file_names]
-    download_archives(urls, INSIDER_SOURCE_DIR)
+    download_archives(urls, INSIDER_SOURCE_DIR, max_workers=1)
 
 def download_exchange_archives():
     os.makedirs(EXCHANGE_SOURCE_DIR, exist_ok=True)
@@ -164,7 +164,7 @@ def download_exchange_archives():
         "individual_security_exchange_2024_q3.zip"
     ]
     urls = [f"{base_url}{file_name}" for file_name in file_names]
-    download_archives(urls, EXCHANGE_SOURCE_DIR)
+    download_archives(urls, EXCHANGE_SOURCE_DIR, max_workers=1)
 
 def allyourbasearebelongtous():
     file_queue = Queue()
@@ -254,7 +254,7 @@ def download_credit_archives():
     end_date = datetime.now().date()
     start_date = end_date - timedelta(days=2*365)
     urls = generate_urls(start_date, end_date)
-    download_archives(urls, CREDIT_SOURCE_DIR, rate_limit_delay=1)
+    download_archives(urls, CREDIT_SOURCE_DIR, max_workers=1, rate_limit_delay=1)
 
 def download_equities_archives():
     os.makedirs(EQUITY_SOURCE_DIR, exist_ok=True)
@@ -272,7 +272,7 @@ def download_equities_archives():
     end_date = datetime.now().date()
     start_date = end_date - timedelta(days=2*365)
     urls = generate_urls(start_date, end_date)
-    download_archives(urls, EQUITY_SOURCE_DIR)
+    download_archives(urls, EQUITY_SOURCE_DIR, max_workers=1)
 
 def download_ncen_archives():
     os.makedirs(NCEN_SOURCE_DIR, exist_ok=True)
@@ -303,7 +303,7 @@ def download_ncen_archives():
         BASE_URL + "2025q1_ncen.zip",
         BASE_URL + "2025q2_ncen.zip",
     ]
-    download_archives(urls, NCEN_SOURCE_DIR)
+    download_archives(urls, NCEN_SOURCE_DIR, max_workers=1)
 
 def download_nport_archives():
     os.makedirs(NPORT_SOURCE_DIR, exist_ok=True)
@@ -333,7 +333,7 @@ def download_nport_archives():
         BASE_URL + "2025q1_nport.zip",
         BASE_URL + "2025q2_nport.zip",
     ]
-    download_archives(urls, NPORT_SOURCE_DIR)
+    download_archives(urls, NPORT_SOURCE_DIR, max_workers=1)
 
 def download_13F_archives():
     os.makedirs(THRTNF_SOURCE_DIR, exist_ok=True)
@@ -387,7 +387,7 @@ def download_13F_archives():
         BASE_URL + "01jun2024-31aug2024_form13f.zip",
         BASE_URL + "01sep2024-30nov2024_form13f.zip",
     ]
-    download_archives(urls, THRTNF_SOURCE_DIR)
+    download_archives(urls, THRTNF_SOURCE_DIR, max_workers=1)
 
 def download_nmfp_archives():
     os.makedirs(NMFP_SOURCE_DIR, exist_ok=True)
@@ -463,7 +463,7 @@ def download_nmfp_archives():
         BASE_URL + "20240408-20240507_nmfp.zip",
         BASE_URL + "20240508-20240607_nmfp.zip",
     ]
-    download_archives(urls, NMFP_SOURCE_DIR)
+    download_archives(urls, NMFP_SOURCE_DIR, max_workers=1)
 
 def download_formd_archives():
     os.makedirs(FORMD_SOURCE_DIR, exist_ok=True)
@@ -537,4 +537,4 @@ def download_formd_archives():
         BASE_URL + "2024q2_d.zip",
         BASE_URL + "2024q3_d.zip",
     ]
-    download_archives(urls, FORMD_SOURCE_DIR)
+    download_archives(urls, FORMD_SOURCE_DIR, max_workers=1)

@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich.progress import Progress
+from config import SEC_USER_AGENT
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -14,6 +15,10 @@ def download_file(url, destination_folder, retries=3, rate_limit_delay=0):
     filename = url.split('/')[-1]
     filepath = os.path.join(destination_folder, filename)
 
+    headers = {
+        'User-Agent': SEC_USER_AGENT
+    }
+
     if os.path.exists(filepath):
         logging.info(f"Skipping download of {filename} as it already exists.")
         return True
@@ -21,7 +26,7 @@ def download_file(url, destination_folder, retries=3, rate_limit_delay=0):
     for attempt in range(retries):
         try:
             logging.info(f"Attempting to download: {filename} (Attempt {attempt + 1}/{retries})")
-            with requests.get(url, stream=True, timeout=30) as req:
+            with requests.get(url, stream=True, timeout=30, headers=headers) as req:
                 # Treat 404 and 500 errors as 'file not found' and don't retry
                 if req.status_code in [404, 500]:
                     logging.info(f"File not found on server (status {req.status_code}): {filename}")

@@ -6,8 +6,12 @@ from data_sources import cftc, sec
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 from rag import query_swapbot
-from processor import process_zip_files, load_cftc_data_to_db
-from config import CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
+from processor import process_zip_files, load_cftc_data_to_db, process_sec_insider_data, process_form13f_data, process_exchange_metrics_data
+from config import (
+    CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, 
+    CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR, THRTNF_SOURCE_DIR,
+    EXCHANGE_SOURCE_DIR
+)
 from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
 from startup import check_dependencies, check_ollama_service
 from worker import start_worker, stop_worker
@@ -201,14 +205,14 @@ def process_data_menu():
     while True:
         print("\n--- Process and Load Data Menu ---")
         print("1. Process CFTC Data")
-        print("2. Process SEC Data (Not fully implemented)")
+        print("2. Process SEC Data")
         print("B. Back to Main Menu")
         choice = input("Enter your choice: ").strip().lower()
 
         if choice == '1':
             process_cftc_submenu()
         elif choice == '2':
-            print("SEC data processing is not fully implemented yet.")
+            process_sec_submenu()
         elif choice == 'b':
             break
         else:
@@ -251,11 +255,33 @@ def process_cftc_submenu():
 
         for source_dir in source_dirs:
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(source_dir))}...")
-            df = process_zip_files(source_dir, TARGET_COMPANIES)
-            if not df.empty:
-                load_cftc_data_to_db(df)
-            else:
-                print(f"No data found for the selected companies in {source_dir}.")
+            process_zip_files(source_dir, TARGET_COMPANIES)
+
+def process_sec_submenu():
+    while True:
+        print("\n--- Process SEC Data ---")
+        print("1. Insider Transactions")
+        print("2. 13F Holdings")
+        print("3. Exchange Metrics")
+        print("B. Back")
+        choice = input("Enter your choice: ").strip().lower()
+
+        if choice == '1':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(INSIDER_SOURCE_DIR))}...")
+            process_sec_insider_data(INSIDER_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == '2':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(THRTNF_SOURCE_DIR))}...")
+            process_form13f_data(THRTNF_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == '3':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(EXCHANGE_SOURCE_DIR))}...")
+            process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == 'b':
+            break
+        else:
+            print("Invalid choice.")
 
 def query_swapbot_menu():
     print("\n--- Chat with SwapBot ---")

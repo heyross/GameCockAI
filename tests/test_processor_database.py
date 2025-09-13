@@ -40,33 +40,38 @@ class TestProcessorDatabase(unittest.TestCase):
 
     def test_process_and_load(self):
         """Test processing a zip file and loading its data into the database."""
+        # 0. Clear any existing data
+        db = self.SessionLocal()
+        db.query(CFTCSwap).delete()
+        db.commit()
+        
         # 1. Create a mock zip file with CSV data
-        csv_data = "dissemination_id,notional_amount,asset_class\n1,1000,Credit"
+        csv_data = "dissemination_id,notional_amount_leg_1,asset_class\n1,1000,Credit"
         zip_path = os.path.join(self.test_dir, "test.zip")
         with ZipFile(zip_path, 'w') as zf:
             zf.writestr("test.csv", csv_data)
 
-        # 2. Process the zip file
-        df = process_zip_files(self.test_dir, target_companies=[])
+        # 2. Process the zip file and load data into the database
+        df = process_zip_files(self.test_dir, target_companies=[], load_to_db=True)
+        self.assertIsNotNone(df)
         self.assertEqual(len(df), 1)
         self.assertEqual(df.iloc[0]['asset_class'], 'Credit')
-
-        # 3. Load the DataFrame into the database
-        load_cftc_data_to_db(df)
 
         # 4. Verify the data in the database
         db = self.SessionLocal()
         count = db.query(CFTCSwap).count()
         self.assertEqual(count, 1)
         record = db.query(CFTCSwap).first()
-        self.assertEqual(record.notional_amount, 1000)
+        self.assertEqual(record.dissemination_id, '1')
+        self.assertEqual(record.notional_amount_leg_1, 1000.0)
+        self.assertEqual(record.asset_class, 'Credit')
         db.close()
 
     def test_db_stats_and_reset(self):
         """Test the database statistics and reset functionality."""
         # 1. Load some data
         db = self.SessionLocal()
-        db.add(CFTCSwap(dissemination_id='123', notional_amount=500))
+        db.add(CFTCSwap(dissemination_id='123', notional_amount_leg_1=500.0, asset_class='Commodity'))
         db.commit()
         db.close()
 
@@ -85,7 +90,7 @@ class TestProcessorDatabase(unittest.TestCase):
         """Test exporting the database to a CSV file."""
         # 1. Load some data
         db = self.SessionLocal()
-        db.add(CFTCSwap(dissemination_id='456', asset_class='Forex', notional_amount=2000))
+        db.add(CFTCSwap(dissemination_id='456', asset_class='Forex', notional_amount_leg_1=2000.0))
         db.commit()
         db.close()
 
@@ -99,7 +104,7 @@ class TestProcessorDatabase(unittest.TestCase):
         df = pd.read_csv(csv_path)
         self.assertEqual(len(df), 1)
         self.assertEqual(df.iloc[0]['asset_class'], 'Forex')
-        self.assertEqual(df.iloc[0]['notional_amount'], 2000.0)
+        self.assertEqual(df.iloc[0]['notional_amount_leg_1'], 2000.0)
 
 
 if __name__ == '__main__':
