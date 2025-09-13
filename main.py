@@ -57,6 +57,7 @@ def select_target_companies_menu():
     while True:
         print("\n1. Search for a company")
         print("2. View target companies")
+        print("3. Clear target companies")
         print("B. Back to Main Menu")
         choice = input("Enter your choice: ").strip().lower()
 
@@ -94,6 +95,18 @@ def select_target_companies_menu():
                 print("\n--- Target Companies ---")
                 for company in TARGET_COMPANIES:
                     print(f"- {company['title']} ({company['ticker']}) - CIK: {company['cik_str']}")
+
+        elif choice == '3':
+            if not TARGET_COMPANIES:
+                print("\nTarget list is already empty.")
+            else:
+                confirm = input(f"Are you sure you want to clear all {len(TARGET_COMPANIES)} target companies? (y/n): ").strip().lower()
+                if confirm == 'y':
+                    TARGET_COMPANIES.clear()
+                    save_target_companies(TARGET_COMPANIES)
+                    print("Target companies list cleared.")
+                else:
+                    print("Clear operation cancelled.")
 
         elif choice == 'b':
             break
