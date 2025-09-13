@@ -39,16 +39,16 @@ def _download_cftc_data(destination_dir, url_fragment, years_back=2, rate_limit_
     download_archives(urls, destination_dir, rate_limit_delay=rate_limit_delay)
 
 def download_cftc_credit_archives():
-    _download_cftc_data(CFTC_CREDIT_SOURCE_DIR, "CFTC_CUMULATIVE_CREDITS_", rate_limit_delay=1)
+    _download_cftc_data(CFTC_CREDIT_SOURCE_DIR, "CFTC_CUMULATIVE_CREDITS_", rate_limit_delay=0.5)
 
 def download_cftc_commodities_archives():
-    _download_cftc_data(CFTC_COMMODITIES_SOURCE_DIR, "CFTC_CUMULATIVE_COMMODITIES_", rate_limit_delay=1)
+    _download_cftc_data(CFTC_COMMODITIES_SOURCE_DIR, "CFTC_CUMULATIVE_COMMODITIES_", rate_limit_delay=0.5)
 
 def download_cftc_rates_archives():
-    _download_cftc_data(CFTC_RATES_SOURCE_DIR, "CFTC_CUMULATIVE_RATES_")
+    _download_cftc_data(CFTC_RATES_SOURCE_DIR, "CFTC_CUMULATIVE_RATES_", rate_limit_delay=0.5)
 
 def download_cftc_equities_archives():
-    _download_cftc_data(CFTC_EQUITY_SOURCE_DIR, "CFTC_CUMULATIVE_EQUITIES_")
+    _download_cftc_data(CFTC_EQUITY_SOURCE_DIR, "CFTC_CUMULATIVE_EQUITIES_", rate_limit_delay=0.5)
 
 def download_cftc_forex_archives():
-    _download_cftc_data(CFTC_FOREX_SOURCE_DIR, "CFTC_CUMULATIVE_FOREX_")
+    _download_cftc_data(CFTC_FOREX_SOURCE_DIR, "CFTC_CUMULATIVE_FOREX_", rate_limit_delay=0.5)

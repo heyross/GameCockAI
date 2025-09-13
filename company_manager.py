@@ -32,8 +32,13 @@ def find_company(df, search_term):
     if df is None:
         return []
     
-    search_term = search_term.lower()
-    # Search in both ticker and title columns
-    results = df[(df['ticker'].str.lower() == search_term) | (df['title'].str.lower().str.contains(search_term, na=False))]
+    search_term_lower = search_term.lower()
+    
+    # Search in ticker, title, and CIK columns
+    results = df[
+        (df['ticker'].str.lower() == search_term_lower) | 
+        (df['title'].str.lower().str.contains(search_term_lower, na=False)) | 
+        (df['cik_str'] == search_term.zfill(10))
+    ]
     return results.to_dict('records')
 

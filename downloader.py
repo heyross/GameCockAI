@@ -50,7 +50,13 @@ def download_archives(urls, destination_folder, max_workers=16, rate_limit_delay
     with Progress() as progress:
         task = progress.add_task("[cyan]Downloading archives...", total=len(urls))
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            futures = {executor.submit(download_file, url, destination_folder, rate_limit_delay): url for url in urls}
+            # Use keyword arguments to avoid positional argument confusion
+            futures = {executor.submit(
+                download_file, 
+                url=url, 
+                destination_folder=destination_folder, 
+                rate_limit_delay=rate_limit_delay
+            ): url for url in urls}
             for future in as_completed(futures):
                 try:
                     future.result()
