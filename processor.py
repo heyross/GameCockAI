@@ -17,7 +17,8 @@ from database import (
     NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
     NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
     NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
-    NMFPDispositionOfPortfolioSecurities
+    NMFPDispositionOfPortfolioSecurities,
+    Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
 )
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -490,10 +491,58 @@ def load_cftc_data_to_db(df, db_session=None):
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
-    sanitized_columns = {}
-    for col in df.columns:
-        new_col = col.lower().replace(' ', '_').replace('-', '_').replace('.', '_')
-        new_col = ''.join(e for e in new_col if e.isalnum() or e == '_')
-        sanitized_columns[col] = new_col
-    df.rename(columns=sanitized_columns, inplace=True)
+    df.columns = df.columns.str.strip().str.lower()
+    df.columns = df.columns.str.replace(r'[^0-9a-zA-Z_]+', '_', regex=True)
+    df.columns = df.columns.str.strip('_')
+    df.columns = [''.join(c if c.isalnum() or c == '_' else '_' for c in col) for col in df.columns]
     return df
+
+def process_10k_filings(source_dir: str, db_session=None, force: bool = False) -> None:
+    """Process 10-K and 10-Q SEC filings from a directory.
+    
+    Args:
+        source_dir: Directory containing 10-K/10-Q filings
+        db_session: Optional database session
+        force: If True, reprocess even if already in database
+    """
+    from processor_10k import SEC10KProcessor
+    import os
+    
+    db = db_session if db_session else SessionLocal()
+    processor = SEC10KProcessor(db_session=db)
+    
+    try:
+        # Find all .txt files in the source directory and subdirectories
+        for root, _, files in os.walk(source_dir):
+            for file in files:
+                if file.endswith('.txt'):
+                    file_path = os.path.join(root, file)
+                    try:
+                        processor.process_filing(file_path, force=force)
+                    except Exception as e:
+                        logging.error(f"Error processing {file_path}: {e}")
+                        continue
+    finally:
+        if not db_session:  # Only close if we created the session
+            db.close()
+
+def process_sec_filings(filing_type: str, source_dir: str, **kwargs):
+    """Process SEC filings based on filing type.
+    
+    Args:
+        filing_type: Type of SEC filing ('10-K', '10-Q', '13F', 'N-MFP', etc.)
+        source_dir: Directory containing the filing data
+        **kwargs: Additional arguments specific to the filing type
+    """
+    if filing_type in ['10-K', '10-Q']:
+        return process_10k_filings(source_dir, **kwargs)
+    elif filing_type == '13F':
+        return process_form13f_data(source_dir, **kwargs)
+    elif filing_type == 'N-MFP':
+        return process_nmfp_data(source_dir, **kwargs)
+    elif filing_type == 'insider':
+        return process_sec_insider_data(source_dir, **kwargs)
+    elif filing_type == 'exchange_metrics':
+        return process_exchange_metrics_data(source_dir, **kwargs)
+    else:
+        raise ValueError(f"Unsupported filing type: {filing_type}")

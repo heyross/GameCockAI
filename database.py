@@ -9,7 +9,7 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-from sqlalchemy import Column, Integer, String, DateTime, Float, Text
+from sqlalchemy import Column, Integer, String, DateTime, Float, Text, Boolean, JSON, BigInteger
 
 class SecSubmission(Base):
     __tablename__ = 'sec_submissions'
@@ -627,9 +627,191 @@ class NMFPCancelledSharesPerBusDay(Base):
 class NMFPDispositionOfPortfolioSecurities(Base):
     __tablename__ = 'nmfp_disposition_of_portfolio_securities'
     accession_number = Column(String(25), primary_key=True)
-    deposition_us_treasury_debt_amt = Column(Float)
-    gov_t_agency_coupon_paying_debt_amt = Column(Float)
-    gov_t_agen_on_coupon_paying_debt_amt = Column(Float)
+    security_description = Column(String(150))
+    ticker_symbol = Column(String(10))
+    cusip = Column(String(9))
+    value = Column(Float)
+    shares = Column(Float)
+    type_of_security = Column(String(50))
+
+class Sec10KSubmission(Base):
+    """Stores metadata about 10-K and 10-Q filings."""
+    __tablename__ = 'sec_10k_submissions'
+    
+    accession_number = Column(String(25), primary_key=True)
+    cik = Column(String(10), nullable=False, index=True)
+    company_name = Column(String(255), nullable=False)
+    form_type = Column(String(10), nullable=False)  # 10-K, 10-Q, etc.
+    filing_date = Column(DateTime, nullable=False, index=True)
+    period_of_report = Column(DateTime, nullable=False)
+    acceptance_datetime = Column(DateTime)
+    file_number = Column(String(20))
+    sec_act = Column(String(50))
+    film_number = Column(String(50))
+    is_xbrl = Column(Boolean, default=False)
+    is_inline_xbrl = Column(Boolean, default=False)
+    primary_document = Column(String(255))
+    size = Column(Integer)  # Size in bytes
+    url = Column(String(500))
+
+class Sec10KDocument(Base):
+    """Stores sections of 10-K/10-Q documents."""
+    __tablename__ = 'sec_10k_documents'
+    
+    id = Column(Integer, primary_key=True)
+    accession_number = Column(String(25), nullable=False, index=True)
+    section = Column(String(50), nullable=False)  # e.g., 'business', 'risk_factors', 'mdna'
+    sequence = Column(Integer, nullable=False)  # Order of sections
+    content = Column(Text)
+    word_count = Column(Integer)
+    
+    __table_args__ = (
+        {'sqlite_autoincrement': True}
+    )
+
+class Sec10KFinancials(Base):
+    """Stores financial statement data from 10-K/10-Q filings."""
+    __tablename__ = 'sec_10k_financials'
+    
+    id = Column(Integer, primary_key=True)
+    accession_number = Column(String(25), nullable=False, index=True)
+    statement_type = Column(String(20), nullable=False)  # 'income', 'balance', 'cash_flow'
+    period_end = Column(DateTime, nullable=False)
+    period_length = Column(String(10))  # 'Q1', 'Q2', 'Q3', 'FY'
+    metric_name = Column(String(100), nullable=False)
+    metric_value = Column(Float)
+    metric_unit = Column(String(20))  # 'USD', 'shares', etc.
+    is_restated = Column(Boolean, default=False)
+    
+    __table_args__ = (
+        {'sqlite_autoincrement': True},
+    )
+
+class Sec10KExhibits(Base):
+    """Stores information about exhibits in 10-K/10-Q filings."""
+    __tablename__ = 'sec_10k_exhibits'
+    
+    id = Column(Integer, primary_key=True)
+    accession_number = Column(String(25), nullable=False, index=True)
+    exhibit_number = Column(String(10), nullable=False)
+    exhibit_description = Column(String(500))
+    file_name = Column(String(255))
+    file_size = Column(Integer)  # Size in bytes
+    url = Column(String(500))
+    
+    __table_args__ = (
+        {'sqlite_autoincrement': True},
+    )
+
+class Sec10KMetadata(Base):
+    """Stores additional metadata and extracted information from 10-K/10-Q filings."""
+    __tablename__ = 'sec_10k_metadata'
+    
+    accession_number = Column(String(25), primary_key=True)
+    fiscal_year = Column(Integer)
+    fiscal_period = Column(String(10))  # Q1, Q2, Q3, Q4, FY
+    entity_common_stock_shares_outstanding = Column(BigInteger)
+    entity_public_float = Column(Float)
+    entity_well_known_seasoned_issuer = Column(Boolean)
+    entity_voluntary_filers = Column(Boolean)
+    entity_small_business = Column(Boolean)
+    entity_emerging_growth_company = Column(Boolean)
+    entity_exchange_act_report = Column(Boolean)
+    entity_shell_company = Column(Boolean)
+    filing_metadata = Column(JSON)  # Renamed from 'metadata' to avoid SQLAlchemy conflict
+    entity_central_index_key = Column(String(10))
+    entity_irs_number = Column(String(20))
+    entity_incorporation_state = Column(String(2))
+    entity_tax_identification_number = Column(String(20))
+    entity_phone_number = Column(String(20))
+    entity_former_name = Column(String(255))
+    entity_former_conformed_name = Column(String(255))
+    entity_date_of_name_change = Column(DateTime)
+    entity_fiscal_year_end = Column(String(5))  # MM-DD
+    entity_website = Column(String(255))
+    entity_business_address = Column(JSON)  # JSON with address fields
+    entity_mailing_address = Column(JSON)   # JSON with address fields
+    entity_former_business_name = Column(String(255))
+    entity_former_conformed_name = Column(String(255))
+    entity_former_name_change_date = Column(DateTime)
+    entity_registrant_name = Column(String(255))
+    entity_edgar_company_conformed_name = Column(String(255))
+    entity_standard_industrial_classification = Column(String(10))
+    entity_irs_employer_identification_number = Column(String(20))
+
+class Sec8KSubmission(Base):
+    """Stores metadata about 8-K filings."""
+    __tablename__ = 'sec_8k_submissions'
+    
+    accession_number = Column(String(25), primary_key=True)
+    cik = Column(String(10), nullable=False, index=True)
+    company_name = Column(String(255), nullable=False)
+    form_type = Column(String(10), nullable=False)  # 8-K, 8-K/A
+    filing_date = Column(DateTime, nullable=False, index=True)
+    period_of_report = Column(DateTime, nullable=True, default=None)
+    acceptance_datetime = Column(DateTime)
+    file_number = Column(String(20))
+    film_number = Column(String(50))
+    items = Column(String(255)) # Comma-separated list of items
+    size = Column(Integer)  # Size in bytes
+    url = Column(String(500))
+
+class Sec8KItem(Base):
+    """Stores individual items from an 8-K filing."""
+    __tablename__ = 'sec_8k_items'
+    
+    id = Column(Integer, primary_key=True)
+    accession_number = Column(String(25), nullable=False, index=True)
+    item_number = Column(String(20), nullable=False) # e.g., '1.01', '5.02'
+    item_title = Column(String(255))
+    content = Column(Text)
+    
+    __table_args__ = (
+        {'sqlite_autoincrement': True},
+    )
+    
+    # Audit information
+    auditor_name = Column(String(255))
+    auditor_location = Column(String(100))
+    auditor_cik = Column(String(10))
+    auditor_former_name = Column(String(255))
+    auditor_independence = Column(Boolean)
+    
+    # Document metadata
+    document_type = Column(String(20))  # 10-K, 10-K/A, 10-Q, 10-Q/A, etc.
+    document_period_end_date = Column(DateTime)
+    document_fiscal_year_focus = Column(Integer)
+    document_fiscal_period_focus = Column(String(10))  # Q1, Q2, Q3, FY
+    current_fiscal_year_end_date = Column(String(10))  # YYYY-MM-DD
+    amendment_flag = Column(Boolean, default=False)
+    amendment_description = Column(Text)
+    document_quarterly_report = Column(Boolean)
+    document_transition_report = Column(Boolean)
+    document_annual_report = Column(Boolean)
+    shell_company_report = Column(Boolean)
+    interactive_data_flag = Column(Boolean)
+    
+    # Filing information
+    filer_category = Column(String(50))
+    filer_status = Column(String(50))
+    filer_well_known_seasoned_issuer = Column(Boolean)
+    filer_voluntary_filer = Column(Boolean)
+    filer_small_reporting_company = Column(Boolean)
+    filer_emerging_growth_company = Column(Boolean)
+    filer_public_float = Column(Float)
+    filer_aggregate_market_value = Column(Float)
+    filer_common_equity_outstanding = Column(BigInteger)
+    
+    # Business information
+    business_primary_sic_code = Column(String(10))
+    business_address = Column(JSON)  # JSON with address fields
+    business_phone = Column(String(20))
+    business_mailing_address = Column(JSON)  # JSON with address fields
+    
+    # Additional metadata
+    filing_metadata = Column(JSON)  # For any additional metadata (renamed from 'metadata' to avoid SQLAlchemy conflict)
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
     non_us_sovereign_supranat_debt_amt = Column(Float)
     certificate_deposit_amt = Column(Float)
     non_negotiable_time_deposit_amt = Column(Float)

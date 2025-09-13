@@ -7,10 +7,11 @@ from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 from rag import query_swapbot
 from processor import process_zip_files, load_cftc_data_to_db, process_sec_insider_data, process_form13f_data, process_exchange_metrics_data
+from processor_8k import process_8k_filings
 from config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, 
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR, THRTNF_SOURCE_DIR,
-    EXCHANGE_SOURCE_DIR
+    EXCHANGE_SOURCE_DIR, SEC_8K_SOURCE_DIR
 )
 from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
 from startup import check_dependencies, check_ollama_service
@@ -263,6 +264,7 @@ def process_sec_submenu():
         print("1. Insider Transactions")
         print("2. 13F Holdings")
         print("3. Exchange Metrics")
+        print("4. 8-K Filings")
         print("B. Back")
         choice = input("Enter your choice: ").strip().lower()
 
@@ -277,6 +279,10 @@ def process_sec_submenu():
         elif choice == '3':
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(EXCHANGE_SOURCE_DIR))}...")
             process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == '4':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(SEC_8K_SOURCE_DIR))}...")
+            process_8k_filings(SEC_8K_SOURCE_DIR)
             print("Processing complete.")
         elif choice == 'b':
             break
