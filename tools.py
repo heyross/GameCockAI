@@ -52,7 +52,7 @@ except ImportError as e:
     sec = None
 
 try:
-    from processor import process_zip_files, load_cftc_data_to_db
+    from src.processor import process_zip_files, load_cftc_data_to_db
     PROCESSOR_AVAILABLE = True
 except ImportError as e:
     logger.warning(f"⚠️ Processor not available: {e}")

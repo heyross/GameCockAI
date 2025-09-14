@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, SecSubmission
-from processor import process_sec_insider_data
+from src.processor import process_sec_insider_data
 
 class TestSecProcessor(unittest.TestCase):
     def setUp(self):

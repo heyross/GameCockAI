@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, SecExchangeMetrics
-from processor import process_exchange_metrics_data
+from src.processor import process_exchange_metrics_data
 
 class TestExchangeMetricsProcessor(unittest.TestCase):
     def setUp(self):

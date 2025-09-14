@@ -1,116 +1,106 @@
-# GameCockAI Next Session Context
+# Next Session Prompt - Critical Bug Fixes Required
 
-## Project Overview
-GameCockAI is a comprehensive financial data analysis platform that downloads, processes, and analyzes data from SEC and CFTC sources. The system features a RAG (Retrieval-Augmented Generation) pipeline with an AI agent called Raven for natural language querying of financial data.
+## Current Critical Issues
 
-## Current System Status
+The GameCock AI application has **CRITICAL BUGS** that prevent core functionality from working. The main application cannot find companies or add them to the target list, which are essential features.
 
-### Successfully Implemented Features
-- **SEC Form D Processing**: Complete implementation with database schemas for all TSV files (FORMDSUBMISSION, ISSUERS, OFFERING, RECIPIENTS, RELATEDPERSONS, SIGNATURES)
-- **SEC Form 13F Processing**: Fully functional with nullable constraint fixes applied
-- **SEC N-CEN Processing**: Complete with database schemas and processing logic
-- **SEC N-PORT Processing**: Fully implemented and tested with real data (9,117 records processed successfully)
-- **CFTC Swap Data**: Processing for Equity, Credit, Commodities, and Interest Rates data
-- **AI Agent (Raven)**: Conversational interface for data management and querying
-- **Company Watchlist**: Target company management system
-- **Database Management**: SQLite backend with export/import capabilities
+## Immediate Priority: Fix Core Application Functionality
 
-### Recent Critical Fixes Applied
-Based on production experience, the following nullable constraint issues have been resolved:
+### 1. **CRITICAL: Fix Company Search and Addition**
+- **Problem**: Main app cannot find companies or add them to target list
+- **Impact**: Core functionality is broken
+- **Status**: Must be fixed before any new features
 
-**Form 13F Tables:**
-- `form13f_info_tables.nameofissuer` → nullable=True
-- `form13f_info_tables.titleofclass` → nullable=True  
-- `form13f_signatures.name` → nullable=True
+### 2. **CRITICAL: Consolidate Duplicate Files**
+- **Problem**: Two `processor.py` files exist:
+  - `GameCockAI/processor.py` (complete, 2000+ lines)
+  - `GameCockAI/src/processor.py` (incomplete, 200 lines)
+- **Solution**: Integrate complete processor.py into src/processor.py
+- **Impact**: Import conflicts causing application failures
 
-**N-CEN Tables:**
-- `NCENSubmission.submission_type` → nullable=True
-- `NCENSubmission.cik` → nullable=True
-- `NCENSubmission.report_ending_period` → nullable=True
+### 3. **CRITICAL: Fix Import System**
+- **Problem**: Import errors due to duplicate files and path conflicts
+- **Solution**: Update all imports to use src/ modules consistently
+- **Impact**: Application cannot start properly
 
-**N-PORT Tables:**
-- `NPORTSubmission.submission_type` → nullable=True
-- `NPORTSubmission.cik` → nullable=True
-- `NPORTSubmission.registrant_name` → nullable=True
-- `NPORTSubmission.report_date` → nullable=True
+## Current File Structure Issues
 
-**Important Note**: These fields can legitimately be missing in SEC data (e.g., "NO 13F SECURITIES TO REPORT", "NA", "/s/ N/A"). Database reset is required after schema changes.
-
-## Current File Structure
 ```
-d:\GitHub\Gamecock_Final\GameCockAI\
-├── Legacy_Code/
-├── MagicMock/
-├── data/
-│   └── sec/
-│       ├── 10k/
-│       └── 8k/
-├── data_sources/
-├── tests/
-├── main.py (entry point)
-├── database.py (SQLAlchemy schemas)
-├── processor.py (data processing logic)
-├── downloader.py (data fetching)
-├── company_manager.py (watchlist management)
-├── rag.py (AI/RAG pipeline)
-├── ui.py (CLI interface)
-└── requirements.txt
+GameCockAI/
+├── processor.py          # COMPLETE VERSION (2000+ lines) - KEEP THIS CONTENT
+├── src/
+│   ├── processor.py      # INCOMPLETE VERSION (200 lines) - REPLACE WITH ABOVE
+│   └── [other modules]
+└── [other files]
 ```
 
-## Data Integration Pattern
-When adding new data file types, follow this established pattern:
+## Required Actions (In Order)
 
-1. **Inspect Data Headers**: Determine CSV/TSV structure
-2. **Document Structure**: Update `datafilestructure.md`
-3. **Update Database Schema**: Modify `database.py` with sanitized column names
-4. **Update Processor**: Modify `processor.py` with proper data type conversion
-5. **Reset Database**: Use "Database Menu" → "Reset Database" (destructive operation)
-6. **Process Data**: Ingest new data type
+### Step 1: Consolidate Processor Files
+1. **Read** `GameCockAI/processor.py` (complete version)
+2. **Read** `GameCockAI/src/processor.py` (incomplete version)
+3. **Replace** `GameCockAI/src/processor.py` with complete content from `GameCockAI/processor.py`
+4. **Delete** `GameCockAI/processor.py` (duplicate)
 
-## Remaining Implementation Opportunities
-The following data sources are documented but not yet implemented:
-- `SecNmfp` - SEC N-MFP forms (Money Market Fund Monthly Report)
-- `FOREX` - Foreign Exchange data
-- `EDGAR` - SEC EDGAR filings
-- `EXCHANGE` - Exchange data
-- `INSIDERS` - Insider trading data
+### Step 2: Fix Import System
+1. **Update** `GameCockAI/main.py` imports to use `from src.processor import ...`
+2. **Update** all other files that import from processor
+3. **Test** that imports work correctly
 
-## Key Technical Considerations
+### Step 3: Test Core Functionality
+1. **Run** `python main.py` to test application startup
+2. **Test** company search functionality
+3. **Test** adding companies to target list
+4. **Verify** all core workflows work end-to-end
 
-### Database Schema Design
-- Use nullable=True for fields that can legitimately be missing in source data
-- Sanitize column names (lowercase, replace spaces/hyphens with underscores)
-- Include proper foreign key relationships
-- Test with real data to identify constraint issues
+### Step 4: Clean Up
+1. **Remove** any remaining duplicate files
+2. **Verify** all imports use src/ modules consistently
+3. **Test** complete application functionality
 
-### Data Processing
-- Always call `sanitize_column_names` function for incoming DataFrames
-- Maintain `potential_date_cols` and `potential_numeric_cols` lists for type conversion
-- Implement comprehensive error handling and logging
-- Handle edge cases like "N/A", empty strings, and malformed data
+## Key Files to Focus On
 
-### Testing Strategy
-- Test with real SEC data samples to identify nullable constraint issues
-- Verify foreign key relationships work correctly
-- Test data type conversions handle edge cases
-- Ensure processing can handle large datasets (9,000+ records tested successfully)
+- `GameCockAI/main.py` - Main application entry point
+- `GameCockAI/processor.py` - Complete processor (source of truth)
+- `GameCockAI/src/processor.py` - Target for integration
+- `GameCockAI/company_manager.py` - Company search functionality
+- `GameCockAI/company_data.py` - Target list management
 
-## Current Active Document
-User was viewing `datafilestructure.md` at line 252, which contains comprehensive documentation of all implemented data structures.
+## Testing Requirements
 
-## Next Steps Recommendations
-1. Consider implementing remaining SEC data types (N-MFP, EDGAR, etc.)
-2. Enhance RAG pipeline with additional query capabilities
-3. Add data visualization features
-4. Implement automated data refresh scheduling
-5. Add data quality validation and reporting features
+After fixes, verify:
+1. Application starts without import errors
+2. Company search works (find companies by name/ticker)
+3. Companies can be added to target list
+4. All core workflows function properly
+5. No duplicate files remain
 
-## Production Readiness
-The system is currently production-ready for:
-- SEC Form D, 13F, N-CEN, and N-PORT processing
-- CFTC swap data analysis
-- AI-powered natural language querying
-- Company watchlist management
-- Database operations and exports
+## Important Notes
 
-All major nullable constraint issues have been resolved through production testing.
+- **DO NOT** start new feature development until core bugs are fixed
+- **DO NOT** create new files until existing issues are resolved
+- **PRIORITIZE** functionality over new features
+- **TEST** everything thoroughly after each fix
+- **KEEP** the complete processor.py content (2000+ lines)
+- **REPLACE** the incomplete src/processor.py with complete content
+
+## Success Criteria
+
+- Application starts without errors
+- Company search functionality works
+- Companies can be added to target list
+- All imports use src/ modules consistently
+- No duplicate files exist
+- Core workflows function end-to-end
+
+## Next Steps After Fixes
+
+Once core functionality is restored:
+1. Implement comprehensive testing
+2. Build features from brainstorm.md one at a time
+3. Add integration testing and documentation
+4. Follow the build/test/commit checklist from brainstorm.md
+
+---
+
+**CRITICAL**: Fix the core application bugs first. Do not proceed with new features until the application can find companies and add them to the target list.

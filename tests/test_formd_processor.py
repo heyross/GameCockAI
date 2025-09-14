@@ -12,7 +12,7 @@ root_dir = os.path.dirname(gamecock_dir)
 sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
 sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
-from processor import process_formd_data, process_formd_quarter
+from src.processor import process_formd_data, process_formd_quarter
 from downloader import extract_formd_filings
 # Import from the correct database module (GameCockAI/database.py)
 from database import (SessionLocal, FormDSubmission, FormDIssuer, FormDOffering, 

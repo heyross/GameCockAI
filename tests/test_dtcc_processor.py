@@ -17,7 +17,7 @@ sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
 sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 # Import the processor and models
-from processor_dtcc import DTCCProcessor
+from src.processor_dtcc import DTCCProcessor
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base
 from dtcc_models import DTCCOrganization, DTCCOptionTrade, DTCCInterestRateSwap, DTCCEquityOption

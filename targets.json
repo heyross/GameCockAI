@@ -13,5 +13,10 @@
         "cik_str": "0000000123",
         "ticker": "123",
         "title": "123"
+    },
+    {
+        "cik_str": "0000056701",
+        "ticker": "KOSS",
+        "title": "KOSS CORP"
     }
 ]

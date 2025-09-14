@@ -3,26 +3,32 @@ import os
 import subprocess
 from typing import List, Tuple
 from pathlib import Path
+
+# Add current directory to path to ensure we import from the right modules
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+# Add parent directory to path for unified RAG
+parent_dir = os.path.dirname(os.path.dirname(__file__))
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
 from ui import gamecock_ascii, gamecat_ascii
 from data_sources import cftc, sec, fred
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
+
 try:
-    import sys
-    import os
-    # Add parent directory to path for unified RAG
-    parent_dir = os.path.dirname(os.path.dirname(__file__))
-    if parent_dir not in sys.path:
-        sys.path.append(parent_dir)
-    
     from rag_unified import query_raven
     print("✅ Using unified RAG system")
 except ImportError as e:
     print(f"⚠️ Unified RAG not available: {e}")
     from rag import query_raven
-from processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
+
+from src.processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
                       process_exchange_metrics_data, process_ncen_data, process_nport_data, process_formd_data)
-from processor_8k import process_8k_filings
+from src.processor_8k import process_8k_filings
 from config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, 
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR, THRTNF_SOURCE_DIR,
@@ -659,7 +665,7 @@ def download_dtcc_data(data_type):
 
 def process_dtcc_data():
     """Process DTCC data files from a directory"""
-    from processor_dtcc import DTCCProcessor
+    from src.processor_dtcc import DTCCProcessor
     from database import SessionLocal
     
     print("\n--- Process DTCC Data ---")

@@ -14,7 +14,7 @@ sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
 sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 from tests.test_base import BaseIntegrationTest
-from processor import process_ncen_data, process_sec_filings
+from src.processor import process_ncen_data, process_sec_filings
 # Import from the correct database module (GameCockAI/database.py)
 from database import SessionLocal, NCENSubmission, NCENFundReportedInfo, get_db_stats
 

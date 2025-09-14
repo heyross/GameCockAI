@@ -12,25 +12,21 @@ import pandas as pd
 from sqlalchemy.orm import Session
 
 # Import from the correct database module (GameCockAI/database.py)
-try:
-    from .database import (
-        SessionLocal,
-        CFTCDerivativesDealer,
-        CFTCDerivativesClearingOrganization,
-        CFTCSwapExecutionFacility,
-        CFTCSwapDataRepository,
-        CFTCDailySwapReport
-    )
-except ImportError:
-    # Fallback for when running from GameCockAI directory
-    from database import (
-        SessionLocal,
-        CFTCDerivativesDealer,
-        CFTCDerivativesClearingOrganization,
-        CFTCSwapExecutionFacility,
-        CFTCSwapDataRepository,
-        CFTCDailySwapReport
-    )
+import sys
+import os
+# Add the parent directory to the path to import from GameCockAI/database.py
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+from database import (
+    SessionLocal,
+    CFTCDerivativesDealer,
+    CFTCDerivativesClearingOrganization,
+    CFTCSwapExecutionFacility,
+    CFTCSwapDataRepository,
+    CFTCDailySwapReport
+)
 from config import (
     CFTC_SWAP_DEALER_DIR,
     CFTC_SWAP_EXECUTION_DIR,

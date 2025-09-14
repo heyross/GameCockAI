@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, Form13FSubmission, Form13FInfoTable
-from processor import process_form13f_data
+from src.processor import process_form13f_data
 
 class TestForm13FProcessor(unittest.TestCase):
     def setUp(self):

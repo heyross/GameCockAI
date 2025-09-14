@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 # Import the processor and database models
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, Sec10KSubmission, Sec10KDocument, Sec10KFinancials
-from processor_10k import SEC10KProcessor
+from src.processor_10k import SEC10KProcessor
 
 class TestSEC10KProcessor(unittest.TestCase):
     """Test cases for the SEC10KProcessor class."""

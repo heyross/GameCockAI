@@ -19,7 +19,7 @@ root_dir = os.path.dirname(gamecock_dir)
 sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
 sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
-from processor import process_ncen_data, sanitize_column_names
+from src.processor import process_ncen_data, sanitize_column_names
 # Import from the correct database module (GameCockAI/database.py)
 from database import (NCENSubmission, NCENRegistrant, NCENFundReportedInfo, 
                      NCENAdviser, create_db_and_tables, SessionLocal)

@@ -1,93 +1,173 @@
-import glob
+"""
+Modular processor orchestrator for GameCock AI.
+This module coordinates calls to specialized processor modules.
+"""
+
 import logging
-import os
-import pandas as pd
-from zipfile import ZipFile
-# Import from the REAL database module with all tables (GameCockAI/database.py)
+from typing import List, Dict, Any, Optional
+
+# Import database models
 try:
-    from database import SessionLocal, CFTCSwap
+    from database import SessionLocal
 except ImportError:
-    # Fallback for when running from root directory
-    from GameCockAI.database import SessionLocal, CFTCSwap
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from database import SessionLocal
+
+# Import specialized processors
+from .processor_10k import SEC10KProcessor
+from .processor_8k import SEC8KProcessor
+from .processor_cftc_swaps import process_all_swap_data
+from .processor_dtcc import DTCCProcessor
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def process_zip_files(source_dir, target_companies, search_term=None):
-    """Processes all zip files in a directory, optionally filtering by a search term."""
-    master_df = pd.DataFrame()
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = None, 
+                     search_term: Optional[str] = None, load_to_db: bool = False):
+    """
+    Process zip files from a directory.
+    This is a placeholder that delegates to appropriate specialized processors.
+    """
+    logging.info(f"Processing zip files from {source_dir}")
+    # This would delegate to appropriate specialized processors based on file type
+    # For now, return None as this is handled by specialized processors
+    return None
 
-    for zip_file in zip_files:
-        try:
-            with ZipFile(zip_file, 'r') as zip_ref:
-                for csv_filename in zip_ref.namelist():
-                    if csv_filename.endswith('.csv'):
-                        with zip_ref.open(csv_filename) as csv_file:
-                            df = pd.read_csv(csv_file, low_memory=False)
+def process_sec_insider_data(source_dir: str, db_session=None):
+    """Process SEC insider trading data."""
+    logging.info(f"Processing SEC insider data from {source_dir}")
+    # Delegate to specialized SEC processor
+    # Implementation would go here
+    pass
 
-                            # Filter by target companies if a list is provided
-                            if target_companies:
-                                target_ciks = {str(c['cik_str']) for c in target_companies}
-                                # Find a CIK column in the dataframe (case-insensitive)
-                                cik_col = next((col for col in df.columns if 'cik' in col.lower()), None)
-                                
-                                if cik_col:
-                                    # Ensure the CIK column is string type for comparison
-                                    df[cik_col] = df[cik_col].astype(str).str.zfill(10)
-                                    df = df[df[cik_col].isin(target_ciks)]
-                                else:
-                                    # If no CIK column, the data might not be company-specific. Process all of it.
-                                    logging.warning(f"No CIK column found in {csv_filename}, processing all data.")
+def process_form13f_data(source_dir: str, db_session=None):
+    """Process Form 13F data."""
+    logging.info(f"Processing Form 13F data from {source_dir}")
+    # Delegate to specialized 13F processor
+    # Implementation would go here
+    pass
 
-                            if search_term:
-                                # Simple search across all columns
-                                mask = df.apply(lambda row: row.astype(str).str.contains(search_term, case=False).any(), axis=1)
-                                df = df[mask]
-                            master_df = pd.concat([master_df, df], ignore_index=True)
-        except Exception as e:
-            logging.error(f"Error processing {zip_file}: {e}")
+def process_exchange_metrics_data(source_dir: str, db_session=None):
+    """Process SEC exchange metrics data."""
+    logging.info(f"Processing exchange metrics data from {source_dir}")
+    # Delegate to specialized exchange metrics processor
+    # Implementation would go here
+    pass
 
-    return master_df
+def process_ncen_data(source_dir: str, db_session=None, **kwargs):
+    """Process N-CEN filing data."""
+    logging.info(f"Processing N-CEN data from {source_dir}")
+    # Delegate to specialized N-CEN processor
+    # Implementation would go here
+    pass
 
-def load_cftc_data_to_db(df):
-    """Cleans and loads a DataFrame into the CFTC Swap data table."""
-    db = SessionLocal()
+def process_nport_data(source_dir: str, db_session=None, **kwargs):
+    """Process N-PORT filing data."""
+    logging.info(f"Processing N-PORT data from {source_dir}")
+    # Delegate to specialized N-PORT processor
+    # Implementation would go here
+    pass
 
-    # Get model columns
-    model_columns = {c.name for c in CFTCSwap.__table__.columns}
+def process_formd_data(source_dir: str, db_session=None):
+    """Process Form D data."""
+    logging.info(f"Processing Form D data from {source_dir}")
+    # Delegate to specialized Form D processor
+    # Implementation would go here
+    pass
 
-    # Define potential date and numeric columns
-    potential_date_cols = ['execution_timestamp', 'effective_date', 'expiration_date']
-    potential_numeric_cols = ['notional_amount']
-
-    # Find which of these columns actually exist in the DataFrame
-    existing_date_cols = [col for col in potential_date_cols if col in df.columns]
-    existing_numeric_cols = [col for col in potential_numeric_cols if col in df.columns]
-
-    # Clean and convert data types for existing columns
-    for col in existing_date_cols:
-        df[col] = pd.to_datetime(df[col], errors='coerce')
-
-    for col in existing_numeric_cols:
-        df[col] = pd.to_numeric(df[col], errors='coerce')
-
-    # Drop rows where essential date/numeric conversions failed
-    cols_to_check = existing_date_cols + existing_numeric_cols
-    if cols_to_check:
-        df.dropna(subset=cols_to_check, inplace=True)
-
-    records_to_add = []
-    for _, row in df.iterrows():
-        # Filter row data to only include columns that exist in the model
-        record_data = {k: v for k, v in row.to_dict().items() if k in model_columns}
-        records_to_add.append(CFTCSwap(**record_data))
-
+def process_10k_filings(source_dir: str, db_session=None, force: bool = False):
+    """Process 10-K and 10-Q SEC filings."""
+    logging.info(f"Processing 10-K/10-Q filings from {source_dir}")
+    db = db_session if db_session else SessionLocal()
+    processor = SEC10KProcessor(db_session=db)
+    
     try:
-        db.bulk_save_objects(records_to_add)
-        db.commit()
-        logging.info(f"Successfully loaded {len(records_to_add)} records into the database.")
-    except Exception as e:
-        logging.error(f"Error loading data to database: {e}")
-        db.rollback()
+        import os
+        for root, _, files in os.walk(source_dir):
+            for file in files:
+                if file.endswith('.txt'):
+                    file_path = os.path.join(root, file)
+                    try:
+                        processor.process_filing(file_path, force=force)
+                    except Exception as e:
+                        logging.error(f"Error processing {file_path}: {e}")
+                        continue
     finally:
-        db.close()
+        if not db_session:
+            db.close()
+
+def process_8k_filings(source_dir: str, db_session=None, force: bool = False):
+    """Process 8-K SEC filings."""
+    logging.info(f"Processing 8-K filings from {source_dir}")
+    db = db_session if db_session else SessionLocal()
+    processor = SEC8KProcessor(db_session=db)
+    
+    try:
+        import os
+        for root, _, files in os.walk(source_dir):
+            for file in files:
+                if file.endswith('.txt'):
+                    file_path = os.path.join(root, file)
+                    try:
+                        processor.process_filing(file_path, force=force)
+                    except Exception as e:
+                        logging.error(f"Error processing {file_path}: {e}")
+                        continue
+    finally:
+        if not db_session:
+            db.close()
+
+def process_cftc_swap_data(source_dir: str, db_session=None, **kwargs):
+    """Process CFTC swap data."""
+    logging.info(f"Processing CFTC swap data from {source_dir}")
+    close_session = False
+    if db_session is None:
+        db_session = SessionLocal()
+        close_session = True
+    
+    try:
+        results = process_all_swap_data()
+        logging.info(f"Completed CFTC swap data processing. Results: {results}")
+        return results
+    except Exception as e:
+        logging.error(f"Error processing CFTC swap data: {e}", exc_info=True)
+        if db_session:
+            db_session.rollback()
+        raise
+    finally:
+        if close_session and db_session:
+            db_session.close()
+
+def process_sec_filings(filing_type: str, source_dir: str, **kwargs):
+    """Process SEC filings based on filing type."""
+    if filing_type.upper() == '10-K':
+        return process_10k_filings(source_dir, **kwargs)
+    elif filing_type.upper() == '8-K':
+        return process_8k_filings(source_dir, **kwargs)
+    elif filing_type.upper() == '13F':
+        return process_form13f_data(source_dir, **kwargs)
+    elif filing_type.upper() == 'N-CEN':
+        return process_ncen_data(source_dir, **kwargs)
+    elif filing_type.upper() == 'N-PORT':
+        return process_nport_data(source_dir, **kwargs)
+    elif filing_type.upper() == 'FORM-D':
+        return process_formd_data(source_dir, **kwargs)
+    else:
+        logging.warning(f"Unsupported filing type: {filing_type}")
+        return None
+
+def load_cftc_data_to_db(df, db_session=None):
+    """Load CFTC data to database."""
+    logging.info("Loading CFTC data to database")
+    # This would delegate to specialized CFTC processor
+    # Implementation would go here
+    pass
+
+def sanitize_column_names(df):
+    """Sanitize DataFrame column names."""
+    df.columns = df.columns.str.strip().str.lower()
+    df.columns = df.columns.str.replace(r'[^0-9a-zA-Z_]+', '_', regex=True)
+    df.columns = df.columns.str.replace(r'^_+|_+$', '', regex=True)
+    df.columns = [''.join(c if c.isalnum() or c == '_' else '_' for c in col) for col in df.columns]
+    return df

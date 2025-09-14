@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, NMFPSubmission, NMFPSeriesLevelInfo
-from processor import process_nmfp_data
+from src.processor import process_nmfp_data
 
 class TestNMFPProcessor(unittest.TestCase):
     def setUp(self):

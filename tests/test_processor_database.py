@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 # Import from the correct database module (GameCockAI/database.py)
 from database import Base, CFTCSwap, get_db_stats, export_db_to_csv, reset_database
-from processor import process_zip_files, load_cftc_data_to_db
+from src.processor import process_zip_files, load_cftc_data_to_db
 
 class TestProcessorDatabase(unittest.TestCase):
 
