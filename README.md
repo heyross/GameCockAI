@@ -1,59 +1,86 @@
-# GamecockAI
+# Raven Financial Analytics
 
-GamecockAI is a Python-based application designed to download, process, and analyze financial data from public sources like the Securities and Exchange Commission (SEC) and the Commodity Futures Trading Commission (CFTC). It features a Retrieval-Augmented Generation (RAG) pipeline with an AI assistant named Raven that allows users to ask natural language questions about the collected data and get intelligent, context-aware responses.
+Raven is an advanced financial data analysis platform designed to download, process, and analyze financial data from multiple public sources including the Securities and Exchange Commission (SEC), Commodity Futures Trading Commission (CFTC), and Federal Reserve Economic Data (FRED). The platform features a powerful Retrieval-Augmented Generation (RAG) pipeline with an AI assistant that provides intelligent, context-aware responses to your financial data queries.
 
 ## Features
 
-- **Data Downloader**: Fetches bulk data from SEC, CFTC, and FRED (Federal Reserve Economic Data) websites.
-- **Raven AI Assistant**: A powerful RAG-based chatbot that provides intelligent, context-aware responses about your financial data. Ask questions in natural language and get accurate, data-driven answers.
-- **Data Sources**
+- **Multi-Source Data Integration**: Seamlessly aggregates data from multiple authoritative financial sources
+- **Raven AI Assistant**: A sophisticated RAG-based chatbot that understands complex financial queries and provides accurate, data-driven insights
+- **Comprehensive Data Processing**: Automated pipelines for downloading, cleaning, and structuring financial data
+- **Advanced Analytics**: Built-in tools for time series analysis, trend detection, and financial modeling
 
-- **SEC EDGAR**: Company filings, insider trades, and more
-- **CFTC**: Swap Dealer and Major Swap Participant data
-- **FRED (Federal Reserve Economic Data)**: Interest rate swaps, credit default swaps, and other economic indicators
-- **AI Agent (SwapBot)**: A conversational AI that can perform tasks on your behalf. It can search for companies, manage watchlists, download and process data, and check the status of background jobs.
-- **Company Watchlist**: Allows users to specify companies of interest to filter the data.
-- **Database Management**: Provides tools for inspecting, exporting, and managing the local database.
+### Data Sources
 
-## Workflows
+- **SEC EDGAR**: Comprehensive access to corporate filings, including:
+  - 10-K, 10-Q, 8-K reports
+  - Form 13F institutional holdings
+  - N-CEN and N-PORT fund disclosures
+  - Insider trading reports
 
-### 1. Data Ingestion and Processing
+- **CFTC Data**: Detailed swap dealer and major swap participant information
+  - Swap dealer registrations
+  - SEF (Swap Execution Facility) information
+  - Historical swap data reporting
 
-1.  **Select Target Companies**: Users can search for and select specific companies to create a watchlist. This focuses the data processing on relevant entities.
-2.  **Download Data**: Download data from various sources (SEC, CFTC, FRED)
-- **Process Data**: Process downloaded data into the database, filtered according to the watchlist, and loaded into a SQLite database.
+- **FRED Economic Data**: Extensive economic indicators including:
+  - Interest rates (EFFR, SOFR, Treasury yields)
+  - Market indicators (VIX, credit spreads)
+  - Economic indicators (GDP, unemployment, inflation)
+  - Financial conditions indices
 
-### 2. Interacting with the AI Agent
+- **AI-Powered Analysis**: Raven's advanced capabilities include:
+  - Natural language query processing
+  - Context-aware financial analysis
+  - Automated report generation
+  - Anomaly detection in financial data
+  - Predictive analytics and forecasting
 
-The application features a powerful AI agent named SwapBot that can perform a variety of tasks through a conversational interface. To chat with SwapBot, select option 4 from the main menu.
+## Key Capabilities
 
-The AI is designed to be interactive. If your request is ambiguous, it will ask clarifying questions to ensure it understands your intent before taking action.
+### 1. Data Ingestion and Processing Pipeline
 
-Here are some examples of what you can ask SwapBot to do:
+1. **Targeted Data Collection**
+   - Create custom watchlists of companies and financial instruments
+   - Schedule automated data refreshes
+   - Filter and preprocess data during download
 
-- **Search for a company:**
-  > `Find companies related to 'morgan'`
+2. **Comprehensive Data Processing**
+   - Automated data validation and cleaning
+   - Normalization across different data sources
+   - Time-series alignment for cross-dataset analysis
+   - Handling of missing and incomplete data
 
-- **Add a company to your target list:**
-  > `Add JP Morgan Chase to my target list.`
-  *(Note: The AI may ask you to confirm which company if multiple matches are found.)*
+3. **Advanced Database Management**
+   - SQLite-based storage with optimized schemas
+   - Efficient indexing for fast query performance
+   - Data versioning and history tracking
+   - Secure storage of sensitive information
 
-- **View your target list:**
-  > `Show me my target list.`
+### 2. Interacting with Raven AI
 
-- **Start a background download:**
-  > `Download the latest CFTC credit data.`
-  
-  The AI will queue the task and respond with a `task_id`.
+Raven's AI assistant provides a natural language interface to your financial data. Access it by selecting the chat option from the main menu.
 
-- **Start a data processing job:**
-  > `Process the downloaded credit data.`
+#### Example Queries
 
-- **Check the status of a background task:**
-  > `What is the status of task [paste task_id here]?`
+**Market Analysis**
+> "Show me the correlation between VIX and S&P 500 returns"
+> "Analyze recent insider trading activity in the tech sector"
+> "Compare interest rate swap trends between US and EU markets"
 
-- **Get database statistics:**
-  > `How many records are in the database?`
+**Regulatory Research**
+> "Find all 13F filings mentioning AI investments in Q2 2023"
+> "Show me the latest N-PORT filings for BlackRock funds"
+> "Analyze changes in CFTC swap dealer positions over the last quarter"
+
+**Economic Indicators**
+> "Plot the yield curve using the latest Treasury data"
+> "Compare current inflation metrics with historical averages"
+> "Show me the relationship between unemployment and consumer sentiment"
+
+**Data Management**
+> "Update all SEC filings for my watchlist companies"
+> "Process the latest FRED economic indicators"
+> "Generate a report on data completeness and quality"
 
 ### 3. Database Management
 
@@ -63,7 +90,7 @@ Here are some examples of what you can ask SwapBot to do:
 
 ## License
 
-GamecockAI is dual-licensed under the following terms:
+Raven Financial Analytics is dual-licensed under the following terms:
 
 1. **Non-Commercial Use**: Licensed under the [GNU Affero General Public License v3.0](LICENSE)
    - Free for personal, educational, and non-commercial use
@@ -72,7 +99,8 @@ GamecockAI is dual-licensed under the following terms:
    - No warranty or liability
 
 2. **Commercial Use**: Requires a commercial license
-   - For businesses, cloud providers, and SaaS offerings
+   - For businesses, financial institutions, and professional services
+   - Includes priority support and additional features
    - Contact [Your Contact Email] for pricing and terms
    - See [COMMERCIAL_LICENSE.md](COMMERCIAL_LICENSE.md) for details
 
@@ -83,58 +111,126 @@ By using this software, you agree to the terms of the appropriate license.
 ### Option 1: Windows Installer (Recommended for Most Users)
 
 1. **Download the Installer**:
-   - Download the latest `GamecockAI.msi` from the [Releases](https://github.com/yourusername/GameCockAI/releases) page
+   - Download the latest `RavenAnalytics.msi` from the [Releases](https://github.com/yourusername/GameCockAI/releases) page
 
 2. **Run the Installer**:
    - Double-click the `.msi` file and follow the installation wizard
    - The installer will create a Start Menu shortcut and desktop icon
 
 3. **First Run**:
-   - Launch GamecockAI from the Start Menu or desktop shortcut
+   - Launch Raven Analytics from the Start Menu or desktop shortcut
    - The application will guide you through the initial setup
-   - Enter your FRED API key when prompted
+   - Enter your FRED API key (get one from [FRED](https://fred.stlouisfed.org/docs/api/api_key.html))
+   - Configure your preferred data sources and update frequencies
 
 ### Option 2: Manual Installation (For Developers)
 
 1. **Prerequisites**
-   - Python 3.7 or higher
+   - Python 3.9 or higher
    - FRED API key (free) from [FRED API](https://fred.stlouisfed.org/docs/api/api_key.html)
+   - Git (for version control)
 
-2. **Automatic Setup**:
-   - The application will automatically create and configure a virtual environment
-   - All required Python packages will be installed automatically
-   - First-time setup will guide you through the configuration process
+2. **Setup**:
+   ```bash
+   # Clone the repository
+   git clone https://github.com/yourusername/GameCockAI.git
+   cd GameCockAI
+   
+   # Create and activate virtual environment
+   python -m venv venv
+   .\venv\Scripts\activate  # Windows
+   source venv/bin/activate  # macOS/Linux
+   
+   # Install dependencies
+   pip install -r requirements.txt
+   
+   # Configure environment
+   copy .env_template .env
+   # Edit .env to add your FRED API key and other settings
+   
+   # Initialize the database
+   python -c "from database import init_db; init_db()"
+   ```
 
-3. **Configuration**:
-   - On first run, the application will create a `.env` file from the template
-   - Add your FRED API key to the `.env` file when prompted
-   - (Optional) Configure other settings as needed
+3. **Run the application**:
+   ```bash
+   # Start the application
+   python main.py
+   ```
 
-4. **Run the application**:
-   - On Windows:
-     ```bash
-     launcher.bat
-     ```
-   - On macOS/Linux:
-     ```bash
-     python main.py
-     ```
+4. **Development Mode**:
+   ```bash
+   # Install development dependencies
+   pip install -r requirements-dev.txt
+   
+   # Run tests
+   python -m pytest
+   
+   # Run with hot-reload for development
+   python -m uvicorn main:app --reload
+   ```
+
+## Advanced Configuration
+
+### Data Source Configuration
+
+Raven supports configuration of various data sources through the `config.py` file or environment variables:
+
+```python
+# FRED API Configuration
+FRED_API_KEY = "your_api_key_here"
+FRED_UPDATE_FREQUENCY = "daily"  # or "weekly", "monthly"
+
+# SEC EDGAR Configuration
+SEC_RATE_LIMIT = 10  # Requests per second
+SEC_USER_AGENT = "Your Company Name - Your Email"
+
+# CFTC Configuration
+CFTC_UPDATE_FREQUENCY = "weekly"
+
+# Database Configuration
+DATABASE_URI = "sqlite:///raven.db"
+MAX_DB_CONNECTIONS = 10
+```
 
 ### Building the Installer (For Developers)
 
-If you want to build the Windows installer yourself, see the [Installer/README.md](Installer/README.md) file for detailed instructions.
+To create a Windows installer for Raven:
 
-This will launch the command-line interface, where you can navigate through the different menus to use the application.
+1. Install NSIS (Nullsoft Scriptable Install System)
+2. Run the build script:
+   ```bash
+   cd Installer
+   .\build_installer.bat
+   ```
+3. The installer will be created in the `dist` directory
 
-## Interacting with Raven AI
+For detailed instructions, see the [Installer/README.md](Installer/README.md) file.
 
-Raven is your intelligent assistant that can help you analyze financial data using natural language. To start a conversation with Raven:
+## Advanced Features
 
-1. From the main menu, select the option to chat with Raven
-2. Ask questions in plain English, such as:
-   - "What are the latest SEC filings for Apple?"
-   - "Show me the trend for interest rate swaps over the past year"
-   - "Compare the CFTC data between these two companies"
-   - "What insights can you find about [company name]?"
+### Raven AI Engine
 
-Raven uses advanced RAG (Retrieval-Augmented Generation) technology to provide accurate, up-to-date answers based on the financial data in your database.
+Raven's AI capabilities are powered by state-of-the-art machine learning models and include:
+
+- **Natural Language Understanding**: Process complex financial queries with industry-specific terminology
+- **Contextual Awareness**: Maintains conversation context and remembers previous interactions
+- **Multi-modal Analysis**: Correlates data across different sources and formats
+- **Anomaly Detection**: Identifies unusual patterns and potential market-moving events
+- **Predictive Analytics**: Projects trends and forecasts based on historical data
+
+### FRED Data Integration
+
+Raven provides comprehensive access to FRED's economic data, including:
+
+- **Interest Rates**: EFFR, SOFR, Treasury yields across maturities
+- **Market Indicators**: VIX, credit spreads, volatility measures
+- **Economic Indicators**: GDP, unemployment, inflation metrics (CPI, PCE)
+- **Financial Conditions**: Various financial conditions indices
+
+### SEC and CFTC Data Processing
+
+- **Form 13F**: Institutional investment holdings with historical tracking
+- **N-CEN/N-PORT**: Detailed fund holdings and risk metrics
+- **CFTC Reports**: Swap dealer positions and market participation
+- **SEC Filings**: 10-K, 10-Q, 8-K, and other corporate disclosures
