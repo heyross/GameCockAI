@@ -81,6 +81,55 @@ def install_missing_packages(packages):
         print(f"❌ Unexpected error during installation: {e}")
         return False
 
+def check_cuda_support():
+    """Checks CUDA availability and provides installation guidance if needed."""
+    print("Checking CUDA support...")
+    
+    try:
+        import torch
+        cuda_available = torch.cuda.is_available()
+        cuda_version = torch.version.cuda if hasattr(torch, 'version') else None
+        device_count = torch.cuda.device_count()
+        
+        if cuda_available:
+            print(f"✅ CUDA is available!")
+            print(f"   CUDA version: {cuda_version}")
+            print(f"   GPU devices: {device_count}")
+            for i in range(device_count):
+                device_name = torch.cuda.get_device_name(i)
+                print(f"   Device {i}: {device_name}")
+            return True
+        else:
+            print("⚠️  CUDA is not available")
+            print("   This will limit performance but the application will still work on CPU")
+            
+            # Check if PyTorch is CPU-only version
+            if '+cpu' in torch.__version__:
+                print("\n🔧 CUDA Setup Required:")
+                print("   You have the CPU-only version of PyTorch installed.")
+                print("   To enable CUDA acceleration:")
+                print("   1. Install CUDA toolkit from: https://developer.nvidia.com/cuda-downloads")
+                print("   2. Reinstall PyTorch with CUDA support:")
+                print("      pip uninstall torch torchvision torchaudio")
+                print("      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118")
+                print("   3. Restart the application")
+            else:
+                print("\n🔧 CUDA Setup Required:")
+                print("   PyTorch supports CUDA but CUDA is not properly installed.")
+                print("   1. Install NVIDIA GPU drivers")
+                print("   2. Install CUDA toolkit from: https://developer.nvidia.com/cuda-downloads")
+                print("   3. Restart the application")
+            
+            print("\n💡 The application will continue with CPU-only processing.")
+            return False
+            
+    except ImportError:
+        print("❌ PyTorch not available - cannot check CUDA support")
+        return False
+    except Exception as e:
+        print(f"⚠️  Error checking CUDA support: {e}")
+        return False
+
 def check_ollama_service():
     """Checks if the Ollama service is running and prompts the user to start it if not."""
     print("Checking for Ollama service...")

@@ -34,7 +34,7 @@ try:
 except ImportError:
     # Fallback for when running from GameCockAI directory
     from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
-from startup import check_dependencies, check_ollama_service
+from startup import check_dependencies, check_ollama_service, check_cuda_support
 from worker import start_worker, stop_worker
 
 def main_menu():
@@ -603,6 +603,15 @@ def run_startup_checks():
         print("After installation, run 'ollama serve' in a terminal.")
         input("\nPress Enter to exit...")
         sys.exit(1)
+    
+    # Check CUDA support (non-blocking)
+    print("\n=== Checking CUDA Support ===")
+    cuda_available = check_cuda_support()
+    
+    if cuda_available:
+        print("🚀 CUDA acceleration enabled for optimal performance!")
+    else:
+        print("💻 Running in CPU mode - consider installing CUDA for better performance")
 
 def initialize_database():
     """Initialize database tables if they don't exist."""

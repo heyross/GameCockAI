@@ -51,9 +51,12 @@ class TestBasicFunctionality(unittest.TestCase):
             "test_real_integration.py",
             "test_data_generators.py",
             "run_all_tests.py",
-            "test_config.json",
-            "README.md"
+            "test_config.json"
         ]
+        
+        # Check root README.md exists
+        root_readme = current_dir.parent.parent / "README.md"
+        self.assertTrue(root_readme.exists(), f"Missing root README.md: {root_readme}")
         
         for filename in expected_files:
             filepath = current_dir / filename

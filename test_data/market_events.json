@@ -2,274 +2,274 @@
   {
     "event_id": "EVENT_000000",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "event_type": "Regulatory Action",
-    "event_date": "2025-08-21",
-    "description": "Credit rating agency upgraded Goldman Sachs Group Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 3.314045043547786,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 86,
-    "social_sentiment_score": -0.13033679166509682
-  },
-  {
-    "event_id": "EVENT_000001",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "event_type": "Lawsuit Settlement",
-    "event_date": "2024-01-08",
-    "description": "Regulatory approval received for Goldman Sachs Group Inc. new product line",
-    "market_impact": "Negative",
-    "volatility_impact": 4.631670159598361,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 7,
-    "social_sentiment_score": 0.542112470237079
-  },
-  {
-    "event_id": "EVENT_000002",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Dividend Declaration",
-    "event_date": "2025-04-10",
-    "description": "Credit rating agency upgraded JPMorgan Chase & Co. outlook to positive",
-    "market_impact": "Neutral",
-    "volatility_impact": 0.7941111504715582,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 89,
-    "social_sentiment_score": -0.9211894904124953
-  },
-  {
-    "event_id": "EVENT_000003",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "event_type": "Credit Rating Change",
-    "event_date": "2024-02-20",
-    "description": "Regulatory approval received for Bank of America Corp. new product line",
-    "market_impact": "Positive",
-    "volatility_impact": 4.507994426325621,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 26,
-    "social_sentiment_score": -0.8081702630083389
-  },
-  {
-    "event_id": "EVENT_000004",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Economic Data Release",
-    "event_date": "2024-10-18",
-    "description": "JPMorgan Chase & Co. completed acquisition of strategic technology assets",
-    "market_impact": "Negative",
-    "volatility_impact": 3.2483463061942373,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 62,
-    "social_sentiment_score": -0.20713055849352502
-  },
-  {
-    "event_id": "EVENT_000005",
-    "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
     "event_type": "Credit Rating Change",
-    "event_date": "2024-11-09",
-    "description": "Amazon.com Inc. announced better than expected quarterly results",
-    "market_impact": "Positive",
-    "volatility_impact": 4.166972713978463,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 1,
-    "social_sentiment_score": -0.6036605718249064
-  },
-  {
-    "event_id": "EVENT_000006",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Economic Data Release",
-    "event_date": "2025-09-13",
-    "description": "Credit rating agency upgraded Berkshire Hathaway Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 0.43475000571054934,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 81,
-    "social_sentiment_score": 0.2580943916914078
-  },
-  {
-    "event_id": "EVENT_000007",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Merger Announcement",
-    "event_date": "2024-08-11",
-    "description": "Berkshire Hathaway Inc. launched innovative solution in Conglomerate market",
-    "market_impact": "Neutral",
-    "volatility_impact": 3.4818270770941266,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 16,
-    "social_sentiment_score": 0.5985740697092952
-  },
-  {
-    "event_id": "EVENT_000008",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "event_type": "Credit Rating Change",
-    "event_date": "2025-06-12",
-    "description": "Bank of America Corp. launched innovative solution in Financial Services market",
-    "market_impact": "Positive",
-    "volatility_impact": 3.5817947469520566,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 64,
-    "social_sentiment_score": 0.5407987751545114
-  },
-  {
-    "event_id": "EVENT_000009",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Executive Change",
-    "event_date": "2024-11-27",
-    "description": "Berkshire Hathaway Inc. completed acquisition of strategic technology assets",
+    "event_date": "2024-11-19",
+    "description": "Regulatory approval received for Amazon.com Inc. new product line",
     "market_impact": "Negative",
-    "volatility_impact": 0.9619477709363379,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 56,
-    "social_sentiment_score": 0.6402008365347291
+    "volatility_impact": 3.172764182748963,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 45,
+    "social_sentiment_score": -0.8585344322197572
   },
   {
-    "event_id": "EVENT_000010",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Merger Announcement",
-    "event_date": "2024-07-21",
-    "description": "Berkshire Hathaway Inc. launched innovative solution in Conglomerate market",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.1052706778717845,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 38,
-    "social_sentiment_score": 0.5893506691561934
-  },
-  {
-    "event_id": "EVENT_000011",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "FDA Approval",
-    "event_date": "2023-09-16",
-    "description": "Berkshire Hathaway Inc. announced better than expected quarterly results",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.986635277148757,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 67,
-    "social_sentiment_score": -0.20561327632806536
-  },
-  {
-    "event_id": "EVENT_000012",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Dividend Declaration",
-    "event_date": "2024-06-11",
-    "description": "JPMorgan Chase & Co. completed acquisition of strategic technology assets",
-    "market_impact": "Positive",
-    "volatility_impact": 1.631154582550229,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 56,
-    "social_sentiment_score": 0.22654622467777408
-  },
-  {
-    "event_id": "EVENT_000013",
+    "event_id": "EVENT_000001",
     "company": {
       "name": "Apple Inc.",
       "ticker": "AAPL",
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "event_type": "Earnings Announcement",
-    "event_date": "2025-05-06",
-    "description": "Apple Inc. launched innovative solution in Technology market",
+    "event_type": "Merger Announcement",
+    "event_date": "2025-08-21",
+    "description": "Regulatory approval received for Apple Inc. new product line",
     "market_impact": "Positive",
-    "volatility_impact": 1.1789247768791216,
+    "volatility_impact": 1.519437261055339,
     "analyst_sentiment": "Bullish",
-    "media_mentions": 64,
-    "social_sentiment_score": 0.86084190214781
+    "media_mentions": 5,
+    "social_sentiment_score": 0.08207120075329577
+  },
+  {
+    "event_id": "EVENT_000002",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Earnings Announcement",
+    "event_date": "2025-07-13",
+    "description": "Berkshire Hathaway Inc. announced better than expected quarterly results",
+    "market_impact": "Positive",
+    "volatility_impact": 1.8158559375863377,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 50,
+    "social_sentiment_score": 0.12240113990058177
+  },
+  {
+    "event_id": "EVENT_000003",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2023-11-24",
+    "description": "Regulatory approval received for Berkshire Hathaway Inc. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 4.884912139013392,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 16,
+    "social_sentiment_score": 0.5850553784240686
+  },
+  {
+    "event_id": "EVENT_000004",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "Dividend Declaration",
+    "event_date": "2025-01-21",
+    "description": "Tesla Inc. announced better than expected quarterly results",
+    "market_impact": "Positive",
+    "volatility_impact": 2.135198157499706,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 95,
+    "social_sentiment_score": -0.08012155360649031
+  },
+  {
+    "event_id": "EVENT_000005",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2024-11-08",
+    "description": "Credit rating agency upgraded Berkshire Hathaway Inc. outlook to positive",
+    "market_impact": "Neutral",
+    "volatility_impact": 0.26303401542766003,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 95,
+    "social_sentiment_score": -0.3679948603586385
+  },
+  {
+    "event_id": "EVENT_000006",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "event_type": "Lawsuit Settlement",
+    "event_date": "2023-09-29",
+    "description": "JPMorgan Chase & Co. completed acquisition of strategic technology assets",
+    "market_impact": "Positive",
+    "volatility_impact": 3.6346370900904583,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 86,
+    "social_sentiment_score": 0.7757162145123342
+  },
+  {
+    "event_id": "EVENT_000007",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "event_type": "Regulatory Action",
+    "event_date": "2025-07-02",
+    "description": "Goldman Sachs Group Inc. launched innovative solution in Financial Services market",
+    "market_impact": "Negative",
+    "volatility_impact": 1.9753421415398544,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 35,
+    "social_sentiment_score": 0.2700455359754772
+  },
+  {
+    "event_id": "EVENT_000008",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "event_type": "Economic Data Release",
+    "event_date": "2024-07-16",
+    "description": "Goldman Sachs Group Inc. launched innovative solution in Financial Services market",
+    "market_impact": "Neutral",
+    "volatility_impact": 1.2646939140924058,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 12,
+    "social_sentiment_score": 0.04787020636425643
+  },
+  {
+    "event_id": "EVENT_000009",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2024-03-14",
+    "description": "Regulatory approval received for Apple Inc. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 0.8052626672746395,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 96,
+    "social_sentiment_score": 0.5794492203722124
+  },
+  {
+    "event_id": "EVENT_000010",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "Executive Change",
+    "event_date": "2023-12-03",
+    "description": "Credit rating agency upgraded Tesla Inc. outlook to positive",
+    "market_impact": "Neutral",
+    "volatility_impact": 3.896907862855562,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 66,
+    "social_sentiment_score": -0.589611847934022
+  },
+  {
+    "event_id": "EVENT_000011",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "event_type": "Executive Change",
+    "event_date": "2024-07-07",
+    "description": "Bank of America Corp. announced better than expected quarterly results",
+    "market_impact": "Neutral",
+    "volatility_impact": 3.927234133401303,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 20,
+    "social_sentiment_score": 0.1589830076791816
+  },
+  {
+    "event_id": "EVENT_000012",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2024-11-08",
+    "description": "Regulatory approval received for Berkshire Hathaway Inc. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 3.4316698771282654,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 51,
+    "social_sentiment_score": -0.14570188451047028
+  },
+  {
+    "event_id": "EVENT_000013",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "event_type": "Dividend Declaration",
+    "event_date": "2024-01-22",
+    "description": "JPMorgan Chase & Co. launched innovative solution in Financial Services market",
+    "market_impact": "Negative",
+    "volatility_impact": 3.9313233860823478,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 44,
+    "social_sentiment_score": -0.013617166201281172
   },
   {
     "event_id": "EVENT_000014",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
     },
-    "event_type": "Dividend Declaration",
-    "event_date": "2024-03-11",
-    "description": "Regulatory approval received for Amazon.com Inc. new product line",
-    "market_impact": "Negative",
-    "volatility_impact": 3.2594268765824568,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 61,
-    "social_sentiment_score": -0.23256691694882203
+    "event_type": "Executive Change",
+    "event_date": "2024-06-23",
+    "description": "JPMorgan Chase & Co. completed acquisition of strategic technology assets",
+    "market_impact": "Positive",
+    "volatility_impact": 1.5533639092030225,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 31,
+    "social_sentiment_score": -0.9427550061034538
   },
   {
     "event_id": "EVENT_000015",
     "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "event_type": "Executive Change",
-    "event_date": "2025-02-28",
-    "description": "Microsoft Corporation completed acquisition of strategic technology assets",
-    "market_impact": "Positive",
-    "volatility_impact": 2.782675466450676,
+    "event_type": "Regulatory Action",
+    "event_date": "2024-07-20",
+    "description": "Goldman Sachs Group Inc. announced better than expected quarterly results",
+    "market_impact": "Negative",
+    "volatility_impact": 3.907321954795707,
     "analyst_sentiment": "Bearish",
-    "media_mentions": 8,
-    "social_sentiment_score": 0.9631130135552235
+    "media_mentions": 92,
+    "social_sentiment_score": -0.47005883079161537
   },
   {
     "event_id": "EVENT_000016",
@@ -280,30 +280,30 @@
       "sector": "E-commerce"
     },
     "event_type": "Regulatory Action",
-    "event_date": "2024-01-09",
-    "description": "Regulatory approval received for Amazon.com Inc. new product line",
-    "market_impact": "Neutral",
-    "volatility_impact": 4.4667748617884735,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 5,
-    "social_sentiment_score": 0.010206619899181923
+    "event_date": "2025-05-12",
+    "description": "Credit rating agency upgraded Amazon.com Inc. outlook to positive",
+    "market_impact": "Positive",
+    "volatility_impact": 1.1817411169697765,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 58,
+    "social_sentiment_score": 0.6776363382988841
   },
   {
     "event_id": "EVENT_000017",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
     },
-    "event_type": "Regulatory Action",
+    "event_type": "Economic Data Release",
     "event_date": "2024-10-21",
-    "description": "Berkshire Hathaway Inc. announced better than expected quarterly results",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.6684473292408972,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 66,
-    "social_sentiment_score": -0.8175572023765023
+    "description": "Regulatory approval received for Amazon.com Inc. new product line",
+    "market_impact": "Negative",
+    "volatility_impact": 1.0269264240133704,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 76,
+    "social_sentiment_score": -0.9782108295392655
   },
   {
     "event_id": "EVENT_000018",
@@ -313,65 +313,65 @@
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "event_type": "Economic Data Release",
-    "event_date": "2024-09-07",
-    "description": "Tesla Inc. completed acquisition of strategic technology assets",
+    "event_type": "Merger Announcement",
+    "event_date": "2024-11-30",
+    "description": "Regulatory approval received for Tesla Inc. new product line",
     "market_impact": "Neutral",
-    "volatility_impact": 0.9590670773492297,
+    "volatility_impact": 0.26008075723060864,
     "analyst_sentiment": "Bearish",
-    "media_mentions": 33,
-    "social_sentiment_score": 0.4038525019480794
+    "media_mentions": 27,
+    "social_sentiment_score": -0.9496872508564571
   },
   {
     "event_id": "EVENT_000019",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
     "event_type": "FDA Approval",
-    "event_date": "2024-11-17",
-    "description": "JPMorgan Chase & Co. announced better than expected quarterly results",
-    "market_impact": "Positive",
-    "volatility_impact": 2.6739894709593828,
+    "event_date": "2025-01-20",
+    "description": "Microsoft Corporation launched innovative solution in Technology market",
+    "market_impact": "Negative",
+    "volatility_impact": 0.5778316486246425,
     "analyst_sentiment": "Bullish",
-    "media_mentions": 79,
-    "social_sentiment_score": 0.7203048247259625
+    "media_mentions": 27,
+    "social_sentiment_score": -0.659968210926233
   },
   {
     "event_id": "EVENT_000020",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "event_type": "Credit Rating Change",
-    "event_date": "2025-02-05",
-    "description": "Amazon.com Inc. announced better than expected quarterly results",
-    "market_impact": "Positive",
-    "volatility_impact": 3.1855793946092765,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 76,
-    "social_sentiment_score": 0.27280900038168543
-  },
-  {
-    "event_id": "EVENT_000021",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "event_type": "Earnings Announcement",
-    "event_date": "2024-06-19",
-    "description": "Bank of America Corp. launched innovative solution in Financial Services market",
-    "market_impact": "Neutral",
-    "volatility_impact": 1.057065394634336,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 71,
-    "social_sentiment_score": -0.5029862210670983
+    "event_type": "Economic Data Release",
+    "event_date": "2025-01-15",
+    "description": "Regulatory approval received for Bank of America Corp. new product line",
+    "market_impact": "Negative",
+    "volatility_impact": 1.1732249983060017,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 62,
+    "social_sentiment_score": 0.6919854986732579
+  },
+  {
+    "event_id": "EVENT_000021",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Lawsuit Settlement",
+    "event_date": "2025-02-09",
+    "description": "Regulatory approval received for Apple Inc. new product line",
+    "market_impact": "Negative",
+    "volatility_impact": 3.6974514033552643,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 65,
+    "social_sentiment_score": 0.484880520372321
   },
   {
     "event_id": "EVENT_000022",
@@ -381,425 +381,289 @@
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "event_type": "Regulatory Action",
-    "event_date": "2024-08-14",
-    "description": "Tesla Inc. completed acquisition of strategic technology assets",
+    "event_type": "Earnings Announcement",
+    "event_date": "2025-02-14",
+    "description": "Tesla Inc. announced better than expected quarterly results",
     "market_impact": "Negative",
-    "volatility_impact": 1.1436270424758341,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 26,
-    "social_sentiment_score": -0.7535922484046353
+    "volatility_impact": 1.2549867751870647,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 34,
+    "social_sentiment_score": -0.18322942902197625
   },
   {
     "event_id": "EVENT_000023",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "event_type": "Credit Rating Change",
-    "event_date": "2025-02-23",
-    "description": "Credit rating agency upgraded Tesla Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 1.813999882311282,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 10,
-    "social_sentiment_score": -0.7303932522464545
-  },
-  {
-    "event_id": "EVENT_000024",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "event_type": "Executive Change",
-    "event_date": "2025-06-22",
-    "description": "Goldman Sachs Group Inc. completed acquisition of strategic technology assets",
-    "market_impact": "Positive",
-    "volatility_impact": 1.4319831176560562,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 44,
-    "social_sentiment_score": -0.12370437817240454
-  },
-  {
-    "event_id": "EVENT_000025",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "event_type": "FDA Approval",
-    "event_date": "2024-02-08",
-    "description": "Credit rating agency upgraded Apple Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 1.7590630279263955,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 84,
-    "social_sentiment_score": -0.4073775315824766
-  },
-  {
-    "event_id": "EVENT_000026",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "event_type": "Economic Data Release",
-    "event_date": "2024-08-20",
-    "description": "Amazon.com Inc. announced better than expected quarterly results",
-    "market_impact": "Positive",
-    "volatility_impact": 4.142472822709814,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 80,
-    "social_sentiment_score": -0.16012067157463528
-  },
-  {
-    "event_id": "EVENT_000027",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Product Launch",
-    "event_date": "2024-07-05",
-    "description": "Berkshire Hathaway Inc. announced better than expected quarterly results",
-    "market_impact": "Neutral",
-    "volatility_impact": 1.0901965712443382,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 3,
-    "social_sentiment_score": 0.6277122655984111
-  },
-  {
-    "event_id": "EVENT_000028",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "event_type": "Credit Rating Change",
-    "event_date": "2024-05-17",
-    "description": "Regulatory approval received for Goldman Sachs Group Inc. new product line",
-    "market_impact": "Positive",
-    "volatility_impact": 1.7352767608968898,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 1,
-    "social_sentiment_score": 0.07437663687547191
-  },
-  {
-    "event_id": "EVENT_000029",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Merger Announcement",
-    "event_date": "2024-06-17",
-    "description": "Credit rating agency upgraded JPMorgan Chase & Co. outlook to positive",
-    "market_impact": "Neutral",
-    "volatility_impact": 0.7050803813899269,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 39,
-    "social_sentiment_score": -0.252410635542633
-  },
-  {
-    "event_id": "EVENT_000030",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Merger Announcement",
-    "event_date": "2025-06-09",
-    "description": "Berkshire Hathaway Inc. launched innovative solution in Conglomerate market",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.722222088238912,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 25,
-    "social_sentiment_score": -0.9530661960356686
-  },
-  {
-    "event_id": "EVENT_000031",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "event_type": "Executive Change",
-    "event_date": "2024-07-12",
-    "description": "Apple Inc. launched innovative solution in Technology market",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.7922299054643562,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 85,
-    "social_sentiment_score": 0.19429963893921331
-  },
-  {
-    "event_id": "EVENT_000032",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Economic Data Release",
-    "event_date": "2024-04-21",
-    "description": "JPMorgan Chase & Co. launched innovative solution in Financial Services market",
-    "market_impact": "Negative",
-    "volatility_impact": 1.527259983233438,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 88,
-    "social_sentiment_score": -0.8926686153875456
-  },
-  {
-    "event_id": "EVENT_000033",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Executive Change",
-    "event_date": "2024-09-07",
-    "description": "Regulatory approval received for Berkshire Hathaway Inc. new product line",
-    "market_impact": "Positive",
-    "volatility_impact": 2.0293236081075796,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 40,
-    "social_sentiment_score": -0.45625461622032626
-  },
-  {
-    "event_id": "EVENT_000034",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "event_type": "Earnings Announcement",
-    "event_date": "2025-09-04",
-    "description": "Goldman Sachs Group Inc. completed acquisition of strategic technology assets",
-    "market_impact": "Negative",
-    "volatility_impact": 0.9426061180372132,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 20,
-    "social_sentiment_score": 0.20886885802055666
-  },
-  {
-    "event_id": "EVENT_000035",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "event_type": "Earnings Announcement",
-    "event_date": "2023-10-25",
-    "description": "Tesla Inc. launched innovative solution in Automotive market",
-    "market_impact": "Negative",
-    "volatility_impact": 2.6706147647426066,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 10,
-    "social_sentiment_score": 0.48608797319030606
-  },
-  {
-    "event_id": "EVENT_000036",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "event_type": "Economic Data Release",
-    "event_date": "2023-10-23",
-    "description": "Amazon.com Inc. launched innovative solution in E-commerce market",
-    "market_impact": "Positive",
-    "volatility_impact": 1.4637509434064346,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 97,
-    "social_sentiment_score": -0.0498577195904879
-  },
-  {
-    "event_id": "EVENT_000037",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "event_type": "FDA Approval",
-    "event_date": "2023-12-18",
-    "description": "Amazon.com Inc. launched innovative solution in E-commerce market",
-    "market_impact": "Neutral",
-    "volatility_impact": 3.1460459574412587,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 49,
-    "social_sentiment_score": 0.6679018626448066
-  },
-  {
-    "event_id": "EVENT_000038",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "event_type": "FDA Approval",
-    "event_date": "2025-01-15",
-    "description": "Microsoft Corporation announced better than expected quarterly results",
-    "market_impact": "Negative",
-    "volatility_impact": 1.291513786873307,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 25,
-    "social_sentiment_score": -0.2700191378672019
-  },
-  {
-    "event_id": "EVENT_000039",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "event_type": "Earnings Announcement",
-    "event_date": "2024-05-03",
-    "description": "Amazon.com Inc. completed acquisition of strategic technology assets",
-    "market_impact": "Neutral",
-    "volatility_impact": 0.7508334819359126,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 94,
-    "social_sentiment_score": 0.8575787974102453
-  },
-  {
-    "event_id": "EVENT_000040",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "event_type": "Executive Change",
-    "event_date": "2025-01-27",
-    "description": "Tesla Inc. completed acquisition of strategic technology assets",
-    "market_impact": "Neutral",
-    "volatility_impact": 1.2873890768295104,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 6,
-    "social_sentiment_score": 0.27233755647221103
-  },
-  {
-    "event_id": "EVENT_000041",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Lawsuit Settlement",
-    "event_date": "2024-07-14",
-    "description": "Credit rating agency upgraded Berkshire Hathaway Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 3.1879160733301455,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 17,
-    "social_sentiment_score": 0.050262061576173966
-  },
-  {
-    "event_id": "EVENT_000042",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "event_type": "Earnings Announcement",
-    "event_date": "2025-08-31",
-    "description": "Berkshire Hathaway Inc. launched innovative solution in Conglomerate market",
-    "market_impact": "Negative",
-    "volatility_impact": 2.3335917607416623,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 64,
-    "social_sentiment_score": -0.5529641208144604
-  },
-  {
-    "event_id": "EVENT_000043",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "event_type": "Merger Announcement",
-    "event_date": "2024-10-11",
-    "description": "Regulatory approval received for JPMorgan Chase & Co. new product line",
-    "market_impact": "Neutral",
-    "volatility_impact": 2.1417546285154834,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 93,
-    "social_sentiment_score": 0.5258857714781444
-  },
-  {
-    "event_id": "EVENT_000044",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "event_type": "Dividend Declaration",
-    "event_date": "2025-07-13",
-    "description": "Tesla Inc. completed acquisition of strategic technology assets",
-    "market_impact": "Negative",
-    "volatility_impact": 1.0132409218583232,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 55,
-    "social_sentiment_score": 0.48117184406064895
-  },
-  {
-    "event_id": "EVENT_000045",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "event_type": "Dividend Declaration",
-    "event_date": "2025-01-24",
-    "description": "Regulatory approval received for Bank of America Corp. new product line",
+    "event_type": "Regulatory Action",
+    "event_date": "2024-02-06",
+    "description": "Bank of America Corp. completed acquisition of strategic technology assets",
     "market_impact": "Negative",
-    "volatility_impact": 2.4117670363476824,
-    "analyst_sentiment": "Bearish",
-    "media_mentions": 91,
-    "social_sentiment_score": -0.35454843847119166
+    "volatility_impact": 1.3062722122522104,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 86,
+    "social_sentiment_score": -0.1002098143323451
   },
   {
-    "event_id": "EVENT_000046",
+    "event_id": "EVENT_000024",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Product Launch",
+    "event_date": "2025-08-13",
+    "description": "Regulatory approval received for Berkshire Hathaway Inc. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 3.840177158455575,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 28,
+    "social_sentiment_score": 0.24269468415208384
+  },
+  {
+    "event_id": "EVENT_000025",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "event_type": "Product Launch",
-    "event_date": "2025-06-08",
-    "description": "Microsoft Corporation announced better than expected quarterly results",
+    "event_type": "FDA Approval",
+    "event_date": "2024-07-22",
+    "description": "Microsoft Corporation completed acquisition of strategic technology assets",
     "market_impact": "Neutral",
-    "volatility_impact": 0.2507126862397231,
-    "analyst_sentiment": "Neutral",
-    "media_mentions": 45,
-    "social_sentiment_score": -0.5132188717546549
+    "volatility_impact": 1.3811413097541276,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 55,
+    "social_sentiment_score": -0.4712389903578007
   },
   {
-    "event_id": "EVENT_000047",
+    "event_id": "EVENT_000026",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Lawsuit Settlement",
+    "event_date": "2025-08-08",
+    "description": "Regulatory approval received for Apple Inc. new product line",
+    "market_impact": "Neutral",
+    "volatility_impact": 2.854985359363483,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 73,
+    "social_sentiment_score": -0.7117231678610922
+  },
+  {
+    "event_id": "EVENT_000027",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "event_type": "Economic Data Release",
+    "event_date": "2023-09-21",
+    "description": "Regulatory approval received for Goldman Sachs Group Inc. new product line",
+    "market_impact": "Neutral",
+    "volatility_impact": 1.7148784241663242,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 76,
+    "social_sentiment_score": 0.2000157383233665
+  },
+  {
+    "event_id": "EVENT_000028",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "FDA Approval",
+    "event_date": "2024-11-14",
+    "description": "Tesla Inc. launched innovative solution in Automotive market",
+    "market_impact": "Positive",
+    "volatility_impact": 3.7027560549120047,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 57,
+    "social_sentiment_score": -0.49117900967584927
+  },
+  {
+    "event_id": "EVENT_000029",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "event_type": "Product Launch",
+    "event_date": "2024-08-22",
+    "description": "Berkshire Hathaway Inc. announced better than expected quarterly results",
+    "market_impact": "Positive",
+    "volatility_impact": 4.498965015592485,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 77,
+    "social_sentiment_score": 0.06976705000639316
+  },
+  {
+    "event_id": "EVENT_000030",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "event_type": "Earnings Announcement",
+    "event_date": "2025-02-16",
+    "description": "Credit rating agency upgraded Goldman Sachs Group Inc. outlook to positive",
+    "market_impact": "Positive",
+    "volatility_impact": 4.015522473662051,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 83,
+    "social_sentiment_score": 0.13633598918440137
+  },
+  {
+    "event_id": "EVENT_000031",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "event_type": "Dividend Declaration",
+    "event_date": "2025-01-11",
+    "description": "JPMorgan Chase & Co. completed acquisition of strategic technology assets",
+    "market_impact": "Neutral",
+    "volatility_impact": 4.537745425861225,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 20,
+    "social_sentiment_score": -0.36447382517229565
+  },
+  {
+    "event_id": "EVENT_000032",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "event_type": "Product Launch",
+    "event_date": "2025-05-09",
+    "description": "Bank of America Corp. announced better than expected quarterly results",
+    "market_impact": "Positive",
+    "volatility_impact": 4.142018617725789,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 25,
+    "social_sentiment_score": -0.8485918836121968
+  },
+  {
+    "event_id": "EVENT_000033",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2025-07-03",
+    "description": "Bank of America Corp. launched innovative solution in Financial Services market",
+    "market_impact": "Negative",
+    "volatility_impact": 2.62945812421844,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 57,
+    "social_sentiment_score": 0.3970376586521738
+  },
+  {
+    "event_id": "EVENT_000034",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "event_type": "FDA Approval",
+    "event_date": "2024-01-22",
+    "description": "Bank of America Corp. launched innovative solution in Financial Services market",
+    "market_impact": "Neutral",
+    "volatility_impact": 3.763299324380924,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 48,
+    "social_sentiment_score": 0.3080517739883357
+  },
+  {
+    "event_id": "EVENT_000035",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "event_type": "Product Launch",
+    "event_date": "2023-09-16",
+    "description": "Regulatory approval received for JPMorgan Chase & Co. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 1.5920655057789634,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 62,
+    "social_sentiment_score": 0.27517932103784615
+  },
+  {
+    "event_id": "EVENT_000036",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "Executive Change",
+    "event_date": "2024-10-13",
+    "description": "Regulatory approval received for Tesla Inc. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 0.42529559301320197,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 12,
+    "social_sentiment_score": -0.18075002947982788
+  },
+  {
+    "event_id": "EVENT_000037",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Merger Announcement",
+    "event_date": "2023-12-14",
+    "description": "Credit rating agency upgraded Apple Inc. outlook to positive",
+    "market_impact": "Positive",
+    "volatility_impact": 3.0649249582207245,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 93,
+    "social_sentiment_score": 0.43541616813639705
+  },
+  {
+    "event_id": "EVENT_000038",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Product Launch",
+    "event_date": "2025-04-29",
+    "description": "Apple Inc. completed acquisition of strategic technology assets",
+    "market_impact": "Positive",
+    "volatility_impact": 0.8588539236523216,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 81,
+    "social_sentiment_score": 0.1718056509346293
+  },
+  {
+    "event_id": "EVENT_000039",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
@@ -807,46 +671,182 @@
       "sector": "Technology"
     },
     "event_type": "Credit Rating Change",
-    "event_date": "2024-03-05",
-    "description": "Microsoft Corporation launched innovative solution in Technology market",
+    "event_date": "2023-12-06",
+    "description": "Regulatory approval received for Microsoft Corporation new product line",
+    "market_impact": "Neutral",
+    "volatility_impact": 0.5286516762778866,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 79,
+    "social_sentiment_score": -0.33102979710377745
+  },
+  {
+    "event_id": "EVENT_000040",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "event_type": "Lawsuit Settlement",
+    "event_date": "2024-12-24",
+    "description": "Credit rating agency upgraded Microsoft Corporation outlook to positive",
     "market_impact": "Negative",
-    "volatility_impact": 0.5584047564493178,
+    "volatility_impact": 3.9095564518250487,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 8,
+    "social_sentiment_score": 0.5586809023719943
+  },
+  {
+    "event_id": "EVENT_000041",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Dividend Declaration",
+    "event_date": "2024-09-23",
+    "description": "Apple Inc. completed acquisition of strategic technology assets",
+    "market_impact": "Neutral",
+    "volatility_impact": 4.939719455866378,
     "analyst_sentiment": "Bearish",
-    "media_mentions": 30,
-    "social_sentiment_score": -0.011452334452124902
+    "media_mentions": 39,
+    "social_sentiment_score": 0.9631294504292358
+  },
+  {
+    "event_id": "EVENT_000042",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "event_type": "Economic Data Release",
+    "event_date": "2023-11-25",
+    "description": "Amazon.com Inc. launched innovative solution in E-commerce market",
+    "market_impact": "Negative",
+    "volatility_impact": 4.287732826268656,
+    "analyst_sentiment": "Bullish",
+    "media_mentions": 45,
+    "social_sentiment_score": 0.5352373020931114
+  },
+  {
+    "event_id": "EVENT_000043",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2025-02-12",
+    "description": "Credit rating agency upgraded Tesla Inc. outlook to positive",
+    "market_impact": "Negative",
+    "volatility_impact": 4.908650745995413,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 1,
+    "social_sentiment_score": 0.04303491826632322
+  },
+  {
+    "event_id": "EVENT_000044",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "event_type": "Credit Rating Change",
+    "event_date": "2025-02-14",
+    "description": "Regulatory approval received for Amazon.com Inc. new product line",
+    "market_impact": "Neutral",
+    "volatility_impact": 2.623677957440413,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 18,
+    "social_sentiment_score": 0.17532277656077278
+  },
+  {
+    "event_id": "EVENT_000045",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "event_type": "Executive Change",
+    "event_date": "2025-04-21",
+    "description": "Regulatory approval received for Apple Inc. new product line",
+    "market_impact": "Negative",
+    "volatility_impact": 3.5067331560383557,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 24,
+    "social_sentiment_score": 0.6593513879484798
+  },
+  {
+    "event_id": "EVENT_000046",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "event_type": "FDA Approval",
+    "event_date": "2025-08-17",
+    "description": "Regulatory approval received for Bank of America Corp. new product line",
+    "market_impact": "Positive",
+    "volatility_impact": 4.675832260040618,
+    "analyst_sentiment": "Neutral",
+    "media_mentions": 86,
+    "social_sentiment_score": -0.16983600750939676
+  },
+  {
+    "event_id": "EVENT_000047",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "event_type": "FDA Approval",
+    "event_date": "2024-06-10",
+    "description": "Tesla Inc. completed acquisition of strategic technology assets",
+    "market_impact": "Neutral",
+    "volatility_impact": 2.91873266020251,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 94,
+    "social_sentiment_score": 0.7432452372892877
   },
   {
     "event_id": "EVENT_000048",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "event_type": "FDA Approval",
-    "event_date": "2025-08-20",
-    "description": "Credit rating agency upgraded Amazon.com Inc. outlook to positive",
+    "event_type": "Product Launch",
+    "event_date": "2024-05-17",
+    "description": "Bank of America Corp. announced better than expected quarterly results",
     "market_impact": "Positive",
-    "volatility_impact": 1.4262115076730846,
-    "analyst_sentiment": "Bullish",
-    "media_mentions": 67,
-    "social_sentiment_score": -0.3507651237438456
+    "volatility_impact": 0.33311153458981757,
+    "analyst_sentiment": "Bearish",
+    "media_mentions": 6,
+    "social_sentiment_score": -0.43057889709412844
   },
   {
     "event_id": "EVENT_000049",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "event_type": "Regulatory Action",
-    "event_date": "2024-11-11",
-    "description": "Credit rating agency upgraded Amazon.com Inc. outlook to positive",
-    "market_impact": "Positive",
-    "volatility_impact": 1.0063090193904747,
+    "event_type": "Economic Data Release",
+    "event_date": "2024-11-20",
+    "description": "Goldman Sachs Group Inc. announced better than expected quarterly results",
+    "market_impact": "Negative",
+    "volatility_impact": 0.14384011359383575,
     "analyst_sentiment": "Bullish",
-    "media_mentions": 68,
-    "social_sentiment_score": -0.5734851497151137
+    "media_mentions": 30,
+    "social_sentiment_score": 0.2961190424937732
   }
 ]

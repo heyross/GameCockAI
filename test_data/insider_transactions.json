@@ -2,110 +2,110 @@
   {
     "transaction_id": "INSIDER_000000",
     "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_051",
-    "relationship": "Director",
-    "transaction_date": "2024-01-24",
-    "transaction_type": "Exercise",
-    "shares": 55258,
-    "price_per_share": 56.90427601795096,
-    "total_value": 3144416.484199934,
-    "remaining_holdings": 123604,
-    "form_type": "Form 3"
+    "insider_name": "Insider_083",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-07-05",
+    "transaction_type": "Grant",
+    "shares": 30412,
+    "price_per_share": 65.66787690408992,
+    "total_value": 1997091.4724071827,
+    "remaining_holdings": 739878,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000001",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_002",
-    "relationship": "Officer",
-    "transaction_date": "2024-10-28",
-    "transaction_type": "Exercise",
-    "shares": 38342,
-    "price_per_share": 172.43036047000524,
-    "total_value": 6611324.881140941,
-    "remaining_holdings": 151235,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000002",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_060",
-    "relationship": "Other",
-    "transaction_date": "2024-09-30",
+    "insider_name": "Insider_072",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-05-23",
     "transaction_type": "Gift",
-    "shares": 50939,
-    "price_per_share": 108.67131221624793,
-    "total_value": 5535607.972983453,
-    "remaining_holdings": 204018,
-    "form_type": "Form 3"
+    "shares": 41459,
+    "price_per_share": 475.4593614303778,
+    "total_value": 19712069.665542033,
+    "remaining_holdings": 891087,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000002",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_093",
+    "relationship": "Other",
+    "transaction_date": "2024-09-12",
+    "transaction_type": "Sale",
+    "shares": 18578,
+    "price_per_share": 487.58838383866083,
+    "total_value": 9058416.99495464,
+    "remaining_holdings": 471943,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000003",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_021",
+    "insider_name": "Insider_059",
     "relationship": "Officer",
-    "transaction_date": "2024-06-26",
-    "transaction_type": "Gift",
-    "shares": 29686,
-    "price_per_share": 298.2334165851477,
-    "total_value": 8853357.204746695,
-    "remaining_holdings": 525233,
+    "transaction_date": "2024-03-18",
+    "transaction_type": "Exercise",
+    "shares": 60182,
+    "price_per_share": 477.1991014130201,
+    "total_value": 28718796.321238376,
+    "remaining_holdings": 985721,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000004",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_034",
+    "relationship": "Officer",
+    "transaction_date": "2024-09-10",
+    "transaction_type": "Purchase",
+    "shares": 99560,
+    "price_per_share": 485.046411014507,
+    "total_value": 48291220.68060432,
+    "remaining_holdings": 306733,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000005",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_050",
-    "relationship": "Director",
-    "transaction_date": "2023-12-07",
-    "transaction_type": "Purchase",
-    "shares": 95496,
-    "price_per_share": 94.63811604660965,
-    "total_value": 9037561.529987035,
-    "remaining_holdings": 309585,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000005",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_038",
-    "relationship": "Director",
-    "transaction_date": "2023-09-22",
-    "transaction_type": "Grant",
-    "shares": 68211,
-    "price_per_share": 383.70217382227287,
-    "total_value": 26172708.978591055,
-    "remaining_holdings": 342744,
-    "form_type": "Form 4"
+    "insider_name": "Insider_087",
+    "relationship": "Other",
+    "transaction_date": "2023-12-22",
+    "transaction_type": "Gift",
+    "shares": 72138,
+    "price_per_share": 312.05337968017847,
+    "total_value": 22510906.703368716,
+    "remaining_holdings": 699867,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000006",
@@ -115,69 +115,69 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_083",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-03-29",
-    "transaction_type": "Grant",
-    "shares": 92256,
-    "price_per_share": 163.5476395247161,
-    "total_value": 15088251.031992208,
-    "remaining_holdings": 622194,
-    "form_type": "Form 3"
+    "insider_name": "Insider_014",
+    "relationship": "Other",
+    "transaction_date": "2023-12-07",
+    "transaction_type": "Gift",
+    "shares": 4282,
+    "price_per_share": 175.838911969638,
+    "total_value": 752942.2210539898,
+    "remaining_holdings": 649039,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000007",
     "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_073",
-    "relationship": "Director",
-    "transaction_date": "2025-01-24",
-    "transaction_type": "Purchase",
-    "shares": 15902,
-    "price_per_share": 385.02709690365936,
-    "total_value": 6122700.894961991,
-    "remaining_holdings": 217020,
-    "form_type": "Form 3"
+    "insider_name": "Insider_069",
+    "relationship": "Officer",
+    "transaction_date": "2023-09-27",
+    "transaction_type": "Sale",
+    "shares": 25388,
+    "price_per_share": 30.88109761892237,
+    "total_value": 784009.3063492011,
+    "remaining_holdings": 649825,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000008",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_030",
+    "relationship": "Director",
+    "transaction_date": "2024-03-13",
+    "transaction_type": "Gift",
+    "shares": 20909,
+    "price_per_share": 169.71512735387688,
+    "total_value": 3548573.597842212,
+    "remaining_holdings": 890355,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000009",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_048",
+    "insider_name": "Insider_069",
     "relationship": "Officer",
-    "transaction_date": "2024-01-14",
-    "transaction_type": "Gift",
-    "shares": 44884,
-    "price_per_share": 400.1497576451536,
-    "total_value": 17960321.722145073,
-    "remaining_holdings": 695671,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000009",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_023",
-    "relationship": "Director",
-    "transaction_date": "2023-11-22",
+    "transaction_date": "2025-02-03",
     "transaction_type": "Grant",
-    "shares": 1798,
-    "price_per_share": 308.2108629371437,
-    "total_value": 554163.1315609844,
-    "remaining_holdings": 217997,
-    "form_type": "Form 4"
+    "shares": 24652,
+    "price_per_share": 218.74662519240883,
+    "total_value": 5392541.804243263,
+    "remaining_holdings": 250445,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000010",
@@ -187,123 +187,123 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_015",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-05-21",
+    "insider_name": "Insider_065",
+    "relationship": "Director",
+    "transaction_date": "2024-11-22",
     "transaction_type": "Exercise",
-    "shares": 56771,
-    "price_per_share": 427.6300029532279,
-    "total_value": 24276982.897657704,
-    "remaining_holdings": 203461,
-    "form_type": "Form 5"
+    "shares": 582,
+    "price_per_share": 346.881671927129,
+    "total_value": 201885.13306158906,
+    "remaining_holdings": 837177,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000011",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_030",
-    "relationship": "Director",
-    "transaction_date": "2025-03-03",
-    "transaction_type": "Sale",
-    "shares": 50037,
-    "price_per_share": 151.959542645162,
-    "total_value": 7603599.635335971,
-    "remaining_holdings": 706514,
+    "insider_name": "Insider_076",
+    "relationship": "Officer",
+    "transaction_date": "2025-01-01",
+    "transaction_type": "Gift",
+    "shares": 2270,
+    "price_per_share": 172.25451351979765,
+    "total_value": 391017.7456899407,
+    "remaining_holdings": 665514,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000012",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_059",
-    "relationship": "Other",
-    "transaction_date": "2023-09-29",
-    "transaction_type": "Purchase",
-    "shares": 18132,
-    "price_per_share": 493.63104990860313,
-    "total_value": 8950518.196942791,
-    "remaining_holdings": 856172,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000013",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_048",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-12-23",
-    "transaction_type": "Grant",
-    "shares": 52697,
-    "price_per_share": 249.3948328538091,
-    "total_value": 13142359.506897178,
-    "remaining_holdings": 435946,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000014",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_080",
-    "relationship": "Director",
-    "transaction_date": "2025-08-11",
-    "transaction_type": "Purchase",
-    "shares": 95194,
-    "price_per_share": 493.17187724323566,
-    "total_value": 46947003.68229257,
-    "remaining_holdings": 235520,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000015",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_027",
+    "insider_name": "Insider_083",
     "relationship": "Other",
-    "transaction_date": "2025-03-04",
+    "transaction_date": "2025-06-10",
     "transaction_type": "Exercise",
-    "shares": 89285,
-    "price_per_share": 67.36582879113587,
-    "total_value": 6014758.023616566,
-    "remaining_holdings": 654554,
+    "shares": 99097,
+    "price_per_share": 155.0094240871974,
+    "total_value": 15360968.898769,
+    "remaining_holdings": 376638,
     "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000013",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_017",
+    "relationship": "Director",
+    "transaction_date": "2024-07-13",
+    "transaction_type": "Sale",
+    "shares": 95148,
+    "price_per_share": 385.14656772489747,
+    "total_value": 36645925.62588854,
+    "remaining_holdings": 938191,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000014",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_047",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-05-19",
+    "transaction_type": "Gift",
+    "shares": 65071,
+    "price_per_share": 392.0444869182933,
+    "total_value": 25510726.808260262,
+    "remaining_holdings": 462426,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000015",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "insider_name": "Insider_091",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-01-24",
+    "transaction_type": "Exercise",
+    "shares": 47287,
+    "price_per_share": 361.1431200556998,
+    "total_value": 17077374.718073875,
+    "remaining_holdings": 66214,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000016",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_005",
-    "relationship": "Director",
-    "transaction_date": "2023-11-26",
-    "transaction_type": "Grant",
-    "shares": 67601,
-    "price_per_share": 374.6089296216938,
-    "total_value": 25323938.25135612,
-    "remaining_holdings": 319402,
-    "form_type": "Form 5"
+    "insider_name": "Insider_072",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-03-31",
+    "transaction_type": "Sale",
+    "shares": 89602,
+    "price_per_share": 139.00322477564143,
+    "total_value": 12454966.946347022,
+    "remaining_holdings": 347609,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000017",
@@ -313,15 +313,15 @@
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_033",
+    "insider_name": "Insider_097",
     "relationship": "Director",
-    "transaction_date": "2024-01-03",
+    "transaction_date": "2025-04-13",
     "transaction_type": "Gift",
-    "shares": 95161,
-    "price_per_share": 87.59665634833719,
-    "total_value": 8335785.414764116,
-    "remaining_holdings": 89501,
-    "form_type": "Form 5"
+    "shares": 89877,
+    "price_per_share": 213.91005021441714,
+    "total_value": 19225593.58312117,
+    "remaining_holdings": 71848,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000018",
@@ -331,51 +331,51 @@
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_064",
-    "relationship": "Officer",
-    "transaction_date": "2023-11-12",
+    "insider_name": "Insider_021",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-08-11",
     "transaction_type": "Grant",
-    "shares": 71566,
-    "price_per_share": 393.4352291475758,
-    "total_value": 28156585.60917541,
-    "remaining_holdings": 184128,
-    "form_type": "Form 3"
+    "shares": 60142,
+    "price_per_share": 491.319688141107,
+    "total_value": 29548948.684182458,
+    "remaining_holdings": 818795,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000019",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_003",
-    "relationship": "Other",
-    "transaction_date": "2025-07-11",
-    "transaction_type": "Exercise",
-    "shares": 64051,
-    "price_per_share": 327.0814145865385,
-    "total_value": 20949891.685682375,
-    "remaining_holdings": 171724,
-    "form_type": "Form 4"
+    "insider_name": "Insider_040",
+    "relationship": "Officer",
+    "transaction_date": "2024-12-20",
+    "transaction_type": "Grant",
+    "shares": 28910,
+    "price_per_share": 74.54037835973865,
+    "total_value": 2154962.3383800443,
+    "remaining_holdings": 799461,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000020",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_057",
-    "relationship": "Officer",
-    "transaction_date": "2024-11-10",
-    "transaction_type": "Exercise",
-    "shares": 15769,
-    "price_per_share": 40.377377428429355,
-    "total_value": 636710.8646689025,
-    "remaining_holdings": 353888,
-    "form_type": "Form 3"
+    "insider_name": "Insider_090",
+    "relationship": "Other",
+    "transaction_date": "2023-12-11",
+    "transaction_type": "Grant",
+    "shares": 40717,
+    "price_per_share": 96.06210262163628,
+    "total_value": 3911360.6324451645,
+    "remaining_holdings": 972445,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000021",
@@ -385,33 +385,33 @@
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_021",
+    "insider_name": "Insider_015",
     "relationship": "Other",
-    "transaction_date": "2024-06-07",
-    "transaction_type": "Sale",
-    "shares": 37801,
-    "price_per_share": 217.28685195021166,
-    "total_value": 8213660.290569951,
-    "remaining_holdings": 363567,
-    "form_type": "Form 5"
+    "transaction_date": "2025-06-22",
+    "transaction_type": "Exercise",
+    "shares": 35734,
+    "price_per_share": 185.3498117767699,
+    "total_value": 6623290.174031096,
+    "remaining_holdings": 630461,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000022",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_086",
+    "insider_name": "Insider_085",
     "relationship": "Director",
-    "transaction_date": "2025-05-26",
+    "transaction_date": "2024-10-29",
     "transaction_type": "Purchase",
-    "shares": 61133,
-    "price_per_share": 81.1491594088916,
-    "total_value": 4960891.562143771,
-    "remaining_holdings": 513722,
-    "form_type": "Form 4"
+    "shares": 18302,
+    "price_per_share": 119.13751619312244,
+    "total_value": 2180454.8213665267,
+    "remaining_holdings": 41587,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000023",
@@ -421,198 +421,234 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_012",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-01-16",
-    "transaction_type": "Purchase",
-    "shares": 42338,
-    "price_per_share": 334.0679695618763,
-    "total_value": 14143769.695310717,
-    "remaining_holdings": 191582,
+    "insider_name": "Insider_022",
+    "relationship": "Other",
+    "transaction_date": "2024-02-23",
+    "transaction_type": "Gift",
+    "shares": 6419,
+    "price_per_share": 346.37582850748225,
+    "total_value": 2223386.443189529,
+    "remaining_holdings": 231783,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000024",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_039",
-    "relationship": "Other",
-    "transaction_date": "2025-05-08",
-    "transaction_type": "Grant",
-    "shares": 3273,
-    "price_per_share": 312.7074018541475,
-    "total_value": 1023491.3262686249,
-    "remaining_holdings": 771478,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000025",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_087",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-03-09",
+    "insider_name": "Insider_052",
+    "relationship": "Director",
+    "transaction_date": "2023-11-18",
     "transaction_type": "Purchase",
-    "shares": 26035,
-    "price_per_share": 222.19691628618781,
-    "total_value": 5784896.7155109,
-    "remaining_holdings": 272623,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000026",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_100",
-    "relationship": "Other",
-    "transaction_date": "2024-07-25",
-    "transaction_type": "Grant",
-    "shares": 56839,
-    "price_per_share": 71.44998512810648,
-    "total_value": 4061145.704696444,
-    "remaining_holdings": 815524,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000027",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_028",
-    "relationship": "Other",
-    "transaction_date": "2025-08-14",
-    "transaction_type": "Exercise",
-    "shares": 51360,
-    "price_per_share": 38.24592778884125,
-    "total_value": 1964310.8512348866,
-    "remaining_holdings": 670347,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000028",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_029",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-07-03",
-    "transaction_type": "Sale",
-    "shares": 64433,
-    "price_per_share": 420.96133897960084,
-    "total_value": 27123801.95447262,
-    "remaining_holdings": 427625,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000029",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_060",
-    "relationship": "Other",
-    "transaction_date": "2025-08-13",
-    "transaction_type": "Exercise",
-    "shares": 52643,
-    "price_per_share": 110.063650269057,
-    "total_value": 5794080.741113968,
-    "remaining_holdings": 310800,
+    "shares": 7528,
+    "price_per_share": 311.75815711934337,
+    "total_value": 2346915.4067944167,
+    "remaining_holdings": 122103,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000030",
+    "transaction_id": "INSIDER_000025",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_034",
-    "relationship": "Officer",
-    "transaction_date": "2024-10-05",
+    "insider_name": "Insider_069",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-05-24",
     "transaction_type": "Gift",
-    "shares": 20136,
-    "price_per_share": 62.692092268935916,
-    "total_value": 1262367.9699272937,
-    "remaining_holdings": 524058,
-    "form_type": "Form 5"
+    "shares": 49332,
+    "price_per_share": 36.417514193705074,
+    "total_value": 1796548.8102038587,
+    "remaining_holdings": 142946,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000031",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_057",
-    "relationship": "Director",
-    "transaction_date": "2023-10-29",
-    "transaction_type": "Gift",
-    "shares": 57866,
-    "price_per_share": 360.3821108544137,
-    "total_value": 20853871.226701505,
-    "remaining_holdings": 681254,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000032",
+    "transaction_id": "INSIDER_000026",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_007",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-02-05",
-    "transaction_type": "Exercise",
-    "shares": 90038,
-    "price_per_share": 253.37707056028626,
-    "total_value": 22813564.679107055,
-    "remaining_holdings": 44595,
-    "form_type": "Form 4"
+    "insider_name": "Insider_023",
+    "relationship": "Other",
+    "transaction_date": "2024-04-03",
+    "transaction_type": "Gift",
+    "shares": 26428,
+    "price_per_share": 332.48898498685736,
+    "total_value": 8787018.895232666,
+    "remaining_holdings": 356835,
+    "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000033",
+    "transaction_id": "INSIDER_000027",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_093",
+    "relationship": "Director",
+    "transaction_date": "2024-12-18",
+    "transaction_type": "Exercise",
+    "shares": 91122,
+    "price_per_share": 85.21576926768981,
+    "total_value": 7765031.327210431,
+    "remaining_holdings": 714839,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000028",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_002",
+    "relationship": "Director",
+    "transaction_date": "2024-04-10",
+    "transaction_type": "Exercise",
+    "shares": 67525,
+    "price_per_share": 141.38573637509052,
+    "total_value": 9547071.848727986,
+    "remaining_holdings": 843752,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000029",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_016",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-08-10",
+    "transaction_type": "Exercise",
+    "shares": 11641,
+    "price_per_share": 227.94174303326054,
+    "total_value": 2653469.8306501857,
+    "remaining_holdings": 598541,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000030",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_080",
+    "relationship": "Director",
+    "transaction_date": "2024-10-20",
+    "transaction_type": "Exercise",
+    "shares": 56213,
+    "price_per_share": 88.70413864866791,
+    "total_value": 4986325.745857569,
+    "remaining_holdings": 129203,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000031",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_072",
+    "relationship": "Officer",
+    "transaction_date": "2025-07-14",
+    "transaction_type": "Sale",
+    "shares": 79562,
+    "price_per_share": 423.79683586005734,
+    "total_value": 33718123.85469788,
+    "remaining_holdings": 320904,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000032",
     "company": {
       "name": "Tesla Inc.",
       "ticker": "TSLA",
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_002",
-    "relationship": "Director",
-    "transaction_date": "2024-10-31",
+    "insider_name": "Insider_091",
+    "relationship": "Other",
+    "transaction_date": "2024-01-09",
     "transaction_type": "Purchase",
-    "shares": 19308,
-    "price_per_share": 431.9246767485988,
-    "total_value": 8339601.658661946,
-    "remaining_holdings": 324373,
+    "shares": 86034,
+    "price_per_share": 196.94211662808726,
+    "total_value": 16943718.06198086,
+    "remaining_holdings": 535456,
     "form_type": "Form 4"
   },
   {
+    "transaction_id": "INSIDER_000033",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_027",
+    "relationship": "Other",
+    "transaction_date": "2025-02-04",
+    "transaction_type": "Sale",
+    "shares": 72391,
+    "price_per_share": 490.1329296961344,
+    "total_value": 35481212.91363286,
+    "remaining_holdings": 596224,
+    "form_type": "Form 3"
+  },
+  {
     "transaction_id": "INSIDER_000034",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_079",
+    "relationship": "Officer",
+    "transaction_date": "2025-04-06",
+    "transaction_type": "Sale",
+    "shares": 56643,
+    "price_per_share": 339.2777339283697,
+    "total_value": 19217708.682904646,
+    "remaining_holdings": 927101,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000035",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_023",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-06-06",
+    "transaction_type": "Exercise",
+    "shares": 89227,
+    "price_per_share": 63.53278148157375,
+    "total_value": 5668839.493256381,
+    "remaining_holdings": 410395,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000036",
     "company": {
       "name": "JPMorgan Chase & Co.",
       "ticker": "JPM",
@@ -621,85 +657,49 @@
     },
     "insider_name": "Insider_053",
     "relationship": "Officer",
-    "transaction_date": "2023-10-13",
+    "transaction_date": "2024-07-16",
     "transaction_type": "Sale",
-    "shares": 51976,
-    "price_per_share": 464.5680037566142,
-    "total_value": 24146386.56325378,
-    "remaining_holdings": 751881,
-    "form_type": "Form 5"
+    "shares": 17592,
+    "price_per_share": 202.33761688607385,
+    "total_value": 3559523.356259811,
+    "remaining_holdings": 275259,
+    "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000035",
+    "transaction_id": "INSIDER_000037",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_041",
-    "relationship": "Director",
-    "transaction_date": "2024-10-16",
-    "transaction_type": "Exercise",
-    "shares": 54476,
-    "price_per_share": 392.77356121962913,
-    "total_value": 21396732.521000516,
-    "remaining_holdings": 633518,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000036",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_094",
+    "insider_name": "Insider_077",
     "relationship": "10% Owner",
-    "transaction_date": "2025-09-03",
-    "transaction_type": "Exercise",
-    "shares": 96674,
-    "price_per_share": 96.82806324725328,
-    "total_value": 9360756.186364964,
-    "remaining_holdings": 174368,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000037",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_004",
-    "relationship": "Director",
-    "transaction_date": "2023-12-17",
-    "transaction_type": "Sale",
-    "shares": 85334,
-    "price_per_share": 427.3625163564525,
-    "total_value": 36468552.970761515,
-    "remaining_holdings": 732512,
-    "form_type": "Form 4"
+    "transaction_date": "2023-10-11",
+    "transaction_type": "Grant",
+    "shares": 27801,
+    "price_per_share": 465.0712524322502,
+    "total_value": 12929445.888868988,
+    "remaining_holdings": 254696,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000038",
     "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_059",
-    "relationship": "Director",
-    "transaction_date": "2024-06-19",
-    "transaction_type": "Purchase",
-    "shares": 87476,
-    "price_per_share": 313.1900594959349,
-    "total_value": 27396613.644466404,
-    "remaining_holdings": 801641,
-    "form_type": "Form 5"
+    "insider_name": "Insider_002",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-06-15",
+    "transaction_type": "Gift",
+    "shares": 96637,
+    "price_per_share": 52.90612406902697,
+    "total_value": 5112689.111658559,
+    "remaining_holdings": 955422,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000039",
@@ -709,50 +709,50 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_006",
-    "relationship": "Other",
-    "transaction_date": "2024-12-21",
+    "insider_name": "Insider_079",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-12-02",
     "transaction_type": "Grant",
-    "shares": 30550,
-    "price_per_share": 135.7254063439263,
-    "total_value": 4146411.1638069483,
-    "remaining_holdings": 741304,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000040",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_048",
-    "relationship": "Officer",
-    "transaction_date": "2024-04-19",
-    "transaction_type": "Purchase",
-    "shares": 91506,
-    "price_per_share": 338.4348375625967,
-    "total_value": 30968818.246002976,
-    "remaining_holdings": 735597,
+    "shares": 6404,
+    "price_per_share": 310.76982522839603,
+    "total_value": 1990169.9607626481,
+    "remaining_holdings": 364239,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000041",
+    "transaction_id": "INSIDER_000040",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_081",
-    "relationship": "Director",
-    "transaction_date": "2023-12-11",
+    "insider_name": "Insider_077",
+    "relationship": "Other",
+    "transaction_date": "2024-11-26",
     "transaction_type": "Grant",
-    "shares": 78848,
-    "price_per_share": 359.5895267520582,
-    "total_value": 28352915.005346283,
-    "remaining_holdings": 254296,
+    "shares": 29057,
+    "price_per_share": 245.67021985117466,
+    "total_value": 7138439.578215582,
+    "remaining_holdings": 437447,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000041",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_005",
+    "relationship": "Other",
+    "transaction_date": "2024-05-25",
+    "transaction_type": "Purchase",
+    "shares": 48884,
+    "price_per_share": 320.1162388385048,
+    "total_value": 15648562.219381468,
+    "remaining_holdings": 462947,
     "form_type": "Form 4"
   },
   {
@@ -763,15 +763,15 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_064",
+    "insider_name": "Insider_072",
     "relationship": "Director",
-    "transaction_date": "2025-01-19",
-    "transaction_type": "Exercise",
-    "shares": 78205,
-    "price_per_share": 43.091437474139546,
-    "total_value": 3369965.867665083,
-    "remaining_holdings": 797974,
-    "form_type": "Form 5"
+    "transaction_date": "2024-01-28",
+    "transaction_type": "Purchase",
+    "shares": 44649,
+    "price_per_share": 370.25335342410517,
+    "total_value": 16531441.977032872,
+    "remaining_holdings": 599758,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000043",
@@ -781,14 +781,14 @@
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_088",
-    "relationship": "Officer",
-    "transaction_date": "2023-11-25",
-    "transaction_type": "Exercise",
-    "shares": 51980,
-    "price_per_share": 382.55809368714637,
-    "total_value": 19885369.70985787,
-    "remaining_holdings": 235689,
+    "insider_name": "Insider_045",
+    "relationship": "Director",
+    "transaction_date": "2025-06-05",
+    "transaction_type": "Grant",
+    "shares": 73041,
+    "price_per_share": 496.2910790879678,
+    "total_value": 36249596.70766425,
+    "remaining_holdings": 728020,
     "form_type": "Form 5"
   },
   {
@@ -799,195 +799,195 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_050",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-06-13",
-    "transaction_type": "Grant",
-    "shares": 15928,
-    "price_per_share": 152.73146188512885,
-    "total_value": 2432706.7249063323,
-    "remaining_holdings": 172981,
+    "insider_name": "Insider_010",
+    "relationship": "Officer",
+    "transaction_date": "2023-12-10",
+    "transaction_type": "Sale",
+    "shares": 61945,
+    "price_per_share": 485.6561440004576,
+    "total_value": 30083969.840108346,
+    "remaining_holdings": 37302,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000045",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_065",
-    "relationship": "Director",
-    "transaction_date": "2024-11-10",
-    "transaction_type": "Grant",
-    "shares": 23518,
-    "price_per_share": 129.6625080471196,
-    "total_value": 3049402.8642521584,
-    "remaining_holdings": 859637,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000046",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_036",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-11-09",
-    "transaction_type": "Exercise",
-    "shares": 64355,
-    "price_per_share": 104.92739126879732,
-    "total_value": 6752602.265103452,
-    "remaining_holdings": 712703,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000047",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_088",
-    "relationship": "Other",
-    "transaction_date": "2023-12-18",
-    "transaction_type": "Gift",
-    "shares": 93537,
-    "price_per_share": 150.57072503806745,
-    "total_value": 14083933.907885715,
-    "remaining_holdings": 387867,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000048",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_063",
-    "relationship": "Officer",
-    "transaction_date": "2023-09-15",
-    "transaction_type": "Purchase",
-    "shares": 68191,
-    "price_per_share": 445.8234865644501,
-    "total_value": 30401149.372316416,
-    "remaining_holdings": 911957,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000049",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_032",
-    "relationship": "Director",
-    "transaction_date": "2024-09-13",
-    "transaction_type": "Exercise",
-    "shares": 39820,
-    "price_per_share": 105.94261295310416,
-    "total_value": 4218634.847792608,
-    "remaining_holdings": 643568,
-    "form_type": "Form 3"
+    "insider_name": "Insider_051",
+    "relationship": "Officer",
+    "transaction_date": "2025-04-09",
+    "transaction_type": "Purchase",
+    "shares": 88952,
+    "price_per_share": 203.51238112949503,
+    "total_value": 18102833.326230843,
+    "remaining_holdings": 834520,
+    "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000050",
+    "transaction_id": "INSIDER_000046",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_089",
-    "relationship": "Director",
-    "transaction_date": "2024-05-09",
-    "transaction_type": "Exercise",
-    "shares": 71869,
-    "price_per_share": 256.69281342082604,
-    "total_value": 18448255.807741348,
-    "remaining_holdings": 112823,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000051",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_090",
-    "relationship": "Officer",
-    "transaction_date": "2024-12-02",
-    "transaction_type": "Grant",
-    "shares": 26034,
-    "price_per_share": 324.7617666141003,
-    "total_value": 8454847.832031487,
-    "remaining_holdings": 760486,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000052",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_081",
+    "insider_name": "Insider_039",
     "relationship": "Other",
-    "transaction_date": "2023-12-10",
-    "transaction_type": "Gift",
-    "shares": 21606,
-    "price_per_share": 278.95507024849644,
-    "total_value": 6027103.247789014,
-    "remaining_holdings": 709357,
+    "transaction_date": "2024-04-04",
+    "transaction_type": "Sale",
+    "shares": 1419,
+    "price_per_share": 185.43082732960863,
+    "total_value": 263126.3439807147,
+    "remaining_holdings": 893105,
     "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000053",
+    "transaction_id": "INSIDER_000047",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_070",
+    "relationship": "Officer",
+    "transaction_date": "2025-06-30",
+    "transaction_type": "Purchase",
+    "shares": 31392,
+    "price_per_share": 191.70608985713582,
+    "total_value": 6018037.572795208,
+    "remaining_holdings": 870228,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000048",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "insider_name": "Insider_030",
+    "relationship": "Officer",
+    "transaction_date": "2024-08-28",
+    "transaction_type": "Grant",
+    "shares": 19874,
+    "price_per_share": 244.96816978289672,
+    "total_value": 4868497.4062652895,
+    "remaining_holdings": 330686,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000049",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_012",
+    "relationship": "Other",
+    "transaction_date": "2024-06-09",
+    "transaction_type": "Sale",
+    "shares": 93151,
+    "price_per_share": 474.2279044415552,
+    "total_value": 44174803.52663531,
+    "remaining_holdings": 714796,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000050",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_001",
-    "relationship": "Director",
-    "transaction_date": "2025-04-03",
-    "transaction_type": "Exercise",
-    "shares": 17829,
-    "price_per_share": 28.102878762722224,
-    "total_value": 501046.2254605745,
-    "remaining_holdings": 449103,
-    "form_type": "Form 3"
+    "insider_name": "Insider_057",
+    "relationship": "Other",
+    "transaction_date": "2023-12-09",
+    "transaction_type": "Sale",
+    "shares": 61849,
+    "price_per_share": 76.94057431968218,
+    "total_value": 4758697.581098024,
+    "remaining_holdings": 695292,
+    "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000054",
+    "transaction_id": "INSIDER_000051",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_006",
-    "relationship": "Officer",
-    "transaction_date": "2024-10-13",
-    "transaction_type": "Grant",
-    "shares": 19578,
-    "price_per_share": 22.954296670267382,
-    "total_value": 449399.2202104948,
-    "remaining_holdings": 217945,
+    "insider_name": "Insider_084",
+    "relationship": "Director",
+    "transaction_date": "2024-12-06",
+    "transaction_type": "Purchase",
+    "shares": 49251,
+    "price_per_share": 139.41960373145182,
+    "total_value": 6866554.903377733,
+    "remaining_holdings": 675454,
     "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000052",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_069",
+    "relationship": "Officer",
+    "transaction_date": "2024-11-17",
+    "transaction_type": "Exercise",
+    "shares": 44460,
+    "price_per_share": 20.016879591362915,
+    "total_value": 889950.4666319952,
+    "remaining_holdings": 195111,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000053",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_057",
+    "relationship": "Director",
+    "transaction_date": "2025-03-07",
+    "transaction_type": "Sale",
+    "shares": 51730,
+    "price_per_share": 111.3777501281367,
+    "total_value": 5761571.014128512,
+    "remaining_holdings": 359385,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000054",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_007",
+    "relationship": "Other",
+    "transaction_date": "2023-11-03",
+    "transaction_type": "Sale",
+    "shares": 32567,
+    "price_per_share": 80.01914441189497,
+    "total_value": 2605983.4760621833,
+    "remaining_holdings": 682764,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000055",
@@ -997,86 +997,86 @@
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_078",
-    "relationship": "Director",
-    "transaction_date": "2025-04-28",
+    "insider_name": "Insider_080",
+    "relationship": "Other",
+    "transaction_date": "2024-07-31",
     "transaction_type": "Sale",
-    "shares": 82019,
-    "price_per_share": 492.2784178369851,
-    "total_value": 40376183.552571684,
-    "remaining_holdings": 166182,
-    "form_type": "Form 4"
+    "shares": 86955,
+    "price_per_share": 13.269644503092472,
+    "total_value": 1153861.937766406,
+    "remaining_holdings": 521958,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000056",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_083",
+    "insider_name": "Insider_060",
     "relationship": "Other",
-    "transaction_date": "2024-01-18",
-    "transaction_type": "Sale",
-    "shares": 27270,
-    "price_per_share": 125.66804609784863,
-    "total_value": 3426967.6170883323,
-    "remaining_holdings": 190534,
-    "form_type": "Form 4"
+    "transaction_date": "2024-09-21",
+    "transaction_type": "Purchase",
+    "shares": 96545,
+    "price_per_share": 223.43345719265682,
+    "total_value": 21571383.12466505,
+    "remaining_holdings": 988912,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000057",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_036",
+    "relationship": "Officer",
+    "transaction_date": "2024-06-05",
+    "transaction_type": "Sale",
+    "shares": 68166,
+    "price_per_share": 198.43375659385023,
+    "total_value": 13526435.451976394,
+    "remaining_holdings": 313804,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000058",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_077",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-08-25",
+    "transaction_type": "Grant",
+    "shares": 45297,
+    "price_per_share": 19.064685888916156,
+    "total_value": 863573.0767102351,
+    "remaining_holdings": 30676,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000059",
     "company": {
       "name": "Tesla Inc.",
       "ticker": "TSLA",
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_081",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-08-28",
-    "transaction_type": "Exercise",
-    "shares": 44578,
-    "price_per_share": 365.0743854818644,
-    "total_value": 16274285.95601055,
-    "remaining_holdings": 11732,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000058",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_040",
-    "relationship": "Officer",
-    "transaction_date": "2023-10-02",
-    "transaction_type": "Exercise",
-    "shares": 74144,
-    "price_per_share": 165.57354281452163,
-    "total_value": 12276284.758439891,
-    "remaining_holdings": 894668,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000059",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_085",
-    "relationship": "Director",
-    "transaction_date": "2024-03-24",
-    "transaction_type": "Gift",
-    "shares": 82353,
-    "price_per_share": 90.18491117035879,
-    "total_value": 7426997.989612557,
-    "remaining_holdings": 170166,
+    "insider_name": "Insider_084",
+    "relationship": "Other",
+    "transaction_date": "2024-05-23",
+    "transaction_type": "Sale",
+    "shares": 25627,
+    "price_per_share": 333.89532170700073,
+    "total_value": 8556735.409385309,
+    "remaining_holdings": 865699,
     "form_type": "Form 3"
   },
   {
@@ -1087,141 +1087,141 @@
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_069",
+    "insider_name": "Insider_015",
     "relationship": "Other",
-    "transaction_date": "2025-08-10",
-    "transaction_type": "Gift",
-    "shares": 12363,
-    "price_per_share": 439.4146282364203,
-    "total_value": 5432483.048886864,
-    "remaining_holdings": 919240,
+    "transaction_date": "2024-07-08",
+    "transaction_type": "Sale",
+    "shares": 20965,
+    "price_per_share": 485.9929261623192,
+    "total_value": 10188841.696993021,
+    "remaining_holdings": 381815,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000061",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_065",
-    "relationship": "Director",
-    "transaction_date": "2024-11-13",
-    "transaction_type": "Sale",
-    "shares": 69989,
-    "price_per_share": 300.95539913034617,
-    "total_value": 21063567.429733798,
-    "remaining_holdings": 677660,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000062",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_071",
+    "insider_name": "Insider_048",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-12-24",
+    "transaction_type": "Sale",
+    "shares": 43455,
+    "price_per_share": 113.91585328177446,
+    "total_value": 4950213.404359509,
+    "remaining_holdings": 807064,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000062",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_046",
     "relationship": "Other",
-    "transaction_date": "2024-03-29",
-    "transaction_type": "Purchase",
-    "shares": 16401,
-    "price_per_share": 269.22194164202574,
-    "total_value": 4415509.064870864,
-    "remaining_holdings": 546048,
-    "form_type": "Form 4"
+    "transaction_date": "2024-01-15",
+    "transaction_type": "Gift",
+    "shares": 44257,
+    "price_per_share": 351.68756351481375,
+    "total_value": 15564636.498475112,
+    "remaining_holdings": 551009,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000063",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_088",
-    "relationship": "Officer",
-    "transaction_date": "2023-11-12",
+    "insider_name": "Insider_015",
+    "relationship": "Director",
+    "transaction_date": "2025-02-25",
     "transaction_type": "Sale",
-    "shares": 36168,
-    "price_per_share": 422.7640080644201,
-    "total_value": 15290528.643673947,
-    "remaining_holdings": 751170,
-    "form_type": "Form 5"
+    "shares": 21671,
+    "price_per_share": 28.141661067293825,
+    "total_value": 609857.9369893245,
+    "remaining_holdings": 312067,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000064",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_089",
-    "relationship": "Other",
-    "transaction_date": "2023-10-26",
-    "transaction_type": "Sale",
-    "shares": 9888,
-    "price_per_share": 345.1338709330542,
-    "total_value": 3412683.71578604,
-    "remaining_holdings": 794824,
-    "form_type": "Form 3"
+    "insider_name": "Insider_026",
+    "relationship": "Officer",
+    "transaction_date": "2023-11-25",
+    "transaction_type": "Exercise",
+    "shares": 72271,
+    "price_per_share": 55.83855521392035,
+    "total_value": 4035508.2238652376,
+    "remaining_holdings": 931082,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000065",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_019",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-09-02",
-    "transaction_type": "Exercise",
-    "shares": 28559,
-    "price_per_share": 337.0017301414822,
-    "total_value": 9624432.41111059,
-    "remaining_holdings": 292299,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000066",
-    "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_004",
+    "insider_name": "Insider_021",
     "relationship": "Other",
-    "transaction_date": "2024-12-19",
-    "transaction_type": "Purchase",
-    "shares": 99837,
-    "price_per_share": 391.0663548919949,
-    "total_value": 39042891.67335209,
-    "remaining_holdings": 521055,
+    "transaction_date": "2025-02-01",
+    "transaction_type": "Grant",
+    "shares": 65552,
+    "price_per_share": 303.13719951513815,
+    "total_value": 19871249.702616338,
+    "remaining_holdings": 238696,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000066",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_071",
+    "relationship": "Director",
+    "transaction_date": "2025-06-29",
+    "transaction_type": "Gift",
+    "shares": 31655,
+    "price_per_share": 338.815286295666,
+    "total_value": 10725197.887689307,
+    "remaining_holdings": 174641,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000067",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_058",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-03-03",
-    "transaction_type": "Grant",
-    "shares": 34169,
-    "price_per_share": 446.51540714458616,
-    "total_value": 15256984.946723364,
-    "remaining_holdings": 941655,
-    "form_type": "Form 3"
+    "insider_name": "Insider_068",
+    "relationship": "Other",
+    "transaction_date": "2024-09-24",
+    "transaction_type": "Exercise",
+    "shares": 82270,
+    "price_per_share": 64.07506072725238,
+    "total_value": 5271455.246031053,
+    "remaining_holdings": 658635,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000068",
@@ -1231,195 +1231,195 @@
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_044",
-    "relationship": "Director",
-    "transaction_date": "2025-08-08",
-    "transaction_type": "Exercise",
-    "shares": 18758,
-    "price_per_share": 339.8589392724688,
-    "total_value": 6375073.9828729695,
-    "remaining_holdings": 744461,
+    "insider_name": "Insider_020",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-03-16",
+    "transaction_type": "Grant",
+    "shares": 82432,
+    "price_per_share": 164.82010365856854,
+    "total_value": 13586450.784783121,
+    "remaining_holdings": 592494,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000069",
     "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
     "insider_name": "Insider_097",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-02-11",
-    "transaction_type": "Sale",
-    "shares": 26627,
-    "price_per_share": 174.39120499687164,
-    "total_value": 4643514.615451701,
-    "remaining_holdings": 36350,
-    "form_type": "Form 4"
+    "relationship": "Director",
+    "transaction_date": "2024-03-28",
+    "transaction_type": "Grant",
+    "shares": 16565,
+    "price_per_share": 289.21310910547584,
+    "total_value": 4790815.152332207,
+    "remaining_holdings": 509295,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000070",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_004",
+    "relationship": "Director",
+    "transaction_date": "2025-08-25",
+    "transaction_type": "Grant",
+    "shares": 5838,
+    "price_per_share": 421.3848591387259,
+    "total_value": 2460044.807651882,
+    "remaining_holdings": 624330,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000071",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_092",
-    "relationship": "Officer",
-    "transaction_date": "2024-09-19",
-    "transaction_type": "Gift",
-    "shares": 11810,
-    "price_per_share": 139.49378234543644,
-    "total_value": 1647421.5694996044,
-    "remaining_holdings": 452298,
-    "form_type": "Form 5"
+    "insider_name": "Insider_032",
+    "relationship": "Director",
+    "transaction_date": "2025-05-10",
+    "transaction_type": "Purchase",
+    "shares": 5900,
+    "price_per_share": 254.39077784399817,
+    "total_value": 1500905.5892795892,
+    "remaining_holdings": 967187,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000071",
+    "transaction_id": "INSIDER_000072",
     "company": {
       "name": "Apple Inc.",
       "ticker": "AAPL",
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_051",
-    "relationship": "Officer",
-    "transaction_date": "2025-08-21",
-    "transaction_type": "Purchase",
-    "shares": 48002,
-    "price_per_share": 353.2308046432934,
-    "total_value": 16955785.08448737,
-    "remaining_holdings": 669225,
+    "insider_name": "Insider_070",
+    "relationship": "Other",
+    "transaction_date": "2024-01-14",
+    "transaction_type": "Exercise",
+    "shares": 46689,
+    "price_per_share": 403.67427755735673,
+    "total_value": 18847148.34487543,
+    "remaining_holdings": 900666,
     "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000072",
+    "transaction_id": "INSIDER_000073",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_075",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-02-06",
-    "transaction_type": "Grant",
-    "shares": 95792,
-    "price_per_share": 253.3206714028461,
-    "total_value": 24266093.755021434,
-    "remaining_holdings": 399375,
-    "form_type": "Form 5"
+    "insider_name": "Insider_018",
+    "relationship": "Other",
+    "transaction_date": "2025-09-08",
+    "transaction_type": "Sale",
+    "shares": 95545,
+    "price_per_share": 395.39579374491615,
+    "total_value": 37778091.11335801,
+    "remaining_holdings": 178041,
+    "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000073",
+    "transaction_id": "INSIDER_000074",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_081",
+    "relationship": "Other",
+    "transaction_date": "2025-07-24",
+    "transaction_type": "Exercise",
+    "shares": 88656,
+    "price_per_share": 405.4599575192403,
+    "total_value": 35946457.99382576,
+    "remaining_holdings": 408481,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000075",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_007",
-    "relationship": "Other",
-    "transaction_date": "2024-08-15",
-    "transaction_type": "Purchase",
-    "shares": 50918,
-    "price_per_share": 303.64443229301577,
-    "total_value": 15460967.203495776,
-    "remaining_holdings": 724190,
+    "insider_name": "Insider_041",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-12-24",
+    "transaction_type": "Sale",
+    "shares": 68665,
+    "price_per_share": 35.50022485281454,
+    "total_value": 2437622.9395185104,
+    "remaining_holdings": 190748,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000074",
+    "transaction_id": "INSIDER_000076",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_060",
-    "relationship": "Officer",
-    "transaction_date": "2025-08-07",
-    "transaction_type": "Gift",
-    "shares": 5989,
-    "price_per_share": 475.7696831883688,
-    "total_value": 2849384.6326151406,
-    "remaining_holdings": 602087,
+    "insider_name": "Insider_080",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-07-11",
+    "transaction_type": "Purchase",
+    "shares": 71243,
+    "price_per_share": 38.43664246227018,
+    "total_value": 2738341.7189395144,
+    "remaining_holdings": 800383,
     "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000075",
+    "transaction_id": "INSIDER_000077",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_093",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-07-02",
+    "insider_name": "Insider_062",
+    "relationship": "Officer",
+    "transaction_date": "2024-04-12",
     "transaction_type": "Grant",
-    "shares": 333,
-    "price_per_share": 416.91522316364234,
-    "total_value": 138832.7693134929,
-    "remaining_holdings": 290596,
-    "form_type": "Form 4"
+    "shares": 21435,
+    "price_per_share": 179.33374616472418,
+    "total_value": 3844018.8490408626,
+    "remaining_holdings": 646663,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000076",
+    "transaction_id": "INSIDER_000078",
     "company": {
       "name": "Tesla Inc.",
       "ticker": "TSLA",
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_070",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-07-02",
-    "transaction_type": "Exercise",
-    "shares": 56794,
-    "price_per_share": 356.63098907769296,
-    "total_value": 20254500.393678494,
-    "remaining_holdings": 389756,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000077",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_032",
-    "relationship": "Other",
-    "transaction_date": "2023-12-02",
-    "transaction_type": "Sale",
-    "shares": 47138,
-    "price_per_share": 415.35818097912767,
-    "total_value": 19579153.93499412,
-    "remaining_holdings": 828555,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000078",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_024",
+    "insider_name": "Insider_012",
     "relationship": "Director",
-    "transaction_date": "2024-10-06",
-    "transaction_type": "Exercise",
-    "shares": 25158,
-    "price_per_share": 303.5181592103198,
-    "total_value": 7635909.849413226,
-    "remaining_holdings": 747978,
-    "form_type": "Form 4"
+    "transaction_date": "2024-11-20",
+    "transaction_type": "Grant",
+    "shares": 7482,
+    "price_per_share": 309.8472730478913,
+    "total_value": 2318277.2969443225,
+    "remaining_holdings": 400886,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000079",
@@ -1429,33 +1429,33 @@
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_034",
-    "relationship": "Other",
-    "transaction_date": "2024-11-30",
+    "insider_name": "Insider_029",
+    "relationship": "Officer",
+    "transaction_date": "2025-03-12",
     "transaction_type": "Purchase",
-    "shares": 26847,
-    "price_per_share": 83.93183962738726,
-    "total_value": 2253318.098476466,
-    "remaining_holdings": 396706,
-    "form_type": "Form 5"
+    "shares": 45642,
+    "price_per_share": 408.41550110695573,
+    "total_value": 18640900.301523674,
+    "remaining_holdings": 703253,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000080",
     "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
     },
-    "insider_name": "Insider_056",
+    "insider_name": "Insider_049",
     "relationship": "Director",
-    "transaction_date": "2025-04-08",
+    "transaction_date": "2025-08-17",
     "transaction_type": "Grant",
-    "shares": 28847,
-    "price_per_share": 297.74525902740146,
-    "total_value": 8589057.48716345,
-    "remaining_holdings": 691792,
-    "form_type": "Form 4"
+    "shares": 40730,
+    "price_per_share": 128.15318936332693,
+    "total_value": 5219679.4027683055,
+    "remaining_holdings": 846324,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000081",
@@ -1465,141 +1465,141 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_011",
-    "relationship": "Officer",
-    "transaction_date": "2023-11-12",
-    "transaction_type": "Purchase",
-    "shares": 69686,
-    "price_per_share": 210.92646910963754,
-    "total_value": 14698621.9263742,
-    "remaining_holdings": 612555,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000082",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_027",
-    "relationship": "Other",
-    "transaction_date": "2023-09-23",
-    "transaction_type": "Grant",
-    "shares": 21935,
-    "price_per_share": 275.8103766977165,
-    "total_value": 6049900.612864411,
-    "remaining_holdings": 764175,
+    "insider_name": "Insider_067",
+    "relationship": "Director",
+    "transaction_date": "2024-03-16",
+    "transaction_type": "Exercise",
+    "shares": 3648,
+    "price_per_share": 378.3816721354566,
+    "total_value": 1380336.3399501457,
+    "remaining_holdings": 963216,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000083",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_002",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-11-30",
-    "transaction_type": "Exercise",
-    "shares": 86646,
-    "price_per_share": 54.46029416031108,
-    "total_value": 4718766.647814314,
-    "remaining_holdings": 362215,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000084",
+    "transaction_id": "INSIDER_000082",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_041",
-    "relationship": "Director",
-    "transaction_date": "2024-09-23",
-    "transaction_type": "Grant",
-    "shares": 57483,
-    "price_per_share": 213.5152662615944,
-    "total_value": 12273498.05051523,
-    "remaining_holdings": 991123,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000085",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_071",
+    "insider_name": "Insider_023",
     "relationship": "Officer",
-    "transaction_date": "2025-03-06",
-    "transaction_type": "Purchase",
-    "shares": 18304,
-    "price_per_share": 175.22899552319004,
-    "total_value": 3207391.5340564703,
-    "remaining_holdings": 975624,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000086",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_019",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-06-30",
-    "transaction_type": "Gift",
-    "shares": 75111,
-    "price_per_share": 345.0071707777502,
-    "total_value": 25913833.6042876,
-    "remaining_holdings": 248933,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000087",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_054",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-12-25",
-    "transaction_type": "Exercise",
-    "shares": 92482,
-    "price_per_share": 408.08554847815844,
-    "total_value": 37740567.69435705,
-    "remaining_holdings": 340971,
+    "transaction_date": "2024-06-28",
+    "transaction_type": "Sale",
+    "shares": 86197,
+    "price_per_share": 240.72402172094803,
+    "total_value": 20749688.50028056,
+    "remaining_holdings": 28989,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000088",
+    "transaction_id": "INSIDER_000083",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_010",
+    "relationship": "Director",
+    "transaction_date": "2024-07-15",
+    "transaction_type": "Gift",
+    "shares": 84814,
+    "price_per_share": 151.10168043634602,
+    "total_value": 12815537.92452825,
+    "remaining_holdings": 964309,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000084",
     "company": {
       "name": "JPMorgan Chase & Co.",
       "ticker": "JPM",
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_089",
-    "relationship": "Director",
-    "transaction_date": "2023-10-23",
-    "transaction_type": "Exercise",
-    "shares": 49472,
-    "price_per_share": 204.83722033209915,
-    "total_value": 10133706.964269608,
-    "remaining_holdings": 666621,
+    "insider_name": "Insider_001",
+    "relationship": "Officer",
+    "transaction_date": "2024-04-23",
+    "transaction_type": "Purchase",
+    "shares": 23423,
+    "price_per_share": 192.598136557176,
+    "total_value": 4511226.152578733,
+    "remaining_holdings": 285429,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000085",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_085",
+    "relationship": "Other",
+    "transaction_date": "2024-12-01",
+    "transaction_type": "Sale",
+    "shares": 77099,
+    "price_per_share": 21.338328964381184,
+    "total_value": 1645163.824824825,
+    "remaining_holdings": 914983,
     "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000086",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_052",
+    "relationship": "Other",
+    "transaction_date": "2024-10-15",
+    "transaction_type": "Purchase",
+    "shares": 66057,
+    "price_per_share": 361.98880694768127,
+    "total_value": 23911894.62054298,
+    "remaining_holdings": 917854,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000087",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_094",
+    "relationship": "Director",
+    "transaction_date": "2025-06-20",
+    "transaction_type": "Grant",
+    "shares": 35235,
+    "price_per_share": 36.47653323725859,
+    "total_value": 1285250.6486148066,
+    "remaining_holdings": 785372,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000088",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_001",
+    "relationship": "Director",
+    "transaction_date": "2025-08-03",
+    "transaction_type": "Purchase",
+    "shares": 46741,
+    "price_per_share": 314.3808407727432,
+    "total_value": 14694474.87855879,
+    "remaining_holdings": 281416,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000089",
@@ -1609,231 +1609,231 @@
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_087",
+    "insider_name": "Insider_037",
     "relationship": "Officer",
-    "transaction_date": "2024-06-09",
-    "transaction_type": "Purchase",
-    "shares": 9183,
-    "price_per_share": 175.69939471844577,
-    "total_value": 1613447.5416994875,
-    "remaining_holdings": 352765,
-    "form_type": "Form 3"
+    "transaction_date": "2025-05-08",
+    "transaction_type": "Sale",
+    "shares": 73150,
+    "price_per_share": 185.9302740026523,
+    "total_value": 13600799.543294016,
+    "remaining_holdings": 666061,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000090",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_037",
-    "relationship": "Director",
-    "transaction_date": "2025-09-09",
-    "transaction_type": "Gift",
-    "shares": 56955,
-    "price_per_share": 328.40542408669734,
-    "total_value": 18704330.928857848,
-    "remaining_holdings": 370441,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000091",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_001",
-    "relationship": "Other",
-    "transaction_date": "2023-12-03",
-    "transaction_type": "Gift",
-    "shares": 55174,
-    "price_per_share": 208.63376416601528,
-    "total_value": 11511159.304095726,
-    "remaining_holdings": 229913,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000092",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_074",
-    "relationship": "Director",
-    "transaction_date": "2024-06-13",
+    "insider_name": "Insider_067",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-07-19",
     "transaction_type": "Purchase",
-    "shares": 64666,
-    "price_per_share": 460.0685310996748,
-    "total_value": 29750791.63209157,
-    "remaining_holdings": 583873,
+    "shares": 34093,
+    "price_per_share": 247.07033928597295,
+    "total_value": 8423369.077276675,
+    "remaining_holdings": 116058,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000091",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_051",
+    "relationship": "Director",
+    "transaction_date": "2023-11-08",
+    "transaction_type": "Exercise",
+    "shares": 62450,
+    "price_per_share": 191.42423584081587,
+    "total_value": 11954443.528258951,
+    "remaining_holdings": 275720,
     "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000093",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_025",
-    "relationship": "Officer",
-    "transaction_date": "2025-06-28",
-    "transaction_type": "Grant",
-    "shares": 53185,
-    "price_per_share": 173.85844897682992,
-    "total_value": 9246661.6088327,
-    "remaining_holdings": 406856,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000094",
+    "transaction_id": "INSIDER_000092",
     "company": {
       "name": "Apple Inc.",
       "ticker": "AAPL",
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_085",
-    "relationship": "Officer",
-    "transaction_date": "2025-09-11",
-    "transaction_type": "Gift",
-    "shares": 87022,
-    "price_per_share": 142.69431012767532,
-    "total_value": 12417544.255930562,
-    "remaining_holdings": 992388,
+    "insider_name": "Insider_011",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-04-18",
+    "transaction_type": "Exercise",
+    "shares": 68724,
+    "price_per_share": 100.18620585015843,
+    "total_value": 6885196.810846288,
+    "remaining_holdings": 514824,
     "form_type": "Form 5"
   },
   {
+    "transaction_id": "INSIDER_000093",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_073",
+    "relationship": "Officer",
+    "transaction_date": "2024-10-30",
+    "transaction_type": "Exercise",
+    "shares": 99756,
+    "price_per_share": 199.35379096006685,
+    "total_value": 19886736.77101243,
+    "remaining_holdings": 88862,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000094",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_090",
+    "relationship": "Officer",
+    "transaction_date": "2024-10-10",
+    "transaction_type": "Gift",
+    "shares": 2118,
+    "price_per_share": 388.22597330682265,
+    "total_value": 822262.6114638504,
+    "remaining_holdings": 127117,
+    "form_type": "Form 4"
+  },
+  {
     "transaction_id": "INSIDER_000095",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_049",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-04-14",
+    "transaction_type": "Gift",
+    "shares": 48076,
+    "price_per_share": 69.75519285948951,
+    "total_value": 3353550.6519128177,
+    "remaining_holdings": 714064,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000096",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_027",
+    "relationship": "Other",
+    "transaction_date": "2025-06-20",
+    "transaction_type": "Grant",
+    "shares": 86748,
+    "price_per_share": 376.144403474127,
+    "total_value": 32629774.71257357,
+    "remaining_holdings": 832756,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000097",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_064",
+    "relationship": "Officer",
+    "transaction_date": "2024-04-17",
+    "transaction_type": "Grant",
+    "shares": 62617,
+    "price_per_share": 288.6203835996553,
+    "total_value": 18072542.55985962,
+    "remaining_holdings": 368633,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000098",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_095",
-    "relationship": "Other",
-    "transaction_date": "2025-07-07",
-    "transaction_type": "Exercise",
-    "shares": 69384,
-    "price_per_share": 11.15514862803609,
-    "total_value": 773988.832407656,
-    "remaining_holdings": 490433,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000096",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_073",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-09-24",
+    "insider_name": "Insider_080",
+    "relationship": "Officer",
+    "transaction_date": "2025-08-23",
     "transaction_type": "Purchase",
-    "shares": 3028,
-    "price_per_share": 225.80024962175625,
-    "total_value": 683723.1558546779,
-    "remaining_holdings": 671329,
-    "form_type": "Form 3"
+    "shares": 52694,
+    "price_per_share": 374.43216403884105,
+    "total_value": 19730328.45186269,
+    "remaining_holdings": 230480,
+    "form_type": "Form 5"
   },
   {
-    "transaction_id": "INSIDER_000097",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_033",
-    "relationship": "Other",
-    "transaction_date": "2024-09-14",
-    "transaction_type": "Gift",
-    "shares": 47710,
-    "price_per_share": 453.6194524012723,
-    "total_value": 21642184.0740647,
-    "remaining_holdings": 979361,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000098",
+    "transaction_id": "INSIDER_000099",
     "company": {
       "name": "Tesla Inc.",
       "ticker": "TSLA",
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_002",
-    "relationship": "Officer",
-    "transaction_date": "2024-09-10",
-    "transaction_type": "Gift",
-    "shares": 13454,
-    "price_per_share": 39.410944612156925,
-    "total_value": 530234.8488119593,
-    "remaining_holdings": 217065,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000099",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_018",
-    "relationship": "Officer",
-    "transaction_date": "2025-06-06",
-    "transaction_type": "Gift",
-    "shares": 85777,
-    "price_per_share": 79.8047244570456,
-    "total_value": 6845409.849752,
-    "remaining_holdings": 427885,
-    "form_type": "Form 5"
+    "insider_name": "Insider_021",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-07-17",
+    "transaction_type": "Purchase",
+    "shares": 88431,
+    "price_per_share": 405.2074276001388,
+    "total_value": 35832898.03010787,
+    "remaining_holdings": 860977,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000100",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
     },
-    "insider_name": "Insider_081",
+    "insider_name": "Insider_024",
     "relationship": "Other",
-    "transaction_date": "2024-08-09",
-    "transaction_type": "Gift",
-    "shares": 57168,
-    "price_per_share": 285.0244985988014,
-    "total_value": 16294280.535896279,
-    "remaining_holdings": 117284,
+    "transaction_date": "2025-03-12",
+    "transaction_type": "Sale",
+    "shares": 32836,
+    "price_per_share": 330.2261567351105,
+    "total_value": 10843306.082554089,
+    "remaining_holdings": 472468,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000101",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_043",
+    "insider_name": "Insider_030",
     "relationship": "10% Owner",
-    "transaction_date": "2025-07-01",
-    "transaction_type": "Exercise",
-    "shares": 29218,
-    "price_per_share": 459.1264629387286,
-    "total_value": 13414756.994143773,
-    "remaining_holdings": 468157,
-    "form_type": "Form 4"
+    "transaction_date": "2025-08-15",
+    "transaction_type": "Sale",
+    "shares": 51372,
+    "price_per_share": 127.22416976386664,
+    "total_value": 6535760.049109357,
+    "remaining_holdings": 651344,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000102",
@@ -1843,213 +1843,213 @@
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_060",
-    "relationship": "Other",
+    "insider_name": "Insider_047",
+    "relationship": "10% Owner",
     "transaction_date": "2024-03-25",
-    "transaction_type": "Grant",
-    "shares": 8167,
-    "price_per_share": 410.5323378132363,
-    "total_value": 3352817.6029207013,
-    "remaining_holdings": 533846,
+    "transaction_type": "Exercise",
+    "shares": 33817,
+    "price_per_share": 58.16805670568245,
+    "total_value": 1967069.1736160635,
+    "remaining_holdings": 162403,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000103",
     "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_069",
+    "insider_name": "Insider_031",
     "relationship": "Other",
-    "transaction_date": "2025-07-14",
-    "transaction_type": "Sale",
-    "shares": 76875,
-    "price_per_share": 46.683100270356846,
-    "total_value": 3588763.3332836824,
-    "remaining_holdings": 845193,
+    "transaction_date": "2024-05-02",
+    "transaction_type": "Exercise",
+    "shares": 39231,
+    "price_per_share": 371.4526630006681,
+    "total_value": 14572459.42217921,
+    "remaining_holdings": 880508,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000104",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_059",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-07-08",
-    "transaction_type": "Purchase",
-    "shares": 13505,
-    "price_per_share": 392.8471705644471,
-    "total_value": 5305401.038472858,
-    "remaining_holdings": 527581,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000105",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_072",
-    "relationship": "Director",
-    "transaction_date": "2024-01-10",
-    "transaction_type": "Sale",
-    "shares": 1246,
-    "price_per_share": 237.4215341841164,
-    "total_value": 295827.23159340903,
-    "remaining_holdings": 479665,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000106",
     "company": {
       "name": "Apple Inc.",
       "ticker": "AAPL",
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_085",
-    "relationship": "Other",
-    "transaction_date": "2024-07-06",
-    "transaction_type": "Exercise",
-    "shares": 70895,
-    "price_per_share": 422.5823037672967,
-    "total_value": 29958972.4255825,
-    "remaining_holdings": 242058,
+    "insider_name": "Insider_021",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-01-19",
+    "transaction_type": "Purchase",
+    "shares": 85761,
+    "price_per_share": 274.8299916609832,
+    "total_value": 23569694.91483758,
+    "remaining_holdings": 84335,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000105",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_072",
+    "relationship": "Officer",
+    "transaction_date": "2023-12-06",
+    "transaction_type": "Grant",
+    "shares": 73511,
+    "price_per_share": 474.36275251254574,
+    "total_value": 34870880.29994975,
+    "remaining_holdings": 130454,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000106",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_073",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-04-27",
+    "transaction_type": "Grant",
+    "shares": 38423,
+    "price_per_share": 69.24517763984022,
+    "total_value": 2660607.4604555806,
+    "remaining_holdings": 643999,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000107",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_085",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-01-16",
-    "transaction_type": "Grant",
-    "shares": 69643,
-    "price_per_share": 278.62590137550586,
-    "total_value": 19404343.649494354,
-    "remaining_holdings": 524329,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000108",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_026",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-05-29",
-    "transaction_type": "Gift",
-    "shares": 73412,
-    "price_per_share": 76.05046140435398,
-    "total_value": 5583016.472616434,
-    "remaining_holdings": 50691,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000109",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_089",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-12-01",
-    "transaction_type": "Gift",
-    "shares": 16196,
-    "price_per_share": 91.83988331005254,
-    "total_value": 1487438.750089611,
-    "remaining_holdings": 274335,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000110",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_025",
-    "relationship": "Director",
-    "transaction_date": "2024-05-24",
-    "transaction_type": "Exercise",
-    "shares": 33739,
-    "price_per_share": 195.92710807138477,
-    "total_value": 6610384.699220451,
-    "remaining_holdings": 79375,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000111",
     "company": {
       "name": "Tesla Inc.",
       "ticker": "TSLA",
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_043",
-    "relationship": "Other",
-    "transaction_date": "2023-10-13",
-    "transaction_type": "Grant",
-    "shares": 54728,
-    "price_per_share": 351.93660847427276,
-    "total_value": 19260786.70858,
-    "remaining_holdings": 726169,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000112",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_046",
-    "relationship": "Other",
-    "transaction_date": "2025-07-20",
-    "transaction_type": "Grant",
-    "shares": 31616,
-    "price_per_share": 395.23592161272774,
-    "total_value": 12495778.897708,
-    "remaining_holdings": 411591,
+    "insider_name": "Insider_087",
+    "relationship": "Officer",
+    "transaction_date": "2024-09-08",
+    "transaction_type": "Gift",
+    "shares": 71991,
+    "price_per_share": 470.55597957610445,
+    "total_value": 33875795.52566334,
+    "remaining_holdings": 52444,
     "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000113",
+    "transaction_id": "INSIDER_000108",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "insider_name": "Insider_036",
+    "relationship": "Director",
+    "transaction_date": "2023-10-10",
+    "transaction_type": "Exercise",
+    "shares": 5131,
+    "price_per_share": 448.32248020743197,
+    "total_value": 2300342.6459443336,
+    "remaining_holdings": 633794,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000109",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_059",
+    "relationship": "Director",
+    "transaction_date": "2024-09-17",
+    "transaction_type": "Sale",
+    "shares": 75620,
+    "price_per_share": 84.48619821849982,
+    "total_value": 6388846.309282957,
+    "remaining_holdings": 198395,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000110",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_031",
+    "relationship": "Director",
+    "transaction_date": "2024-10-06",
+    "transaction_type": "Gift",
+    "shares": 89148,
+    "price_per_share": 225.26635689773906,
+    "total_value": 20082045.18471964,
+    "remaining_holdings": 223316,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000111",
     "company": {
       "name": "JPMorgan Chase & Co.",
       "ticker": "JPM",
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_084",
-    "relationship": "Director",
-    "transaction_date": "2024-02-19",
-    "transaction_type": "Sale",
-    "shares": 18263,
-    "price_per_share": 83.53036532109515,
-    "total_value": 1525515.0618591607,
-    "remaining_holdings": 774577,
+    "insider_name": "Insider_071",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-09-18",
+    "transaction_type": "Gift",
+    "shares": 3892,
+    "price_per_share": 298.9134249119,
+    "total_value": 1163371.0497571148,
+    "remaining_holdings": 406082,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000112",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_056",
+    "relationship": "Other",
+    "transaction_date": "2024-01-24",
+    "transaction_type": "Exercise",
+    "shares": 75221,
+    "price_per_share": 386.85510255332457,
+    "total_value": 29099627.669163626,
+    "remaining_holdings": 845099,
     "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000113",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_018",
+    "relationship": "Other",
+    "transaction_date": "2025-08-10",
+    "transaction_type": "Gift",
+    "shares": 18360,
+    "price_per_share": 168.53527637952132,
+    "total_value": 3094307.6743280115,
+    "remaining_holdings": 816470,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000114",
@@ -2059,15 +2059,15 @@
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_036",
-    "relationship": "Officer",
-    "transaction_date": "2025-02-11",
-    "transaction_type": "Grant",
-    "shares": 32500,
-    "price_per_share": 193.24811827006644,
-    "total_value": 6280563.843777159,
-    "remaining_holdings": 269614,
-    "form_type": "Form 3"
+    "insider_name": "Insider_094",
+    "relationship": "Director",
+    "transaction_date": "2024-08-01",
+    "transaction_type": "Gift",
+    "shares": 51179,
+    "price_per_share": 131.31881824752253,
+    "total_value": 6720765.799089955,
+    "remaining_holdings": 389735,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000115",
@@ -2077,51 +2077,51 @@
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_028",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-02-27",
-    "transaction_type": "Gift",
-    "shares": 20435,
-    "price_per_share": 477.10985564367616,
-    "total_value": 9749739.900078522,
-    "remaining_holdings": 815713,
-    "form_type": "Form 4"
+    "insider_name": "Insider_097",
+    "relationship": "Director",
+    "transaction_date": "2023-09-29",
+    "transaction_type": "Purchase",
+    "shares": 38645,
+    "price_per_share": 344.11831557841583,
+    "total_value": 13298452.305527879,
+    "remaining_holdings": 132279,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000116",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_081",
-    "relationship": "Other",
-    "transaction_date": "2024-10-03",
-    "transaction_type": "Gift",
-    "shares": 28058,
-    "price_per_share": 154.03510116568918,
-    "total_value": 4321916.8685069075,
-    "remaining_holdings": 166489,
+    "insider_name": "Insider_017",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-11-15",
+    "transaction_type": "Sale",
+    "shares": 78316,
+    "price_per_share": 457.81023921916585,
+    "total_value": 35853866.69468819,
+    "remaining_holdings": 361158,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000117",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_089",
-    "relationship": "Officer",
-    "transaction_date": "2024-06-17",
-    "transaction_type": "Gift",
-    "shares": 38864,
-    "price_per_share": 411.4295878269825,
-    "total_value": 15989799.501307849,
-    "remaining_holdings": 890365,
-    "form_type": "Form 5"
+    "insider_name": "Insider_075",
+    "relationship": "Other",
+    "transaction_date": "2024-08-23",
+    "transaction_type": "Grant",
+    "shares": 84389,
+    "price_per_share": 13.074159762487483,
+    "total_value": 1103315.2681965563,
+    "remaining_holdings": 344314,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000118",
@@ -2131,213 +2131,213 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_053",
-    "relationship": "Officer",
-    "transaction_date": "2023-12-02",
+    "insider_name": "Insider_028",
+    "relationship": "Other",
+    "transaction_date": "2024-06-24",
     "transaction_type": "Grant",
-    "shares": 36533,
-    "price_per_share": 114.26985829018525,
-    "total_value": 4174620.732915338,
-    "remaining_holdings": 666839,
+    "shares": 11712,
+    "price_per_share": 271.44038504695044,
+    "total_value": 3179109.7896698834,
+    "remaining_holdings": 503421,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000119",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_094",
-    "relationship": "Other",
-    "transaction_date": "2025-03-11",
-    "transaction_type": "Exercise",
-    "shares": 63608,
-    "price_per_share": 373.26389066202006,
-    "total_value": 23742569.557229772,
-    "remaining_holdings": 538716,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000120",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_052",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-12-23",
-    "transaction_type": "Exercise",
-    "shares": 55008,
-    "price_per_share": 27.34462343281001,
-    "total_value": 1504173.045792013,
-    "remaining_holdings": 114565,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000121",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_086",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-11-08",
-    "transaction_type": "Exercise",
-    "shares": 99555,
-    "price_per_share": 97.84639322551939,
-    "total_value": 9741097.677566582,
-    "remaining_holdings": 743622,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000122",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_019",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-10-27",
-    "transaction_type": "Exercise",
-    "shares": 58040,
-    "price_per_share": 40.33357931669766,
-    "total_value": 2340960.943541132,
-    "remaining_holdings": 619484,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000123",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_046",
-    "relationship": "Director",
-    "transaction_date": "2024-08-17",
-    "transaction_type": "Purchase",
-    "shares": 3722,
-    "price_per_share": 468.95517241287905,
-    "total_value": 1745451.151720736,
-    "remaining_holdings": 952854,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000124",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_060",
-    "relationship": "Officer",
-    "transaction_date": "2024-06-27",
-    "transaction_type": "Sale",
-    "shares": 67725,
-    "price_per_share": 300.6721444103612,
-    "total_value": 20363020.980191715,
-    "remaining_holdings": 800486,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000125",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_039",
-    "relationship": "Other",
-    "transaction_date": "2024-07-27",
+    "insider_name": "Insider_058",
+    "relationship": "Officer",
+    "transaction_date": "2025-05-13",
     "transaction_type": "Gift",
-    "shares": 53382,
-    "price_per_share": 131.63324834226376,
-    "total_value": 7026846.063006724,
-    "remaining_holdings": 146721,
+    "shares": 70599,
+    "price_per_share": 479.0845334663132,
+    "total_value": 33822888.97818825,
+    "remaining_holdings": 114516,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000120",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_085",
+    "relationship": "Director",
+    "transaction_date": "2023-12-20",
+    "transaction_type": "Sale",
+    "shares": 17540,
+    "price_per_share": 342.13043596553973,
+    "total_value": 6000967.846835567,
+    "remaining_holdings": 393862,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000121",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "insider_name": "Insider_099",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-02-20",
+    "transaction_type": "Gift",
+    "shares": 97699,
+    "price_per_share": 26.160001858138784,
+    "total_value": 2555806.021538301,
+    "remaining_holdings": 752130,
     "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000126",
+    "transaction_id": "INSIDER_000122",
     "company": {
       "name": "Goldman Sachs Group Inc.",
       "ticker": "GS",
       "cik": "0000886982",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_090",
-    "relationship": "Other",
-    "transaction_date": "2025-03-13",
+    "insider_name": "Insider_055",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-05-21",
     "transaction_type": "Exercise",
-    "shares": 62372,
-    "price_per_share": 261.38246824046064,
-    "total_value": 16302947.309094012,
-    "remaining_holdings": 723970,
+    "shares": 91512,
+    "price_per_share": 161.603746514175,
+    "total_value": 14788682.05100518,
+    "remaining_holdings": 916296,
     "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000123",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_011",
+    "relationship": "Officer",
+    "transaction_date": "2024-08-26",
+    "transaction_type": "Exercise",
+    "shares": 40053,
+    "price_per_share": 368.9995173730407,
+    "total_value": 14779537.669342399,
+    "remaining_holdings": 266891,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000124",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_024",
+    "relationship": "Officer",
+    "transaction_date": "2024-10-19",
+    "transaction_type": "Exercise",
+    "shares": 79322,
+    "price_per_share": 159.34559375863995,
+    "total_value": 12639611.188122839,
+    "remaining_holdings": 238457,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000125",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_066",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-11-20",
+    "transaction_type": "Exercise",
+    "shares": 78824,
+    "price_per_share": 421.5311721918342,
+    "total_value": 33226773.116849136,
+    "remaining_holdings": 970773,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000126",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_037",
+    "relationship": "Officer",
+    "transaction_date": "2025-01-16",
+    "transaction_type": "Sale",
+    "shares": 35924,
+    "price_per_share": 347.969277652778,
+    "total_value": 12500448.330398396,
+    "remaining_holdings": 99310,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000127",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_085",
-    "relationship": "Other",
-    "transaction_date": "2024-08-12",
-    "transaction_type": "Grant",
-    "shares": 38853,
-    "price_per_share": 32.80166652846448,
-    "total_value": 1274443.1496304304,
-    "remaining_holdings": 33333,
-    "form_type": "Form 3"
+    "insider_name": "Insider_035",
+    "relationship": "Officer",
+    "transaction_date": "2025-05-15",
+    "transaction_type": "Sale",
+    "shares": 83222,
+    "price_per_share": 301.9547508553331,
+    "total_value": 25129278.27568253,
+    "remaining_holdings": 284911,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000128",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_076",
-    "relationship": "Other",
-    "transaction_date": "2024-07-20",
-    "transaction_type": "Purchase",
-    "shares": 17264,
-    "price_per_share": 25.371573802142144,
-    "total_value": 438014.850120182,
-    "remaining_holdings": 942720,
+    "insider_name": "Insider_050",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-01-04",
+    "transaction_type": "Sale",
+    "shares": 92535,
+    "price_per_share": 37.4808759841757,
+    "total_value": 3468292.859195698,
+    "remaining_holdings": 337967,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000129",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_076",
+    "insider_name": "Insider_059",
     "relationship": "Other",
-    "transaction_date": "2024-05-23",
-    "transaction_type": "Gift",
-    "shares": 84533,
-    "price_per_share": 412.4404437292258,
-    "total_value": 34864828.02976265,
-    "remaining_holdings": 263016,
-    "form_type": "Form 4"
+    "transaction_date": "2024-06-13",
+    "transaction_type": "Purchase",
+    "shares": 96323,
+    "price_per_share": 24.0787243212514,
+    "total_value": 2319334.962795899,
+    "remaining_holdings": 226086,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000130",
@@ -2347,54 +2347,180 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_084",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-08-12",
-    "transaction_type": "Grant",
-    "shares": 56779,
-    "price_per_share": 76.57482422757494,
-    "total_value": 4347841.944817477,
-    "remaining_holdings": 319831,
+    "insider_name": "Insider_029",
+    "relationship": "Other",
+    "transaction_date": "2024-08-04",
+    "transaction_type": "Purchase",
+    "shares": 22246,
+    "price_per_share": 260.8093997894439,
+    "total_value": 5801965.907715969,
+    "remaining_holdings": 496834,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000131",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_055",
+    "relationship": "Other",
+    "transaction_date": "2024-04-08",
+    "transaction_type": "Exercise",
+    "shares": 14353,
+    "price_per_share": 252.83594681880064,
+    "total_value": 3628954.3446902456,
+    "remaining_holdings": 652907,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000132",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_044",
+    "relationship": "Other",
+    "transaction_date": "2024-07-12",
+    "transaction_type": "Sale",
+    "shares": 89400,
+    "price_per_share": 362.69155022790704,
+    "total_value": 32424624.59037489,
+    "remaining_holdings": 536907,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000133",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_055",
+    "relationship": "Other",
+    "transaction_date": "2023-11-29",
+    "transaction_type": "Gift",
+    "shares": 27404,
+    "price_per_share": 370.6475293139598,
+    "total_value": 10157224.893319754,
+    "remaining_holdings": 40767,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000134",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_080",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-05-24",
+    "transaction_type": "Grant",
+    "shares": 29477,
+    "price_per_share": 241.58340457039805,
+    "total_value": 7121154.016521623,
+    "remaining_holdings": 815234,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000135",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_070",
+    "relationship": "Other",
+    "transaction_date": "2024-04-20",
+    "transaction_type": "Sale",
+    "shares": 26496,
+    "price_per_share": 132.84122557372567,
+    "total_value": 3519761.1128014354,
+    "remaining_holdings": 433236,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000136",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_004",
+    "relationship": "Other",
+    "transaction_date": "2025-08-29",
+    "transaction_type": "Grant",
+    "shares": 47260,
+    "price_per_share": 346.7336923210958,
+    "total_value": 16386634.299094988,
+    "remaining_holdings": 799994,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000137",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_070",
+    "relationship": "Director",
+    "transaction_date": "2023-10-25",
+    "transaction_type": "Exercise",
+    "shares": 65331,
+    "price_per_share": 145.0729229723357,
+    "total_value": 9477759.130705664,
+    "remaining_holdings": 448869,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000138",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_066",
-    "relationship": "Officer",
-    "transaction_date": "2023-11-12",
-    "transaction_type": "Grant",
-    "shares": 25553,
-    "price_per_share": 394.04699824468133,
-    "total_value": 10069082.946146343,
-    "remaining_holdings": 545015,
+    "insider_name": "Insider_027",
+    "relationship": "Other",
+    "transaction_date": "2025-01-11",
+    "transaction_type": "Exercise",
+    "shares": 83066,
+    "price_per_share": 134.6842250976233,
+    "total_value": 11187679.841959178,
+    "remaining_holdings": 380066,
     "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000132",
+    "transaction_id": "INSIDER_000139",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_009",
+    "insider_name": "Insider_014",
     "relationship": "Officer",
-    "transaction_date": "2024-08-12",
-    "transaction_type": "Exercise",
-    "shares": 34679,
-    "price_per_share": 368.5529145512834,
-    "total_value": 12781046.523723956,
-    "remaining_holdings": 469569,
-    "form_type": "Form 4"
+    "transaction_date": "2025-08-15",
+    "transaction_type": "Gift",
+    "shares": 36671,
+    "price_per_share": 96.91614418235955,
+    "total_value": 3554011.923311307,
+    "remaining_holdings": 106514,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000133",
+    "transaction_id": "INSIDER_000140",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
@@ -2402,338 +2528,212 @@
       "sector": "Conglomerate"
     },
     "insider_name": "Insider_039",
-    "relationship": "Officer",
-    "transaction_date": "2024-04-28",
-    "transaction_type": "Exercise",
-    "shares": 74875,
-    "price_per_share": 388.46201536948126,
-    "total_value": 29086093.40078991,
-    "remaining_holdings": 381802,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000134",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_083",
     "relationship": "Other",
-    "transaction_date": "2025-06-02",
-    "transaction_type": "Sale",
-    "shares": 39435,
-    "price_per_share": 309.1010495494195,
-    "total_value": 12189399.888981357,
-    "remaining_holdings": 498329,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000135",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_050",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-06-27",
+    "transaction_date": "2025-09-11",
     "transaction_type": "Purchase",
-    "shares": 84147,
-    "price_per_share": 335.98322269070536,
-    "total_value": 28271980.239754785,
-    "remaining_holdings": 267382,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000136",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_018",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-04-17",
-    "transaction_type": "Grant",
-    "shares": 77095,
-    "price_per_share": 433.86592169603995,
-    "total_value": 33448893.2331562,
-    "remaining_holdings": 542088,
+    "shares": 11471,
+    "price_per_share": 237.9865200344729,
+    "total_value": 2729943.3713154388,
+    "remaining_holdings": 789088,
     "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000137",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_093",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-12-23",
-    "transaction_type": "Gift",
-    "shares": 83967,
-    "price_per_share": 284.765835924359,
-    "total_value": 23910932.94506065,
-    "remaining_holdings": 549816,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000138",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_087",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-05-20",
-    "transaction_type": "Exercise",
-    "shares": 21614,
-    "price_per_share": 180.40453054043766,
-    "total_value": 3899263.5231010197,
-    "remaining_holdings": 235174,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000139",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_063",
-    "relationship": "Other",
-    "transaction_date": "2025-06-23",
-    "transaction_type": "Gift",
-    "shares": 15321,
-    "price_per_share": 488.1279512197121,
-    "total_value": 7478608.340637209,
-    "remaining_holdings": 267599,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000140",
-    "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
-    },
-    "insider_name": "Insider_019",
-    "relationship": "Director",
-    "transaction_date": "2024-12-12",
-    "transaction_type": "Sale",
-    "shares": 42737,
-    "price_per_share": 175.47362639948523,
-    "total_value": 7499216.3714348,
-    "remaining_holdings": 184503,
-    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000141",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_008",
-    "relationship": "Other",
-    "transaction_date": "2024-08-27",
-    "transaction_type": "Gift",
-    "shares": 78120,
-    "price_per_share": 53.48444558066742,
-    "total_value": 4178204.888761739,
-    "remaining_holdings": 731890,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000142",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_003",
-    "relationship": "Other",
-    "transaction_date": "2025-04-11",
-    "transaction_type": "Exercise",
-    "shares": 42625,
-    "price_per_share": 315.9980373242089,
-    "total_value": 13469416.340944404,
-    "remaining_holdings": 913931,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000143",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_033",
+    "insider_name": "Insider_071",
     "relationship": "Other",
-    "transaction_date": "2025-08-09",
-    "transaction_type": "Exercise",
-    "shares": 48689,
-    "price_per_share": 204.6480133369173,
-    "total_value": 9964107.121361166,
-    "remaining_holdings": 626487,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000144",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_007",
-    "relationship": "Other",
-    "transaction_date": "2025-07-29",
+    "transaction_date": "2025-04-10",
     "transaction_type": "Sale",
-    "shares": 50195,
-    "price_per_share": 494.9327962538407,
-    "total_value": 24843151.707961533,
-    "remaining_holdings": 175249,
+    "shares": 95360,
+    "price_per_share": 290.6336003254207,
+    "total_value": 27714820.127032116,
+    "remaining_holdings": 65036,
     "form_type": "Form 4"
   },
   {
-    "transaction_id": "INSIDER_000145",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_087",
-    "relationship": "Director",
-    "transaction_date": "2025-02-26",
-    "transaction_type": "Purchase",
-    "shares": 47217,
-    "price_per_share": 369.07286225344075,
-    "total_value": 17426513.33702071,
-    "remaining_holdings": 54604,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000146",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_032",
-    "relationship": "Other",
-    "transaction_date": "2023-12-16",
-    "transaction_type": "Grant",
-    "shares": 42631,
-    "price_per_share": 230.47047083855455,
-    "total_value": 9825186.642318418,
-    "remaining_holdings": 192736,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000147",
+    "transaction_id": "INSIDER_000142",
     "company": {
       "name": "Apple Inc.",
       "ticker": "AAPL",
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_035",
-    "relationship": "Other",
-    "transaction_date": "2024-10-10",
-    "transaction_type": "Gift",
-    "shares": 60419,
-    "price_per_share": 121.50287062845415,
-    "total_value": 7341081.940500571,
-    "remaining_holdings": 672456,
-    "form_type": "Form 5"
+    "insider_name": "Insider_061",
+    "relationship": "Officer",
+    "transaction_date": "2024-05-05",
+    "transaction_type": "Exercise",
+    "shares": 95267,
+    "price_per_share": 325.9727521138223,
+    "total_value": 31054446.17562751,
+    "remaining_holdings": 544450,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000148",
+    "transaction_id": "INSIDER_000143",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_088",
-    "relationship": "Director",
-    "transaction_date": "2024-05-10",
-    "transaction_type": "Sale",
-    "shares": 37026,
-    "price_per_share": 347.25161714195247,
-    "total_value": 12857338.376297932,
-    "remaining_holdings": 170359,
-    "form_type": "Form 5"
+    "insider_name": "Insider_070",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-12-18",
+    "transaction_type": "Grant",
+    "shares": 90594,
+    "price_per_share": 332.49116600733225,
+    "total_value": 30121704.693268258,
+    "remaining_holdings": 655792,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000149",
+    "transaction_id": "INSIDER_000144",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_005",
-    "relationship": "Director",
-    "transaction_date": "2024-02-09",
+    "insider_name": "Insider_036",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-07-31",
+    "transaction_type": "Grant",
+    "shares": 34656,
+    "price_per_share": 273.9516955977444,
+    "total_value": 9494069.96263543,
+    "remaining_holdings": 573179,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000145",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_051",
+    "relationship": "Other",
+    "transaction_date": "2024-04-19",
+    "transaction_type": "Grant",
+    "shares": 69958,
+    "price_per_share": 394.1320314851953,
+    "total_value": 27572688.65864129,
+    "remaining_holdings": 787054,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000146",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_097",
+    "relationship": "Officer",
+    "transaction_date": "2024-05-23",
+    "transaction_type": "Sale",
+    "shares": 7379,
+    "price_per_share": 467.5720047015347,
+    "total_value": 3450213.8226926243,
+    "remaining_holdings": 140870,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000147",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_001",
+    "relationship": "Officer",
+    "transaction_date": "2025-01-06",
+    "transaction_type": "Sale",
+    "shares": 58364,
+    "price_per_share": 349.5254730085393,
+    "total_value": 20399704.706670385,
+    "remaining_holdings": 604843,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000148",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_006",
+    "relationship": "Other",
+    "transaction_date": "2025-01-27",
     "transaction_type": "Purchase",
-    "shares": 23696,
-    "price_per_share": 499.2537306380827,
-    "total_value": 11830316.401200008,
-    "remaining_holdings": 895921,
+    "shares": 84927,
+    "price_per_share": 199.5559707245956,
+    "total_value": 16947689.92572773,
+    "remaining_holdings": 687076,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000149",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_075",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-09-01",
+    "transaction_type": "Purchase",
+    "shares": 19769,
+    "price_per_share": 174.49672674900918,
+    "total_value": 3449625.791101163,
+    "remaining_holdings": 598671,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000150",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_051",
-    "relationship": "Other",
-    "transaction_date": "2024-03-16",
-    "transaction_type": "Exercise",
-    "shares": 60724,
-    "price_per_share": 469.0696604230042,
-    "total_value": 28483786.059526507,
-    "remaining_holdings": 994287,
-    "form_type": "Form 4"
+    "insider_name": "Insider_075",
+    "relationship": "Director",
+    "transaction_date": "2024-11-13",
+    "transaction_type": "Sale",
+    "shares": 39585,
+    "price_per_share": 282.68813863190206,
+    "total_value": 11190209.967743844,
+    "remaining_holdings": 616918,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000151",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_014",
-    "relationship": "Other",
-    "transaction_date": "2024-01-09",
-    "transaction_type": "Gift",
-    "shares": 50444,
-    "price_per_share": 50.58469706062599,
-    "total_value": 2551694.4585262174,
-    "remaining_holdings": 853896,
-    "form_type": "Form 3"
+    "insider_name": "Insider_008",
+    "relationship": "Director",
+    "transaction_date": "2025-08-20",
+    "transaction_type": "Purchase",
+    "shares": 18041,
+    "price_per_share": 175.4050257980387,
+    "total_value": 3164482.070422416,
+    "remaining_holdings": 73934,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000152",
@@ -2743,15 +2743,15 @@
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_072",
+    "insider_name": "Insider_091",
     "relationship": "10% Owner",
-    "transaction_date": "2024-05-06",
-    "transaction_type": "Gift",
-    "shares": 50302,
-    "price_per_share": 317.0521398557228,
-    "total_value": 15948356.73902257,
-    "remaining_holdings": 164738,
-    "form_type": "Form 3"
+    "transaction_date": "2023-12-09",
+    "transaction_type": "Grant",
+    "shares": 52211,
+    "price_per_share": 126.24948192804918,
+    "total_value": 6591611.7009453755,
+    "remaining_holdings": 50273,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000153",
@@ -2761,213 +2761,213 @@
       "cik": "0001318605",
       "sector": "Automotive"
     },
-    "insider_name": "Insider_063",
-    "relationship": "Officer",
-    "transaction_date": "2025-05-22",
-    "transaction_type": "Exercise",
-    "shares": 45668,
-    "price_per_share": 242.20009829362456,
-    "total_value": 11060794.088873247,
-    "remaining_holdings": 311049,
-    "form_type": "Form 5"
+    "insider_name": "Insider_008",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-06-23",
+    "transaction_type": "Sale",
+    "shares": 92448,
+    "price_per_share": 307.6709901305503,
+    "total_value": 28443567.695589114,
+    "remaining_holdings": 261311,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000154",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_060",
-    "relationship": "Officer",
-    "transaction_date": "2024-08-15",
-    "transaction_type": "Exercise",
-    "shares": 91952,
-    "price_per_share": 409.5610510440665,
-    "total_value": 37659957.765604004,
-    "remaining_holdings": 197600,
+    "insider_name": "Insider_044",
+    "relationship": "Director",
+    "transaction_date": "2023-11-06",
+    "transaction_type": "Grant",
+    "shares": 96163,
+    "price_per_share": 367.73014397515266,
+    "total_value": 35362033.835082605,
+    "remaining_holdings": 70347,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000155",
     "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_065",
+    "insider_name": "Insider_001",
     "relationship": "Director",
-    "transaction_date": "2025-01-12",
-    "transaction_type": "Purchase",
-    "shares": 21307,
-    "price_per_share": 324.8182029838961,
-    "total_value": 6920901.450977874,
-    "remaining_holdings": 159347,
-    "form_type": "Form 3"
+    "transaction_date": "2025-07-05",
+    "transaction_type": "Gift",
+    "shares": 34486,
+    "price_per_share": 65.3536816319718,
+    "total_value": 2253787.0647601793,
+    "remaining_holdings": 423285,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000156",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_100",
-    "relationship": "Officer",
-    "transaction_date": "2024-02-06",
-    "transaction_type": "Sale",
-    "shares": 26457,
-    "price_per_share": 114.2025548308092,
-    "total_value": 3021456.993158719,
-    "remaining_holdings": 95023,
+    "insider_name": "Insider_025",
+    "relationship": "Other",
+    "transaction_date": "2024-04-23",
+    "transaction_type": "Gift",
+    "shares": 62687,
+    "price_per_share": 330.3955961368405,
+    "total_value": 20711508.73503012,
+    "remaining_holdings": 457247,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000157",
     "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
     },
-    "insider_name": "Insider_020",
-    "relationship": "Officer",
-    "transaction_date": "2024-08-05",
-    "transaction_type": "Purchase",
-    "shares": 34032,
-    "price_per_share": 130.75166158922332,
-    "total_value": 4449740.547204448,
-    "remaining_holdings": 704058,
+    "insider_name": "Insider_041",
+    "relationship": "Director",
+    "transaction_date": "2025-01-16",
+    "transaction_type": "Sale",
+    "shares": 60490,
+    "price_per_share": 293.99159636802875,
+    "total_value": 17783551.66430206,
+    "remaining_holdings": 111280,
     "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000158",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_049",
-    "relationship": "Officer",
-    "transaction_date": "2025-02-26",
-    "transaction_type": "Grant",
-    "shares": 63174,
-    "price_per_share": 385.48610067186564,
-    "total_value": 24352698.92384444,
-    "remaining_holdings": 512596,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000159",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_032",
-    "relationship": "Other",
-    "transaction_date": "2023-11-11",
-    "transaction_type": "Purchase",
-    "shares": 45373,
-    "price_per_share": 66.08649031692914,
-    "total_value": 2998542.325150026,
-    "remaining_holdings": 662200,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000160",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_091",
-    "relationship": "Director",
-    "transaction_date": "2024-06-30",
-    "transaction_type": "Sale",
-    "shares": 90270,
-    "price_per_share": 494.67742245474625,
-    "total_value": 44654530.924989946,
-    "remaining_holdings": 591337,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000161",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_051",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-05-01",
-    "transaction_type": "Gift",
-    "shares": 9249,
-    "price_per_share": 133.4939817777419,
-    "total_value": 1234685.837462335,
-    "remaining_holdings": 247843,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000162",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_051",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-04-01",
-    "transaction_type": "Purchase",
-    "shares": 99891,
-    "price_per_share": 291.79533145377917,
-    "total_value": 29147727.454249457,
-    "remaining_holdings": 341776,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000163",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_070",
-    "relationship": "Director",
-    "transaction_date": "2024-10-27",
-    "transaction_type": "Exercise",
-    "shares": 36447,
-    "price_per_share": 61.36527644701615,
-    "total_value": 2236580.2306643976,
-    "remaining_holdings": 43925,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000164",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_018",
-    "relationship": "Other",
-    "transaction_date": "2025-06-03",
+    "insider_name": "Insider_012",
+    "relationship": "Officer",
+    "transaction_date": "2023-10-16",
     "transaction_type": "Purchase",
-    "shares": 60265,
-    "price_per_share": 498.86701900820515,
-    "total_value": 30064220.90052948,
-    "remaining_holdings": 35166,
+    "shares": 57038,
+    "price_per_share": 456.3890038399951,
+    "total_value": 26031516.00102564,
+    "remaining_holdings": 165865,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000159",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_073",
+    "relationship": "Director",
+    "transaction_date": "2025-08-08",
+    "transaction_type": "Purchase",
+    "shares": 78658,
+    "price_per_share": 422.03625908263206,
+    "total_value": 33196528.066921674,
+    "remaining_holdings": 772230,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000160",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_005",
+    "relationship": "Director",
+    "transaction_date": "2023-11-11",
+    "transaction_type": "Exercise",
+    "shares": 89026,
+    "price_per_share": 199.62830674948634,
+    "total_value": 17772109.636679772,
+    "remaining_holdings": 213136,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000161",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_093",
+    "relationship": "Other",
+    "transaction_date": "2024-09-20",
+    "transaction_type": "Exercise",
+    "shares": 35221,
+    "price_per_share": 334.20472396154435,
+    "total_value": 11771024.582649553,
+    "remaining_holdings": 378069,
     "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000162",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_075",
+    "relationship": "Director",
+    "transaction_date": "2025-04-21",
+    "transaction_type": "Grant",
+    "shares": 27183,
+    "price_per_share": 347.5591042467098,
+    "total_value": 9447699.130738312,
+    "remaining_holdings": 592711,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000163",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "insider_name": "Insider_003",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-12-10",
+    "transaction_type": "Sale",
+    "shares": 85240,
+    "price_per_share": 496.12874162959577,
+    "total_value": 42290013.93650674,
+    "remaining_holdings": 993048,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000164",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_042",
+    "relationship": "Other",
+    "transaction_date": "2025-08-13",
+    "transaction_type": "Purchase",
+    "shares": 12722,
+    "price_per_share": 84.56078380841241,
+    "total_value": 1075782.2916106228,
+    "remaining_holdings": 610393,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000165",
@@ -2977,177 +2977,177 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_026",
-    "relationship": "Other",
-    "transaction_date": "2024-09-19",
-    "transaction_type": "Gift",
-    "shares": 35153,
-    "price_per_share": 230.38003731912016,
-    "total_value": 8098549.451879031,
-    "remaining_holdings": 353492,
-    "form_type": "Form 3"
+    "insider_name": "Insider_015",
+    "relationship": "Officer",
+    "transaction_date": "2024-05-21",
+    "transaction_type": "Grant",
+    "shares": 32610,
+    "price_per_share": 146.62878248489778,
+    "total_value": 4781564.596832517,
+    "remaining_holdings": 597855,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000166",
     "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_075",
-    "relationship": "Officer",
-    "transaction_date": "2025-03-22",
-    "transaction_type": "Grant",
-    "shares": 96938,
-    "price_per_share": 323.427797798309,
-    "total_value": 31352443.862972476,
-    "remaining_holdings": 742390,
+    "insider_name": "Insider_059",
+    "relationship": "Other",
+    "transaction_date": "2024-12-12",
+    "transaction_type": "Sale",
+    "shares": 83047,
+    "price_per_share": 361.569793052208,
+    "total_value": 30027286.60360672,
+    "remaining_holdings": 697218,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000167",
     "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_024",
-    "relationship": "Other",
-    "transaction_date": "2023-11-16",
-    "transaction_type": "Sale",
-    "shares": 32669,
-    "price_per_share": 106.41699933008285,
-    "total_value": 3476536.9511144767,
-    "remaining_holdings": 942300,
+    "insider_name": "Insider_073",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-11-02",
+    "transaction_type": "Exercise",
+    "shares": 57459,
+    "price_per_share": 447.4563123686438,
+    "total_value": 25710392.252389904,
+    "remaining_holdings": 911650,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000168",
     "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_006",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-09-20",
-    "transaction_type": "Exercise",
-    "shares": 49851,
-    "price_per_share": 446.16587105190683,
-    "total_value": 22241814.83780861,
-    "remaining_holdings": 939253,
+    "insider_name": "Insider_034",
+    "relationship": "Other",
+    "transaction_date": "2025-02-17",
+    "transaction_type": "Sale",
+    "shares": 50576,
+    "price_per_share": 135.7905626418389,
+    "total_value": 6867743.496173644,
+    "remaining_holdings": 355722,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000169",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_055",
-    "relationship": "Other",
-    "transaction_date": "2025-07-29",
-    "transaction_type": "Purchase",
-    "shares": 90742,
-    "price_per_share": 97.2306073706436,
-    "total_value": 8822899.774026942,
-    "remaining_holdings": 691416,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000170",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_067",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-02-05",
-    "transaction_type": "Sale",
-    "shares": 167,
-    "price_per_share": 26.440035885394295,
-    "total_value": 4415.485992860848,
-    "remaining_holdings": 215227,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000171",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_019",
-    "relationship": "10% Owner",
-    "transaction_date": "2025-05-13",
-    "transaction_type": "Exercise",
-    "shares": 51561,
-    "price_per_share": 407.43811620949117,
-    "total_value": 21007916.709877573,
-    "remaining_holdings": 532139,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000172",
-    "company": {
-      "name": "Berkshire Hathaway Inc.",
-      "ticker": "BRK.A",
-      "cik": "0001067983",
-      "sector": "Conglomerate"
-    },
-    "insider_name": "Insider_008",
-    "relationship": "Officer",
-    "transaction_date": "2024-05-08",
-    "transaction_type": "Grant",
-    "shares": 33643,
-    "price_per_share": 473.87600008121467,
-    "total_value": 15942610.270732306,
-    "remaining_holdings": 429499,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000173",
-    "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_010",
-    "relationship": "Officer",
-    "transaction_date": "2025-07-06",
-    "transaction_type": "Grant",
-    "shares": 75156,
-    "price_per_share": 355.1685804778819,
-    "total_value": 26693049.83439569,
-    "remaining_holdings": 519318,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000174",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_062",
-    "relationship": "Other",
-    "transaction_date": "2025-03-27",
-    "transaction_type": "Sale",
-    "shares": 79183,
-    "price_per_share": 322.2451838946277,
-    "total_value": 25516340.396328304,
-    "remaining_holdings": 318442,
+    "insider_name": "Insider_097",
+    "relationship": "Officer",
+    "transaction_date": "2025-01-30",
+    "transaction_type": "Grant",
+    "shares": 94089,
+    "price_per_share": 333.8568479741227,
+    "total_value": 31412256.969037227,
+    "remaining_holdings": 924148,
     "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000170",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "insider_name": "Insider_005",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-12-24",
+    "transaction_type": "Gift",
+    "shares": 38659,
+    "price_per_share": 121.40049913491252,
+    "total_value": 4693221.896056583,
+    "remaining_holdings": 7249,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000171",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_100",
+    "relationship": "Director",
+    "transaction_date": "2024-05-27",
+    "transaction_type": "Sale",
+    "shares": 51313,
+    "price_per_share": 454.70754914842394,
+    "total_value": 23332408.469453078,
+    "remaining_holdings": 399915,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000172",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_065",
+    "relationship": "Other",
+    "transaction_date": "2025-02-24",
+    "transaction_type": "Gift",
+    "shares": 48051,
+    "price_per_share": 457.49610612325296,
+    "total_value": 21983145.39532843,
+    "remaining_holdings": 2118,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000173",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_064",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-05-22",
+    "transaction_type": "Exercise",
+    "shares": 26781,
+    "price_per_share": 240.7879586994879,
+    "total_value": 6448542.321930985,
+    "remaining_holdings": 294165,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000174",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_041",
+    "relationship": "Other",
+    "transaction_date": "2025-04-01",
+    "transaction_type": "Grant",
+    "shares": 10655,
+    "price_per_share": 204.72290649910713,
+    "total_value": 2181322.5687479866,
+    "remaining_holdings": 182257,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000175",
@@ -3157,51 +3157,51 @@
       "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_003",
+    "insider_name": "Insider_058",
     "relationship": "10% Owner",
-    "transaction_date": "2024-07-02",
+    "transaction_date": "2024-03-23",
     "transaction_type": "Exercise",
-    "shares": 81961,
-    "price_per_share": 105.19834213435755,
-    "total_value": 8622161.319674078,
-    "remaining_holdings": 346608,
+    "shares": 30065,
+    "price_per_share": 251.98845734393475,
+    "total_value": 7576032.970045398,
+    "remaining_holdings": 284121,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000176",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_076",
-    "relationship": "Officer",
-    "transaction_date": "2025-02-21",
-    "transaction_type": "Sale",
-    "shares": 7683,
-    "price_per_share": 38.623752754397756,
-    "total_value": 296746.29241203796,
-    "remaining_holdings": 547241,
-    "form_type": "Form 3"
+    "insider_name": "Insider_100",
+    "relationship": "Director",
+    "transaction_date": "2024-02-27",
+    "transaction_type": "Gift",
+    "shares": 4560,
+    "price_per_share": 413.37571258096983,
+    "total_value": 1884993.2493692224,
+    "remaining_holdings": 243506,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000177",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
     },
-    "insider_name": "Insider_039",
-    "relationship": "Director",
-    "transaction_date": "2024-07-20",
-    "transaction_type": "Sale",
-    "shares": 2042,
-    "price_per_share": 140.2136261530136,
-    "total_value": 286316.2246044538,
-    "remaining_holdings": 650640,
-    "form_type": "Form 5"
+    "insider_name": "Insider_098",
+    "relationship": "Officer",
+    "transaction_date": "2023-12-23",
+    "transaction_type": "Exercise",
+    "shares": 61995,
+    "price_per_share": 415.47286870495594,
+    "total_value": 25757240.495363742,
+    "remaining_holdings": 969956,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000178",
@@ -3211,86 +3211,86 @@
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_077",
-    "relationship": "Officer",
-    "transaction_date": "2025-05-31",
-    "transaction_type": "Grant",
-    "shares": 50802,
-    "price_per_share": 243.28135399650927,
-    "total_value": 12359179.345730664,
-    "remaining_holdings": 593517,
-    "form_type": "Form 5"
+    "insider_name": "Insider_069",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-01-06",
+    "transaction_type": "Gift",
+    "shares": 76192,
+    "price_per_share": 478.27227139033624,
+    "total_value": 36440520.9017725,
+    "remaining_holdings": 147580,
+    "form_type": "Form 4"
   },
   {
     "transaction_id": "INSIDER_000179",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_007",
+    "relationship": "Officer",
+    "transaction_date": "2024-11-04",
+    "transaction_type": "Grant",
+    "shares": 29993,
+    "price_per_share": 228.67920690492357,
+    "total_value": 6858775.452699373,
+    "remaining_holdings": 405013,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000180",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_009",
+    "insider_name": "Insider_076",
     "relationship": "10% Owner",
-    "transaction_date": "2024-05-27",
-    "transaction_type": "Sale",
-    "shares": 91755,
-    "price_per_share": 316.0050431794705,
-    "total_value": 28995042.736932315,
-    "remaining_holdings": 498094,
+    "transaction_date": "2024-04-06",
+    "transaction_type": "Gift",
+    "shares": 26008,
+    "price_per_share": 346.2674054652591,
+    "total_value": 9005722.68134046,
+    "remaining_holdings": 385511,
     "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000180",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_092",
-    "relationship": "Other",
-    "transaction_date": "2025-08-08",
-    "transaction_type": "Grant",
-    "shares": 97420,
-    "price_per_share": 251.22283713252085,
-    "total_value": 24474128.79345018,
-    "remaining_holdings": 475264,
-    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000181",
     "company": {
-      "name": "Bank of America Corp.",
-      "ticker": "BAC",
-      "cik": "0000070858",
-      "sector": "Financial Services"
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
     },
-    "insider_name": "Insider_019",
-    "relationship": "Officer",
-    "transaction_date": "2025-07-27",
+    "insider_name": "Insider_054",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-05-19",
     "transaction_type": "Gift",
-    "shares": 57247,
-    "price_per_share": 242.7784011792143,
-    "total_value": 13898335.132306483,
-    "remaining_holdings": 571847,
-    "form_type": "Form 3"
+    "shares": 6888,
+    "price_per_share": 34.37318568271931,
+    "total_value": 236762.50298257062,
+    "remaining_holdings": 954379,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000182",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
     },
-    "insider_name": "Insider_035",
+    "insider_name": "Insider_052",
     "relationship": "Officer",
-    "transaction_date": "2024-10-04",
-    "transaction_type": "Grant",
-    "shares": 68774,
-    "price_per_share": 286.71636799067284,
-    "total_value": 19718631.492190532,
-    "remaining_holdings": 684998,
+    "transaction_date": "2025-03-07",
+    "transaction_type": "Gift",
+    "shares": 3110,
+    "price_per_share": 221.3553329350772,
+    "total_value": 688415.0854280901,
+    "remaining_holdings": 845402,
     "form_type": "Form 4"
   },
   {
@@ -3301,105 +3301,105 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_076",
-    "relationship": "Other",
-    "transaction_date": "2024-08-30",
-    "transaction_type": "Purchase",
-    "shares": 13223,
-    "price_per_share": 462.89017597213035,
-    "total_value": 6120796.79687948,
-    "remaining_holdings": 100799,
-    "form_type": "Form 4"
+    "insider_name": "Insider_099",
+    "relationship": "Director",
+    "transaction_date": "2025-01-01",
+    "transaction_type": "Exercise",
+    "shares": 90834,
+    "price_per_share": 294.5212017871463,
+    "total_value": 26752538.843133647,
+    "remaining_holdings": 750357,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000184",
-    "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
-    },
-    "insider_name": "Insider_051",
-    "relationship": "Officer",
-    "transaction_date": "2024-07-14",
-    "transaction_type": "Gift",
-    "shares": 86651,
-    "price_per_share": 458.1586154950636,
-    "total_value": 39699902.19126276,
-    "remaining_holdings": 285266,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000185",
-    "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_058",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-01-15",
-    "transaction_type": "Grant",
-    "shares": 17981,
-    "price_per_share": 465.2857187834653,
-    "total_value": 8366302.509445489,
-    "remaining_holdings": 702825,
-    "form_type": "Form 5"
-  },
-  {
-    "transaction_id": "INSIDER_000186",
     "company": {
       "name": "Amazon.com Inc.",
       "ticker": "AMZN",
       "cik": "0001018724",
       "sector": "E-commerce"
     },
-    "insider_name": "Insider_093",
+    "insider_name": "Insider_012",
+    "relationship": "Director",
+    "transaction_date": "2024-10-07",
+    "transaction_type": "Gift",
+    "shares": 63443,
+    "price_per_share": 139.29114305479158,
+    "total_value": 8837047.988825142,
+    "remaining_holdings": 225916,
+    "form_type": "Form 3"
+  },
+  {
+    "transaction_id": "INSIDER_000185",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "insider_name": "Insider_058",
     "relationship": "10% Owner",
-    "transaction_date": "2024-04-17",
-    "transaction_type": "Purchase",
-    "shares": 73857,
-    "price_per_share": 95.39115118979144,
-    "total_value": 7045304.253424427,
-    "remaining_holdings": 292570,
+    "transaction_date": "2024-12-07",
+    "transaction_type": "Sale",
+    "shares": 37120,
+    "price_per_share": 426.38052589561084,
+    "total_value": 15827245.121245075,
+    "remaining_holdings": 783693,
     "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000186",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_016",
+    "relationship": "Director",
+    "transaction_date": "2023-12-28",
+    "transaction_type": "Exercise",
+    "shares": 66776,
+    "price_per_share": 438.1870940069545,
+    "total_value": 29260381.389408395,
+    "remaining_holdings": 491223,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000187",
     "company": {
-      "name": "Goldman Sachs Group Inc.",
-      "ticker": "GS",
-      "cik": "0000886982",
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_034",
-    "relationship": "Other",
-    "transaction_date": "2024-06-23",
-    "transaction_type": "Grant",
-    "shares": 94586,
-    "price_per_share": 215.88894712523444,
-    "total_value": 20420071.952787425,
-    "remaining_holdings": 826598,
-    "form_type": "Form 5"
+    "insider_name": "Insider_009",
+    "relationship": "Officer",
+    "transaction_date": "2025-08-07",
+    "transaction_type": "Exercise",
+    "shares": 38258,
+    "price_per_share": 482.1885011123282,
+    "total_value": 18447567.675555453,
+    "remaining_holdings": 545214,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000188",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
     },
-    "insider_name": "Insider_095",
-    "relationship": "Director",
-    "transaction_date": "2024-06-18",
-    "transaction_type": "Gift",
-    "shares": 90632,
-    "price_per_share": 211.36852145264086,
-    "total_value": 19156751.836295746,
-    "remaining_holdings": 398638,
-    "form_type": "Form 4"
+    "insider_name": "Insider_077",
+    "relationship": "10% Owner",
+    "transaction_date": "2025-08-07",
+    "transaction_type": "Sale",
+    "shares": 17229,
+    "price_per_share": 188.57165716714704,
+    "total_value": 3248901.081332776,
+    "remaining_holdings": 866476,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000189",
@@ -3409,15 +3409,15 @@
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_044",
-    "relationship": "Other",
-    "transaction_date": "2025-03-15",
-    "transaction_type": "Gift",
-    "shares": 83898,
-    "price_per_share": 269.89204277444406,
-    "total_value": 22643402.60469031,
-    "remaining_holdings": 789350,
-    "form_type": "Form 4"
+    "insider_name": "Insider_026",
+    "relationship": "Director",
+    "transaction_date": "2024-01-25",
+    "transaction_type": "Sale",
+    "shares": 84685,
+    "price_per_share": 469.1495989862064,
+    "total_value": 39729933.79014689,
+    "remaining_holdings": 493498,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000190",
@@ -3427,176 +3427,176 @@
       "cik": "0000320193",
       "sector": "Technology"
     },
-    "insider_name": "Insider_024",
-    "relationship": "Officer",
-    "transaction_date": "2024-10-18",
-    "transaction_type": "Gift",
-    "shares": 60372,
-    "price_per_share": 236.97909219663592,
-    "total_value": 14306901.754095303,
-    "remaining_holdings": 968261,
+    "insider_name": "Insider_031",
+    "relationship": "Other",
+    "transaction_date": "2025-06-27",
+    "transaction_type": "Sale",
+    "shares": 34618,
+    "price_per_share": 344.14066936483664,
+    "total_value": 11913461.692071915,
+    "remaining_holdings": 888635,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000191",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_017",
+    "relationship": "Officer",
+    "transaction_date": "2024-02-05",
+    "transaction_type": "Gift",
+    "shares": 66820,
+    "price_per_share": 392.146806224118,
+    "total_value": 26203249.591895565,
+    "remaining_holdings": 498591,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000192",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "insider_name": "Insider_039",
+    "relationship": "10% Owner",
+    "transaction_date": "2023-10-28",
+    "transaction_type": "Grant",
+    "shares": 12473,
+    "price_per_share": 312.93814543355666,
+    "total_value": 3903277.4879927523,
+    "remaining_holdings": 19595,
+    "form_type": "Form 4"
+  },
+  {
+    "transaction_id": "INSIDER_000193",
     "company": {
       "name": "Berkshire Hathaway Inc.",
       "ticker": "BRK.A",
       "cik": "0001067983",
       "sector": "Conglomerate"
     },
-    "insider_name": "Insider_049",
-    "relationship": "Officer",
-    "transaction_date": "2025-01-18",
-    "transaction_type": "Gift",
-    "shares": 84460,
-    "price_per_share": 312.3090460624225,
-    "total_value": 26377622.030432206,
-    "remaining_holdings": 260668,
-    "form_type": "Form 4"
-  },
-  {
-    "transaction_id": "INSIDER_000192",
-    "company": {
-      "name": "Microsoft Corporation",
-      "ticker": "MSFT",
-      "cik": "0000789019",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_039",
-    "relationship": "Other",
-    "transaction_date": "2024-12-04",
+    "insider_name": "Insider_078",
+    "relationship": "Director",
+    "transaction_date": "2023-11-22",
     "transaction_type": "Grant",
-    "shares": 86042,
-    "price_per_share": 40.849323249005906,
-    "total_value": 3514757.470990966,
-    "remaining_holdings": 979049,
-    "form_type": "Form 5"
+    "shares": 47626,
+    "price_per_share": 187.56984276855593,
+    "total_value": 8933201.331695246,
+    "remaining_holdings": 689834,
+    "form_type": "Form 3"
   },
   {
-    "transaction_id": "INSIDER_000193",
+    "transaction_id": "INSIDER_000194",
     "company": {
       "name": "Bank of America Corp.",
       "ticker": "BAC",
       "cik": "0000070858",
       "sector": "Financial Services"
     },
-    "insider_name": "Insider_061",
+    "insider_name": "Insider_060",
     "relationship": "10% Owner",
-    "transaction_date": "2025-05-16",
-    "transaction_type": "Exercise",
-    "shares": 53530,
-    "price_per_share": 367.7483546906491,
-    "total_value": 19685569.426590446,
-    "remaining_holdings": 811464,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000194",
-    "company": {
-      "name": "JPMorgan Chase & Co.",
-      "ticker": "JPM",
-      "cik": "0000019617",
-      "sector": "Financial Services"
-    },
-    "insider_name": "Insider_011",
-    "relationship": "10% Owner",
-    "transaction_date": "2024-04-09",
-    "transaction_type": "Exercise",
-    "shares": 70162,
-    "price_per_share": 47.83906574990553,
-    "total_value": 3356484.531144872,
-    "remaining_holdings": 611031,
+    "transaction_date": "2024-08-26",
+    "transaction_type": "Grant",
+    "shares": 32030,
+    "price_per_share": 112.81933212950386,
+    "total_value": 3613603.208108009,
+    "remaining_holdings": 958683,
     "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000195",
-    "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
-      "sector": "Technology"
-    },
-    "insider_name": "Insider_070",
-    "relationship": "10% Owner",
-    "transaction_date": "2023-11-09",
-    "transaction_type": "Grant",
-    "shares": 39931,
-    "price_per_share": 49.32535626097653,
-    "total_value": 1969610.8008570536,
-    "remaining_holdings": 144411,
-    "form_type": "Form 3"
-  },
-  {
-    "transaction_id": "INSIDER_000196",
     "company": {
       "name": "Microsoft Corporation",
       "ticker": "MSFT",
       "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_066",
-    "relationship": "Other",
-    "transaction_date": "2024-03-10",
-    "transaction_type": "Gift",
-    "shares": 4908,
-    "price_per_share": 302.4721843756919,
-    "total_value": 1484533.4809158957,
-    "remaining_holdings": 268366,
-    "form_type": "Form 4"
+    "insider_name": "Insider_074",
+    "relationship": "Officer",
+    "transaction_date": "2023-12-21",
+    "transaction_type": "Exercise",
+    "shares": 74846,
+    "price_per_share": 147.38908386493293,
+    "total_value": 11031483.37095477,
+    "remaining_holdings": 341774,
+    "form_type": "Form 5"
+  },
+  {
+    "transaction_id": "INSIDER_000196",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "insider_name": "Insider_060",
+    "relationship": "10% Owner",
+    "transaction_date": "2024-11-12",
+    "transaction_type": "Grant",
+    "shares": 18154,
+    "price_per_share": 50.28705103539939,
+    "total_value": 912911.1244966404,
+    "remaining_holdings": 997462,
+    "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000197",
     "company": {
-      "name": "Tesla Inc.",
-      "ticker": "TSLA",
-      "cik": "0001318605",
-      "sector": "Automotive"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_057",
-    "relationship": "Officer",
-    "transaction_date": "2024-04-20",
-    "transaction_type": "Grant",
-    "shares": 82045,
-    "price_per_share": 404.062682190601,
-    "total_value": 33151322.760327857,
-    "remaining_holdings": 34371,
-    "form_type": "Form 4"
+    "insider_name": "Insider_063",
+    "relationship": "Director",
+    "transaction_date": "2024-11-28",
+    "transaction_type": "Gift",
+    "shares": 67511,
+    "price_per_share": 416.6356215506579,
+    "total_value": 28127487.446506467,
+    "remaining_holdings": 989316,
+    "form_type": "Form 3"
   },
   {
     "transaction_id": "INSIDER_000198",
     "company": {
-      "name": "Amazon.com Inc.",
-      "ticker": "AMZN",
-      "cik": "0001018724",
-      "sector": "E-commerce"
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
     },
-    "insider_name": "Insider_008",
+    "insider_name": "Insider_015",
     "relationship": "Other",
-    "transaction_date": "2024-08-30",
-    "transaction_type": "Exercise",
-    "shares": 86488,
-    "price_per_share": 68.0995090667891,
-    "total_value": 5889790.340168456,
-    "remaining_holdings": 190826,
+    "transaction_date": "2024-08-10",
+    "transaction_type": "Grant",
+    "shares": 90996,
+    "price_per_share": 345.2084043834328,
+    "total_value": 31412583.96527485,
+    "remaining_holdings": 274755,
     "form_type": "Form 5"
   },
   {
     "transaction_id": "INSIDER_000199",
     "company": {
-      "name": "Apple Inc.",
-      "ticker": "AAPL",
-      "cik": "0000320193",
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
       "sector": "Technology"
     },
-    "insider_name": "Insider_067",
+    "insider_name": "Insider_012",
     "relationship": "10% Owner",
-    "transaction_date": "2024-07-06",
+    "transaction_date": "2024-12-01",
     "transaction_type": "Grant",
-    "shares": 4819,
-    "price_per_share": 476.86131250519827,
-    "total_value": 2297994.6649625506,
-    "remaining_holdings": 608355,
-    "form_type": "Form 5"
+    "shares": 74117,
+    "price_per_share": 449.1740915630439,
+    "total_value": 33291436.144378122,
+    "remaining_holdings": 979743,
+    "form_type": "Form 3"
   }
 ]

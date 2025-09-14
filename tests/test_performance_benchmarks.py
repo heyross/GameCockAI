@@ -22,15 +22,26 @@ src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
 if src_dir not in sys.path:
     sys.path.append(src_dir)
 
-from test_data_generators import FinancialTestDataGenerator, create_test_vector_collection
+try:
+    from test_data_generators import FinancialTestDataGenerator, create_test_vector_collection
+except ImportError:
+    # Fallback for when running from different directory
+    import sys
+    import os
+    test_dir = os.path.dirname(__file__)
+    if test_dir not in sys.path:
+        sys.path.append(test_dir)
+    from test_data_generators import FinancialTestDataGenerator, create_test_vector_collection
 
 try:
     from vector_db import VectorDBManager, GameCockVectorDB
-    from embedding_service import FinancialEmbeddingService
+    from embedding_service import FinancialEmbeddingService, TORCH_AVAILABLE
     from document_processor import FinancialDocumentProcessor, DocumentType
     from rag_enhanced import EnhancedRAGSystem
     from vector_integration import VectorIntegrationManager
     VECTOR_MODULES_AVAILABLE = True
+    if not TORCH_AVAILABLE:
+        print("⚠️  PyTorch not available - some embedding features may be limited")
 except ImportError as e:
     VECTOR_MODULES_AVAILABLE = False
     print(f"⚠️  Vector modules not available for performance testing: {e}")
@@ -118,6 +129,10 @@ class PerformanceBenchmarks(unittest.TestCase):
             
             service = FinancialEmbeddingService(enable_caching=False)
             
+            # Skip test if PyTorch is not available
+            if not TORCH_AVAILABLE:
+                self.skipTest("PyTorch not available - skipping embedding performance test")
+            
             for batch_size in batch_sizes:
                 service.batch_size = batch_size
                 
@@ -191,7 +206,7 @@ class PerformanceBenchmarks(unittest.TestCase):
         
         self.assertTrue(success)
         
-        faiss_insertion_rate = len(vectors) / faiss_insertion_time
+        faiss_insertion_rate = len(vectors) / max(faiss_insertion_time, 0.001)  # Avoid division by zero
         print(f"  FAISS insertion: {faiss_insertion_time:.3f}s ({faiss_insertion_rate:.1f} vectors/sec)")
         
         self.benchmark_results.update({
@@ -208,7 +223,7 @@ class PerformanceBenchmarks(unittest.TestCase):
         
         # Set up test collection with data
         collection_name = "search_perf_test"
-        vector_db.create_collection(collection_name, collection_type="chroma")
+        vector_db.create_collection(collection_name, collection_type="chroma", embedding_dimension=768)
         
         test_data = create_test_vector_collection()
         documents = test_data["documents"][:200]  # Larger dataset for search testing
@@ -341,12 +356,14 @@ class PerformanceBenchmarks(unittest.TestCase):
                         
                         # Mock the process_query method to avoid async/mock issues
                         async def mock_process_query(*args, **kwargs):
-                            from rag_enhanced import RAGResponse
+                            from rag_enhanced import RAGResponse, QueryType
                             return RAGResponse(
                                 answer="Mock response for end-to-end performance testing",
                                 confidence_score=0.85,
                                 sources=[],
-                                processing_time=0.001
+                                processing_time=0.001,
+                                query_type=QueryType.GENERAL,
+                                metadata={"test": True}
                             )
                         
                         rag_system.process_query = mock_process_query
@@ -424,12 +441,14 @@ class PerformanceBenchmarks(unittest.TestCase):
                         
                         # Mock the entire process_query method to avoid async/mock issues
                         async def mock_process_query(*args, **kwargs):
-                            from rag_enhanced import RAGResponse
+                            from rag_enhanced import RAGResponse, QueryType
                             return RAGResponse(
                                 answer="Mock response for concurrent testing",
                                 confidence_score=0.85,
                                 sources=[],
-                                processing_time=0.001
+                                processing_time=0.001,
+                                query_type=QueryType.GENERAL,
+                                metadata={"test": True}
                             )
                         
                         rag_system.process_query = mock_process_query
@@ -535,7 +554,7 @@ class PerformanceBenchmarks(unittest.TestCase):
         
         vector_db = GameCockVectorDB(persist_directory=self.test_dir)
         collection_name = "scalability_test"
-        vector_db.create_collection(collection_name, collection_type="chroma")
+        vector_db.create_collection(collection_name, collection_type="chroma", embedding_dimension=768)
         
         # Test with increasing document counts
         document_counts = [100, 500, 1000, 2000]

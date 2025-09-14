@@ -4,9 +4,16 @@ Provides specialized embedding generation for financial documents and data
 """
 
 import numpy as np
-import torch
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
+
+# Lazy import torch to avoid Windows loading issues
+try:
+    import torch
+    TORCH_AVAILABLE = True
+except ImportError:
+    TORCH_AVAILABLE = False
+    torch = None
 import hashlib
 import pickle
 import os
@@ -48,7 +55,7 @@ class FinancialEmbeddingService:
         
         # Set device
         if device == "auto":
-            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            self.device = "cuda" if TORCH_AVAILABLE and torch.cuda.is_available() else "cpu"
         else:
             self.device = device
         

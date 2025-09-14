@@ -14,8 +14,11 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Tuple
 
-# Add src directory to path
-sys.path.append('../src')
+# Add src directory to path - handle both relative and absolute paths
+import os
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
 # Test suite imports
 try:
