@@ -27,8 +27,8 @@ class TestDownloader(unittest.TestCase):
         # Mock the requests.get call to return a successful response
         mock_response = MagicMock()
         mock_response.raise_for_status.return_value = None
-        mock_response.iter_content.return_value = [b'test', b'data']
-        mock_get.return_value = mock_response
+        mock_response.iter_content.return_value = (b'test' for b in [b'data'])
+        mock_get.return_value.__enter__.return_value = mock_response
 
         url = "http://example.com/testfile.zip"
         result = download_file(url, self.test_dir)
@@ -78,7 +78,7 @@ class TestDownloader(unittest.TestCase):
 
         # Check that download_file was called for each URL
         self.assertEqual(mock_download_file.call_count, len(urls))
-        expected_calls = [call(url, self.test_dir, 0) for url in urls]
+        expected_calls = [call(url=url, destination_folder=self.test_dir, rate_limit_delay=0) for url in urls]
         mock_download_file.assert_has_calls(expected_calls, any_order=True)
 
 if __name__ == '__main__':

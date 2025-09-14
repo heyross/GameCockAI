@@ -183,37 +183,6 @@ def allyourbasearebelongtous():
             log.write(f"{datetime.now()}: {message}\n")
         print(message)
 
-    def download_edgar_file(url, download_directory):
-        try:
-            headers = {'User-Agent': "anonymous/FORTHELULZ@anonyops.com"}
-            response = requests.get(url, headers=headers, stream=True, timeout=30)
-            response.raise_for_status()
-
-            filename = url.split('/')[-1]
-            cik_parts = url.split('/data/')
-            if len(cik_parts) > 1:
-                cik = cik_parts[1].split('/')[0]
-                dir_path = os.path.join(download_directory, cik)
-                os.makedirs(dir_path, exist_ok=True)
-                filepath = os.path.join(dir_path, filename)
-            else:
-                filepath = os.path.join(download_directory, filename)
-
-            if os.path.exists(filepath):
-                # File verification logic can be added here if needed
-                print(f"FILE already downloaded: {filepath}")
-                return True, filepath
-
-            with open(filepath, 'wb') as file:
-                for chunk in response.iter_content(chunk_size=8192):
-                    file.write(chunk)
-
-            print(f"Downloaded: {filepath}")
-            return True, filepath
-
-        except requests.RequestException as e:
-            print(f"Error downloading {url}: {e}")
-            return False, None
 
     def process_line(line):
         parts = line.split('|')
@@ -232,11 +201,29 @@ def allyourbasearebelongtous():
                     return zip_ref.read(file_name).decode('utf-8', errors='ignore')
         raise FileNotFoundError("No IDX file found in ZIP archive.")
 
-    # TODO: The original logic for processing EDGAR filings is complex and needs a full refactoring.
-    # This includes handling user input for selecting years/quarters, compiling a master index, 
-    # and managing the download and processing of a large number of files.
-    # This will be addressed in a future development cycle.
-    print("EDGAR processing logic is not yet fully implemented.")
+    # The logic to get the URLs to download needs to be implemented.
+    # For now, we will assume a list of URLs is provided.
+    # In a real scenario, this would come from parsing the master.idx files.
+    urls_to_download = [] # This should be populated by the index file processing logic.
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_url = {}
+        for url in urls_to_download:
+            cik_parts = url.split('/data/')
+            cik = cik_parts[1].split('/')[0] if len(cik_parts) > 1 else None
+            future = executor.submit(download_file, url, EDGAR_SOURCE_DIR, company_identifier=cik)
+            future_to_url[future] = url
+
+        for future in concurrent.futures.as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                success = future.result()
+                if success:
+                    log_progress(f"Successfully downloaded {url}")
+                else:
+                    log_progress(f"Failed to download {url}")
+            except Exception as exc:
+                log_progress(f'{url} generated an exception: {exc}')
 
 def download_credit_archives():
     os.makedirs(CREDIT_SOURCE_DIR, exist_ok=True)

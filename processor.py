@@ -36,7 +36,7 @@ def process_zip_files(source_dir, target_companies=None, search_term=None, load_
     Returns:
         DataFrame containing the processed data, or None if no data was found
     """
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     chunk_size = 100000  # Process 100,000 rows at a time
     all_data = []
 
@@ -85,7 +85,7 @@ def process_zip_files(source_dir, target_companies=None, search_term=None, load_
 
 def process_sec_insider_data(source_dir, db_session=None):
     """Processes SEC insider trading data from zip files and loads it into the database."""
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     db = db_session if db_session else SessionLocal()
 
     table_map = {
@@ -142,7 +142,7 @@ def process_sec_insider_data(source_dir, db_session=None):
 
 def process_form13f_data(source_dir, db_session=None):
     """Processes Form 13F data from zip files and loads it into the database."""
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     db = db_session if db_session else SessionLocal()
 
     table_map = {
@@ -220,7 +220,11 @@ def process_form13f_data(source_dir, db_session=None):
                                     if col in df.columns:
                                         df[col] = pd.to_numeric(df[col], errors='coerce')
 
-                                records = df.where(pd.notna(df), None).to_dict(orient='records')
+                                # Convert all NaN values to None for database insertion
+                                # Use replace to handle both NaN and NaT values properly
+                                import numpy as np
+                                df = df.replace({np.nan: None, pd.NaT: None})
+                                records = df.to_dict(orient='records')
                                 db.bulk_insert_mappings(model, records)
                                 logging.info(f"Loading {len(records)} records into {model.__tablename__}")
                 db.commit()
@@ -233,7 +237,7 @@ def process_form13f_data(source_dir, db_session=None):
 
 def process_exchange_metrics_data(source_dir, db_session=None):
     """Processes SEC Exchange Metrics data from zip files and loads it into the database."""
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     db = db_session if db_session else SessionLocal()
 
     numeric_columns = [
@@ -297,7 +301,7 @@ def process_exchange_metrics_data(source_dir, db_session=None):
 
 def process_nmfp_data(source_dir, db_session=None):
     """Processes Form N-MFP data from zip files and loads it into the database."""
-    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     db = db_session if db_session else SessionLocal()
 
     column_maps = {
@@ -493,9 +497,75 @@ def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
     df.columns = df.columns.str.strip().str.lower()
     df.columns = df.columns.str.replace(r'[^0-9a-zA-Z_]+', '_', regex=True)
-    df.columns = df.columns.str.strip('_')
+    df.columns = df.columns.str.replace(r'^_+|_+$', '', regex=True)
     df.columns = [''.join(c if c.isalnum() or c == '_' else '_' for c in col) for col in df.columns]
     return df
+
+
+def load_data_to_db(df, model_class, table_name, db_session=None):
+    """
+    Generic function to load DataFrame data into database using SQLAlchemy model.
+    
+    Args:
+        df: DataFrame containing the data
+        model_class: SQLAlchemy model class
+        table_name: Name of the table (for logging)
+        db_session: Optional database session
+    """
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    if df.empty:
+        logger.info(f"No data to load for {table_name}")
+        return
+        
+    db = db_session or SessionLocal()
+    
+    try:
+        # Sanitize column names
+        df = sanitize_column_names(df)
+        
+        # Convert data types
+        # Get columns of the target model
+        model_columns = [c.name for c in model_class.__table__.columns]
+        
+        # Filter DataFrame to only include columns that exist in the model
+        df = df.loc[:, [col for col in df.columns if col in model_columns]].copy()
+        potential_date_cols = [col for col in df.columns if any(keyword in col.lower() for keyword in ['date', 'time', 'period'])]
+        potential_numeric_cols = [col for col in df.columns if any(keyword in col.lower() for keyword in ['amount', 'value', 'fee', 'assets', 'series', 'percentage', 'delta', 'gamma', 'balance', 'usd', 'held', 'shares', 'units', 'notional'])]
+        potential_bool_cols = [col for col in df.columns if col.lower().startswith('is_') or any(k in col.lower() for k in ['flag', 'restricted', 'etf', 'money_market'])]
+
+        # Convert data types using .loc to avoid SettingWithCopyWarning
+        for col in potential_date_cols:
+            if col in df.columns:
+                df.loc[:, col] = pd.to_datetime(df[col], errors='coerce')
+
+        for col in potential_numeric_cols:
+            if col in df.columns:
+                df.loc[:, col] = pd.to_numeric(df[col], errors='coerce')
+
+        for col in potential_bool_cols:
+            if col in df.columns:
+                df.loc[:, col] = df[col].map({'Y': True, 'N': False, 'YES': True, 'NO': False, '1': True, '0': False}).fillna(False)
+        
+        # Replace NaN and NaT with None for database insertion
+        df = df.where(pd.notnull(df), None)
+        
+        # Convert to records and insert
+        records = df.to_dict(orient='records')
+        logger.info(f"Loading {len(records)} records into {table_name}")
+        
+        # Bulk insert
+        db.bulk_insert_mappings(model_class, records)
+        db.commit()
+        
+    except Exception as e:
+        logger.error(f"Error loading data to {table_name}: {str(e)}")
+        db.rollback()
+        raise
+    finally:
+        if not db_session:  # Only close if we created the session
+            db.close()
 
 def process_10k_filings(source_dir: str, db_session=None, force: bool = False) -> None:
     """Process 10-K and 10-Q SEC filings from a directory.
@@ -544,5 +614,192 @@ def process_sec_filings(filing_type: str, source_dir: str, **kwargs):
         return process_sec_insider_data(source_dir, **kwargs)
     elif filing_type == 'exchange_metrics':
         return process_exchange_metrics_data(source_dir, **kwargs)
+    elif filing_type == 'N-CEN':
+        return process_ncen_data(source_dir, **kwargs)
+    elif filing_type == 'N-PORT':
+        return process_nport_data(source_dir, **kwargs)
     else:
         raise ValueError(f"Unsupported filing type: {filing_type}")
+
+
+def process_ncen_data(source_dir, **kwargs):
+    """
+    Process N-CEN (Form N-CEN) filing data from ZIP archives.
+    
+    Args:
+        source_dir (str): Directory containing N-CEN ZIP files
+        **kwargs: Additional processing options
+        
+    Returns:
+        dict: Processing results summary
+    """
+    import zipfile
+    import logging
+    from database import (NCENSubmission, NCENRegistrant, NCENFundReportedInfo, 
+                         NCENAdviser, SessionLocal)
+    
+    logger = logging.getLogger(__name__)
+    logger.info(f"Processing N-CEN files from {source_dir}")
+    
+    if not os.path.exists(source_dir):
+        logger.error(f"N-CEN source directory does not exist: {source_dir}")
+        return {"error": "Source directory not found"}
+    
+    zip_files = glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True)
+    if not zip_files:
+        logger.warning(f"No ZIP files found in {source_dir}")
+        return {"processed": 0, "errors": 0}
+    
+    results = {"processed": 0, "errors": 0, "files": []}
+    
+    for zip_file in zip_files:
+        zip_path = os.path.join(source_dir, zip_file)
+        logger.info(f"Processing N-CEN file: {zip_path}")
+        
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zf:
+                # Process each TSV file in the ZIP
+                tsv_files = [name for name in zf.namelist() if name.endswith('.tsv')]
+                
+                # Check if this ZIP contains N-CEN data by looking for N-CEN specific files
+                has_ncen_data = any('submission' in name.lower() or 'registrant' in name.lower() or 'fund_reported_info' in name.lower() for name in tsv_files)
+                if not has_ncen_data:
+                    logger.debug(f"Skipping {zip_file} - no N-CEN data found")
+                    results["processed"] += 1  # Still count as processed even if no relevant data
+                    results["files"].append(zip_file)
+                    continue
+                
+                db = SessionLocal()
+                try:
+                    for tsv_name in tsv_files:
+                        try:
+                            with zf.open(tsv_name) as tsv_file:
+                                df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
+                            
+                            if df.empty:
+                                continue
+                                
+                            df = sanitize_column_names(df)
+                            df = df.where(pd.notnull(df), None)
+                            
+                            table_name = tsv_name.lower().replace('.tsv', '')
+                            
+                            if 'submission' in table_name:
+                                load_data_to_db(df, NCENSubmission, 'ncen_submissions', db_session=db)
+                            elif 'registrant' in table_name and 'website' not in table_name:
+                                load_data_to_db(df, NCENRegistrant, 'ncen_registrants', db_session=db)
+                            elif 'fund_reported_info' in table_name:
+                                load_data_to_db(df, NCENFundReportedInfo, 'ncen_fund_reported_info', db_session=db)
+                            elif 'adviser' in table_name:
+                                load_data_to_db(df, NCENAdviser, 'ncen_advisers', db_session=db)
+
+                        except Exception as e:
+                            logger.error(f"Error processing N-CEN TSV {tsv_name}: {str(e)}")
+                            results["errors"] += 1
+                    db.commit()
+                except Exception as e:
+                    db.rollback()
+                    raise e
+                finally:
+                    db.close()
+                        
+            results["processed"] += 1
+            results["files"].append(zip_file)
+            
+        except Exception as e:
+            logger.error(f"Error processing N-CEN file {zip_path}: {str(e)}")
+            results["errors"] += 1
+    
+    logger.info(f"N-CEN processing completed. Processed: {results['processed']}, Errors: {results['errors']}")
+    return results
+
+
+def process_nport_data(source_dir, **kwargs):
+    """
+    Process N-PORT (Form N-PORT) filing data from ZIP archives.
+    
+    Args:
+        source_dir (str): Directory containing N-PORT ZIP files
+        **kwargs: Additional processing options
+        
+    Returns:
+        dict: Processing results summary
+    """
+    import zipfile
+    import logging
+    from database import (NPORTSubmission, NPORTGeneralInfo, NPORTHolding,
+                         NPORTDerivative, SessionLocal)
+    
+    logger = logging.getLogger(__name__)
+    logger.info(f"Processing N-PORT files from {source_dir}")
+    
+    if not os.path.exists(source_dir):
+        logger.error(f"N-PORT source directory does not exist: {source_dir}")
+        return {"error": "Source directory not found"}
+    
+    zip_files = glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True)
+    if not zip_files:
+        logger.warning(f"No ZIP files found in {source_dir}")
+        return {"processed": 0, "errors": 0}
+    
+    results = {"processed": 0, "errors": 0, "files": []}
+    
+    for zip_file in zip_files:
+        zip_path = os.path.join(source_dir, zip_file)
+        logger.info(f"Processing N-PORT file: {zip_path}")
+        
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zf:
+                # Process each TSV file in the ZIP
+                tsv_files = [name for name in zf.namelist() if name.endswith('.tsv')]
+                
+                # Check if this ZIP contains N-PORT data by looking for N-PORT specific files
+                has_nport_data = any('holding' in name.lower() or 'derivative' in name.lower() or 'general_info' in name.lower() for name in tsv_files)
+                if not has_nport_data:
+                    logger.debug(f"Skipping {zip_file} - no N-PORT data found")
+                    results["processed"] += 1  # Still count as processed even if no relevant data
+                    results["files"].append(zip_file)
+                    continue
+                
+                db = SessionLocal()
+                try:
+                    for tsv_name in tsv_files:
+                        try:
+                            with zf.open(tsv_name) as tsv_file:
+                                df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
+                            
+                            if df.empty:
+                                continue
+                            
+                            df = sanitize_column_names(df)
+                            df = df.where(pd.notnull(df), None)
+                            
+                            table_name = tsv_name.lower().replace('.tsv', '')
+                            
+                            if 'submission' in table_name:
+                                load_data_to_db(df, NPORTSubmission, 'nport_submissions', db_session=db)
+                            elif 'general' in table_name or 'geninfo' in table_name:
+                                load_data_to_db(df, NPORTGeneralInfo, 'nport_general_info', db_session=db)
+                            elif 'holding' in table_name:
+                                load_data_to_db(df, NPORTHolding, 'nport_holdings', db_session=db)
+                            elif 'derivative' in table_name:
+                                load_data_to_db(df, NPORTDerivative, 'nport_derivatives', db_session=db)
+                        except Exception as e:
+                            logger.error(f"Error processing N-PORT TSV {tsv_name}: {str(e)}")
+                            results["errors"] += 1
+                    db.commit()
+                except Exception as e:
+                    db.rollback()
+                    raise e
+                finally:
+                    db.close()
+                        
+            results["processed"] += 1
+            results["files"].append(zip_file)
+            
+        except Exception as e:
+            logger.error(f"Error processing N-PORT file {zip_path}: {str(e)}")
+            results["errors"] += 1
+    
+    logger.info(f"N-PORT processing completed. Processed: {results['processed']}, Errors: {results['errors']}")
+    return results

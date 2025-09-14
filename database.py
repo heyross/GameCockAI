@@ -192,7 +192,7 @@ class Form13FCoverPage(Base):
     accession_number = Column(String(25), primary_key=True)
     report_calendar_or_quarter = Column(DateTime, nullable=False)
     is_amendment = Column(String(1))
-    amendment_no = Column(Integer)
+    amendment_no = Column(Integer, nullable=True)
     amendment_type = Column(String(20))
     conf_denied_expired = Column(String(1))
     date_denied_expired = Column(DateTime)
@@ -211,55 +211,56 @@ class Form13FCoverPage(Base):
 
 class Form13FOtherManager(Base):
     __tablename__ = 'form13f_other_managers'
-    accession_number = Column(String(25), primary_key=True)
-    other_manager_sk = Column(Integer, primary_key=True)
+    other_manager_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
     cik = Column(String(10))
     form13f_file_number = Column(String(17))
-    name = Column(String(150), nullable=False)
+    name = Column(String(150), nullable=True)
 
 class Form13FSignature(Base):
     __tablename__ = 'form13f_signatures'
     accession_number = Column(String(25), primary_key=True)
-    name = Column(String(150), nullable=False)
+    name = Column(String(150), nullable=True)
     title = Column(String(60))
     phone = Column(String(20))
     signature = Column(String(150), nullable=False)
-    city = Column(String(30), nullable=False)
-    state_or_country = Column(String(2), nullable=False)
+    city = Column(String(30), nullable=True)
+    state_or_country = Column(String(2), nullable=True)
     signature_date = Column(DateTime, nullable=False)
 
 class Form13FSummaryPage(Base):
     __tablename__ = 'form13f_summary_pages'
     accession_number = Column(String(25), primary_key=True)
-    other_included_managers_count = Column(Integer)
-    table_entry_total = Column(Integer)
-    table_value_total = Column(Integer)
+    other_included_managers_count = Column(Integer, nullable=True)
+    table_entry_total = Column(Integer, nullable=True)
+    table_value_total = Column(Integer, nullable=True)
     is_confidential_omitted = Column(String(1))
 
 class Form13FOtherManager2(Base):
     __tablename__ = 'form13f_other_managers2'
-    accession_number = Column(String(25), primary_key=True)
-    sequence_number = Column(Integer, primary_key=True)
+    other_manager2_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
+    sequence_number = Column(Integer, nullable=False)
     cik = Column(String(10))
     form13f_file_number = Column(String(17))
-    name = Column(String(150), nullable=False)
+    name = Column(String(150), nullable=True)
 
 class Form13FInfoTable(Base):
     __tablename__ = 'form13f_info_tables'
     accession_number = Column(String(25), primary_key=True)
     infotable_sk = Column(Integer, primary_key=True)
-    nameofissuer = Column(String(200), nullable=False)
-    titleofclass = Column(String(150), nullable=False)
+    nameofissuer = Column(String(200), nullable=True)
+    titleofclass = Column(String(150), nullable=True)
     cusip = Column(String(9), nullable=False)
-    value = Column(Integer, nullable=False)
-    sshprnamt = Column(Integer, nullable=False)
+    value = Column(Integer, nullable=True)
+    sshprnamt = Column(Integer, nullable=True)
     sshprnamttype = Column(String(10), nullable=False)
     putcall = Column(String(10))
     investmentdiscretion = Column(String(10), nullable=False)
     othermanager = Column(String(100))
-    voting_auth_sole = Column(Integer, nullable=False)
-    voting_auth_shared = Column(Integer, nullable=False)
-    voting_auth_none = Column(Integer, nullable=False)
+    voting_auth_sole = Column(Integer, nullable=True)
+    voting_auth_shared = Column(Integer, nullable=True)
+    voting_auth_none = Column(Integer, nullable=True)
 
 class SecExchangeMetrics(Base):
     __tablename__ = 'sec_exchange_metrics'
@@ -283,6 +284,187 @@ class SecExchangeMetrics(Base):
     odd_lot_vol = Column(Float)
     hidden_vol = Column(Float)
     trade_vol_for_hidden = Column(Float)
+
+# N-CEN Tables
+class NCENSubmission(Base):
+    __tablename__ = 'ncen_submissions'
+    accession_number = Column(String(25), primary_key=True)
+    submission_type = Column(String(20), nullable=True)
+    cik = Column(String(10), nullable=True)
+    filing_date = Column(DateTime, nullable=False)
+    report_ending_period = Column(DateTime, nullable=True)
+    is_report_period_lt_12month = Column(Boolean)
+    file_num = Column(String(20))
+    registrant_signed_name = Column(String(150))
+    date_signed = Column(DateTime)
+    signature = Column(String(150))
+    title = Column(String(100))
+    is_legal_proceedings = Column(Boolean)
+    is_provision_financial_support = Column(Boolean)
+    is_ipa_report_internal_control = Column(Boolean)
+    is_change_acc_principles = Column(Boolean)
+    is_info_required_eo = Column(Boolean)
+    is_other_info_required = Column(Boolean)
+    is_material_amendments = Column(Boolean)
+    is_inst_defining_rights = Column(Boolean)
+    is_new_or_amended_inv_adv_cont = Column(Boolean)
+    is_info_item405 = Column(Boolean)
+    is_code_of_ethics = Column(Boolean)
+
+class NCENRegistrant(Base):
+    __tablename__ = 'ncen_registrants'
+    ncen_registrant_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
+    registrant_name = Column(String(200), nullable=False)
+    file_num = Column(String(20))
+    cik = Column(String(10))
+    lei = Column(String(20))
+    address1 = Column(String(100))
+    address2 = Column(String(100))
+    city = Column(String(50))
+    state = Column(String(2))
+    country = Column(String(50))
+    zip = Column(String(10))
+    phone = Column(String(20))
+    is_first_filing = Column(Boolean)
+    is_last_filing = Column(Boolean)
+    is_family_investment_company = Column(Boolean)
+    family_investment_company_name = Column(String(200))
+    investment_company_type = Column(String(50))
+    total_series = Column(Integer)
+
+class NCENFundReportedInfo(Base):
+    __tablename__ = 'ncen_fund_reported_info'
+    ncen_fund_sk = Column(Integer, primary_key=True, autoincrement=True)
+    fund_id = Column(String(50), nullable=False)
+    accession_number = Column(String(25), nullable=False)
+    fund_name = Column(String(200), nullable=False)
+    series_id = Column(String(50))
+    lei = Column(String(20))
+    is_first_filing = Column(Boolean)
+    authorized_shares_cnt = Column(BigInteger)
+    added_new_shares_cnt = Column(BigInteger)
+    terminated_shares_cnt = Column(BigInteger)
+    is_etf = Column(Boolean)
+    is_etmf = Column(Boolean)
+    is_index = Column(Boolean)
+    is_multi_inverse_index = Column(Boolean)
+    is_interval = Column(Boolean)
+    is_fund_of_fund = Column(Boolean)
+    is_master_feeder = Column(Boolean)
+    is_money_market = Column(Boolean)
+    is_target_date = Column(Boolean)
+    is_underlying_fund = Column(Boolean)
+    return_b4_fees_and_expenses = Column(Float)
+    return_aftr_fees_and_expenses = Column(Float)
+    monthly_avg_net_assets = Column(BigInteger)
+    daily_avg_net_assets = Column(BigInteger)
+    management_fee = Column(Float)
+    net_operating_expenses = Column(Float)
+    market_price_per_share = Column(Float)
+    nav_per_share = Column(Float)
+
+class NCENAdviser(Base):
+    __tablename__ = 'ncen_advisers'
+    ncen_adviser_sk = Column(Integer, primary_key=True, autoincrement=True)
+    fund_id = Column(String(50), nullable=False)
+    source = Column(String(20))
+    adviser_type = Column(String(50))
+    adviser_name = Column(String(200), nullable=False)
+    file_num = Column(String(20))
+    crd_num = Column(String(20))
+    adviser_lei = Column(String(20))
+    state = Column(String(2))
+    country = Column(String(50))
+    is_affiliated = Column(Boolean)
+    is_advisor_hired = Column(Boolean)
+    advisor_start_date = Column(DateTime)
+    advisor_terminated_date = Column(DateTime)
+
+# N-PORT Tables
+class NPORTSubmission(Base):
+    __tablename__ = 'nport_submissions'
+    accession_number = Column(String(25), primary_key=True)
+    submission_type = Column(String(20), nullable=True)
+    cik = Column(String(10), nullable=True)
+    filing_date = Column(DateTime, nullable=False)
+    report_date = Column(DateTime, nullable=True)
+    registrant_name = Column(String(200), nullable=True)
+    file_number = Column(String(20))
+    lei = Column(String(20))
+    series_id = Column(String(50))
+    series_name = Column(String(200))
+    class_id = Column(String(50))
+    class_name = Column(String(200))
+    total_assets = Column(BigInteger)
+    total_liabilities = Column(BigInteger)
+    net_assets = Column(BigInteger)
+    assets_attributable_to_miscellaneous_securities = Column(BigInteger)
+    investments_owned_at_value = Column(BigInteger)
+
+class NPORTGeneralInfo(Base):
+    __tablename__ = 'nport_general_info'
+    nport_general_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
+    registrant_name = Column(String(200))
+    file_number = Column(String(20))
+    lei = Column(String(20))
+    address1 = Column(String(100))
+    address2 = Column(String(100))
+    city = Column(String(50))
+    state_or_country = Column(String(50))
+    zip = Column(String(10))
+    phone = Column(String(20))
+    is_final_filing = Column(Boolean)
+    total_assets = Column(BigInteger)
+    total_liabilities = Column(BigInteger)
+    net_assets = Column(BigInteger)
+    miscellaneous_securities_owned = Column(BigInteger)
+    investments_owned_at_value = Column(BigInteger)
+    uninvested_cash = Column(BigInteger)
+
+class NPORTHolding(Base):
+    __tablename__ = 'nport_holdings'
+    nport_holding_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
+    holding_id = Column(String(50))
+    issuer_name = Column(String(200))
+    title_of_issue = Column(String(200))
+    cusip = Column(String(9))
+    isin = Column(String(12))
+    balance_held = Column(BigInteger)
+    units_principal_amount = Column(String(20))
+    currency_code = Column(String(3))
+    value_usd = Column(BigInteger)
+    percentage_of_net_assets = Column(Float)
+    payoff_profile = Column(String(50))
+    asset_category = Column(String(50))
+    issuer_category = Column(String(50))
+    investment_country = Column(String(2))
+    is_restricted_security = Column(Boolean)
+    fair_value_level = Column(String(10))
+    liquidity_classification = Column(String(50))
+
+class NPORTDerivative(Base):
+    __tablename__ = 'nport_derivatives'
+    nport_derivative_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accession_number = Column(String(25), nullable=False)
+    derivative_id = Column(String(50))
+    counterparty_name = Column(String(200))
+    derivative_category = Column(String(50))
+    underlying_name = Column(String(200))
+    underlying_cusip = Column(String(9))
+    underlying_isin = Column(String(12))
+    notional_amount = Column(BigInteger)
+    currency_code = Column(String(3))
+    unrealized_appreciation = Column(BigInteger)
+    unrealized_depreciation = Column(BigInteger)
+    maturity_date = Column(DateTime)
+    expiration_date = Column(DateTime)
+    delta = Column(Float)
+    gamma = Column(Float)
+    theta = Column(Float)
+    vega = Column(Float)
 
 # N-MFP Tables
 class NMFPSubmission(Base):
@@ -948,7 +1130,13 @@ class CFTCSwap(Base):
     delivery_type = Column(String)
 
 def create_db_and_tables():
-    Base.metadata.create_all(bind=engine)
+    """Create database tables if they don't exist. Safe to run multiple times."""
+    try:
+        Base.metadata.create_all(bind=engine)
+        return True
+    except Exception as e:
+        print(f"Error creating database tables: {e}")
+        return False
 
 def get_db_stats():
     """Returns statistics about the database."""
@@ -980,6 +1168,14 @@ def get_db_stats():
             "nmfp_administrators": db.query(NMFPAdministrator).count(),
             "nmfp_transfer_agents": db.query(NMFPTransferAgent).count(),
             "nmfp_series_shadow_price_l": db.query(NMFPSeriesShadowPriceL).count(),
+            "ncen_submissions": db.query(NCENSubmission).count(),
+            "ncen_registrants": db.query(NCENRegistrant).count(),
+            "ncen_fund_reported_info": db.query(NCENFundReportedInfo).count(),
+            "ncen_advisers": db.query(NCENAdviser).count(),
+            "nport_submissions": db.query(NPORTSubmission).count(),
+            "nport_general_info": db.query(NPORTGeneralInfo).count(),
+            "nport_holdings": db.query(NPORTHolding).count(),
+            "nport_derivatives": db.query(NPORTDerivative).count(),
             "nmfp_class_level_info": db.query(NMFPClassLevelInfo).count(),
             "nmfp_net_asset_value_per_share_l": db.query(NMFPNetAssetValuePerShareL).count(),
             "nmfp_sch_portfolio_securities": db.query(NMFPSchPortfolioSecurities).count(),

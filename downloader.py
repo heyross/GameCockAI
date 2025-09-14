@@ -9,8 +9,11 @@ from config import SEC_USER_AGENT
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def download_file(url, destination_folder, retries=3, rate_limit_delay=0):
+def download_file(url, destination_folder, company_identifier=None, retries=3, rate_limit_delay=0):
     """Downloads a file from a URL with retries and intelligent error handling."""
+    if company_identifier:
+        destination_folder = os.path.join(destination_folder, str(company_identifier))
+    
     os.makedirs(destination_folder, exist_ok=True)
     filename = url.split('/')[-1]
     filepath = os.path.join(destination_folder, filename)

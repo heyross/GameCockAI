@@ -6,12 +6,13 @@ from data_sources import cftc, sec
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 from rag import query_swapbot
-from processor import process_zip_files, load_cftc_data_to_db, process_sec_insider_data, process_form13f_data, process_exchange_metrics_data
+from processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
+                      process_exchange_metrics_data, process_ncen_data, process_nport_data)
 from processor_8k import process_8k_filings
 from config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR, 
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR, THRTNF_SOURCE_DIR,
-    EXCHANGE_SOURCE_DIR, SEC_8K_SOURCE_DIR
+    EXCHANGE_SOURCE_DIR, SEC_8K_SOURCE_DIR, NCEN_SOURCE_DIR, NPORT_SOURCE_DIR
 )
 from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
 from startup import check_dependencies, check_ollama_service
@@ -278,6 +279,8 @@ def process_sec_submenu():
         print("2. 13F Holdings")
         print("3. Exchange Metrics")
         print("4. 8-K Filings")
+        print("5. N-CEN Filings")
+        print("6. N-PORT Filings")
         print("B. Back")
         choice = input("Enter your choice: ").strip().lower()
 
@@ -296,6 +299,14 @@ def process_sec_submenu():
         elif choice == '4':
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(SEC_8K_SOURCE_DIR))}...")
             process_8k_filings(SEC_8K_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == '5':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(NCEN_SOURCE_DIR))}...")
+            process_ncen_data(NCEN_SOURCE_DIR)
+            print("Processing complete.")
+        elif choice == '6':
+            print(f"\nProcessing files in {os.path.basename(os.path.normpath(NPORT_SOURCE_DIR))}...")
+            process_nport_data(NPORT_SOURCE_DIR)
             print("Processing complete.")
         elif choice == 'b':
             break
@@ -382,7 +393,20 @@ def run_startup_checks():
 
     check_ollama_service()
 
+def initialize_database():
+    """Initialize database tables if they don't exist."""
+    try:
+        from database import create_db_and_tables
+        success = create_db_and_tables()
+        if success:
+            print("Database tables verified/created successfully.")
+        else:
+            print("Warning: Database table initialization failed.")
+    except Exception as e:
+        print(f"Warning: Could not initialize database tables: {e}")
+
 if __name__ == "__main__":
     run_startup_checks()
+    initialize_database()
     start_worker()
     main_menu()
