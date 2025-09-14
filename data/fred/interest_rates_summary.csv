@@ -1,0 +1,14 @@
+name,title,current_rate,units,change_pct,last_updated,frequency,series_id
+US_1M,"Market Yield on U.S. Treasury Securities at 1-Month Constant Maturity, Quoted on an Investment Basis",4.2200,Percent,-0.2364,2025-09-11,Daily,DGS1MO
+US_3M,"Market Yield on U.S. Treasury Securities at 3-Month Constant Maturity, Quoted on an Investment Basis",4.0800,Percent,-0.2445,2025-09-11,Daily,DGS3MO
+US_6M,"Market Yield on U.S. Treasury Securities at 6-Month Constant Maturity, Quoted on an Investment Basis",3.8200,Percent,-0.2611,2025-09-11,Daily,DGS6MO
+US_1Y,"Market Yield on U.S. Treasury Securities at 1-Year Constant Maturity, Quoted on an Investment Basis",3.6300,Percent,-0.8197,2025-09-11,Daily,DGS1
+US_2Y,"Market Yield on U.S. Treasury Securities at 2-Year Constant Maturity, Quoted on an Investment Basis",3.5200,Percent,-0.5650,2025-09-11,Daily,DGS2
+US_5Y,"Market Yield on U.S. Treasury Securities at 5-Year Constant Maturity, Quoted on an Investment Basis",3.5900,Percent,0.0000,2025-09-11,Daily,DGS5
+US_10Y,"Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis",4.0100,Percent,-0.7426,2025-09-11,Daily,DGS10
+US_30Y,"Market Yield on U.S. Treasury Securities at 30-Year Constant Maturity, Quoted on an Investment Basis",4.6500,Percent,-0.8529,2025-09-11,Daily,DGS30
+FEDFUNDS,Federal Funds Effective Rate,4.3300,Percent,,2025-08-01,Monthly,FEDFUNDS
+DFF,Federal Funds Effective Rate,4.3300,Percent,0.0000,2025-09-11,"Daily, 7-Day",DFF
+EFFR,Effective Federal Funds Rate,4.3300,Percent,0.0000,2025-09-11,Daily,EFFR
+SOFR,Secured Overnight Financing Rate,4.4100,Percent,0.4556,2025-09-11,Daily,SOFR
+PRIME,Bank Prime Loan Rate,7.5000,Percent,,2025-08-01,Monthly,MPRIME

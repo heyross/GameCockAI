@@ -1,0 +1,50 @@
+{
+  "start_time": "2025-09-14T06:57:25.010993",
+  "end_time": "2025-09-14T06:57:29.769568",
+  "duration": 4.758575201034546,
+  "test_suites": {
+    "Unit Tests": {
+      "success": true,
+      "duration": 0.011269092559814453,
+      "critical": true,
+      "description": "Comprehensive unit tests with mocked dependencies"
+    }
+  },
+  "summary": {
+    "suites_run": 1,
+    "suites_passed": 1,
+    "suites_failed": 0,
+    "critical_suites_total": 1,
+    "critical_suites_passed": 1,
+    "critical_suites_failed": 0,
+    "total_duration": 4.758575201034546,
+    "overall_success": true,
+    "pass_rate": 100.0
+  },
+  "environment": {
+    "python_version": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cpu_count": 16,
+    "current_directory": "D:\\GitHub\\Gamecock_Final\\GameCockAI\\tests",
+    "test_time": "2025-09-14T06:57:25.289610",
+    "numpy_version": "2.2.4",
+    "torch_version": "2.6.0+cpu",
+    "cuda_available": false,
+    "chromadb_version": "Not available",
+    "vector_modules_available": false
+  },
+  "recommendations": [
+    {
+      "type": "critical",
+      "message": "Vector modules not available - run 'python vector_setup.py' to install"
+    },
+    {
+      "type": "performance",
+      "message": "CUDA not available - consider GPU acceleration for better performance"
+    },
+    {
+      "type": "success",
+      "message": "All critical tests passed - system ready for deployment"
+    }
+  ]
+}

@@ -24,23 +24,29 @@ FRED_API_KEY = os.getenv('FRED_API_KEY')
 if not FRED_API_KEY:
     logger.warning("FRED_API_KEY not found in environment variables. Some functionality may be limited.")
 
-# FRED Series IDs for swap rates (source: https://fred.stlouisfed.org/categories/33045)
+# FRED Series IDs for interest rates and economic indicators
+# Source: https://fred.stlouisfed.org/categories/22
 SWAP_RATE_SERIES = {
-    # USD Interest Rate Swaps
-    'USD_1Y': 'DSWRD1',    # 1-Year USD Swap Rate
-    'USD_2Y': 'DSWRD2',    # 2-Year USD Swap Rate
-    'USD_5Y': 'DSWRD5',    # 5-Year USD Swap Rate
-    'USD_10Y': 'DSWRD10',  # 10-Year USD Swap Rate
-    'USD_30Y': 'DSWRD30',  # 30-Year USD Swap Rate
+    # US Treasury Yields (as a proxy for swap rates)
+    'US_1M': 'DGS1MO',        # 1-Month Treasury Yield
+    'US_3M': 'DGS3MO',        # 3-Month Treasury Yield
+    'US_6M': 'DGS6MO',        # 6-Month Treasury Yield
+    'US_1Y': 'DGS1',          # 1-Year Treasury Yield
+    'US_2Y': 'DGS2',          # 2-Year Treasury Yield
+    'US_5Y': 'DGS5',          # 5-Year Treasury Yield
+    'US_10Y': 'DGS10',        # 10-Year Treasury Yield
+    'US_30Y': 'DGS30',        # 30-Year Treasury Yield
     
-    # EUR Interest Rate Swaps
-    'EUR_1Y': 'DSWRD1F',   # 1-Year EUR Swap Rate
-    'EUR_5Y': 'DSWRD5F',   # 5-Year EUR Swap Rate
-    'EUR_10Y': 'DSWRD10F', # 10-Year EUR Swap Rate
+    # Key Policy Rates
+    'FEDFUNDS': 'FEDFUNDS',   # Federal Funds Rate
+    'DFF': 'DFF',             # Effective Federal Funds Rate
+    'EFFR': 'EFFR',           # EFFR Volume-Weighted Median
+    'SOFR': 'SOFR',           # Secured Overnight Financing Rate
     
-    # Credit Default Swaps (CDS)
-    'CDX_IG': 'CDXIG',     # CDX North America Investment Grade Index
-    'CDX_HY': 'CDXHY',     # CDX North America High Yield Index
+    # Market Rates
+    'LIBOR_1M': 'USD1MTD156N',  # 1-Month LIBOR
+    'LIBOR_3M': 'USD3MTD156N',  # 3-Month LIBOR
+    'PRIME': 'MPRIME'           # Bank Prime Loan Rate
 }
 
 class FREDClient:
@@ -57,52 +63,144 @@ class FREDClient:
             raise ValueError("FRED API key is required. Get one at https://fred.stlouisfed.org/docs/api/api_key.html")
         
         self.fred = Fred(api_key=self.api_key)
+        self.available_series = {}
     
-    def get_swap_rate(self, series_id: str, days: int = 365) -> pd.DataFrame:
-        """Get historical swap rate data for a specific series.
+    def check_series_availability(self, series_ids: List[str] = None) -> Dict[str, bool]:
+        """Check which series are available in FRED.
         
         Args:
-            series_id: The FRED series ID (e.g., 'DSWRD10' for 10-year USD swap rate)
+            series_ids: List of series IDs to check. If None, checks all in SWAP_RATE_SERIES.
+            
+        Returns:
+            Dictionary mapping series IDs to availability status (True/False)
+        """
+        if series_ids is None:
+            series_ids = list(SWAP_RATE_SERIES.values())
+            
+        available = {}
+        for series_id in series_ids:
+            try:
+                # Try to get series info - will raise an exception if not found
+                self.fred.get_series_info(series_id)
+                available[series_id] = True
+                logger.info(f"Found series: {series_id}")
+            except Exception as e:
+                available[series_id] = False
+                logger.warning(f"Series not found: {series_id} - {str(e)}")
+                
+        self.available_series = {k: v for k, v in available.items() if v}
+        return available
+    
+    def get_series_data(self, series_id: str, days: int = 365) -> pd.DataFrame:
+        """Get historical data for a specific FRED series.
+        
+        Args:
+            series_id: The FRED series ID (e.g., 'DGS10' for 10-year Treasury yield)
             days: Number of days of historical data to retrieve (max 10 years for free tier)
             
         Returns:
-            DataFrame with date index and rate values
+            DataFrame with date index and values
         """
+        # Check if we've already verified this series is available
+        if series_id not in self.available_series:
+            self.check_series_availability([series_id])
+            if series_id not in self.available_series:
+                raise ValueError(f"Series {series_id} is not available in FRED")
+        
         end_date = datetime.now()
         start_date = end_date - timedelta(days=days)
         
         try:
             data = self.fred.get_series(series_id, start_date, end_date)
-            return pd.DataFrame({'rate': data}, index=data.index)
+            if data.empty:
+                logger.warning(f"No data returned for series {series_id} in the specified date range")
+                return pd.DataFrame()
+                
+            # Get series info for better column naming
+            try:
+                info = self.fred.get_series_info(series_id)
+                col_name = info.get('title', series_id).split(';')[0].strip()
+            except:
+                col_name = series_id
+                
+            return pd.DataFrame({col_name: data})
+            
         except Exception as e:
             logger.error(f"Error fetching FRED series {series_id}: {e}")
             raise
     
-    def get_swap_rates(self, series_ids: List[str] = None, days: int = 365) -> Dict[str, pd.DataFrame]:
-        """Get multiple swap rate series.
+    def get_available_series(self, days: int = 30) -> List[dict]:
+        """Get a list of available series with their metadata.
         
         Args:
-            series_ids: List of FRED series IDs. If None, uses default swap rate series.
+            days: Number of days of data to check for availability
+            
+        Returns:
+            List of dictionaries containing series metadata
+        """
+        available_series = []
+        
+        for name, series_id in SWAP_RATE_SERIES.items():
+            try:
+                # Get series info
+                info = self.fred.get_series_info(series_id)
+                
+                # Try to get some data to verify it's working
+                data = self.get_series_data(series_id, days=min(days, 30))
+                
+                available_series.append({
+                    'id': series_id,
+                    'name': name,
+                    'title': info.get('title', ''),
+                    'frequency': info.get('frequency', ''),
+                    'units': info.get('units', ''),
+                    'last_updated': info.get('last_updated', ''),
+                    'data_points': len(data) if not data.empty else 0
+                })
+                
+            except Exception as e:
+                logger.debug(f"Skipping unavailable series {series_id}: {e}")
+                continue
+                
+        return available_series
+    
+    def get_swap_rates(self, series_ids: List[str] = None, days: int = 365) -> Dict[str, pd.DataFrame]:
+        """Get multiple interest rate series.
+        
+        Args:
+            series_ids: List of FRED series IDs. If None, uses available series.
             days: Number of days of historical data to retrieve
             
         Returns:
-            Dictionary mapping series IDs to DataFrames with rate data
+            Dictionary mapping series names to DataFrames with rate data
         """
-        if series_ids is None:
-            series_ids = list(SWAP_RATE_SERIES.values())
+        # First check which series are available
+        available_series = self.get_available_series()
+        available_ids = {s['id']: s for s in available_series}
+        
+        if not series_ids:
+            # Use all available series
+            series_ids = list(available_ids.keys())
         
         results = {}
         for series_id in series_ids:
+            if series_id not in available_ids:
+                logger.warning(f"Skipping unavailable series: {series_id}")
+                continue
+                
             try:
-                results[series_id] = self.get_swap_rate(series_id, days)
+                series_info = available_ids[series_id]
+                df = self.get_series_data(series_id, days)
+                if not df.empty:
+                    results[series_info['name']] = df
             except Exception as e:
-                logger.warning(f"Skipping series {series_id}: {e}")
+                logger.warning(f"Error processing series {series_id}: {e}")
                 continue
                 
         return results
     
     def get_swap_rate_summary(self, days: int = 30) -> pd.DataFrame:
-        """Get a summary of current swap rates with change from previous period.
+        """Get a summary of current interest rates with change from previous period.
         
         Args:
             days: Number of days to look back for calculating changes
@@ -110,77 +208,110 @@ class FREDClient:
         Returns:
             DataFrame with current rates and changes
         """
-        end_date = datetime.now()
-        start_date = end_date - timedelta(days=days)
-        
         summary = []
+        available_series = self.get_available_series(days)
         
-        for name, series_id in SWAP_RATE_SERIES.items():
+        for series in available_series:
+            series_id = series['id']
+            
             try:
                 # Get the full series data
-                series = self.fred.get_series(series_id, start_date, end_date)
-                if series.empty:
+                df = self.get_series_data(series_id, days)
+                if df.empty:
                     continue
+                    
+                series_data = df.iloc[:, 0]  # Get first column
                 
                 # Get the most recent and previous values
-                latest = series.iloc[-1]
-                previous = series.iloc[-2] if len(series) > 1 else None
-                change = (latest - previous) / previous * 100 if previous is not None else None
+                latest = series_data.iloc[-1]
+                previous = series_data.iloc[-2] if len(series_data) > 1 else None
+                
+                # Calculate percentage change if we have previous value
+                if pd.notna(previous) and previous != 0:
+                    change_pct = (latest - previous) / abs(previous) * 100
+                else:
+                    change_pct = None
                 
                 summary.append({
                     'series_id': series_id,
-                    'name': name,
+                    'name': series['name'],
+                    'title': series['title'],
                     'current_rate': latest,
                     'previous_rate': previous,
-                    'change_pct': change,
-                    'last_updated': series.index[-1].strftime('%Y-%m-%d')
+                    'change_pct': change_pct,
+                    'last_updated': series_data.index[-1].strftime('%Y-%m-%d'),
+                    'frequency': series['frequency'],
+                    'units': series['units']
                 })
                 
             except Exception as e:
-                logger.warning(f"Error processing {name} ({series_id}): {e}")
+                logger.warning(f"Error processing {series.get('name', series_id)}: {e}")
                 continue
         
         return pd.DataFrame(summary)
 
 def download_fred_swap_data(output_dir: str = 'data/fred', days: int = 365) -> Dict[str, str]:
-    """Download swap rate data from FRED and save to CSV files.
+    """Download interest rate data from FRED and save to CSV files.
     
     Args:
         output_dir: Directory to save the downloaded files
         days: Number of days of historical data to retrieve
         
     Returns:
-        Dictionary mapping series IDs to file paths of saved data
+        Dictionary mapping series names to file paths of saved data
     """
     os.makedirs(output_dir, exist_ok=True)
+    saved_files = {}
     
     try:
         client = FREDClient()
         
-        # Get all swap rate series
-        swap_rates = client.get_swap_rates(days=days)
+        # First, get available series with metadata
+        logger.info("Checking available FRED series...")
+        available_series = client.get_available_series(days=min(days, 30))
+        
+        if not available_series:
+            logger.warning("No available FRED series found. Check your API key and internet connection.")
+            return {}
+            
+        logger.info(f"Found {len(available_series)} available series")
+        
+        # Get all available interest rate series
+        logger.info(f"Downloading up to {days} days of historical data...")
+        all_rates = client.get_swap_rates(days=days)
+        
+        if not all_rates:
+            logger.warning("No data was downloaded. No valid series available.")
+            return {}
         
         # Save each series to a CSV file
-        saved_files = {}
-        for series_id, data in swap_rates.items():
+        for series_name, data in all_rates.items():
             if not data.empty:
-                # Get the series name for the filename
-                series_name = next((k for k, v in SWAP_RATE_SERIES.items() if v == series_id), series_id)
-                filename = f"{series_name}.csv"
+                # Clean the series name for filename
+                safe_name = "".join(c if c.isalnum() else "_" for c in series_name)
+                filename = f"{safe_name}.csv"
                 filepath = os.path.join(output_dir, filename)
-                data.to_csv(filepath)
-                saved_files[series_id] = filepath
+                
+                # Save with index (dates) and proper header
+                data.to_csv(filepath, index_label='date')
+                saved_files[series_name] = filepath
                 logger.info(f"Saved {len(data)} data points to {filepath}")
         
-        # Also save a summary file
-        summary = client.get_swap_rate_summary()
+        # Save a summary of all rates
+        logger.info("Generating summary...")
+        summary = client.get_swap_rate_summary(days=min(days, 365))  # Limit to 1 year for summary
+        
         if not summary.empty:
-            summary_file = os.path.join(output_dir, 'swap_rates_summary.csv')
-            summary.to_csv(summary_file, index=False)
-            logger.info(f"Saved swap rate summary to {summary_file}")
+            summary_file = os.path.join(output_dir, 'interest_rates_summary.csv')
+            # Reorder columns for better readability
+            cols = ['name', 'title', 'current_rate', 'units', 'change_pct', 
+                   'last_updated', 'frequency', 'series_id']
+            summary[cols].to_csv(summary_file, index=False, float_format='%.4f')
+            logger.info(f"Saved interest rate summary to {summary_file}")
         
         return saved_files
         
     except Exception as e:
-        logger.error(f"Error downloading FRED swap data: {e}")
+        logger.error(f"Error downloading FRED data: {e}")
+        logger.exception("Full error details:")
         raise

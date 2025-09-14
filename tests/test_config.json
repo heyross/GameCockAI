@@ -1,0 +1,73 @@
+{
+  "test_settings": {
+    "run_performance_tests": true,
+    "run_integration_tests": true,
+    "max_test_documents": 1000,
+    "performance_timeout_seconds": 300,
+    "enable_verbose_output": false,
+    "save_test_artifacts": true,
+    "cleanup_after_tests": true
+  },
+  "vector_settings": {
+    "embedding_dimension": 768,
+    "batch_size": 32,
+    "enable_caching": true,
+    "cache_directory": "./test_cache",
+    "vector_store_directory": "./test_vector_store"
+  },
+  "performance_targets": {
+    "embedding_generation_docs_per_second": 100,
+    "vector_search_max_latency_ms": 100,
+    "end_to_end_query_max_latency_ms": 500,
+    "memory_usage_max_mb": 2048,
+    "concurrent_queries_target": 10
+  },
+  "test_data_generation": {
+    "financial_documents": 100,
+    "cftc_swap_records": 500,
+    "insider_transactions": 200,
+    "form_13f_holdings": 300,
+    "market_events": 50,
+    "companies": 20
+  },
+  "environment_requirements": {
+    "min_python_version": "3.8",
+    "required_packages": [
+      "numpy>=1.21.0",
+      "pandas>=1.5.0",
+      "chromadb>=0.4.15",
+      "sentence-transformers>=2.2.2",
+      "faiss-cpu>=1.7.4",
+      "transformers>=4.21.0",
+      "torch>=2.0.0",
+      "tiktoken>=0.5.0",
+      "beautifulsoup4>=4.11.0"
+    ],
+    "optional_packages": [
+      "faiss-gpu>=1.7.4",
+      "redis>=4.5.0",
+      "psutil>=5.8.0"
+    ]
+  },
+  "test_exclusions": {
+    "skip_on_missing_models": [
+      "test_real_financial_text_embedding",
+      "test_real_market_data_embedding"
+    ],
+    "skip_on_no_gpu": [
+      "test_gpu_acceleration_performance"
+    ],
+    "skip_in_ci": [
+      "test_large_scale_performance",
+      "test_memory_stress_testing"
+    ]
+  },
+  "reporting": {
+    "generate_html_report": true,
+    "generate_json_report": true,
+    "generate_csv_metrics": true,
+    "include_performance_graphs": true,
+    "email_notifications": false,
+    "slack_webhook_url": null
+  }
+}

@@ -1,11 +1,13 @@
 import sys
 import os
 import subprocess
+from typing import List, Tuple
+from pathlib import Path
 from ui import gamecock_ascii, gamecat_ascii
 from data_sources import cftc, sec, fred
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
-from rag import query_swapbot
+from rag import query_raven
 from processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
                       process_exchange_metrics_data, process_ncen_data, process_nport_data, process_formd_data)
 from processor_8k import process_8k_filings
@@ -25,7 +27,7 @@ def main_menu():
         print("1. Select Target Companies")
         print("2. Download Data")
         print("3. Process Downloaded Data")
-        print("4. Query with SwapBot")
+        print("4. Query with Raven")
         print("5. Database Menu")
         print("Q. Quit")
 
@@ -38,7 +40,7 @@ def main_menu():
         elif choice == '3':
             process_data_menu()
         elif choice == '4':
-            query_swapbot_menu()
+            query_raven_menu()
         elif choice == '5':
             database_menu()
         elif choice == 'q':
@@ -386,27 +388,10 @@ def process_sec_submenu():
         else:
             print("Invalid choice.")
 
-def query_swapbot_menu():
-    print("\n--- Chat with SwapBot ---")
-    print("SwapBot is now in agent mode. You can ask it to perform actions.")
-    print("Type 'back' to return to the main menu.")
-
-    # Initialize the conversation history with a system prompt
-    messages = [{
-        'role': 'system',
-        'content': 'You are SwapBot, an expert financial data assistant. Your goal is to help users by answering questions and performing tasks. When a user\'s request is ambiguous, ask clarifying questions to understand their intent before using your tools. Be conversational and guide the user if they seem unsure. You can use tools to find companies, manage watchlists, download data, and check on background tasks.'
-
-    }]
-
-    while True:
-        user_query = input("\nYou: ").strip()
-        if user_query.lower() == 'back':
-            break
-        if not user_query:
-            continue
-
-        response = query_swapbot(user_query, messages)
-        print(f"\nSwapBot: {response}")
+def query_raven_menu():
+    """Launch the interactive chat interface."""
+    from chat_interface import main as chat_main
+    chat_main()
 
 def database_menu():
     while True:
@@ -440,31 +425,151 @@ def database_menu():
 
 def run_startup_checks():
     """Performs all startup checks and handles missing dependencies."""
-    missing = check_dependencies()
-    if missing:
-        print("\nThe following required packages are missing:")
-        for pkg in missing:
+    print("\n=== Checking Dependencies ===")
+    
+    # Core required packages - only check for existence, not versions
+    required_packages = [
+        'sentence_transformers',
+        'sklearn',
+        'numpy',
+        'pandas',
+        'requests',
+        'bs4',
+        'tqdm',
+        'sqlalchemy',
+        'ollama',
+        'python_dotenv',
+        'rich',
+        'fredapi'
+    ]
+    
+    # Map of import names to pip package names
+    package_map = {
+        'sklearn': 'scikit-learn',
+        'bs4': 'beautifulsoup4',
+        'python_dotenv': 'python-dotenv'
+    }
+    
+    missing_packages = []
+    import importlib
+    
+    # Check each required package
+    for pkg in required_packages:
+        try:
+            importlib.import_module(pkg)
+        except ImportError:
+            # Use the mapped package name if it exists, otherwise use the import name
+            pip_name = package_map.get(pkg, pkg)
+            missing_packages.append(pip_name)
+    
+    if missing_packages:
+        print("\nThe following packages need to be installed:")
+        for pkg in missing_packages:
             print(f"- {pkg}")
         
         print("\nAttempting to install missing packages...")
+        
         try:
-            install_command = [sys.executable, '-m', 'pip', 'install'] + missing
-            # Run the installation command, showing output to the user
-            subprocess.run(install_command, check=True)
-            print("Dependencies installed successfully. Please wait for the application to restart.")
-            # Exit with a special code to signal the launcher to restart
-            sys.exit(10)
-        except subprocess.CalledProcessError as e:
-            print("\nError installing dependencies:")
-            print(e.stderr)
-            print("Please try running the following command manually:")
-            print(f"    pip install {' '.join(missing)}")
-            sys.exit(1)
+            import subprocess
+            import sys
+            
+            # Install each package one by one to avoid issues with failed installations
+            for pkg in missing_packages:
+                print(f"\nInstalling {pkg}...")
+                try:
+                    # First try with the exact package name
+                    result = subprocess.run(
+                        [sys.executable, "-m", "pip", "install", "--upgrade", pkg],
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        text=True
+                    )
+                    
+                    if result.returncode != 0:
+                        # If that fails, try with --user flag
+                        result = subprocess.run(
+                            [sys.executable, "-m", "pip", "install", "--user", "--upgrade", pkg],
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True
+                        )
+                    
+                    if result.returncode == 0:
+                        print(f"✅ Successfully installed {pkg}")
+                    else:
+                        print(f"❌ Failed to install {pkg}")
+                        print(f"Error: {result.stderr if result.stderr else 'Unknown error'}")
+                        print(f"\nPlease try installing it manually with:")
+                        print(f"    pip install --user --upgrade {pkg}")
+                        input("\nPress Enter to continue...")
+                        
+                    # Add a small delay to ensure the environment is updated
+                    import time
+                    time.sleep(1)
+                        
+                except Exception as e:
+                    print(f"❌ Error installing {pkg}: {str(e)}")
+                    print(f"\nPlease try installing it manually with:")
+                    print(f"    pip install --user --upgrade {pkg}")
+                    input("\nPress Enter to continue...")
+            
+            # Verify all packages were installed by checking pip list
+            still_missing = []
+            import subprocess
+            
+            # Get list of installed packages
+            result = subprocess.run(
+                [sys.executable, "-m", "pip", "list", "--format=freeze"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            
+            if result.returncode != 0:
+                print("\n❌ Failed to check installed packages. Assuming all installations failed.")
+                still_missing = missing_packages.copy()
+            else:
+                installed_packages = [pkg.split('==')[0].lower() for pkg in result.stdout.split('\n') if pkg.strip()]
+                for pkg in missing_packages:
+                    # Check if package is in the installed packages list
+                    if pkg.lower() not in installed_packages:
+                        still_missing.append(pkg)
+            
+            if still_missing:
+                print("\n❌ The following packages could not be installed:")
+                for pkg in still_missing:
+                    print(f"  - {pkg}")
+                print("\nPlease try installing them manually with:")
+                for pkg in still_missing:
+                    print(f"    pip install --upgrade {pkg}")
+                input("\nPress Enter to exit...")
+                sys.exit(1)
+            else:
+                print("\n✅ All packages installed successfully!")
+                
         except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            print(f"\n❌ An unexpected error occurred: {str(e)}")
+            print("\nPlease try installing the required packages manually:")
+            for pkg in missing_packages:
+                print(f"    pip install --upgrade {pkg}")
+            input("\nPress Enter to exit...")
             sys.exit(1)
-
-    check_ollama_service()
+    else:
+        print("✅ All dependencies are installed and up to date.")
+    
+    # Check Ollama service
+    print("\n=== Checking Ollama Service ===")
+    try:
+        import ollama
+        ollama.list()
+        print("✅ Ollama service is running.")
+    except Exception as e:
+        print(f"\n❌ Error checking Ollama service: {e}")
+        print("\nPlease ensure Ollama is installed and running.")
+        print("You can download it from: https://ollama.ai/")
+        print("After installation, run 'ollama serve' in a terminal.")
+        input("\nPress Enter to exit...")
+        sys.exit(1)
 
 def initialize_database():
     """Initialize database tables if they don't exist."""

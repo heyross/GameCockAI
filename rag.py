@@ -2,7 +2,7 @@ import ollama
 import json
 from tools import TOOL_MAP
 
-def query_swapbot(user_query: str, messages: list):
+def query_raven(user_query: str, messages: list):
     """Handles a user query by deciding whether to use a tool or answer directly.
 
     This function orchestrates the agentic loop:
@@ -21,7 +21,7 @@ def query_swapbot(user_query: str, messages: list):
 
     # First call to the model to get its decision
     response = ollama.chat(
-        model='swapbot-enhanced',
+        model='raven-enhanced',
         messages=messages,
         tools=[tool['schema'] for tool in TOOL_MAP.values()],
         tool_choice='auto'  # Let the model decide
@@ -59,7 +59,7 @@ def query_swapbot(user_query: str, messages: list):
 
     # Second call to the model with the tool's output
     final_response = ollama.chat(
-        model='swapbot-enhanced',
+        model='raven-enhanced',
         messages=messages
     )
     messages.append(final_response['message'])

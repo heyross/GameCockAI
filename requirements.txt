@@ -8,3 +8,6 @@ ollama>=0.2.0
 python-dotenv
 rich
 fredapi>=0.5.0
+sentence-transformers>=2.2.2
+scikit-learn>=1.0.2
+numpy>=1.21.0
