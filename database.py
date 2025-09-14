@@ -1129,6 +1129,140 @@ class CFTCSwap(Base):
     physical_delivery_location_leg_1 = Column(String)
     delivery_type = Column(String)
 
+# Form D Tables
+class FormDSubmission(Base):
+    __tablename__ = 'formd_submissions'
+    accessionnumber = Column(String(25), primary_key=True)
+    file_num = Column(String(20), nullable=True)
+    filing_date = Column(String(20), nullable=True)  # Store as string, convert during processing
+    sic_code = Column(String(10), nullable=True)
+    schemaversion = Column(String(10), nullable=True)
+    submissiontype = Column(String(20), nullable=True)
+    testorlive = Column(String(10), nullable=True)
+    over100personsflag = Column(String(10), nullable=True)
+    over100issuerflag = Column(String(10), nullable=True)
+
+class FormDIssuer(Base):
+    __tablename__ = 'formd_issuers'
+    formd_issuer_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accessionnumber = Column(String(25), nullable=False)
+    is_primaryissuer_flag = Column(String(10), nullable=True)
+    issuer_seq_key = Column(Integer, nullable=True)
+    cik = Column(String(10), nullable=True)
+    entityname = Column(String(200), nullable=True)
+    street1 = Column(String(100), nullable=True)
+    street2 = Column(String(100), nullable=True)
+    city = Column(String(50), nullable=True)
+    stateorcountry = Column(String(10), nullable=True)
+    stateorcountrydescription = Column(String(50), nullable=True)
+    zipcode = Column(String(15), nullable=True)
+    issuerphonenumber = Column(String(20), nullable=True)
+    jurisdictionofinc = Column(String(10), nullable=True)
+    issuer_previousname_1 = Column(String(200), nullable=True)
+    issuer_previousname_2 = Column(String(200), nullable=True)
+    issuer_previousname_3 = Column(String(200), nullable=True)
+    edgar_previousname_1 = Column(String(200), nullable=True)
+    edgar_previousname_2 = Column(String(200), nullable=True)
+    edgar_previousname_3 = Column(String(200), nullable=True)
+    entitytype = Column(String(50), nullable=True)
+    entitytypeotherdesc = Column(String(100), nullable=True)
+    yearofinc_timespan_choice = Column(String(20), nullable=True)
+    yearofinc_value_entered = Column(String(10), nullable=True)
+
+class FormDOffering(Base):
+    __tablename__ = 'formd_offerings'
+    formd_offering_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accessionnumber = Column(String(25), nullable=False)
+    industrygrouptype = Column(String(50), nullable=True)
+    investmentfundtype = Column(String(50), nullable=True)
+    is40act = Column(String(10), nullable=True)
+    revenuerange = Column(String(50), nullable=True)
+    aggregatenetassetvaluerange = Column(String(50), nullable=True)
+    federalexemptions_items_list = Column(String(200), nullable=True)
+    isamendment = Column(String(10), nullable=True)
+    previousaccessionnumber = Column(String(25), nullable=True)
+    sale_date = Column(String(20), nullable=True)
+    yettooccur = Column(String(10), nullable=True)
+    morethanoneyear = Column(String(10), nullable=True)
+    isequitytype = Column(String(10), nullable=True)
+    isdebttype = Column(String(10), nullable=True)
+    isoptiontoacquiretype = Column(String(10), nullable=True)
+    issecuritytobeacquiredtype = Column(String(10), nullable=True)
+    ispooledinvestmentfundtype = Column(String(10), nullable=True)
+    istenantincommontype = Column(String(10), nullable=True)
+    ismineralpropertytype = Column(String(10), nullable=True)
+    isothertype = Column(String(10), nullable=True)
+    descriptionofothertype = Column(String(200), nullable=True)
+    isbusinesscombinationtrans = Column(String(10), nullable=True)
+    buscombclarificationofresp = Column(String(200), nullable=True)
+    minimuminvestmentaccepted = Column(String(20), nullable=True)
+    over100recipientflag = Column(String(10), nullable=True)
+    totalofferingamount = Column(String(20), nullable=True)
+    totalamountsold = Column(String(20), nullable=True)
+    totalremaining = Column(String(20), nullable=True)
+    salesamtclarificationofresp = Column(String(200), nullable=True)
+    hasnonaccreditedinvestors = Column(String(10), nullable=True)
+    numbernonaccreditedinvestors = Column(String(10), nullable=True)
+    totalnumberalreadyinvested = Column(String(10), nullable=True)
+    salescomm_dollaramount = Column(String(20), nullable=True)
+    salescomm_isestimate = Column(String(10), nullable=True)
+    findersfee_dollaramount = Column(String(20), nullable=True)
+    findersfee_isestimate = Column(String(10), nullable=True)
+    finderfeeclarificationofresp = Column(String(200), nullable=True)
+    grossproceedsused_dollaramount = Column(String(20), nullable=True)
+    grossproceedsused_isestimate = Column(String(10), nullable=True)
+    grossproceedsused_clarofresp = Column(String(200), nullable=True)
+    authorizedrepresentative = Column(String(200), nullable=True)
+
+class FormDRecipient(Base):
+    __tablename__ = 'formd_recipients'
+    formd_recipient_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accessionnumber = Column(String(25), nullable=False)
+    recipient_seq_key = Column(Integer, nullable=True)
+    recipientname = Column(String(200), nullable=True)
+    recipientcrdnumber = Column(String(20), nullable=True)
+    associatedbdname = Column(String(200), nullable=True)
+    associatedbdcrdnumber = Column(String(20), nullable=True)
+    street1 = Column(String(100), nullable=True)
+    street2 = Column(String(100), nullable=True)
+    city = Column(String(50), nullable=True)
+    stateorcountry = Column(String(10), nullable=True)
+    stateorcountrydescription = Column(String(50), nullable=True)
+    zipcode = Column(String(15), nullable=True)
+    states_or_value_list = Column(String(200), nullable=True)
+    descriptions_list = Column(String(500), nullable=True)
+    foreignsolicitation = Column(String(10), nullable=True)
+
+class FormDRelatedPerson(Base):
+    __tablename__ = 'formd_related_persons'
+    formd_related_person_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accessionnumber = Column(String(25), nullable=False)
+    relatedperson_seq_key = Column(Integer, nullable=True)
+    firstname = Column(String(50), nullable=True)
+    middlename = Column(String(50), nullable=True)
+    lastname = Column(String(50), nullable=True)
+    street1 = Column(String(100), nullable=True)
+    street2 = Column(String(100), nullable=True)
+    city = Column(String(50), nullable=True)
+    stateorcountry = Column(String(10), nullable=True)
+    stateorcountrydescription = Column(String(50), nullable=True)
+    zipcode = Column(String(15), nullable=True)
+    relationship_1 = Column(String(50), nullable=True)
+    relationship_2 = Column(String(50), nullable=True)
+    relationship_3 = Column(String(50), nullable=True)
+    relationshipclarification = Column(String(200), nullable=True)
+
+class FormDSignature(Base):
+    __tablename__ = 'formd_signatures'
+    formd_signature_sk = Column(Integer, primary_key=True, autoincrement=True)
+    accessionnumber = Column(String(25), nullable=False)
+    signature_seq_key = Column(Integer, nullable=True)
+    issuername = Column(String(200), nullable=True)
+    signaturename = Column(String(100), nullable=True)
+    nameofsigner = Column(String(100), nullable=True)
+    signaturetitle = Column(String(100), nullable=True)
+    signaturedate = Column(String(20), nullable=True)  # Store as string, convert during processing
+
 def create_db_and_tables():
     """Create database tables if they don't exist. Safe to run multiple times."""
     try:
@@ -1138,66 +1272,26 @@ def create_db_and_tables():
         print(f"Error creating database tables: {e}")
         return False
 
-def get_db_stats():
-    """Returns statistics about the database."""
-    db = SessionLocal()
+def get_db_stats(db_session=None):
+    """Returns a dictionary with table names and their row counts."""
+    from sqlalchemy import inspect
+
+    db = db_session if db_session else SessionLocal()
     try:
-        stats = {
-            "cftc_swap_data": db.query(CFTCSwap).count(),
-            "sec_submissions": db.query(SecSubmission).count(),
-            "sec_reporting_owners": db.query(SecReportingOwner).count(),
-            "sec_non_deriv_trans": db.query(SecNonDerivTrans).count(),
-            "sec_non_deriv_holdings": db.query(SecNonDerivHolding).count(),
-            "sec_deriv_trans": db.query(SecDerivTrans).count(),
-            "sec_deriv_holdings": db.query(SecDerivHolding).count(),
-            "sec_footnotes": db.query(SecFootnote).count(),
-            "sec_owner_signatures": db.query(SecOwnerSignature).count(),
-            "form13f_submissions": db.query(Form13FSubmission).count(),
-            "form13f_coverpages": db.query(Form13FCoverPage).count(),
-            "form13f_other_managers": db.query(Form13FOtherManager).count(),
-            "form13f_signatures": db.query(Form13FSignature).count(),
-            "form13f_summary_pages": db.query(Form13FSummaryPage).count(),
-            "form13f_other_managers2": db.query(Form13FOtherManager2).count(),
-            "form13f_info_tables": db.query(Form13FInfoTable).count(),
-            "sec_exchange_metrics": db.query(SecExchangeMetrics).count(),
-            "nmfp_submissions": db.query(NMFPSubmission).count(),
-            "nmfp_funds": db.query(NMFPFund).count(),
-            "nmfp_series_level_info": db.query(NMFPSeriesLevelInfo).count(),
-            "nmfp_master_feeder_funds": db.query(NMFPMasterFeederFund).count(),
-            "nmfp_advisers": db.query(NMFPAdviser).count(),
-            "nmfp_administrators": db.query(NMFPAdministrator).count(),
-            "nmfp_transfer_agents": db.query(NMFPTransferAgent).count(),
-            "nmfp_series_shadow_price_l": db.query(NMFPSeriesShadowPriceL).count(),
-            "ncen_submissions": db.query(NCENSubmission).count(),
-            "ncen_registrants": db.query(NCENRegistrant).count(),
-            "ncen_fund_reported_info": db.query(NCENFundReportedInfo).count(),
-            "ncen_advisers": db.query(NCENAdviser).count(),
-            "nport_submissions": db.query(NPORTSubmission).count(),
-            "nport_general_info": db.query(NPORTGeneralInfo).count(),
-            "nport_holdings": db.query(NPORTHolding).count(),
-            "nport_derivatives": db.query(NPORTDerivative).count(),
-            "nmfp_class_level_info": db.query(NMFPClassLevelInfo).count(),
-            "nmfp_net_asset_value_per_share_l": db.query(NMFPNetAssetValuePerShareL).count(),
-            "nmfp_sch_portfolio_securities": db.query(NMFPSchPortfolioSecurities).count(),
-            "nmfp_collateral_issuers": db.query(NMFPCollateralIssuers).count(),
-            "nmfp_nrsro": db.query(NMFPNrsro).count(),
-            "nmfp_demand_features": db.query(NMFPDemandFeature).count(),
-            "nmfp_guarantors": db.query(NMFPGuarantor).count(),
-            "nmfp_enhancement_providers": db.query(NMFPEnhancementProvider).count(),
-            "nmfp_liquid_assets_details": db.query(NMFPLiquidAssetsDetails).count(),
-            "nmfp_seven_day_gross_yields": db.query(NMFPSevenDayGrossYield).count(),
-            "nmfp_dly_net_asset_value_per_shars": db.query(NMFPDlyNetAssetValuePerShars).count(),
-            "nmfp_liquidity_fee_reporting_per": db.query(NMFPLiquidityFeeReportingPer).count(),
-            "nmfp_dly_net_asset_value_per_sharc": db.query(NMFPDlyNetAssetValuePerSharc).count(),
-            "nmfp_dly_shareholder_flow_reports": db.query(NMFPDlyShareholderFlowReport).count(),
-            "nmfp_seven_day_net_yields": db.query(NMFPSevenDayNetYield).count(),
-            "nmfp_beneficial_record_owner_cat": db.query(NMFPBeneficialRecordOwnerCat).count(),
-            "nmfp_cancelled_shares_per_bus_day": db.query(NMFPCancelledSharesPerBusDay).count(),
-            "nmfp_disposition_of_portfolio_securities": db.query(NMFPDispositionOfPortfolioSecurities).count(),
-        }
+        inspector = inspect(db.bind)
+        stats = {}
+        # Create a mapping from table names to model classes
+        table_to_model = {cls.class_.__tablename__: cls for cls in Base.registry.mappers}
+
+        for table_name in inspector.get_table_names():
+            model_class = table_to_model.get(table_name)
+            if model_class:
+                count = db.query(model_class.class_).count()
+                stats[table_name] = count
         return stats
     finally:
-        db.close()
+        if not db_session:
+            db.close()
 
 def export_db_to_csv(output_path):
     """Exports the CFTC Swap data to a CSV file."""

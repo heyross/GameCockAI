@@ -175,7 +175,7 @@ class TestNCENProcessing(unittest.TestCase):
         # Check results
         self.assertEqual(result['processed'], 1)
         self.assertEqual(result['errors'], 0)
-        self.assertIn('test_ncen.zip', result['files'])
+        self.assertTrue(any('test_ncen.zip' in f for f in result['files']))
         
         # Verify that load_data_to_db was called for each table type
         self.assertEqual(mock_load_data.call_count, 4)  # submission, registrant, fund, adviser

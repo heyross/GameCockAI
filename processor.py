@@ -3,22 +3,22 @@ import logging
 import os
 import pandas as pd
 from zipfile import ZipFile
+from downloader import extract_formd_filings
+from config import FORMD_SOURCE_DIR
 from database import (
-    SessionLocal, CFTCSwap, SecSubmission, SecReportingOwner, 
-    SecNonDerivTrans, SecNonDerivHolding, SecDerivTrans, 
-    SecDerivHolding, SecFootnote, SecOwnerSignature,
-    Form13FSubmission, Form13FCoverPage, Form13FOtherManager, 
-    Form13FSignature, Form13FSummaryPage, Form13FOtherManager2, Form13FInfoTable,
-    SecExchangeMetrics,
-    NMFPSubmission, NMFPFund, NMFPSeriesLevelInfo, NMFPMasterFeederFund, NMFPAdviser,
-    NMFPAdministrator, NMFPTransferAgent, NMFPSeriesShadowPriceL, NMFPClassLevelInfo,
+    SessionLocal, CFTCSwap, SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
+    SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, Form13FSubmission,
+    Form13FCoverPage, Form13FOtherManager, Form13FSignature, Form13FSummaryPage,
+    Form13FOtherManager2, Form13FInfoTable, SecExchangeMetrics, NCENSubmission,
+    NCENRegistrant, NCENFundReportedInfo, NCENAdviser, NPORTSubmission, NPORTGeneralInfo,
+    NPORTHolding, NPORTDerivative, NMFPSubmission, NMFPFund, NMFPSeriesLevelInfo,
+    FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient, FormDRelatedPerson,
+    FormDSignature, NMFPAdministrator, NMFPTransferAgent, NMFPSeriesShadowPriceL, NMFPClassLevelInfo,
     NMFPNetAssetValuePerShareL, NMFPSchPortfolioSecurities, NMFPCollateralIssuers,
     NMFPNrsro, NMFPDemandFeature, NMFPGuarantor, NMFPEnhancementProvider,
     NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
     NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
     NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
-    NMFPDispositionOfPortfolioSecurities,
-    Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
 )
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -298,6 +298,135 @@ def process_exchange_metrics_data(source_dir, db_session=None):
         if not db_session:
             db.close()
 
+
+def process_formd_data(source_dir, db_session=None):
+    """
+    Process Form D data by extracting quarterly archives and loading TSV files into database.
+    """
+    logging.info("Starting processing of Form D data...")
+    
+    # Get all zip files in the source directory
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
+    
+    if not zip_files:
+        logging.warning(f"No zip files found in {source_dir}")
+        return
+    
+    # Extract each archive first
+    for zip_file in zip_files:
+        logging.info(f"Processing archive: {zip_file}")
+        extract_formd_filings(zip_file)
+    
+    # Now process the extracted quarterly directories
+    db = db_session if db_session else SessionLocal()
+    try:
+        # Find all quarterly directories
+        quarterly_dirs = []
+        for item in os.listdir(source_dir):
+            item_path = os.path.join(source_dir, item)
+            if os.path.isdir(item_path) and item.endswith('_d'):
+                quarterly_dirs.append(item_path)
+        
+        quarterly_dirs.sort()
+        
+        for quarter_dir in quarterly_dirs:
+            logging.info(f"Processing quarterly data from: {quarter_dir}")
+            process_formd_quarter(quarter_dir, db)
+            
+        db.commit()
+        logging.info("Finished processing all Form D data.")
+        
+    except Exception as e:
+        logging.error(f"Error processing Form D data: {e}")
+        db.rollback()
+        raise
+    finally:
+        if not db_session:
+            db.close()
+
+def process_formd_quarter(quarter_dir, db_session):
+    """
+    Process TSV files from a single quarterly directory.
+    """
+    # Define the table mapping for Form D TSV files
+    table_map = {
+        'FORMDSUBMISSION.tsv': FormDSubmission,
+        'ISSUERS.tsv': FormDIssuer,
+        'OFFERING.tsv': FormDOffering,
+        'RECIPIENTS.tsv': FormDRecipient,
+        'RELATEDPERSONS.tsv': FormDRelatedPerson,
+        'SIGNATURES.tsv': FormDSignature
+    }
+    
+    # Find the actual quarterly subdirectory (e.g., 2024Q3_d)
+    quarter_subdir = None
+    for item in os.listdir(quarter_dir):
+        item_path = os.path.join(quarter_dir, item)
+        if os.path.isdir(item_path):
+            quarter_subdir = item_path
+            break
+    
+    if not quarter_subdir:
+        logging.warning(f"No quarterly subdirectory found in {quarter_dir}")
+        return
+    
+    # Process each TSV file
+    for file_name, model in table_map.items():
+        file_path = os.path.join(quarter_subdir, file_name)
+        
+        if not os.path.exists(file_path):
+            logging.warning(f"File not found: {file_path}")
+            continue
+            
+        logging.info(f"Processing {file_name}...")
+        
+        try:
+            # Read TSV file
+            df = pd.read_csv(file_path, sep='\t', low_memory=False, 
+                           dtype=str, na_values=['', 'nan', 'NaN', 'NULL'])
+            
+            if df.empty:
+                logging.info(f"No data found in {file_name}")
+                continue
+            
+            # Sanitize column names to match database schema
+            sanitized_columns = df.columns.str.strip().str.lower()
+            sanitized_columns = sanitized_columns.str.replace(r'[^0-9a-zA-Z_]+', '_', regex=True)
+            df.columns = sanitized_columns
+            
+            # Convert DataFrame to records and bulk insert
+            records = df.to_dict('records')
+            
+            # Handle special cases for different tables
+            if model == FormDIssuer:
+                # Add auto-increment key for issuers
+                for i, record in enumerate(records):
+                    record.pop('formd_issuer_sk', None)  # Remove if exists
+            elif model == FormDOffering:
+                # Add auto-increment key for offerings
+                for i, record in enumerate(records):
+                    record.pop('formd_offering_sk', None)
+            elif model == FormDRecipient:
+                # Add auto-increment key for recipients
+                for i, record in enumerate(records):
+                    record.pop('formd_recipient_sk', None)
+            elif model == FormDRelatedPerson:
+                # Add auto-increment key for related persons
+                for i, record in enumerate(records):
+                    record.pop('formd_related_person_sk', None)
+            elif model == FormDSignature:
+                # Add auto-increment key for signatures
+                for i, record in enumerate(records):
+                    record.pop('formd_signature_sk', None)
+            
+            # Bulk insert records
+            if records:
+                db_session.bulk_insert_mappings(model, records)
+                logging.info(f"Inserted {len(records)} records from {file_name}")
+            
+        except Exception as e:
+            logging.error(f"Error processing {file_name}: {e}")
+            continue
 
 def process_nmfp_data(source_dir, db_session=None):
     """Processes Form N-MFP data from zip files and loads it into the database."""
@@ -622,12 +751,13 @@ def process_sec_filings(filing_type: str, source_dir: str, **kwargs):
         raise ValueError(f"Unsupported filing type: {filing_type}")
 
 
-def process_ncen_data(source_dir, **kwargs):
+def process_ncen_data(source_dir, db_session=None, **kwargs):
     """
     Process N-CEN (Form N-CEN) filing data from ZIP archives.
     
     Args:
         source_dir (str): Directory containing N-CEN ZIP files
+        db_session: Optional database session
         **kwargs: Additional processing options
         
     Returns:
@@ -653,11 +783,10 @@ def process_ncen_data(source_dir, **kwargs):
     results = {"processed": 0, "errors": 0, "files": []}
     
     for zip_file in zip_files:
-        zip_path = os.path.join(source_dir, zip_file)
-        logger.info(f"Processing N-CEN file: {zip_path}")
+        logger.info(f"Processing N-CEN file: {zip_file}")
         
         try:
-            with zipfile.ZipFile(zip_path, 'r') as zf:
+            with zipfile.ZipFile(zip_file, 'r') as zf:
                 # Process each TSV file in the ZIP
                 tsv_files = [name for name in zf.namelist() if name.endswith('.tsv')]
                 
@@ -669,21 +798,23 @@ def process_ncen_data(source_dir, **kwargs):
                     results["files"].append(zip_file)
                     continue
                 
-                db = SessionLocal()
+                db = db_session if db_session else SessionLocal()
                 try:
                     for tsv_name in tsv_files:
+                        # Read TSV data
+                        with zf.open(tsv_name) as tsv_file:
+                            df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
+                        
+                        if df.empty:
+                            continue
+                            
+                        # Sanitize column names
+                        df = sanitize_column_names(df)
+                        
+                        # Route to appropriate table based on TSV file name
+                        table_name = tsv_name.lower().replace('.tsv', '')
+                        
                         try:
-                            with zf.open(tsv_name) as tsv_file:
-                                df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
-                            
-                            if df.empty:
-                                continue
-                                
-                            df = sanitize_column_names(df)
-                            df = df.where(pd.notnull(df), None)
-                            
-                            table_name = tsv_name.lower().replace('.tsv', '')
-                            
                             if 'submission' in table_name:
                                 load_data_to_db(df, NCENSubmission, 'ncen_submissions', db_session=db)
                             elif 'registrant' in table_name and 'website' not in table_name:
@@ -692,16 +823,18 @@ def process_ncen_data(source_dir, **kwargs):
                                 load_data_to_db(df, NCENFundReportedInfo, 'ncen_fund_reported_info', db_session=db)
                             elif 'adviser' in table_name:
                                 load_data_to_db(df, NCENAdviser, 'ncen_advisers', db_session=db)
-
                         except Exception as e:
                             logger.error(f"Error processing N-CEN TSV {tsv_name}: {str(e)}")
                             results["errors"] += 1
-                    db.commit()
+                            db.rollback() # Rollback on a per-file error
+                            # Continue to next file
+                    db.commit() # Commit after all files in zip are processed
                 except Exception as e:
+                    logger.error(f"A critical error occurred during N-CEN processing: {e}")
                     db.rollback()
-                    raise e
                 finally:
-                    db.close()
+                    if not db_session:
+                        db.close()
                         
             results["processed"] += 1
             results["files"].append(zip_file)
@@ -714,12 +847,13 @@ def process_ncen_data(source_dir, **kwargs):
     return results
 
 
-def process_nport_data(source_dir, **kwargs):
+def process_nport_data(source_dir, db_session=None, **kwargs):
     """
     Process N-PORT (Form N-PORT) filing data from ZIP archives.
     
     Args:
         source_dir (str): Directory containing N-PORT ZIP files
+        db_session: Optional database session
         **kwargs: Additional processing options
         
     Returns:
@@ -745,11 +879,10 @@ def process_nport_data(source_dir, **kwargs):
     results = {"processed": 0, "errors": 0, "files": []}
     
     for zip_file in zip_files:
-        zip_path = os.path.join(source_dir, zip_file)
-        logger.info(f"Processing N-PORT file: {zip_path}")
+        logger.info(f"Processing N-PORT file: {zip_file}")
         
         try:
-            with zipfile.ZipFile(zip_path, 'r') as zf:
+            with zipfile.ZipFile(zip_file, 'r') as zf:
                 # Process each TSV file in the ZIP
                 tsv_files = [name for name in zf.namelist() if name.endswith('.tsv')]
                 
@@ -761,21 +894,23 @@ def process_nport_data(source_dir, **kwargs):
                     results["files"].append(zip_file)
                     continue
                 
-                db = SessionLocal()
+                db = db_session if db_session else SessionLocal()
                 try:
                     for tsv_name in tsv_files:
+                        # Read TSV data
+                        with zf.open(tsv_name) as tsv_file:
+                            df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
+                        
+                        if df.empty:
+                            continue
+                            
+                        # Sanitize column names
+                        df = sanitize_column_names(df)
+
+                        # Route to appropriate table based on TSV file name
+                        table_name = tsv_name.lower().replace('.tsv', '')
+                        
                         try:
-                            with zf.open(tsv_name) as tsv_file:
-                                df = pd.read_csv(tsv_file, sep='\t', dtype=str, low_memory=False)
-                            
-                            if df.empty:
-                                continue
-                            
-                            df = sanitize_column_names(df)
-                            df = df.where(pd.notnull(df), None)
-                            
-                            table_name = tsv_name.lower().replace('.tsv', '')
-                            
                             if 'submission' in table_name:
                                 load_data_to_db(df, NPORTSubmission, 'nport_submissions', db_session=db)
                             elif 'general' in table_name or 'geninfo' in table_name:
@@ -787,12 +922,15 @@ def process_nport_data(source_dir, **kwargs):
                         except Exception as e:
                             logger.error(f"Error processing N-PORT TSV {tsv_name}: {str(e)}")
                             results["errors"] += 1
+                            db.rollback()
+                            # Continue to next file
                     db.commit()
                 except Exception as e:
+                    logger.error(f"A critical error occurred during N-PORT processing: {e}")
                     db.rollback()
-                    raise e
                 finally:
-                    db.close()
+                    if not db_session:
+                        db.close()
                         
             results["processed"] += 1
             results["files"].append(zip_file)

@@ -5,7 +5,9 @@ import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich.progress import Progress
-from config import SEC_USER_AGENT
+import zipfile
+import shutil
+from config import SEC_USER_AGENT, FORMD_SOURCE_DIR
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -71,3 +73,30 @@ def download_archives(urls, destination_folder, max_workers=16, rate_limit_delay
                 except Exception as e:
                     logging.error(f"Error processing {futures[future]}: {e}")
                 progress.update(task, advance=1)
+
+def extract_formd_filings(archive_path):
+    """Extracts Form D filings from a quarterly archive.
+    The quarterly archive contains TSV files directly, so we extract
+    to a directory named after the quarter.
+    """
+    # Get the quarter name from the archive filename
+    archive_name = os.path.basename(archive_path)
+    quarter_name = os.path.splitext(archive_name)[0]  # e.g., "2024q3_d"
+    
+    # Create extraction directory for this quarter
+    quarter_dir = os.path.join(FORMD_SOURCE_DIR, quarter_name)
+    
+    if os.path.exists(quarter_dir):
+        logging.info(f"Directory {quarter_dir} already exists, skipping extraction.")
+        return
+
+    try:
+        # Extract the quarterly archive directly to its own directory
+        with zipfile.ZipFile(archive_path, 'r') as zip_ref:
+            zip_ref.extractall(quarter_dir)
+            logging.info(f"Extracted {archive_path} to {quarter_dir}")
+
+    except zipfile.BadZipFile:
+        logging.error(f"Error: {archive_path} is not a valid zip file or is corrupted.")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred during extraction: {e}")

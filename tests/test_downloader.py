@@ -27,7 +27,8 @@ class TestDownloader(unittest.TestCase):
         # Mock the requests.get call to return a successful response
         mock_response = MagicMock()
         mock_response.raise_for_status.return_value = None
-        mock_response.iter_content.return_value = (b'test' for b in [b'data'])
+        mock_response.iter_content.return_value = [b'testdata']
+        # To properly mock a context manager, we need to set the return value of __enter__
         mock_get.return_value.__enter__.return_value = mock_response
 
         url = "http://example.com/testfile.zip"

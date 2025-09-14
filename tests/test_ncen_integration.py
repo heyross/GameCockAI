@@ -20,14 +20,14 @@ class TestNCENIntegration(BaseIntegrationTest):
         """Test the complete N-CEN processing pipeline in an isolated environment."""
         self.create_ncen_test_data()
         
-        result = process_ncen_data(self.test_dir)
-        
-        # In an isolated test, only one ZIP file is processed.
-        self.assertEqual(result['processed'], 1)
-        self.assertEqual(result['errors'], 0)
-        
         db = SessionLocal()
         try:
+            result = process_ncen_data(self.test_dir, db_session=db)
+            
+            # In an isolated test, only one ZIP file is processed.
+            self.assertEqual(result['processed'], 1)
+            self.assertEqual(result['errors'], 0)
+            
             submissions = db.query(NCENSubmission).count()
             self.assertEqual(submissions, 1)
             
@@ -43,14 +43,14 @@ class TestNCENIntegration(BaseIntegrationTest):
         """Test the generic process_sec_filings function for N-CEN data."""
         self.create_ncen_test_data()
         
-        # The generic processor should correctly route to the N-CEN function.
-        result = process_sec_filings('N-CEN', self.test_dir)
-        
-        self.assertEqual(result['processed'], 1)
-        self.assertEqual(result['errors'], 0)
-
         db = SessionLocal()
         try:
+            # The generic processor should correctly route to the N-CEN function.
+            result = process_sec_filings('N-CEN', self.test_dir, db_session=db)
+            
+            self.assertEqual(result['processed'], 1)
+            self.assertEqual(result['errors'], 0)
+
             self.assertEqual(db.query(NCENSubmission).count(), 1)
         finally:
             db.close()
@@ -58,9 +58,12 @@ class TestNCENIntegration(BaseIntegrationTest):
     def test_database_stats_for_ncen(self):
         """Verify that get_db_stats correctly reports counts for N-CEN tables."""
         self.create_ncen_test_data()
-        process_ncen_data(self.test_dir)
-        
-        stats = get_db_stats()
+        db = SessionLocal()
+        try:
+            process_ncen_data(self.test_dir, db_session=db)
+            stats = get_db_stats(db_session=db)
+        finally:
+            db.close()
         
         self.assertGreater(stats.get('ncen_submissions', 0), 0)
         self.assertGreater(stats.get('ncen_registrants', 0), 0)

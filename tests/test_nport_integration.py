@@ -22,14 +22,14 @@ class TestNPORTIntegration(BaseIntegrationTest):
         """Test the complete N-PORT processing pipeline in an isolated environment."""
         self.create_nport_test_data()
         
-        result = process_nport_data(self.test_dir)
-        
-        # In an isolated test, only one ZIP file is processed.
-        self.assertEqual(result['processed'], 1)
-        self.assertEqual(result['errors'], 0)
-        
         db = SessionLocal()
         try:
+            result = process_nport_data(self.test_dir, db_session=db)
+            
+            # In an isolated test, only one ZIP file is processed.
+            self.assertEqual(result['processed'], 1)
+            self.assertEqual(result['errors'], 0)
+            
             holdings = db.query(NPORTHolding).all()
             self.assertEqual(len(holdings), 2)
             
@@ -53,13 +53,13 @@ class TestNPORTIntegration(BaseIntegrationTest):
         with zipfile.ZipFile(large_zip_path, 'w') as zf:
             zf.writestr('HOLDING.tsv', pd.DataFrame(holdings_data).to_csv(sep='\t', index=False))
 
-        result = process_nport_data(self.test_dir)
-        
-        self.assertEqual(result['processed'], 1)
-        self.assertEqual(result['errors'], 0)
-        
         db = SessionLocal()
         try:
+            result = process_nport_data(self.test_dir, db_session=db)
+            
+            self.assertEqual(result['processed'], 1)
+            self.assertEqual(result['errors'], 0)
+            
             holdings_count = db.query(NPORTHolding).count()
             self.assertEqual(holdings_count, num_records)
             
@@ -71,9 +71,12 @@ class TestNPORTIntegration(BaseIntegrationTest):
     def test_database_stats_for_nport(self):
         """Verify that get_db_stats correctly reports counts for N-PORT tables."""
         self.create_nport_test_data()
-        process_nport_data(self.test_dir)
-        
-        stats = get_db_stats()
+        db = SessionLocal()
+        try:
+            process_nport_data(self.test_dir, db_session=db)
+            stats = get_db_stats(db_session=db)
+        finally:
+            db.close()
         
         self.assertGreater(stats.get('nport_submissions', 0), 0)
         self.assertGreater(stats.get('nport_holdings', 0), 0)
