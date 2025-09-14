@@ -14,8 +14,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Tuple
 
-# Add parent directory to path
-sys.path.append('../..')
+# Add src directory to path
+sys.path.append('../src')
 
 # Test suite imports
 try:

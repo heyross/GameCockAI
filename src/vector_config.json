@@ -1,0 +1,21 @@
+{
+  "vector_embeddings": {
+    "enabled": true,
+    "vector_store_path": "./vector_store",
+    "embedding_cache_path": "./embedding_cache",
+    "default_model": "finbert",
+    "batch_size": 32,
+    "cache_size": 1000,
+    "max_chunk_size": 512,
+    "overlap_size": 50
+  },
+  "performance": {
+    "async_enabled": true,
+    "enable_gpu": true,
+    "max_concurrent_queries": 10
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/vector_embeddings.log"
+  }
+}

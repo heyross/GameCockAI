@@ -1,4 +1,18 @@
 import json
+import sys
+import os
+
+# Add src directory to path for imports
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.join(current_dir, 'src')
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
+
+# Add GameCockAI directory to path for config imports
+gamecock_dir = current_dir
+if gamecock_dir not in sys.path:
+    sys.path.insert(0, gamecock_dir)
+
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 from data_sources import cftc, sec
@@ -24,7 +38,7 @@ except ImportError:
         return {"status": "disabled", "message": "Worker not available"}
     WORKER_AVAILABLE = False
 from analytics_tools import ANALYTICS_TOOLS
-from enhanced_analytics_tools_fixed import ENHANCED_ANALYTICS_TOOLS_FIXED
+from enhanced_analytics_tools import ENHANCED_ANALYTICS_TOOLS
 
 def search_companies(company_name: str):
     """Searches for a company by name or ticker in the SEC's CIK lookup data.
@@ -272,5 +286,5 @@ TOOL_MAP = {
     # Import analytics tools
     **ANALYTICS_TOOLS,
     # Import enhanced cross-dataset analytics tools (fixed version)
-    **ENHANCED_ANALYTICS_TOOLS_FIXED
+    **ENHANCED_ANALYTICS_TOOLS
 }

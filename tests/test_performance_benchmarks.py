@@ -16,11 +16,11 @@ from pathlib import Path
 import os
 import sys
 
-# Add parent directory to path for imports
+# Add src directory to path for imports
 import os
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
 from test_data_generators import FinancialTestDataGenerator, create_test_vector_collection
 

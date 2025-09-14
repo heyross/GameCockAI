@@ -1,0 +1,124 @@
+{
+  "cftc_swap_data": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "nullable": false,
+        "primary_key": 1,
+        "default": null
+      },
+      {
+        "name": "dissemination_id",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "original_dissemination_id",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "action",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "clearing_indicator",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "collateralization_indicator",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "end_user_exception_indicator",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "off_market_price_indicator",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "execution_timestamp",
+        "type": "DATETIME",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "effective_date",
+        "type": "DATETIME",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "expiration_date",
+        "type": "DATETIME",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "asset_class",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "notional_amount",
+        "type": "FLOAT",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      },
+      {
+        "name": "currency",
+        "type": "VARCHAR",
+        "nullable": true,
+        "primary_key": 0,
+        "default": null
+      }
+    ],
+    "indexes": [
+      {
+        "name": "ix_cftc_swap_data_dissemination_id",
+        "column_names": [
+          "dissemination_id"
+        ],
+        "unique": 0,
+        "dialect_options": {}
+      },
+      {
+        "name": "ix_cftc_swap_data_id",
+        "column_names": [
+          "id"
+        ],
+        "unique": 0,
+        "dialect_options": {}
+      }
+    ],
+    "foreign_keys": [],
+    "row_count": 0
+  }
+}

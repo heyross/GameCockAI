@@ -17,10 +17,10 @@ from pathlib import Path
 # Import the modules we're testing
 import sys
 import os
-# Add path to find vector modules (works both standalone and when imported)
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
+# Add path to find vector modules in src directory
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
 try:
     from vector_db import VectorDBManager, GameCockVectorDB

@@ -1,0 +1,11 @@
+{
+  "downloaded_models": [
+    {
+      "name": "all-MiniLM-L6-v2",
+      "is_financial": false,
+      "dimension": 384
+    }
+  ],
+  "primary_model": "all-MiniLM-L6-v2",
+  "setup_date": "2025-09-14 07:29:41"
+}
