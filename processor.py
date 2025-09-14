@@ -427,6 +427,10 @@ def process_formd_quarter(quarter_dir, db_session):
         except Exception as e:
             logging.error(f"Error processing {file_name}: {e}")
             continue
+    
+    # Commit all changes for this quarter
+    db_session.commit()
+    logging.info(f"Committed all changes for quarter: {os.path.basename(quarter_dir)}")
 
 def process_nmfp_data(source_dir, db_session=None):
     """Processes Form N-MFP data from zip files and loads it into the database."""

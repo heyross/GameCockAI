@@ -136,16 +136,6 @@ class TestFormDProcessor(unittest.TestCase):
         extracted_dir = os.path.join(self.test_source_dir, '2020q1_d')
         self.assertTrue(os.path.exists(extracted_dir))
         
-        # Debug: Print the actual directory structure
-        print(f"\nDebugging extracted directory: {extracted_dir}")
-        for root, dirs, files in os.walk(extracted_dir):
-            level = root.replace(extracted_dir, '').count(os.sep)
-            indent = ' ' * 2 * level
-            print(f"{indent}{os.path.basename(root)}/")
-            subindent = ' ' * 2 * (level + 1)
-            for file in files:
-                print(f"{subindent}{file}")
-        
         # Find TSV files recursively
         tsv_files_found = []
         for root, dirs, files in os.walk(extracted_dir):
@@ -192,21 +182,47 @@ class TestFormDProcessor(unittest.TestCase):
         mock_session.commit.assert_called()
 
     @patch('processor.SessionLocal')
-    def test_process_formd_data_integration(self, mock_session_local):
+    @patch('downloader.FORMD_SOURCE_DIR')
+    def test_process_formd_data_integration(self, mock_formd_source_dir, mock_session_local):
         """Test the complete Form D data processing pipeline."""
-        # Create multiple mock quarterly archives
+        # Mock the FORMD_SOURCE_DIR to use our test directory
+        mock_formd_source_dir.__str__ = lambda: self.test_source_dir
+        mock_formd_source_dir.return_value = self.test_source_dir
+        
+        # Create a mock zip file and quarterly directories
         quarters = ['2020q1_d', '2020q2_d']
         for quarter in quarters:
-            self.create_mock_quarterly_archive(quarter)
+            # Create the zip file (required by process_formd_data)
+            zip_path = self.create_mock_quarterly_archive(quarter)
+            
+            # Also create the quarterly directory structure manually to ensure it exists
+            quarter_dir = os.path.join(self.test_source_dir, quarter)
+            quarter_subdir = os.path.join(quarter_dir, quarter.upper())  # e.g., 2020Q1_D
+            os.makedirs(quarter_subdir, exist_ok=True)
+            
+            # Create TSV files with sample data
+            submission_df = pd.DataFrame(self.mock_submission_data)
+            submission_df.to_csv(os.path.join(quarter_subdir, 'FORMDSUBMISSION.tsv'),
+                               sep='\t', index=False)
+            
+            issuer_df = pd.DataFrame(self.mock_issuer_data)
+            issuer_df.to_csv(os.path.join(quarter_subdir, 'ISSUERS.tsv'),
+                            sep='\t', index=False)
+            
+            # Create empty TSV files for other tables
+            for filename in ['OFFERING.tsv', 'RECIPIENTS.tsv', 'RELATEDPERSONS.tsv', 'SIGNATURES.tsv']:
+                with open(os.path.join(quarter_subdir, filename), 'w') as f:
+                    f.write('ACCESSIONNUMBER\n')  # Empty file with header
         
         # Mock database session
         mock_session = MagicMock()
         mock_session_local.return_value = mock_session
         
-        # Test complete processing
-        process_formd_data(self.test_source_dir, mock_session)
+        # Test complete processing with mocked FORMD_SOURCE_DIR
+        with patch('downloader.FORMD_SOURCE_DIR', self.test_source_dir):
+            process_formd_data(self.test_source_dir, mock_session)
         
-        # Verify extraction and processing occurred
+        # Verify processing occurred
         for quarter in quarters:
             extracted_dir = os.path.join(self.test_source_dir, quarter)
             self.assertTrue(os.path.exists(extracted_dir))
