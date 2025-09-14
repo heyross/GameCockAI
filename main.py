@@ -7,7 +7,19 @@ from ui import gamecock_ascii, gamecat_ascii
 from data_sources import cftc, sec, fred
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
-from rag import query_raven
+try:
+    import sys
+    import os
+    # Add parent directory to path for unified RAG
+    parent_dir = os.path.dirname(os.path.dirname(__file__))
+    if parent_dir not in sys.path:
+        sys.path.append(parent_dir)
+    
+    from rag_unified import query_raven
+    print("✅ Using unified RAG system")
+except ImportError as e:
+    print(f"⚠️ Unified RAG not available: {e}")
+    from rag import query_raven
 from processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
                       process_exchange_metrics_data, process_ncen_data, process_nport_data, process_formd_data)
 from processor_8k import process_8k_filings
@@ -513,11 +525,11 @@ def run_startup_checks():
                     print(f"    pip install --user --upgrade {pkg}")
                     input("\nPress Enter to continue...")
             
-            # Verify all packages were installed by checking pip list
+            # Verify all packages were installed by checking both pip list and import
             still_missing = []
             import subprocess
             
-            # Get list of installed packages
+            # Get list of installed packages from pip
             result = subprocess.run(
                 [sys.executable, "-m", "pip", "list", "--format=freeze"],
                 stdout=subprocess.PIPE,
@@ -526,14 +538,30 @@ def run_startup_checks():
             )
             
             if result.returncode != 0:
-                print("\n❌ Failed to check installed packages. Assuming all installations failed.")
-                still_missing = missing_packages.copy()
+                print("\n❌ Failed to check installed packages. Will try direct imports instead.")
+                installed_packages = []
             else:
                 installed_packages = [pkg.split('==')[0].lower() for pkg in result.stdout.split('\n') if pkg.strip()]
-                for pkg in missing_packages:
-                    # Check if package is in the installed packages list
-                    if pkg.lower() not in installed_packages:
-                        still_missing.append(pkg)
+            
+            # Check each package
+            for pkg in missing_packages:
+                pip_name = pkg.lower()
+                import_name = next((k for k, v in package_map.items() if v.lower() == pip_name), pip_name)
+                
+                # First check if pip thinks it's installed
+                pip_installed = pip_name in installed_packages if installed_packages else False
+                
+                # Then try to import it
+                try:
+                    importlib.invalidate_caches()
+                    importlib.import_module(import_name)
+                    import_success = True
+                except ImportError:
+                    import_success = False
+                
+                # If both checks fail, mark as missing
+                if not (pip_installed or import_success):
+                    still_missing.append(pkg)
             
             if still_missing:
                 print("\n❌ The following packages could not be installed:")
