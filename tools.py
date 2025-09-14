@@ -9,6 +9,7 @@ from config import (
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
 )
 from worker import add_task, get_task_status as get_task_status_from_worker
+from analytics_tools import ANALYTICS_TOOLS
 
 def search_companies(company_name: str):
     """Searches for a company by name or ticker in the SEC's CIK lookup data.
@@ -252,5 +253,7 @@ TOOL_MAP = {
                 "required": ["task_id"]
             }
         }
-    }
+    },
+    # Import analytics tools
+    **ANALYTICS_TOOLS
 }
