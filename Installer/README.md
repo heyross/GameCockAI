@@ -8,6 +8,8 @@ This directory contains the necessary files to create a Windows installer for Ga
 - Python 3.7 or higher (64-bit recommended)
 - pip (Python package manager)
 - Administrator privileges (for installation)
+- nVidia GPU with 8GB of vRAM, 3xxx or later version
+- Plenty of disk storage and at least 32gb of RAM
 
 ## Creating the Installer
 
