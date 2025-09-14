@@ -1,0 +1,66 @@
+{
+  "start_time": "2025-09-14T11:15:24.166220",
+  "end_time": "2025-09-14T11:15:27.750817",
+  "duration": 3.584597587585449,
+  "test_suites": {
+    "Unit Tests": {
+      "success": true,
+      "duration": 0.011005401611328125,
+      "critical": true,
+      "description": "Comprehensive unit tests with mocked dependencies"
+    },
+    "Performance Benchmarks": {
+      "success": false,
+      "duration": 0.0009999275207519531,
+      "critical": false,
+      "description": "Performance and scalability benchmarks"
+    },
+    "Real Integration Tests": {
+      "success": false,
+      "duration": 0.0,
+      "critical": true,
+      "description": "End-to-end integration tests with real components"
+    }
+  },
+  "summary": {
+    "suites_run": 3,
+    "suites_passed": 1,
+    "suites_failed": 2,
+    "critical_suites_total": 2,
+    "critical_suites_passed": 1,
+    "critical_suites_failed": 1,
+    "total_duration": 3.584597587585449,
+    "overall_success": false,
+    "pass_rate": 33.33333333333333
+  },
+  "environment": {
+    "python_version": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cpu_count": 16,
+    "current_directory": "D:\\GitHub\\Gamecock_Final\\GameCockAI",
+    "test_time": "2025-09-14T11:15:24.392271",
+    "numpy_version": "2.2.4",
+    "torch_version": "2.6.0+cpu",
+    "cuda_available": false,
+    "chromadb_version": "1.0.21",
+    "vector_modules_available": false
+  },
+  "recommendations": [
+    {
+      "type": "critical",
+      "message": "Vector modules not available - run 'python vector_setup.py' to install"
+    },
+    {
+      "type": "performance",
+      "message": "CUDA not available - consider GPU acceleration for better performance"
+    },
+    {
+      "type": "critical",
+      "message": "Critical test suites failed - system may not be production ready"
+    },
+    {
+      "type": "warning",
+      "message": "Test pass rate 33.3% - investigate failures"
+    }
+  ]
+}

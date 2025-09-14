@@ -1,0 +1,50 @@
+{
+  "start_time": "2025-09-14T10:24:27.330155",
+  "end_time": "2025-09-14T10:24:38.113949",
+  "duration": 10.783794164657593,
+  "test_suites": {
+    "Unit Tests": {
+      "success": false,
+      "duration": 10.750763177871704,
+      "critical": true,
+      "description": "Comprehensive unit tests with mocked dependencies"
+    }
+  },
+  "summary": {
+    "suites_run": 1,
+    "suites_passed": 0,
+    "suites_failed": 1,
+    "critical_suites_total": 1,
+    "critical_suites_passed": 0,
+    "critical_suites_failed": 1,
+    "total_duration": 10.783794164657593,
+    "overall_success": false,
+    "pass_rate": 0.0
+  },
+  "environment": {
+    "python_version": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cpu_count": 16,
+    "current_directory": "D:\\GitHub\\Gamecock_Final\\GameCockAI",
+    "test_time": "2025-09-14T10:24:27.362186",
+    "numpy_version": "2.2.4",
+    "torch_version": "2.6.0+cpu",
+    "cuda_available": false,
+    "chromadb_version": "1.0.21",
+    "vector_modules_available": true
+  },
+  "recommendations": [
+    {
+      "type": "performance",
+      "message": "CUDA not available - consider GPU acceleration for better performance"
+    },
+    {
+      "type": "critical",
+      "message": "Critical test suites failed - system may not be production ready"
+    },
+    {
+      "type": "warning",
+      "message": "Test pass rate 0.0% - investigate failures"
+    }
+  ]
+}

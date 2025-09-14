@@ -1,0 +1,31 @@
+🧪 GameCock AI Vector Embeddings Test Report
+============================================================
+Generated: 2025-09-14 11:24:28
+Duration: 36.7 seconds
+
+🔍 ENVIRONMENT
+--------------------
+Python: 3.12.9
+Platform: Windows-10-10.0.19045-SP0
+Vector modules: Available
+CUDA support: Not available
+
+📊 SUMMARY
+--------------------
+Test suites run: 3
+Passed: 1
+Failed: 2
+Pass rate: 33.3%
+Overall success: ❌ No
+
+📋 TEST SUITE RESULTS
+--------------------
+Unit Tests: ✅ PASS (CRITICAL) - 11.7s
+Performance Benchmarks: ❌ FAIL - 6.0s
+Real Integration Tests: ❌ FAIL (CRITICAL) - 18.9s
+
+💡 RECOMMENDATIONS
+--------------------
+⚡ CUDA not available - consider GPU acceleration for better performance
+🚨 Critical test suites failed - system may not be production ready
+⚠️  Test pass rate 33.3% - investigate failures

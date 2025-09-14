@@ -1,0 +1,11 @@
+{
+  "generation_timestamp": "2025-09-14T11:38:01.502381",
+  "datasets": {
+    "financial_documents": 100,
+    "cftc_swaps": 500,
+    "insider_transactions": 200,
+    "form_13f_holdings": 300,
+    "market_events": 50
+  },
+  "total_records": 1150
+}

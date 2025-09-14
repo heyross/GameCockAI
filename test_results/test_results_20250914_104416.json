@@ -1,0 +1,62 @@
+{
+  "start_time": "2025-09-14T10:43:41.986606",
+  "end_time": "2025-09-14T10:44:16.379716",
+  "duration": 34.393110513687134,
+  "test_suites": {
+    "Unit Tests": {
+      "success": false,
+      "duration": 9.01569652557373,
+      "critical": true,
+      "description": "Comprehensive unit tests with mocked dependencies"
+    },
+    "Performance Benchmarks": {
+      "success": false,
+      "duration": 6.035136699676514,
+      "critical": false,
+      "description": "Performance and scalability benchmarks"
+    },
+    "Real Integration Tests": {
+      "success": false,
+      "duration": 19.30927014350891,
+      "critical": true,
+      "description": "End-to-end integration tests with real components"
+    }
+  },
+  "summary": {
+    "suites_run": 3,
+    "suites_passed": 0,
+    "suites_failed": 3,
+    "critical_suites_total": 2,
+    "critical_suites_passed": 0,
+    "critical_suites_failed": 2,
+    "total_duration": 34.393110513687134,
+    "overall_success": false,
+    "pass_rate": 0.0
+  },
+  "environment": {
+    "python_version": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cpu_count": 16,
+    "current_directory": "D:\\GitHub\\Gamecock_Final\\GameCockAI",
+    "test_time": "2025-09-14T10:43:42.018613",
+    "numpy_version": "2.2.4",
+    "torch_version": "2.6.0+cpu",
+    "cuda_available": false,
+    "chromadb_version": "1.0.21",
+    "vector_modules_available": true
+  },
+  "recommendations": [
+    {
+      "type": "performance",
+      "message": "CUDA not available - consider GPU acceleration for better performance"
+    },
+    {
+      "type": "critical",
+      "message": "Critical test suites failed - system may not be production ready"
+    },
+    {
+      "type": "warning",
+      "message": "Test pass rate 0.0% - investigate failures"
+    }
+  ]
+}

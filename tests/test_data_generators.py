@@ -102,7 +102,7 @@ class FinancialTestDataGenerator:
             
             f"Management's Discussion and Analysis: {company['name']} experienced significant changes in market conditions during the reporting period. Key performance indicators include: {random.choice(self.financial_keywords)} growth of {random.randint(-20, 40)}%, improved {random.choice(self.financial_keywords)} metrics, and strategic investments in {random.choice(['technology', 'human capital', 'market expansion', 'regulatory compliance'])}.",
             
-            f"Business Overview: {company['name']} operates in the {company['sector']} sector, with primary business activities including {random.choice(self.business_descriptions)}. The company maintains a diversified portfolio of {random.choice(self.financial_keywords)} and focuses on {random.choice(['sustainable growth', 'shareholder value', 'market leadership', 'innovation'])}."
+            f"Business Overview: {company['name']} operates in the {company.get('sector', 'Financial Services')} sector, with primary business activities including {random.choice(self.business_descriptions)}. The company maintains a diversified portfolio of {random.choice(self.financial_keywords)} and focuses on {random.choice(['sustainable growth', 'shareholder value', 'market leadership', 'innovation'])}."
         ]
         
         return random.choice(templates)
@@ -110,12 +110,12 @@ class FinancialTestDataGenerator:
     def _generate_8k_content(self, company: Dict[str, str]) -> str:
         """Generate realistic 8-K filing content"""
         event_types = [
-            "earnings announcement",
-            "executive appointment", 
-            "acquisition announcement",
-            "dividend declaration",
-            "material agreement",
-            "regulatory filing"
+            "earnings_announcement",
+            "executive_appointment", 
+            "acquisition_announcement",
+            "dividend_declaration",
+            "material_agreement",
+            "regulatory_filing"
         ]
         
         event = random.choice(event_types)
@@ -188,6 +188,15 @@ class FinancialTestDataGenerator:
         content += f"Risk factors include {random.choice(self.risk_factors)}."
         
         return content
+    
+    def generate_sec_10k_document(self, company: Dict[str, str]) -> str:
+        """Generate a realistic SEC 10-K document content"""
+        return self._generate_10k_content(company)
+    
+    def generate_test_embeddings(self, dimension: int, count: int) -> List[List[float]]:
+        """Generate random test embeddings for performance testing"""
+        import numpy as np
+        return np.random.random((count, dimension)).tolist()
     
     def generate_cftc_swap_data(self, num_records: int = 500) -> List[Dict[str, Any]]:
         """Generate realistic CFTC swap data"""
@@ -412,18 +421,20 @@ class FinancialTestDataGenerator:
         return datasets
 
 
-def create_test_vector_collection(embeddings_data: List[Dict], collection_name: str = "test_collection"):
+def create_test_vector_collection(embeddings_data: List[Dict] = None, collection_name: str = "test_collection"):
     """Create a test vector collection for testing purposes"""
     try:
         import chromadb
-        from chromadb.config import Settings
         
-        # Create in-memory ChromaDB for testing
-        client = chromadb.Client(Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory=None,
-            anonymized_telemetry=False
-        ))
+        # Generate default test data if none provided
+        if embeddings_data is None:
+            generator = FinancialTestDataGenerator()
+            embeddings_data = generator.generate_financial_text_corpus(100)
+        
+        # Create ChromaDB client using new configuration
+        import tempfile
+        temp_dir = tempfile.mkdtemp()
+        client = chromadb.PersistentClient(path=temp_dir)
         
         collection = client.create_collection(name=collection_name)
         
@@ -445,18 +456,25 @@ def create_test_vector_collection(embeddings_data: List[Dict], collection_name: 
         import numpy as np
         fake_embeddings = np.random.random((len(documents), 768)).tolist()
         
-        collection.add(
-            documents=documents,
-            metadatas=metadatas,
-            ids=ids,
-            embeddings=fake_embeddings
-        )
-        
-        return collection
+        # Return data dictionary for performance tests
+        return {
+            "documents": documents,
+            "metadatas": metadatas,
+            "ids": ids,
+            "embeddings": fake_embeddings,
+            "collection": collection  # Include collection for tests that need it
+        }
         
     except ImportError:
-        print("ChromaDB not available - returning mock collection")
-        return None
+        print("ChromaDB not available - returning mock data")
+        # Return mock data when ChromaDB is not available
+        return {
+            "documents": [f"Mock document {i}" for i in range(100)],
+            "metadatas": [{"type": "mock", "id": i} for i in range(100)],
+            "ids": [f"mock_{i}" for i in range(100)],
+            "embeddings": [[0.1] * 768 for _ in range(100)],
+            "collection": None
+        }
 
 
 def generate_test_database():

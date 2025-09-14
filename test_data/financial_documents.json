@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "doc_0000",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Apple Inc. (AAPL) - Buy Rating with $190 price target. We believe Apple Inc. is well-positioned in the Technology sector due to market leadership. Key catalysts include earnings growth. Risk factors include Concentration risk in specific market segments.",
+    "filing_date": "2025-05-20",
+    "metadata": {
+      "word_count": 40,
+      "section": "management_discussion",
+      "importance_score": 0.6322850337929447
+    }
+  },
+  {
+    "id": "doc_0001",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Hold Rating with $73 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to operational efficiency. Key catalysts include cost reduction. Risk factors include Interest rate fluctuations affecting portfolio value.",
+    "filing_date": "2024-09-10",
+    "metadata": {
+      "word_count": 45,
+      "section": "business",
+      "importance_score": 0.699086517943287
+    }
+  },
+  {
+    "id": "doc_0002",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "10-K",
+    "content": "Tesla Inc. provides investment banking and asset management services. During fiscal year 2023, the company reported revenue of $314 billion, representing a -8% change from the prior year. Regulatory changes affecting compliance costs.",
+    "filing_date": "2024-09-24",
+    "metadata": {
+      "word_count": 33,
+      "section": "business",
+      "importance_score": 0.2179899009796224
+    }
+  },
+  {
+    "id": "doc_0003",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Outperform Rating with $379 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to market leadership. Key catalysts include regulatory changes. Risk factors include Liquidity risk in stressed market conditions.",
+    "filing_date": "2025-06-29",
+    "metadata": {
+      "word_count": 45,
+      "section": "financial_data",
+      "importance_score": 0.8460023176191924
+    }
+  },
+  {
+    "id": "doc_0004",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Goldman Sachs Group Inc. develops and manufactures consumer electronics and software. During fiscal year 2023, the company reported revenue of $103 billion, representing a -13% change from the prior year. Foreign exchange rate volatility.",
+    "filing_date": "2024-04-24",
+    "metadata": {
+      "word_count": 34,
+      "section": "business",
+      "importance_score": 0.2055233357895716
+    }
+  },
+  {
+    "id": "doc_0005",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: Apple Inc. experienced significant changes in market conditions during the reporting period. Key performance indicators include: liabilities growth of -20%, improved liabilities metrics, and strategic investments in human capital.",
+    "filing_date": "2025-08-16",
+    "metadata": {
+      "word_count": 33,
+      "section": "risk_factors",
+      "importance_score": 0.33564213457584113
+    }
+  },
+  {
+    "id": "doc_0006",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "earnings_call",
+    "content": "Berkshire Hathaway Inc. Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $52.0 billion, representing 12.6% growth year-over-year. Net income was $11.0 billion, and earnings per share of $6.24. Looking ahead, we remain focused on market expansion. CFO: Our EBITDA position remains strong with adequate capital.",
+    "filing_date": "2025-06-13",
+    "metadata": {
+      "word_count": 50,
+      "section": "business",
+      "importance_score": 0.6826287908674366
+    }
+  },
+  {
+    "id": "doc_0007",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "13F",
+    "content": "Tesla Inc. 13F Holdings Report: Total portfolio value of $3794 million across 7 positions. Top holdings include JPMorgan Chase & Co. ($465M), Apple Inc. ($590M). Portfolio demonstrates sector concentration strategy.",
+    "filing_date": "2025-06-03",
+    "metadata": {
+      "word_count": 30,
+      "section": "financial_data",
+      "importance_score": 0.19906238895054706
+    }
+  },
+  {
+    "id": "doc_0008",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "Bank of America Corp. 13F Holdings Report: Total portfolio value of $5574 million across 13 positions. Top holdings include Goldman Sachs Group Inc. ($387M), Apple Inc. ($588M). Portfolio demonstrates diversification strategy.",
+    "filing_date": "2024-09-08",
+    "metadata": {
+      "word_count": 31,
+      "section": "risk_factors",
+      "importance_score": 0.6044533774845405
+    }
+  },
+  {
+    "id": "doc_0009",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Microsoft Corporation's business operations: Foreign exchange rate volatility. Additionally, Economic downturn impacting business operations. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2024-12-25",
+    "metadata": {
+      "word_count": 35,
+      "section": "financial_data",
+      "importance_score": 0.4608900133631716
+    }
+  },
+  {
+    "id": "doc_0010",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Microsoft Corporation's business operations: Foreign exchange rate volatility. Additionally, Market volatility may impact trading revenues. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2024-02-24",
+    "metadata": {
+      "word_count": 36,
+      "section": "management_discussion",
+      "importance_score": 0.6685195334225092
+    }
+  },
+  {
+    "id": "doc_0011",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "8-K",
+    "content": "Berkshire Hathaway Inc. entered into a definitive agreement to acquire strategic assets for approximately $1 billion. The transaction is expected to drive growth.",
+    "filing_date": "2024-06-10",
+    "metadata": {
+      "word_count": 23,
+      "section": "financial_data",
+      "importance_score": 0.3992723807948175
+    }
+  },
+  {
+    "id": "doc_0012",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Goldman Sachs Group Inc. operates retail banking and commercial lending business. During fiscal year 2023, the company reported revenue of $281 billion, representing a 1% change from the prior year. Cybersecurity threats to data systems.",
+    "filing_date": "2024-11-01",
+    "metadata": {
+      "word_count": 35,
+      "section": "financial_data",
+      "importance_score": 0.8186821525181622
+    }
+  },
+  {
+    "id": "doc_0013",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Microsoft Corporation (MSFT) - Sell Rating with $347 price target. We believe Microsoft Corporation is well-positioned in the Technology sector due to operational efficiency. Key catalysts include market expansion. Risk factors include Cybersecurity threats to data systems.",
+    "filing_date": "2025-05-26",
+    "metadata": {
+      "word_count": 39,
+      "section": "management_discussion",
+      "importance_score": 0.9402793225812911
+    }
+  },
+  {
+    "id": "doc_0014",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "earnings_call",
+    "content": "Amazon.com Inc. Q2 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $59.0 billion, representing 29.7% growth year-over-year. Net income was $12.0 billion, and earnings per share of $4.42. Looking ahead, we remain focused on cost optimization. CFO: Our capital position remains strong with adequate reserves.",
+    "filing_date": "2024-07-29",
+    "metadata": {
+      "word_count": 49,
+      "section": "management_discussion",
+      "importance_score": 0.6231274518972
+    }
+  },
+  {
+    "id": "doc_0015",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Goldman Sachs Group Inc. declared a quarterly dividend of $1.24 per share, adjusting the dividend rate from the previous quarter. The dividend will be paid to shareholders of record.",
+    "filing_date": "2024-01-14",
+    "metadata": {
+      "word_count": 29,
+      "section": "risk_factors",
+      "importance_score": 0.807884703864953
+    }
+  },
+  {
+    "id": "doc_0016",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "earnings_call",
+    "content": "Amazon.com Inc. Q4 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $84.0 billion, representing -8.6% growth year-over-year. Net income was $19.0 billion, and earnings per share of $7.90. Looking ahead, we remain focused on innovation. CFO: Our liquidity position remains strong with adequate liquidity.",
+    "filing_date": "2025-03-09",
+    "metadata": {
+      "word_count": 48,
+      "section": "management_discussion",
+      "importance_score": 0.42446034568856905
+    }
+  },
+  {
+    "id": "doc_0017",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Microsoft Corporation Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $52.0 billion, representing 6.9% growth year-over-year. Net income was $6.0 billion, and earnings per share of $7.47. Looking ahead, we remain focused on market expansion. CFO: Our merger position remains strong with adequate reserves.",
+    "filing_date": "2024-03-10",
+    "metadata": {
+      "word_count": 49,
+      "section": "business",
+      "importance_score": 0.35089216715101545
+    }
+  },
+  {
+    "id": "doc_0018",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Bank of America Corp. (BAC) - Buy Rating with $281 price target. We believe Bank of America Corp. is well-positioned in the Financial Services sector due to strong fundamentals. Key catalysts include market expansion. Risk factors include Foreign exchange rate volatility.",
+    "filing_date": "2024-05-22",
+    "metadata": {
+      "word_count": 43,
+      "section": "management_discussion",
+      "importance_score": 0.40054875437213533
+    }
+  },
+  {
+    "id": "doc_0019",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "JPMorgan Chase & Co. 13F Holdings Report: Total portfolio value of $5863 million across 10 positions. Top holdings include Amazon.com Inc. ($304M), Bank of America Corp. ($557M). Portfolio demonstrates focus on growth strategy.",
+    "filing_date": "2025-03-23",
+    "metadata": {
+      "word_count": 33,
+      "section": "management_discussion",
+      "importance_score": 0.6571167820835582
+    }
+  },
+  {
+    "id": "doc_0020",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "earnings_call",
+    "content": "Tesla Inc. Q2 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $67.0 billion, representing 13.5% growth year-over-year. Net income was $5.0 billion, and earnings per share of $6.81. Looking ahead, we remain focused on operational excellence. CFO: Our securities position remains strong with adequate liquidity.",
+    "filing_date": "2024-05-09",
+    "metadata": {
+      "word_count": 49,
+      "section": "risk_factors",
+      "importance_score": 0.1663985354978781
+    }
+  },
+  {
+    "id": "doc_0021",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "earnings_call",
+    "content": "Amazon.com Inc. Q3 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $78.0 billion, representing 22.4% growth year-over-year. Net income was $6.0 billion, and earnings per share of $4.93. Looking ahead, we remain focused on cost optimization. CFO: Our risk management position remains strong with adequate capital.",
+    "filing_date": "2025-05-06",
+    "metadata": {
+      "word_count": 50,
+      "section": "management_discussion",
+      "importance_score": 0.39751945932129995
+    }
+  },
+  {
+    "id": "doc_0022",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "13F",
+    "content": "Apple Inc. 13F Holdings Report: Total portfolio value of $4297 million across 9 positions. Top holdings include Bank of America Corp. ($692M), Microsoft Corporation ($216M). Portfolio demonstrates sector concentration strategy.",
+    "filing_date": "2025-08-18",
+    "metadata": {
+      "word_count": 30,
+      "section": "business",
+      "importance_score": 0.1540021758660613
+    }
+  },
+  {
+    "id": "doc_0023",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "10-K",
+    "content": "Tesla Inc. operates retail banking and commercial lending business. During fiscal year 2023, the company reported revenue of $160 billion, representing a -8% change from the prior year. Economic downturn impacting business operations.",
+    "filing_date": "2025-04-08",
+    "metadata": {
+      "word_count": 33,
+      "section": "business",
+      "importance_score": 0.34177771356817516
+    }
+  },
+  {
+    "id": "doc_0024",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Bank of America Corp. (BAC) - Sell Rating with $305 price target. We believe Bank of America Corp. is well-positioned in the Financial Services sector due to innovative products. Key catalysts include market expansion. Risk factors include Concentration risk in specific market segments.",
+    "filing_date": "2025-08-10",
+    "metadata": {
+      "word_count": 45,
+      "section": "risk_factors",
+      "importance_score": 0.32155819511577627
+    }
+  },
+  {
+    "id": "doc_0025",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "Goldman Sachs Group Inc. 13F Holdings Report: Total portfolio value of $6108 million across 11 positions. Top holdings include Apple Inc. ($51M), Berkshire Hathaway Inc. ($712M). Portfolio demonstrates value orientation strategy.",
+    "filing_date": "2024-09-08",
+    "metadata": {
+      "word_count": 31,
+      "section": "management_discussion",
+      "importance_score": 0.3596995074906285
+    }
+  },
+  {
+    "id": "doc_0026",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "10-K",
+    "content": "Berkshire Hathaway Inc. designs and manufactures electric vehicles and energy systems. During fiscal year 2023, the company reported revenue of $369 billion, representing a -11% change from the prior year. Credit risk from counterparty defaults.",
+    "filing_date": "2025-03-16",
+    "metadata": {
+      "word_count": 35,
+      "section": "financial_data",
+      "importance_score": 0.2633587461826954
+    }
+  },
+  {
+    "id": "doc_0027",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "8-K",
+    "content": "Berkshire Hathaway Inc. declared a quarterly dividend of $1.16 per share, maintaining the dividend rate from the previous quarter. The dividend will be paid to shareholders of record.",
+    "filing_date": "2024-10-20",
+    "metadata": {
+      "word_count": 28,
+      "section": "management_discussion",
+      "importance_score": 0.401936701576453
+    }
+  },
+  {
+    "id": "doc_0028",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Bank of America Corp.'s business operations: Foreign exchange rate volatility. Additionally, Liquidity risk in stressed market conditions. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2025-08-03",
+    "metadata": {
+      "word_count": 38,
+      "section": "risk_factors",
+      "importance_score": 0.965751646366858
+    }
+  },
+  {
+    "id": "doc_0029",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "13F",
+    "content": "Berkshire Hathaway Inc. 13F Holdings Report: Total portfolio value of $4044 million across 8 positions. Top holdings include Microsoft Corporation ($247M), Goldman Sachs Group Inc. ($720M). Portfolio demonstrates value orientation strategy.",
+    "filing_date": "2024-03-06",
+    "metadata": {
+      "word_count": 31,
+      "section": "risk_factors",
+      "importance_score": 0.8807395734193534
+    }
+  },
+  {
+    "id": "doc_0030",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Goldman Sachs Group Inc. announced the appointment of a new Chief Risk Officer. The appointment is effective immediately and is expected to strengthen leadership.",
+    "filing_date": "2023-09-24",
+    "metadata": {
+      "word_count": 24,
+      "section": "business",
+      "importance_score": 0.4768566093498944
+    }
+  },
+  {
+    "id": "doc_0031",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Bank of America Corp. entered into a material agreement with a government entity valued at approximately $233 million over 5 years.",
+    "filing_date": "2024-05-30",
+    "metadata": {
+      "word_count": 21,
+      "section": "management_discussion",
+      "importance_score": 0.7715104494399498
+    }
+  },
+  {
+    "id": "doc_0032",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Tesla Inc. (TSLA) - Outperform Rating with $142 price target. We believe Tesla Inc. is well-positioned in the Automotive sector due to market leadership. Key catalysts include earnings growth. Risk factors include Foreign exchange rate volatility.",
+    "filing_date": "2024-04-13",
+    "metadata": {
+      "word_count": 38,
+      "section": "business",
+      "importance_score": 0.9691620509278985
+    }
+  },
+  {
+    "id": "doc_0033",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Berkshire Hathaway Inc. (BRK.A) - Sell Rating with $72 price target. We believe Berkshire Hathaway Inc. is well-positioned in the Conglomerate sector due to operational efficiency. Key catalysts include cost reduction. Risk factors include Cybersecurity threats to data systems.",
+    "filing_date": "2024-08-29",
+    "metadata": {
+      "word_count": 41,
+      "section": "financial_data",
+      "importance_score": 0.37882516537584554
+    }
+  },
+  {
+    "id": "doc_0034",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Goldman Sachs Group Inc. entered into a definitive agreement to acquire a competitor for approximately $7 billion. The transaction is expected to enhance market position.",
+    "filing_date": "2023-11-14",
+    "metadata": {
+      "word_count": 25,
+      "section": "risk_factors",
+      "importance_score": 0.3326549539118723
+    }
+  },
+  {
+    "id": "doc_0035",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Bank of America Corp. (BAC) - Underperform Rating with $357 price target. We believe Bank of America Corp. is well-positioned in the Financial Services sector due to innovative products. Key catalysts include regulatory changes. Risk factors include Credit risk from counterparty defaults.",
+    "filing_date": "2024-06-29",
+    "metadata": {
+      "word_count": 44,
+      "section": "risk_factors",
+      "importance_score": 0.47878437148937947
+    }
+  },
+  {
+    "id": "doc_0036",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "Bank of America Corp. 13F Holdings Report: Total portfolio value of $7483 million across 15 positions. Top holdings include Berkshire Hathaway Inc. ($601M), Berkshire Hathaway Inc. ($284M). Portfolio demonstrates value orientation strategy.",
+    "filing_date": "2023-10-30",
+    "metadata": {
+      "word_count": 32,
+      "section": "business",
+      "importance_score": 0.174572947150477
+    }
+  },
+  {
+    "id": "doc_0037",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "earnings_call",
+    "content": "Goldman Sachs Group Inc. Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $50.0 billion, representing 10.8% growth year-over-year. Net income was $15.0 billion, and earnings per share of $4.81. Looking ahead, we remain focused on innovation. CFO: Our credit risk position remains strong with adequate liquidity.",
+    "filing_date": "2024-09-06",
+    "metadata": {
+      "word_count": 51,
+      "section": "management_discussion",
+      "importance_score": 0.25476811449386544
+    }
+  },
+  {
+    "id": "doc_0038",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Goldman Sachs Group Inc. announced the appointment of a new Chief Executive Officer. The appointment is effective immediately and is expected to enhance operational excellence.",
+    "filing_date": "2024-09-08",
+    "metadata": {
+      "word_count": 25,
+      "section": "risk_factors",
+      "importance_score": 0.8310039616273857
+    }
+  },
+  {
+    "id": "doc_0039",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "13F",
+    "content": "Apple Inc. 13F Holdings Report: Total portfolio value of $7270 million across 16 positions. Top holdings include Bank of America Corp. ($131M), Berkshire Hathaway Inc. ($468M). Portfolio demonstrates focus on growth strategy.",
+    "filing_date": "2023-12-22",
+    "metadata": {
+      "word_count": 32,
+      "section": "management_discussion",
+      "importance_score": 0.2726813613463585
+    }
+  },
+  {
+    "id": "doc_0040",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Apple Inc. Q3 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $51.0 billion, representing 22.6% growth year-over-year. Net income was $17.0 billion, and earnings per share of $4.41. Looking ahead, we remain focused on innovation. CFO: Our derivatives position remains strong with adequate liquidity.",
+    "filing_date": "2025-07-13",
+    "metadata": {
+      "word_count": 48,
+      "section": "financial_data",
+      "importance_score": 0.561760675389959
+    }
+  },
+  {
+    "id": "doc_0041",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: JPMorgan Chase & Co. experienced significant changes in market conditions during the reporting period. Key performance indicators include: IPO growth of 29%, improved investment metrics, and strategic investments in regulatory compliance.",
+    "filing_date": "2024-01-20",
+    "metadata": {
+      "word_count": 35,
+      "section": "business",
+      "importance_score": 0.24484239503038785
+    }
+  },
+  {
+    "id": "doc_0042",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Microsoft Corporation (MSFT) - Hold Rating with $92 price target. We believe Microsoft Corporation is well-positioned in the Technology sector due to innovative products. Key catalysts include market expansion. Risk factors include Operational risk from system failures.",
+    "filing_date": "2024-02-22",
+    "metadata": {
+      "word_count": 39,
+      "section": "management_discussion",
+      "importance_score": 0.3712494891858834
+    }
+  },
+  {
+    "id": "doc_0043",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Sell Rating with $326 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to operational efficiency. Key catalysts include new products. Risk factors include Concentration risk in specific market segments.",
+    "filing_date": "2024-10-06",
+    "metadata": {
+      "word_count": 45,
+      "section": "financial_data",
+      "importance_score": 0.48416198252735276
+    }
+  },
+  {
+    "id": "doc_0044",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Goldman Sachs Group Inc. (GS) - Hold Rating with $444 price target. We believe Goldman Sachs Group Inc. is well-positioned in the Financial Services sector due to innovative products. Key catalysts include market expansion. Risk factors include Concentration risk in specific market segments.",
+    "filing_date": "2024-09-29",
+    "metadata": {
+      "word_count": 45,
+      "section": "business",
+      "importance_score": 0.12311494694421499
+    }
+  },
+  {
+    "id": "doc_0045",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "13F",
+    "content": "Microsoft Corporation 13F Holdings Report: Total portfolio value of $6871 million across 13 positions. Top holdings include Goldman Sachs Group Inc. ($135M), Tesla Inc. ($289M). Portfolio demonstrates sector concentration strategy.",
+    "filing_date": "2024-04-05",
+    "metadata": {
+      "word_count": 30,
+      "section": "business",
+      "importance_score": 0.1391555461031651
+    }
+  },
+  {
+    "id": "doc_0046",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Berkshire Hathaway Inc. (BRK.A) - Sell Rating with $249 price target. We believe Berkshire Hathaway Inc. is well-positioned in the Conglomerate sector due to innovative products. Key catalysts include regulatory changes. Risk factors include Foreign exchange rate volatility.",
+    "filing_date": "2023-10-19",
+    "metadata": {
+      "word_count": 40,
+      "section": "risk_factors",
+      "importance_score": 0.7536036754502213
+    }
+  },
+  {
+    "id": "doc_0047",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Apple Inc. Q2 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $45.0 billion, representing 3.1% growth year-over-year. Net income was $15.0 billion, and earnings per share of $6.03. Looking ahead, we remain focused on strategic growth. CFO: Our operational risk position remains strong with adequate capital.",
+    "filing_date": "2025-02-09",
+    "metadata": {
+      "word_count": 50,
+      "section": "risk_factors",
+      "importance_score": 0.42643858086278597
+    }
+  },
+  {
+    "id": "doc_0048",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "8-K",
+    "content": "Tesla Inc. entered into a definitive agreement to acquire a financial services firm for approximately $6 billion. The transaction is expected to create synergies.",
+    "filing_date": "2023-12-21",
+    "metadata": {
+      "word_count": 24,
+      "section": "financial_data",
+      "importance_score": 0.7303547999627588
+    }
+  },
+  {
+    "id": "doc_0049",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "earnings_call",
+    "content": "Goldman Sachs Group Inc. Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $94.0 billion, representing 15.2% growth year-over-year. Net income was $18.0 billion, and earnings per share of $7.58. Looking ahead, we remain focused on cost optimization. CFO: Our hedging position remains strong with adequate reserves.",
+    "filing_date": "2024-11-10",
+    "metadata": {
+      "word_count": 51,
+      "section": "management_discussion",
+      "importance_score": 0.3120924109133928
+    }
+  },
+  {
+    "id": "doc_0050",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Bank of America Corp. operates retail banking and commercial lending business. During fiscal year 2023, the company reported revenue of $125 billion, representing a -8% change from the prior year. Foreign exchange rate volatility.",
+    "filing_date": "2025-04-15",
+    "metadata": {
+      "word_count": 34,
+      "section": "business",
+      "importance_score": 0.2984361559380513
+    }
+  },
+  {
+    "id": "doc_0051",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Microsoft Corporation Q4 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $26.0 billion, representing 9.5% growth year-over-year. Net income was $13.0 billion, and earnings per share of $6.29. Looking ahead, we remain focused on operational excellence. CFO: Our merger position remains strong with adequate reserves.",
+    "filing_date": "2024-10-12",
+    "metadata": {
+      "word_count": 49,
+      "section": "management_discussion",
+      "importance_score": 0.8230217133214804
+    }
+  },
+  {
+    "id": "doc_0052",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "JPMorgan Chase & Co. develops and manufactures consumer electronics and software. During fiscal year 2023, the company reported revenue of $183 billion, representing a -15% change from the prior year. Operational risk from system failures.",
+    "filing_date": "2025-04-11",
+    "metadata": {
+      "word_count": 35,
+      "section": "financial_data",
+      "importance_score": 0.5778127412152864
+    }
+  },
+  {
+    "id": "doc_0053",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Hold Rating with $74 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to operational efficiency. Key catalysts include cost reduction. Risk factors include Regulatory changes affecting compliance costs.",
+    "filing_date": "2023-10-17",
+    "metadata": {
+      "word_count": 44,
+      "section": "management_discussion",
+      "importance_score": 0.6787806422434359
+    }
+  },
+  {
+    "id": "doc_0054",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect JPMorgan Chase & Co.'s business operations: Economic downturn impacting business operations. Additionally, Foreign exchange rate volatility. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2025-01-09",
+    "metadata": {
+      "word_count": 37,
+      "section": "management_discussion",
+      "importance_score": 0.6040813825073527
+    }
+  },
+  {
+    "id": "doc_0055",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Goldman Sachs Group Inc. (GS) - Hold Rating with $180 price target. We believe Goldman Sachs Group Inc. is well-positioned in the Financial Services sector due to operational efficiency. Key catalysts include earnings growth. Risk factors include Interest rate fluctuations affecting portfolio value.",
+    "filing_date": "2025-06-01",
+    "metadata": {
+      "word_count": 45,
+      "section": "business",
+      "importance_score": 0.3921198708393411
+    }
+  },
+  {
+    "id": "doc_0056",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "8-K",
+    "content": "Berkshire Hathaway Inc. entered into a definitive agreement to acquire a financial services firm for approximately $5 billion. The transaction is expected to enhance market position.",
+    "filing_date": "2025-01-30",
+    "metadata": {
+      "word_count": 26,
+      "section": "financial_data",
+      "importance_score": 0.14833312754966493
+    }
+  },
+  {
+    "id": "doc_0057",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "8-K",
+    "content": "Tesla Inc. entered into a material agreement with a major customer valued at approximately $10 million over 10 years.",
+    "filing_date": "2024-09-23",
+    "metadata": {
+      "word_count": 19,
+      "section": "business",
+      "importance_score": 0.5293378097315589
+    }
+  },
+  {
+    "id": "doc_0058",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: Berkshire Hathaway Inc. experienced significant changes in market conditions during the reporting period. Key performance indicators include: liquidity growth of -17%, improved debt metrics, and strategic investments in regulatory compliance.",
+    "filing_date": "2024-08-06",
+    "metadata": {
+      "word_count": 34,
+      "section": "risk_factors",
+      "importance_score": 0.7414056734575278
+    }
+  },
+  {
+    "id": "doc_0059",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "earnings_call",
+    "content": "Berkshire Hathaway Inc. Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $82.0 billion, representing 27.9% growth year-over-year. Net income was $9.0 billion, and earnings per share of $9.67. Looking ahead, we remain focused on innovation. CFO: Our securities position remains strong with adequate reserves.",
+    "filing_date": "2025-08-12",
+    "metadata": {
+      "word_count": 49,
+      "section": "risk_factors",
+      "importance_score": 0.5156332468671798
+    }
+  },
+  {
+    "id": "doc_0060",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "JPMorgan Chase & Co. announced quarterly earnings results showing cash flow of $14 billion, exceeding analyst expectations. Management provided guidance for the next quarter indicating moderate outlook.",
+    "filing_date": "2024-02-12",
+    "metadata": {
+      "word_count": 27,
+      "section": "business",
+      "importance_score": 0.8579126751402533
+    }
+  },
+  {
+    "id": "doc_0061",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Tesla Inc.'s business operations: Operational risk from system failures. Additionally, Operational risk from system failures. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2025-05-28",
+    "metadata": {
+      "word_count": 36,
+      "section": "management_discussion",
+      "importance_score": 0.37491120003425904
+    }
+  },
+  {
+    "id": "doc_0062",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Goldman Sachs Group Inc. (GS) - Sell Rating with $221 price target. We believe Goldman Sachs Group Inc. is well-positioned in the Financial Services sector due to innovative products. Key catalysts include cost reduction. Risk factors include Operational risk from system failures.",
+    "filing_date": "2023-10-05",
+    "metadata": {
+      "word_count": 44,
+      "section": "financial_data",
+      "importance_score": 0.6850528307740711
+    }
+  },
+  {
+    "id": "doc_0063",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Amazon.com Inc. (AMZN) - Sell Rating with $359 price target. We believe Amazon.com Inc. is well-positioned in the E-commerce sector due to market leadership. Key catalysts include market expansion. Risk factors include Cybersecurity threats to data systems.",
+    "filing_date": "2024-12-21",
+    "metadata": {
+      "word_count": 39,
+      "section": "financial_data",
+      "importance_score": 0.8075035916828647
+    }
+  },
+  {
+    "id": "doc_0064",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "8-K",
+    "content": "Apple Inc. entered into a material agreement with a government entity valued at approximately $170 million over 6 years.",
+    "filing_date": "2023-10-27",
+    "metadata": {
+      "word_count": 19,
+      "section": "business",
+      "importance_score": 0.6723317965661908
+    }
+  },
+  {
+    "id": "doc_0065",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: JPMorgan Chase & Co. experienced significant changes in market conditions during the reporting period. Key performance indicators include: debt growth of 11%, improved market risk metrics, and strategic investments in human capital.",
+    "filing_date": "2023-10-25",
+    "metadata": {
+      "word_count": 36,
+      "section": "financial_data",
+      "importance_score": 0.4845430498189238
+    }
+  },
+  {
+    "id": "doc_0066",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "8-K",
+    "content": "Berkshire Hathaway Inc. entered into a material agreement with an industry consortium valued at approximately $271 million over 10 years.",
+    "filing_date": "2025-03-26",
+    "metadata": {
+      "word_count": 20,
+      "section": "risk_factors",
+      "importance_score": 0.6893748364804864
+    }
+  },
+  {
+    "id": "doc_0067",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Tesla Inc. (TSLA) - Hold Rating with $329 price target. We believe Tesla Inc. is well-positioned in the Automotive sector due to strong fundamentals. Key catalysts include market expansion. Risk factors include Interest rate fluctuations affecting portfolio value.",
+    "filing_date": "2024-11-06",
+    "metadata": {
+      "word_count": 40,
+      "section": "risk_factors",
+      "importance_score": 0.153124169526539
+    }
+  },
+  {
+    "id": "doc_0068",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Microsoft Corporation Q3 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $64.0 billion, representing -1.1% growth year-over-year. Net income was $17.0 billion, and earnings per share of $9.85. Looking ahead, we remain focused on cost optimization. CFO: Our regulatory position remains strong with adequate liquidity.",
+    "filing_date": "2024-12-02",
+    "metadata": {
+      "word_count": 49,
+      "section": "risk_factors",
+      "importance_score": 0.252827831498926
+    }
+  },
+  {
+    "id": "doc_0069",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "Goldman Sachs Group Inc. 13F Holdings Report: Total portfolio value of $9039 million across 14 positions. Top holdings include Bank of America Corp. ($778M), Microsoft Corporation ($747M). Portfolio demonstrates diversification strategy.",
+    "filing_date": "2025-07-18",
+    "metadata": {
+      "word_count": 31,
+      "section": "business",
+      "importance_score": 0.7598070788805548
+    }
+  },
+  {
+    "id": "doc_0070",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: Apple Inc. experienced significant changes in market conditions during the reporting period. Key performance indicators include: cash flow growth of -15%, improved Basel III metrics, and strategic investments in market expansion.",
+    "filing_date": "2024-06-26",
+    "metadata": {
+      "word_count": 35,
+      "section": "financial_data",
+      "importance_score": 0.2941183980433517
+    }
+  },
+  {
+    "id": "doc_0071",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Apple Inc. (AAPL) - Hold Rating with $410 price target. We believe Apple Inc. is well-positioned in the Technology sector due to operational efficiency. Key catalysts include new products. Risk factors include Operational risk from system failures.",
+    "filing_date": "2023-11-16",
+    "metadata": {
+      "word_count": 39,
+      "section": "management_discussion",
+      "importance_score": 0.4183119864808257
+    }
+  },
+  {
+    "id": "doc_0072",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Underperform Rating with $94 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to innovative products. Key catalysts include market expansion. Risk factors include Economic downturn impacting business operations.",
+    "filing_date": "2024-02-03",
+    "metadata": {
+      "word_count": 44,
+      "section": "financial_data",
+      "importance_score": 0.3503986277918013
+    }
+  },
+  {
+    "id": "doc_0073",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Apple Inc. (AAPL) - Outperform Rating with $91 price target. We believe Apple Inc. is well-positioned in the Technology sector due to market leadership. Key catalysts include regulatory changes. Risk factors include Market volatility may impact trading revenues.",
+    "filing_date": "2024-12-30",
+    "metadata": {
+      "word_count": 40,
+      "section": "management_discussion",
+      "importance_score": 0.4127982338402433
+    }
+  },
+  {
+    "id": "doc_0074",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Goldman Sachs Group Inc.'s business operations: Cybersecurity threats to data systems. Additionally, Liquidity risk in stressed market conditions. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2023-09-30",
+    "metadata": {
+      "word_count": 39,
+      "section": "business",
+      "importance_score": 0.7388465809577742
+    }
+  },
+  {
+    "id": "doc_0075",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "earnings_call",
+    "content": "Amazon.com Inc. Q1 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $23.0 billion, representing -6.9% growth year-over-year. Net income was $10.0 billion, and earnings per share of $4.28. Looking ahead, we remain focused on strategic growth. CFO: Our dividend position remains strong with adequate capital.",
+    "filing_date": "2023-09-26",
+    "metadata": {
+      "word_count": 49,
+      "section": "management_discussion",
+      "importance_score": 0.6264445768595378
+    }
+  },
+  {
+    "id": "doc_0076",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Apple Inc. (AAPL) - Buy Rating with $135 price target. We believe Apple Inc. is well-positioned in the Technology sector due to operational efficiency. Key catalysts include earnings growth. Risk factors include Liquidity risk in stressed market conditions.",
+    "filing_date": "2024-11-21",
+    "metadata": {
+      "word_count": 40,
+      "section": "risk_factors",
+      "importance_score": 0.5382881216993814
+    }
+  },
+  {
+    "id": "doc_0077",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "13F",
+    "content": "Microsoft Corporation 13F Holdings Report: Total portfolio value of $2871 million across 5 positions. Top holdings include Apple Inc. ($511M), Bank of America Corp. ($88M). Portfolio demonstrates diversification strategy.",
+    "filing_date": "2023-11-01",
+    "metadata": {
+      "word_count": 29,
+      "section": "financial_data",
+      "importance_score": 0.9944230919864654
+    }
+  },
+  {
+    "id": "doc_0078",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "13F",
+    "content": "Tesla Inc. 13F Holdings Report: Total portfolio value of $7849 million across 14 positions. Top holdings include Apple Inc. ($595M), Apple Inc. ($253M). Portfolio demonstrates diversification strategy.",
+    "filing_date": "2023-11-18",
+    "metadata": {
+      "word_count": 27,
+      "section": "financial_data",
+      "importance_score": 0.40733188808261833
+    }
+  },
+  {
+    "id": "doc_0079",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "13F",
+    "content": "Tesla Inc. 13F Holdings Report: Total portfolio value of $3273 million across 6 positions. Top holdings include Apple Inc. ($760M), Goldman Sachs Group Inc. ($827M). Portfolio demonstrates value orientation strategy.",
+    "filing_date": "2023-12-22",
+    "metadata": {
+      "word_count": 30,
+      "section": "risk_factors",
+      "importance_score": 0.48795722433585464
+    }
+  },
+  {
+    "id": "doc_0080",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "13F",
+    "content": "Berkshire Hathaway Inc. 13F Holdings Report: Total portfolio value of $8450 million across 17 positions. Top holdings include Microsoft Corporation ($897M), Bank of America Corp. ($657M). Portfolio demonstrates focus on growth strategy.",
+    "filing_date": "2024-11-02",
+    "metadata": {
+      "word_count": 32,
+      "section": "management_discussion",
+      "importance_score": 0.28132293459216917
+    }
+  },
+  {
+    "id": "doc_0081",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "8-K",
+    "content": "Amazon.com Inc. entered into a material agreement with a government entity valued at approximately $487 million over 3 years.",
+    "filing_date": "2025-06-16",
+    "metadata": {
+      "word_count": 19,
+      "section": "financial_data",
+      "importance_score": 0.8296252885724505
+    }
+  },
+  {
+    "id": "doc_0082",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "10-K",
+    "content": "Management's Discussion and Analysis: Amazon.com Inc. experienced significant changes in market conditions during the reporting period. Key performance indicators include: liabilities growth of -13%, improved hedging metrics, and strategic investments in regulatory compliance.",
+    "filing_date": "2025-03-25",
+    "metadata": {
+      "word_count": 33,
+      "section": "financial_data",
+      "importance_score": 0.42436593488971974
+    }
+  },
+  {
+    "id": "doc_0083",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Bank of America Corp. (BAC) - Outperform Rating with $71 price target. We believe Bank of America Corp. is well-positioned in the Financial Services sector due to market leadership. Key catalysts include cost reduction. Risk factors include Foreign exchange rate volatility.",
+    "filing_date": "2024-08-26",
+    "metadata": {
+      "word_count": 43,
+      "section": "management_discussion",
+      "importance_score": 0.3709792094410185
+    }
+  },
+  {
+    "id": "doc_0084",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Goldman Sachs Group Inc. submitted required regulatory filings related to risk management. The filing demonstrates the company's commitment to sound risk management.",
+    "filing_date": "2025-09-07",
+    "metadata": {
+      "word_count": 22,
+      "section": "business",
+      "importance_score": 0.6582211336643177
+    }
+  },
+  {
+    "id": "doc_0085",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "8-K",
+    "content": "Tesla Inc. announced the appointment of a new Chief Executive Officer. The appointment is effective immediately and is expected to strengthen leadership.",
+    "filing_date": "2025-09-12",
+    "metadata": {
+      "word_count": 22,
+      "section": "management_discussion",
+      "importance_score": 0.3659918212958966
+    }
+  },
+  {
+    "id": "doc_0086",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Tesla Inc.'s business operations: Economic downturn impacting business operations. Additionally, Credit risk from counterparty defaults. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2024-09-20",
+    "metadata": {
+      "word_count": 36,
+      "section": "management_discussion",
+      "importance_score": 0.2169228824879505
+    }
+  },
+  {
+    "id": "doc_0087",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "10-K",
+    "content": "Risk Factors: The following risk factors may materially affect Tesla Inc.'s business operations: Operational risk from system failures. Additionally, Foreign exchange rate volatility. Management believes these risks are adequately addressed through comprehensive risk management frameworks.",
+    "filing_date": "2023-12-27",
+    "metadata": {
+      "word_count": 35,
+      "section": "management_discussion",
+      "importance_score": 0.9386736680813298
+    }
+  },
+  {
+    "id": "doc_0088",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "13F",
+    "content": "JPMorgan Chase & Co. 13F Holdings Report: Total portfolio value of $5688 million across 11 positions. Top holdings include Goldman Sachs Group Inc. ($769M), Tesla Inc. ($713M). Portfolio demonstrates diversification strategy.",
+    "filing_date": "2023-10-08",
+    "metadata": {
+      "word_count": 31,
+      "section": "risk_factors",
+      "importance_score": 0.8346664416294959
+    }
+  },
+  {
+    "id": "doc_0089",
+    "company": {
+      "name": "Goldman Sachs Group Inc.",
+      "ticker": "GS",
+      "cik": "0000886982",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Goldman Sachs Group Inc. (GS) - Hold Rating with $499 price target. We believe Goldman Sachs Group Inc. is well-positioned in the Financial Services sector due to operational efficiency. Key catalysts include new products. Risk factors include Market volatility may impact trading revenues.",
+    "filing_date": "2024-03-15",
+    "metadata": {
+      "word_count": 45,
+      "section": "management_discussion",
+      "importance_score": 0.42560430524022996
+    }
+  },
+  {
+    "id": "doc_0090",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "8-K",
+    "content": "Bank of America Corp. declared a quarterly dividend of $1.64 per share, maintaining the dividend rate from the previous quarter. The dividend will be paid to shareholders of record.",
+    "filing_date": "2024-02-22",
+    "metadata": {
+      "word_count": 29,
+      "section": "risk_factors",
+      "importance_score": 0.8723080620209643
+    }
+  },
+  {
+    "id": "doc_0091",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Apple Inc. Q3 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $16.0 billion, representing -3.5% growth year-over-year. Net income was $18.0 billion, and earnings per share of $1.86. Looking ahead, we remain focused on operational excellence. CFO: Our derivatives position remains strong with adequate liquidity.",
+    "filing_date": "2024-09-17",
+    "metadata": {
+      "word_count": 49,
+      "section": "business",
+      "importance_score": 0.186813545942137
+    }
+  },
+  {
+    "id": "doc_0092",
+    "company": {
+      "name": "Tesla Inc.",
+      "ticker": "TSLA",
+      "cik": "0001318605",
+      "sector": "Automotive"
+    },
+    "document_type": "8-K",
+    "content": "Tesla Inc. announced the appointment of a new Chief Financial Officer. The appointment is effective immediately and is expected to improve risk management.",
+    "filing_date": "2025-08-03",
+    "metadata": {
+      "word_count": 23,
+      "section": "risk_factors",
+      "importance_score": 0.9326106768285268
+    }
+  },
+  {
+    "id": "doc_0093",
+    "company": {
+      "name": "Apple Inc.",
+      "ticker": "AAPL",
+      "cik": "0000320193",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Apple Inc. Q3 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $60.0 billion, representing 20.9% growth year-over-year. Net income was $1.0 billion, and earnings per share of $5.85. Looking ahead, we remain focused on cost optimization. CFO: Our EBITDA position remains strong with adequate capital.",
+    "filing_date": "2023-09-17",
+    "metadata": {
+      "word_count": 49,
+      "section": "business",
+      "importance_score": 0.11954201263615086
+    }
+  },
+  {
+    "id": "doc_0094",
+    "company": {
+      "name": "Microsoft Corporation",
+      "ticker": "MSFT",
+      "cik": "0000789019",
+      "sector": "Technology"
+    },
+    "document_type": "earnings_call",
+    "content": "Microsoft Corporation Q4 2023 Earnings Call Transcript: CEO: We delivered strong results with revenue of $94.0 billion, representing 27.2% growth year-over-year. Net income was $10.0 billion, and earnings per share of $1.57. Looking ahead, we remain focused on innovation. CFO: Our stress testing position remains strong with adequate reserves.",
+    "filing_date": "2025-07-28",
+    "metadata": {
+      "word_count": 49,
+      "section": "risk_factors",
+      "importance_score": 0.9863516520211079
+    }
+  },
+  {
+    "id": "doc_0095",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "JPMorgan Chase & Co. provides insurance and diversified investment services. During fiscal year 2023, the company reported revenue of $289 billion, representing a -6% change from the prior year. Market volatility may impact trading revenues.",
+    "filing_date": "2024-11-25",
+    "metadata": {
+      "word_count": 35,
+      "section": "management_discussion",
+      "importance_score": 0.9179477280491166
+    }
+  },
+  {
+    "id": "doc_0096",
+    "company": {
+      "name": "Bank of America Corp.",
+      "ticker": "BAC",
+      "cik": "0000070858",
+      "sector": "Financial Services"
+    },
+    "document_type": "10-K",
+    "content": "Business Overview: Bank of America Corp. operates in the Financial Services sector, with primary business activities including operates e-commerce and digital advertising platforms. The company maintains a diversified portfolio of EBITDA and focuses on sustainable growth.",
+    "filing_date": "2023-10-24",
+    "metadata": {
+      "word_count": 36,
+      "section": "management_discussion",
+      "importance_score": 0.8684217294566936
+    }
+  },
+  {
+    "id": "doc_0097",
+    "company": {
+      "name": "JPMorgan Chase & Co.",
+      "ticker": "JPM",
+      "cik": "0000019617",
+      "sector": "Financial Services"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: JPMorgan Chase & Co. (JPM) - Underperform Rating with $86 price target. We believe JPMorgan Chase & Co. is well-positioned in the Financial Services sector due to strong fundamentals. Key catalysts include cost reduction. Risk factors include Economic downturn impacting business operations.",
+    "filing_date": "2024-12-05",
+    "metadata": {
+      "word_count": 44,
+      "section": "business",
+      "importance_score": 0.516076409768215
+    }
+  },
+  {
+    "id": "doc_0098",
+    "company": {
+      "name": "Amazon.com Inc.",
+      "ticker": "AMZN",
+      "cik": "0001018724",
+      "sector": "E-commerce"
+    },
+    "document_type": "analyst_report",
+    "content": "Analyst Report: Amazon.com Inc. (AMZN) - Sell Rating with $458 price target. We believe Amazon.com Inc. is well-positioned in the E-commerce sector due to market leadership. Key catalysts include regulatory changes. Risk factors include Liquidity risk in stressed market conditions.",
+    "filing_date": "2025-06-29",
+    "metadata": {
+      "word_count": 40,
+      "section": "risk_factors",
+      "importance_score": 0.27455855963586495
+    }
+  },
+  {
+    "id": "doc_0099",
+    "company": {
+      "name": "Berkshire Hathaway Inc.",
+      "ticker": "BRK.A",
+      "cik": "0001067983",
+      "sector": "Conglomerate"
+    },
+    "document_type": "8-K",
+    "content": "Berkshire Hathaway Inc. submitted required regulatory filings related to capital adequacy. The filing demonstrates the company's commitment to sound risk management.",
+    "filing_date": "2025-01-06",
+    "metadata": {
+      "word_count": 21,
+      "section": "management_discussion",
+      "importance_score": 0.2215583814551333
+    }
+  }
+]
