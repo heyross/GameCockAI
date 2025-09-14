@@ -7,7 +7,12 @@ import json
 import pandas as pd
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Union
-from database import SessionLocal
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import SessionLocal
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import SessionLocal
 from sqlalchemy import text, func, and_, or_
 import ollama
 
@@ -682,7 +687,7 @@ class CrossDatasetAnalyticsEngine:
         """Generate AI-powered insights from cross-dataset analysis results"""
         
         prompt = f"""
-        As SwapBot, analyze the following cross-dataset {query_type} results and provide sophisticated financial insights:
+        As Raven, analyze the following cross-dataset {query_type} results and provide sophisticated financial insights:
 
         Query Type: {query_type}
         Parameters: {json.dumps(params, indent=2)}
@@ -702,7 +707,7 @@ class CrossDatasetAnalyticsEngine:
         
         try:
             response = ollama.chat(
-                model='swapbot-enhanced',
+                model='raven-enhanced',
                 messages=[{'role': 'user', 'content': prompt}]
             )
             return response['message']['content']

@@ -34,7 +34,7 @@ def worker():
             print(f"[Worker] Starting task {task.id}...")
             
             try:
-                result = task.func(*task.args, **kwargs)
+                result = task.func(*task.args, **task.kwargs)
                 task.result = result
                 task.status = STATUS_COMPLETED
                 print(f"[Worker] Task {task.id} completed successfully.")

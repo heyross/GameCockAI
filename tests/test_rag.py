@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Assuming TOOL_MAP is imported in rag.py and we need to patch it there
-from rag import query_swapbot, TOOL_MAP
+from rag import query_raven, TOOL_MAP
 
 class TestAgenticRag(unittest.TestCase):
 
@@ -45,7 +45,7 @@ class TestAgenticRag(unittest.TestCase):
 
             # --- Run Test ---
             messages = []
-            response = query_swapbot("find apple", messages)
+            response = query_raven("find apple", messages)
 
             # --- Assertions ---
             # Verify that our mock tool was called with the correct arguments.
@@ -77,7 +77,7 @@ class TestAgenticRag(unittest.TestCase):
 
         # --- Run Test ---
         messages = []
-        response = query_swapbot("hello", messages)
+        response = query_raven("hello", messages)
 
         # --- Assertions ---
         # Verify that the response is the direct answer from the AI.

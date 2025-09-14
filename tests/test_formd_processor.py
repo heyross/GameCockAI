@@ -6,12 +6,17 @@ import pandas as pd
 from zipfile import ZipFile
 from unittest.mock import patch, MagicMock
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add GameCockAI directory to path to allow imports from the main package
+gamecock_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root_dir = os.path.dirname(gamecock_dir)
+sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
+sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 from processor import process_formd_data, process_formd_quarter
 from downloader import extract_formd_filings
+# Import from the correct database module (GameCockAI/database.py)
 from database import (SessionLocal, FormDSubmission, FormDIssuer, FormDOffering, 
-                     FormDRecipient, FormDRelatedPerson, FormDSignature)
+                      FormDRecipient, FormDRelatedPerson, FormDSignature)
 
 
 class TestFormDProcessor(unittest.TestCase):

@@ -28,7 +28,12 @@ from config import (
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR, THRTNF_SOURCE_DIR,
     EXCHANGE_SOURCE_DIR, SEC_8K_SOURCE_DIR, NCEN_SOURCE_DIR, NPORT_SOURCE_DIR, FORMD_SOURCE_DIR
 )
-from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import create_db_and_tables, get_db_stats, export_db_to_csv, reset_database
 from startup import check_dependencies, check_ollama_service
 from worker import start_worker, stop_worker
 

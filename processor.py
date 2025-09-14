@@ -5,23 +5,44 @@ import pandas as pd
 from zipfile import ZipFile
 from downloader import extract_formd_filings
 from config import FORMD_SOURCE_DIR
-from database import (
-    SessionLocal, CFTCSwap, SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
-    SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, Form13FSubmission,
-    Form13FCoverPage, Form13FOtherManager, Form13FSignature, Form13FSummaryPage,
-    Form13FOtherManager2, Form13FInfoTable, SecExchangeMetrics, NCENSubmission,
-    NCENRegistrant, NCENFundReportedInfo, NCENAdviser, NPORTSubmission, NPORTGeneralInfo,
-    NPORTHolding, NPORTDerivative, NMFPSubmission, NMFPFund, NMFPSeriesLevelInfo,
-    FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient, FormDRelatedPerson,
-    FormDSignature, NMFPAdministrator, NMFPTransferAgent, NMFPSeriesShadowPriceL, NMFPClassLevelInfo,
-    NMFPNetAssetValuePerShareL, NMFPSchPortfolioSecurities, NMFPCollateralIssuers,
-    NMFPNrsro, NMFPDemandFeature, NMFPGuarantor, NMFPEnhancementProvider,
-    NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
-    NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
-    NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
-    CFTCDerivativesDealer, CFTCDerivativesClearingOrganization, CFTCSwapExecutionFacility,
-    CFTCSwapDataRepository, CFTCDailySwapReport
-)
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import (
+        SessionLocal, CFTCSwap, SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
+        SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, Form13FSubmission,
+        Form13FCoverPage, Form13FOtherManager, Form13FSignature, Form13FSummaryPage,
+        Form13FOtherManager2, Form13FInfoTable, SecExchangeMetrics, NCENSubmission,
+        NCENRegistrant, NCENFundReportedInfo, NCENAdviser, NPORTSubmission, NPORTGeneralInfo,
+        NPORTHolding, NPORTDerivative, NMFPSubmission, NMFPFund, NMFPSeriesLevelInfo,
+        FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient, FormDRelatedPerson,
+        FormDSignature, NMFPAdministrator, NMFPTransferAgent, NMFPSeriesShadowPriceL, NMFPClassLevelInfo,
+        NMFPNetAssetValuePerShareL, NMFPSchPortfolioSecurities, NMFPCollateralIssuers,
+        NMFPNrsro, NMFPDemandFeature, NMFPGuarantor, NMFPEnhancementProvider,
+        NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
+        NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
+        NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
+        CFTCDerivativesDealer, CFTCDerivativesClearingOrganization, CFTCSwapExecutionFacility,
+        CFTCSwapDataRepository, CFTCDailySwapReport
+    )
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import (
+        SessionLocal, CFTCSwap, SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
+        SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, Form13FSubmission,
+        Form13FCoverPage, Form13FOtherManager, Form13FSignature, Form13FSummaryPage,
+        Form13FOtherManager2, Form13FInfoTable, SecExchangeMetrics, NCENSubmission,
+        NCENRegistrant, NCENFundReportedInfo, NCENAdviser, NPORTSubmission, NPORTGeneralInfo,
+        NPORTHolding, NPORTDerivative, NMFPSubmission, NMFPFund, NMFPSeriesLevelInfo,
+        FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient, FormDRelatedPerson,
+        FormDSignature, NMFPAdministrator, NMFPTransferAgent, NMFPSeriesShadowPriceL, NMFPClassLevelInfo,
+        NMFPNetAssetValuePerShareL, NMFPSchPortfolioSecurities, NMFPCollateralIssuers,
+        NMFPNrsro, NMFPDemandFeature, NMFPGuarantor, NMFPEnhancementProvider,
+        NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
+        NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
+        NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
+        CFTCDerivativesDealer, CFTCDerivativesClearingOrganization, CFTCSwapExecutionFacility,
+        CFTCSwapDataRepository, CFTCDailySwapReport
+    )
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 

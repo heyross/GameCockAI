@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
+# Import from the correct database module (GameCockAI/database.py)
 from database import Base, SecSubmission
 from processor import process_sec_insider_data
 

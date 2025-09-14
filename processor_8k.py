@@ -17,7 +17,12 @@ from bs4 import BeautifulSoup
 from typing import Dict, List, Optional, Tuple, Union
 from sqlalchemy.orm import Session
 
-from database import SessionLocal, Sec8KSubmission, Sec8KItem
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import SessionLocal, Sec8KSubmission, Sec8KItem
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import SessionLocal, Sec8KSubmission, Sec8KItem
 from config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
 
 # Configure logging

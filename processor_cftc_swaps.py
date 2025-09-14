@@ -11,14 +11,26 @@ from typing import Dict, List, Any, Optional
 import pandas as pd
 from sqlalchemy.orm import Session
 
-from database import (
-    SessionLocal,
-    CFTCDerivativesDealer,
-    CFTCDerivativesClearingOrganization,
-    CFTCSwapExecutionFacility,
-    CFTCSwapDataRepository,
-    CFTCDailySwapReport
-)
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import (
+        SessionLocal,
+        CFTCDerivativesDealer,
+        CFTCDerivativesClearingOrganization,
+        CFTCSwapExecutionFacility,
+        CFTCSwapDataRepository,
+        CFTCDailySwapReport
+    )
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import (
+        SessionLocal,
+        CFTCDerivativesDealer,
+        CFTCDerivativesClearingOrganization,
+        CFTCSwapExecutionFacility,
+        CFTCSwapDataRepository,
+        CFTCDailySwapReport
+    )
 from config import (
     CFTC_SWAP_DEALER_DIR,
     CFTC_SWAP_EXECUTION_DIR,

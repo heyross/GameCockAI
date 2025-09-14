@@ -1,7 +1,7 @@
 # GameCockAI Next Session Context
 
 ## Project Overview
-GameCockAI is a comprehensive financial data analysis platform that downloads, processes, and analyzes data from SEC and CFTC sources. The system features a RAG (Retrieval-Augmented Generation) pipeline with an AI agent called SwapBot for natural language querying of financial data.
+GameCockAI is a comprehensive financial data analysis platform that downloads, processes, and analyzes data from SEC and CFTC sources. The system features a RAG (Retrieval-Augmented Generation) pipeline with an AI agent called Raven for natural language querying of financial data.
 
 ## Current System Status
 
@@ -11,7 +11,7 @@ GameCockAI is a comprehensive financial data analysis platform that downloads, p
 - **SEC N-CEN Processing**: Complete with database schemas and processing logic
 - **SEC N-PORT Processing**: Fully implemented and tested with real data (9,117 records processed successfully)
 - **CFTC Swap Data**: Processing for Equity, Credit, Commodities, and Interest Rates data
-- **AI Agent (SwapBot)**: Conversational interface for data management and querying
+- **AI Agent (Raven)**: Conversational interface for data management and querying
 - **Company Watchlist**: Target company management system
 - **Database Management**: SQLite backend with export/import capabilities
 

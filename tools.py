@@ -3,12 +3,26 @@ from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 from data_sources import cftc, sec
 from processor import process_zip_files, load_cftc_data_to_db
-from database import get_db_stats, export_db_to_csv
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import get_db_stats, export_db_to_csv
+except ImportError:
+    # Fallback for when running from GameCockAI directory
+    from database import get_db_stats, export_db_to_csv
 from config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR,
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
 )
-from worker import add_task, get_task_status as get_task_status_from_worker
+try:
+    from worker import add_task, get_task_status as get_task_status_from_worker
+    WORKER_AVAILABLE = True
+except ImportError:
+    print("⚠️ Worker functions not available")
+    def add_task(func, *args, **kwargs):
+        return "worker-disabled"
+    def get_task_status_from_worker(task_id):
+        return {"status": "disabled", "message": "Worker not available"}
+    WORKER_AVAILABLE = False
 from analytics_tools import ANALYTICS_TOOLS
 from enhanced_analytics_tools_fixed import ENHANCED_ANALYTICS_TOOLS_FIXED
 

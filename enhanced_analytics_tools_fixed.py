@@ -7,7 +7,12 @@ import json
 import pandas as pd
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Union
-from database import SessionLocal, CFTCSwap
+# Import from the correct database module (GameCockAI/database.py)
+try:
+    from .database import SessionLocal, CFTCSwap
+except ImportError:
+    # Fallback for when running from GameCockAI directory  
+    from database import SessionLocal, CFTCSwap
 from sqlalchemy import text, func, and_, or_
 import ollama
 
@@ -247,7 +252,7 @@ class CrossDatasetAnalyticsEngine:
         """Generate AI insights adapted to available data"""
         
         prompt = f"""
-        As SwapBot, analyze the following {query_type} results from the GameCock financial database:
+        As Raven, analyze the following {query_type} results from the GameCock financial database:
 
         Query Type: {query_type}
         Parameters: {json.dumps(params, indent=2)}
@@ -266,7 +271,7 @@ class CrossDatasetAnalyticsEngine:
         
         try:
             response = ollama.chat(
-                model='swapbot-enhanced',
+                model='raven-enhanced',
                 messages=[{'role': 'user', 'content': prompt}]
             )
             return response['message']['content']

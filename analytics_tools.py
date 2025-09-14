@@ -7,7 +7,7 @@ import json
 import pandas as pd
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
-from database import SessionLocal, CFTCSwap
+from .database import SessionLocal, CFTCSwap
 from sqlalchemy import text, func, and_, or_
 import ollama
 
@@ -294,7 +294,7 @@ class AnalyticsEngine:
         
         # Create a comprehensive prompt for the AI
         prompt = f"""
-        As SwapBot, analyze the following {query_type} results and provide insights:
+        As Raven, analyze the following {query_type} results and provide insights:
 
         Query Parameters: {json.dumps(params, indent=2)}
         
@@ -312,7 +312,7 @@ class AnalyticsEngine:
         
         try:
             response = ollama.chat(
-                model='swapbot-enhanced',
+                model='raven-enhanced',
                 messages=[{'role': 'user', 'content': prompt}]
             )
             return response['message']['content']

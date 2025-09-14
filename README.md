@@ -149,7 +149,7 @@ By using this software, you agree to the terms of the appropriate license.
    # Edit .env to add your FRED API key and other settings
    
    # Initialize the database
-   python -c "from database import init_db; init_db()"
+   python -c "from GameCockAI.database import create_db_and_tables; create_db_and_tables()"
    ```
 
 3. **Run the application**:

@@ -10,11 +10,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sys
 
-# Add parent directory to path to allow imports from the main package
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add GameCockAI directory to path to allow imports from the main package
+gamecock_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root_dir = os.path.dirname(gamecock_dir)
+sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
+sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 # Import the processor and models
 from processor_dtcc import DTCCProcessor
+# Import from the correct database module (GameCockAI/database.py)
 from database import Base
 from dtcc_models import DTCCOrganization, DTCCOptionTrade, DTCCInterestRateSwap, DTCCEquityOption
 

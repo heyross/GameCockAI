@@ -56,7 +56,7 @@ class ChatInterface:
         self.messages = [{
             'role': 'system',
             'content': (
-                'You are SwapBot, an expert financial data assistant. Your goal is to help users by answering questions '
+                'You are Raven, an expert financial data assistant. Your goal is to help users by answering questions '
                 'and performing tasks. When a user\'s request is ambiguous, ask clarifying questions to understand their '
                 'intent before using your tools. Be conversational and guide the user if they seem unsure.'
             )
@@ -99,7 +99,7 @@ class ChatInterface:
         ) as progress:
             task = progress.add_task("Thinking...", total=None)
             response = ollama.chat(
-                model='swapbot-enhanced',
+                model='raven-enhanced',
                 messages=self.messages + [{'role': 'user', 'content': prompt}],
                 stream=False
             )
@@ -216,7 +216,7 @@ def main():
     
     console.print(
         Panel(
-            "[bold blue]SwapBot[/bold blue] - Financial Data Assistant\n"
+            "[bold blue]Raven[/bold blue] - Financial Data Assistant\n"
             "Type your questions or use /help for commands",
             title="Welcome",
             border_style="blue",
@@ -238,7 +238,7 @@ def main():
                     response = chat.process_query(user_input)
                 
                 # Print response with Markdown formatting
-                console.print("\n[bold green]SwapBot:[/bold green]")
+                console.print("\n[bold green]Raven:[/bold green]")
                 console.print(Markdown(response))
                 
             except KeyboardInterrupt:

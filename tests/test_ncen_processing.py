@@ -13,9 +13,14 @@ from unittest.mock import patch, MagicMock
 
 # Import the modules we're testing
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add GameCockAI directory to path to allow imports from the main package
+gamecock_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root_dir = os.path.dirname(gamecock_dir)
+sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
+sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 from processor import process_ncen_data, sanitize_column_names
+# Import from the correct database module (GameCockAI/database.py)
 from database import (NCENSubmission, NCENRegistrant, NCENFundReportedInfo, 
                      NCENAdviser, create_db_and_tables, SessionLocal)
 

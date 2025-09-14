@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
+# Import from the correct database module (GameCockAI/database.py)
 from database import Base, SecExchangeMetrics
 from processor import process_exchange_metrics_data
 

@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # Import the processor and database models
+# Import from the correct database module (GameCockAI/database.py)
 from database import Base, Sec8KSubmission, Sec8KItem
 from processor_8k import SEC8KProcessor
 
