@@ -21,8 +21,30 @@ def check_dependencies():
     print("Checking for required dependencies...")
     missing_packages = []
     
+    # Look for requirements.txt in multiple possible locations
+    import os
+    requirements_paths = [
+        'requirements.txt',  # Current directory
+        'GameCockAI/requirements.txt',  # GameCockAI subdirectory
+        os.path.join(os.path.dirname(__file__), '..', 'requirements.txt'),  # Relative to this file
+        os.path.join(os.path.dirname(__file__), '..', '..', 'requirements.txt')  # Root directory
+    ]
+    
+    requirements_file = None
+    for path in requirements_paths:
+        if os.path.exists(path):
+            requirements_file = path
+            break
+    
+    if not requirements_file:
+        print("Error: requirements.txt not found in any expected location.")
+        print("Searched locations:")
+        for path in requirements_paths:
+            print(f"  - {path}")
+        return False
+    
     try:
-        with open('requirements.txt', 'r') as f:
+        with open(requirements_file, 'r') as f:
             for line in f:
                 line = line.strip()
                 
@@ -41,7 +63,7 @@ def check_dependencies():
                     missing_packages.append(line)  # Keep the full line with version
                     
     except FileNotFoundError:
-        print("Error: requirements.txt not found.")
+        print(f"Error: Could not read requirements file at {requirements_file}")
         return False
 
     if missing_packages:

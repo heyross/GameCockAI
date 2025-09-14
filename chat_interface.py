@@ -13,7 +13,20 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.live import Live
 from rich.text import Text
 import ollama
-from tools import TOOL_MAP
+import sys
+
+# Import the tool-enabled Raven system
+try:
+    from src.rag_unified import query_raven_with_tools
+    TOOL_ENABLED_RAVEN = True
+    print("✅ Tool-enabled Raven system loaded")
+except ImportError as e:
+    print(f"⚠️ Tool-enabled Raven not available: {e}")
+    TOOL_ENABLED_RAVEN = False
+    try:
+        from tools import TOOL_MAP
+    except ImportError:
+        TOOL_MAP = {}
 
 class RAGSystem:
     def __init__(self, model_name: str = 'all-mpnet-base-v2'):
@@ -56,14 +69,17 @@ class ChatInterface:
         self.messages = [{
             'role': 'system',
             'content': (
-                'You are Raven, an expert financial data assistant. Your goal is to help users by answering questions '
-                'and performing tasks. When a user\'s request is ambiguous, ask clarifying questions to understand their '
-                'intent before using your tools. Be conversational and guide the user if they seem unsure.'
+                'You are Raven, an expert financial data assistant with access to 18 specialized tools. '
+                'Your goal is to help users by answering questions and performing tasks using your available tools. '
+                'When a user\'s request is ambiguous, ask clarifying questions to understand their intent before using your tools. '
+                'Be conversational and guide the user if they seem unsure. You have access to company search, data downloading, '
+                'processing, analytics, and database management tools.'
             )
         }]
         self.command_history = []
         self.session_id = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.history_file = Path(f'chat_history_{self.session_id}.json')
+        self.tool_enabled = TOOL_ENABLED_RAVEN
         
     def save_history(self):
         """Save chat history to a file."""
@@ -85,7 +101,31 @@ class ChatInterface:
         if query.startswith('/'):
             return self._handle_command(query[1:])
         
-        # Use RAG to get relevant context
+        # Use tool-enabled Raven system if available
+        if self.tool_enabled:
+            try:
+                with Progress(
+                    SpinnerColumn(),
+                    TextColumn("[progress.description]{task.description}"),
+                    transient=True,
+                ) as progress:
+                    task = progress.add_task("Raven is thinking and using tools...", total=None)
+                    response_text = query_raven_with_tools(query, self.messages)
+                
+                # Add response to history
+                self.messages.append({'role': 'assistant', 'content': response_text})
+                
+                # Save history
+                self.save_history()
+                
+                return response_text
+                
+            except Exception as e:
+                self.console.print(f"[red]Error with tool-enabled Raven: {e}[/red]")
+                # Fall back to basic RAG
+                self.tool_enabled = False
+        
+        # Fallback: Use basic RAG system
         context = self.rag.retrieve_relevant_documents(query)
         
         # Prepare the prompt with context
@@ -138,6 +178,7 @@ class ChatInterface:
             'exit': self._cmd_exit,
             'load': self._cmd_load,
             'save': self._cmd_save,
+            'tools': self._cmd_tools,
         }
         
         handler = commands.get(cmd, self._cmd_not_found)
@@ -153,6 +194,7 @@ class ChatInterface:
             '/exit': 'Exit the chat',
             '/load <file>': 'Load a knowledge base file',
             '/save [file]': 'Save the current session',
+            '/tools': 'Show available tools and capabilities',
         }
         
         for cmd, desc in commands.items():
@@ -205,6 +247,19 @@ class ChatInterface:
         except Exception as e:
             return f"Error saving session: {e}"
     
+    def _cmd_tools(self, args: list) -> str:
+        """Show available tools and capabilities."""
+        if not self.tool_enabled:
+            return "❌ Tool-enabled Raven is not available. Running in basic mode."
+        
+        try:
+            # Use the tool orchestrator to get tool information
+            from src.rag_tool_orchestrator import RAGToolOrchestrator
+            orchestrator = RAGToolOrchestrator()
+            return orchestrator._handle_tool_help()
+        except Exception as e:
+            return f"❌ Error retrieving tool information: {e}"
+    
     def _cmd_not_found(self, args: list) -> str:
         """Handle unknown commands."""
         return f"Unknown command. Type /help for a list of available commands."
@@ -214,11 +269,23 @@ def main():
     console = Console()
     chat = ChatInterface()
     
+    # Check if tool-enabled Raven is available
+    tool_status = "✅ Tool-enabled" if TOOL_ENABLED_RAVEN else "⚠️ Basic mode"
+    
     console.print(
         Panel(
-            "[bold blue]Raven[/bold blue] - Financial Data Assistant\n"
-            "Type your questions or use /help for commands",
-            title="Welcome",
+            f"[bold blue]🖤 Welcome to Raven[/bold blue] - Your Financial Data Assistant ({tool_status})\n\n"
+            f"👋 Hello! I'm Raven, your intelligent financial data assistant.\n"
+            f"I have access to {len(TOOL_MAP) if 'TOOL_MAP' in globals() else '18'} specialized tools\n"
+            f"to help you navigate the complex world of financial data.\n\n"
+            f"[bold]💬 Let's start a conversation![/bold] Here are some things you can ask me:\n"
+            f"• 'What can you help me with?' - Discover my full capabilities\n"
+            f"• 'What data do you have access to?' - Explore available datasets\n"
+            f"• 'Search for Apple company' - Find and analyze companies\n"
+            f"• 'Show me database statistics' - See what data we have\n"
+            f"• 'Analyze market trends' - Get AI-powered market insights\n\n"
+            f"[dim]Type your questions or use /help for commands[/dim]",
+            title="🖤 Raven's Financial Intelligence Hub",
             border_style="blue",
         )
     )

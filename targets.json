@@ -8,5 +8,10 @@
         "cik_str": "0001326380",
         "ticker": "GME",
         "title": "GameStop Corp."
+    },
+    {
+        "cik_str": "0000000123",
+        "ticker": "123",
+        "title": "123"
     }
 ]

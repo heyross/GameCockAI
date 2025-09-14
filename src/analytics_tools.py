@@ -5,11 +5,30 @@ Provides structured SQL query capabilities with RAG integration
 
 import json
 import pandas as pd
+import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from database import SessionLocal, CFTCSwap
 from sqlalchemy import text, func, and_, or_
 import ollama
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
+# Error handling decorator for analytics tools
+def handle_analytics_errors(func):
+    """Decorator to provide consistent error handling for analytics tools"""
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            logger.error(f"Error in analytics tool {func.__name__}: {str(e)}")
+            return json.dumps({
+                "error": f"Analytics tool execution failed: {str(e)}",
+                "tool": func.__name__,
+                "suggestion": "Please check your database connection and data availability"
+            })
+    return wrapper
 
 class AnalyticsEngine:
     """Main analytics engine that combines SQL queries with AI analysis"""
@@ -321,61 +340,117 @@ class AnalyticsEngine:
 
 
 # Analytics tool functions for the TOOL_MAP
+@handle_analytics_errors
 def analyze_market_trends(days_back: int = 30, asset_class: str = None):
     """Analyze market trends over a specified period"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('market_trends', {
-            'days_back': days_back,
-            'asset_class': asset_class
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('market_trends', {
+                'days_back': days_back,
+                'asset_class': asset_class
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Market trends analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Market trends analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_analytics_errors
 def analyze_trading_positions(company_cik: str = None, asset_class: str = None):
     """Analyze trading positions and concentrations"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('trading_positions', {
-            'company_cik': company_cik,
-            'asset_class': asset_class
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('trading_positions', {
+                'company_cik': company_cik,
+                'asset_class': asset_class
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Trading positions analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Trading positions analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_analytics_errors
 def risk_assessment(assessment_type: str = 'general'):
     """Perform risk assessment analysis"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('risk_assessment', {
-            'assessment_type': assessment_type
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('risk_assessment', {
+                'assessment_type': assessment_type
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Risk assessment failed: {str(e)}")
+        return json.dumps({
+            "error": "Risk assessment failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_analytics_errors
 def compare_companies(company_list: list):
     """Compare multiple companies across various metrics"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('company_comparison', {
-            'companies': company_list
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('company_comparison', {
+                'companies': company_list
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Company comparison failed: {str(e)}")
+        return json.dumps({
+            "error": "Company comparison failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_analytics_errors
 def exposure_analysis(dimension: str = 'asset_class'):
     """Analyze market exposure by various dimensions"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('exposure_analysis', {
-            'dimension': dimension
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('exposure_analysis', {
+                'dimension': dimension
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Exposure analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Exposure analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_analytics_errors
 def swap_market_overview():
     """Provide comprehensive swap market overview"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('swap_overview', {})
-    return json.dumps(results, default=str)
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('swap_overview', {})
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Swap market overview failed: {str(e)}")
+        return json.dumps({
+            "error": "Swap market overview failed",
+            "suggestion": "Please check your database connection and data availability"
+        })
 
+@handle_analytics_errors
 def liquidity_analysis(timeframe: str = '30d'):
     """Analyze market liquidity metrics"""
-    with AnalyticsEngine() as engine:
-        results = engine.execute_analytical_query('liquidity_analysis', {
-            'timeframe': timeframe
+    try:
+        with AnalyticsEngine() as engine:
+            results = engine.execute_analytical_query('liquidity_analysis', {
+                'timeframe': timeframe
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Liquidity analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Liquidity analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
 
 # Enhanced TOOL_MAP with analytics functions

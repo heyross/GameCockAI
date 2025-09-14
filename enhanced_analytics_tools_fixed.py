@@ -5,6 +5,7 @@ Adapted to work with actual database schema and current data availability
 
 import json
 import pandas as pd
+import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Union
 # Import from the correct database module (GameCockAI/database.py)
@@ -15,6 +16,24 @@ except ImportError:
     from database import SessionLocal, CFTCSwap
 from sqlalchemy import text, func, and_, or_
 import ollama
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
+# Error handling decorator for enhanced analytics tools
+def handle_enhanced_analytics_errors(func):
+    """Decorator to provide consistent error handling for enhanced analytics tools"""
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            logger.error(f"Error in enhanced analytics tool {func.__name__}: {str(e)}")
+            return json.dumps({
+                "error": f"Enhanced analytics tool execution failed: {str(e)}",
+                "tool": func.__name__,
+                "suggestion": "Please check your database connection and data availability"
+            })
+    return wrapper
 
 class CrossDatasetAnalyticsEngine:
     """Advanced analytics engine adapted for current database structure"""
@@ -280,73 +299,137 @@ class CrossDatasetAnalyticsEngine:
 
 
 # Fixed analytics functions that work with current database structure
+@handle_enhanced_analytics_errors
 def comprehensive_company_analysis(cik: str, include_subsidiaries: bool = True):
     """Company analysis adapted to available data"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('company_comprehensive_profile', {
-            'cik': cik,
-            'include_subsidiaries': include_subsidiaries
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('company_comprehensive_profile', {
+                'cik': cik,
+                'include_subsidiaries': include_subsidiaries
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Comprehensive company analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Comprehensive company analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def institutional_flow_analysis(timeframe_days: int = 90, min_position_value: float = 1000000):
     """Institutional flow analysis placeholder"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('institutional_flow_analysis', {
-            'timeframe_days': timeframe_days,
-            'min_position_value': min_position_value
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('institutional_flow_analysis', {
+                'timeframe_days': timeframe_days,
+                'min_position_value': min_position_value
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Institutional flow analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Institutional flow analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def insider_activity_monitoring(analysis_type: str = "unusual_activity", lookback_days: int = 30):
     """Insider activity monitoring placeholder"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('insider_activity_monitoring', {
-            'analysis_type': analysis_type,
-            'lookback_days': lookback_days
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('insider_activity_monitoring', {
+                'analysis_type': analysis_type,
+                'lookback_days': lookback_days
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Insider activity monitoring failed: {str(e)}")
+        return json.dumps({
+            "error": "Insider activity monitoring failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def swap_risk_assessment(risk_dimension: str = "asset_class", aggregation_level: str = "weekly"):
     """CFTC swap risk assessment using available data"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('swap_risk_assessment', {
-            'risk_dimension': risk_dimension,
-            'aggregation_level': aggregation_level
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('swap_risk_assessment', {
+                'risk_dimension': risk_dimension,
+                'aggregation_level': aggregation_level
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Swap risk assessment failed: {str(e)}")
+        return json.dumps({
+            "error": "Swap risk assessment failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def fund_stability_analysis(fund_category: str = "all", stress_scenario: bool = False):
     """Fund stability analysis placeholder"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('fund_stability_analysis', {
-            'fund_category': fund_category,
-            'stress_scenario': stress_scenario
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('fund_stability_analysis', {
+                'fund_category': fund_category,
+                'stress_scenario': stress_scenario
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Fund stability analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Fund stability analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def company_peer_analysis(cik: str, peer_selection: str = "industry"):
     """Company peer analysis placeholder"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('company_peer_analysis', {
-            'cik': cik,
-            'peer_selection': peer_selection
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('company_peer_analysis', {
+                'cik': cik,
+                'peer_selection': peer_selection
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Company peer analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Company peer analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
+@handle_enhanced_analytics_errors
 def market_overview_analysis():
     """Basic market overview using available CFTC data"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('market_overview', {})
-    return json.dumps(results, default=str)
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('market_overview', {})
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"Market overview analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "Market overview analysis failed",
+            "suggestion": "Please check your database connection and data availability"
+        })
 
+@handle_enhanced_analytics_errors
 def cftc_swap_analysis(timeframe_days: int = 30):
     """Detailed CFTC swap analysis"""
-    with CrossDatasetAnalyticsEngine() as engine:
-        results = engine.execute_cross_dataset_query('cftc_swap_analysis', {
-            'timeframe_days': timeframe_days
+    try:
+        with CrossDatasetAnalyticsEngine() as engine:
+            results = engine.execute_cross_dataset_query('cftc_swap_analysis', {
+                'timeframe_days': timeframe_days
+            })
+        return json.dumps(results, default=str)
+    except Exception as e:
+        logger.error(f"CFTC swap analysis failed: {str(e)}")
+        return json.dumps({
+            "error": "CFTC swap analysis failed",
+            "suggestion": "Please check your database connection and data availability"
         })
-    return json.dumps(results, default=str)
 
 # Fixed TOOL_MAP with working functions
 ENHANCED_ANALYTICS_TOOLS_FIXED = {
