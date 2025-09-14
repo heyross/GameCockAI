@@ -10,6 +10,7 @@ from config import (
 )
 from worker import add_task, get_task_status as get_task_status_from_worker
 from analytics_tools import ANALYTICS_TOOLS
+from enhanced_analytics_tools_fixed import ENHANCED_ANALYTICS_TOOLS_FIXED
 
 def search_companies(company_name: str):
     """Searches for a company by name or ticker in the SEC's CIK lookup data.
@@ -255,5 +256,7 @@ TOOL_MAP = {
         }
     },
     # Import analytics tools
-    **ANALYTICS_TOOLS
+    **ANALYTICS_TOOLS,
+    # Import enhanced cross-dataset analytics tools (fixed version)
+    **ENHANCED_ANALYTICS_TOOLS_FIXED
 }

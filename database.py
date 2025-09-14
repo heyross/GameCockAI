@@ -1,13 +1,15 @@
-from sqlalchemy import create_engine
+from datetime import datetime
+from sqlalchemy import create_engine, Index
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 import pandas as pd
 
-DATABASE_URL = "sqlite:///./gamecock.db"
-
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Create the declarative base first to avoid circular imports
 Base = declarative_base()
+
+DATABASE_URL = "sqlite:///./gamecock.db"
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 from sqlalchemy import Column, Integer, String, DateTime, Float, Text, Boolean, JSON, BigInteger
 
@@ -465,6 +467,151 @@ class NPORTDerivative(Base):
     gamma = Column(Float)
     theta = Column(Float)
     vega = Column(Float)
+
+# CFTC Swap Data Tables
+
+class CFTCDerivativesDealer(Base):
+    """CFTC Swap Dealers and Major Swap Participants"""
+    __tablename__ = 'cftc_derivatives_dealers'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    legal_name = Column(String(255), nullable=False)
+    dftc_swap_dealer_id = Column(String(50), unique=True, nullable=False)
+    dftc_major_swap_participant_id = Column(String(50))
+    dco_swap_dealer_id = Column(String(50))
+    dco_major_swap_participant_id = Column(String(50))
+    dcm_swap_dealer_id = Column(String(50))
+    dcm_major_swap_participant_id = Column(String(50))
+    swap_dealer_status = Column(String(50))
+    major_swap_participant_status = Column(String(50))
+    registration_status = Column(String(50))
+    registration_date = Column(DateTime)
+    registration_effective_date = Column(DateTime)
+    registration_withdrawal_date = Column(DateTime)
+    registration_withdrawal_effective_date = Column(DateTime)
+    registration_withdrawal_reason = Column(String(255))
+    registration_withdrawal_other_reason = Column(String(255))
+    registration_withdrawal_comments = Column(Text)
+    registration_withdrawal_filing_date = Column(DateTime)
+    registration_withdrawal_effective_date_filing_date = Column(DateTime)
+    registration_withdrawal_comments_filing_date = Column(DateTime)
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (
+        Index('idx_cftc_derivatives_dealer_legal_name', 'legal_name'),
+        Index('idx_cftc_derivatives_dealer_dftc_id', 'dftc_swap_dealer_id'),
+        Index('idx_cftc_derivatives_dealer_registration_status', 'registration_status'),
+    )
+
+class CFTCDerivativesClearingOrganization(Base):
+    """CFTC Derivatives Clearing Organizations"""
+    __tablename__ = 'cftc_derivatives_clearing_orgs'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    legal_name = Column(String(255), nullable=False)
+    dco_id = Column(String(50), unique=True, nullable=False)
+    dco_registration_status = Column(String(50))
+    dco_registration_date = Column(DateTime)
+    dco_registration_effective_date = Column(DateTime)
+    dco_registration_withdrawal_date = Column(DateTime)
+    dco_registration_withdrawal_effective_date = Column(DateTime)
+    dco_registration_withdrawal_reason = Column(String(255))
+    dco_registration_withdrawal_other_reason = Column(String(255))
+    dco_registration_withdrawal_comments = Column(Text)
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (
+        Index('idx_cftc_dco_legal_name', 'legal_name'),
+        Index('idx_cftc_dco_id', 'dco_id'),
+        Index('idx_cftc_dco_registration_status', 'dco_registration_status'),
+    )
+
+class CFTCSwapExecutionFacility(Base):
+    """CFTC Swap Execution Facilities"""
+    __tablename__ = 'cftc_swap_execution_facilities'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    legal_name = Column(String(255), nullable=False)
+    sef_id = Column(String(50), unique=True, nullable=False)
+    sef_registration_status = Column(String(50))
+    sef_registration_date = Column(DateTime)
+    sef_registration_effective_date = Column(DateTime)
+    sef_registration_withdrawal_date = Column(DateTime)
+    sef_registration_withdrawal_effective_date = Column(DateTime)
+    sef_registration_withdrawal_reason = Column(String(255))
+    sef_registration_withdrawal_other_reason = Column(String(255))
+    sef_registration_withdrawal_comments = Column(Text)
+    sef_website = Column(String(255))
+    sef_contact_name = Column(String(100))
+    sef_contact_title = Column(String(100))
+    sef_contact_phone = Column(String(20))
+    sef_contact_email = Column(String(100))
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (
+        Index('idx_cftc_sef_legal_name', 'legal_name'),
+        Index('idx_cftc_sef_id', 'sef_id'),
+        Index('idx_cftc_sef_registration_status', 'sef_registration_status'),
+    )
+
+class CFTCSwapDataRepository(Base):
+    """CFTC Swap Data Repositories"""
+    __tablename__ = 'cftc_swap_data_repositories'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    legal_name = Column(String(255), nullable=False)
+    sdr_id = Column(String(50), unique=True, nullable=False)
+    sdr_registration_status = Column(String(50))
+    sdr_registration_date = Column(DateTime)
+    sdr_registration_effective_date = Column(DateTime)
+    sdr_registration_withdrawal_date = Column(DateTime)
+    sdr_registration_withdrawal_effective_date = Column(DateTime)
+    sdr_registration_withdrawal_reason = Column(String(255))
+    sdr_registration_withdrawal_other_reason = Column(String(255))
+    sdr_registration_withdrawal_comments = Column(Text)
+    sdr_website = Column(String(255))
+    sdr_contact_name = Column(String(100))
+    sdr_contact_title = Column(String(100))
+    sdr_contact_phone = Column(String(20))
+    sdr_contact_email = Column(String(100))
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (
+        Index('idx_cftc_sdr_legal_name', 'legal_name'),
+        Index('idx_cftc_sdr_id', 'sdr_id'),
+        Index('idx_cftc_sdr_registration_status', 'sdr_registration_status'),
+    )
+
+class CFTCDailySwapReport(Base):
+    """CFTC Daily Swap Report Data"""
+    __tablename__ = 'cftc_daily_swap_reports'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    report_date = Column(DateTime, nullable=False, index=True)
+    asset_class = Column(String(50), nullable=False, index=True)
+    product_type = Column(String(100), nullable=False, index=True)
+    product_subtype = Column(String(100))
+    notional_amount = Column(BigInteger)
+    trade_count = Column(Integer)
+    counterparty_type = Column(String(50))
+    clearing_status = Column(String(50))
+    execution_type = Column(String(50))
+    block_trade = Column(Boolean)
+    block_trade_eligible = Column(Boolean)
+    compression_trade = Column(Boolean)
+    package_trade = Column(Boolean)
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    __table_args__ = (
+        Index('idx_cftc_dsr_date_asset_class', 'report_date', 'asset_class'),
+        Index('idx_cftc_dsr_product_type', 'product_type'),
+        Index('idx_cftc_dsr_clearing_status', 'clearing_status'),
+    )
 
 # N-MFP Tables
 class NMFPSubmission(Base):

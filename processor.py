@@ -19,6 +19,8 @@ from database import (
     NMFPLiquidAssetsDetails, NMFPSevenDayGrossYield, NMFPDlyNetAssetValuePerShars,
     NMFPLiquidityFeeReportingPer, NMFPDlyNetAssetValuePerSharc, NMFPDlyShareholderFlowReport,
     NMFPSevenDayNetYield, NMFPBeneficialRecordOwnerCat, NMFPCancelledSharesPerBusDay,
+    CFTCDerivativesDealer, CFTCDerivativesClearingOrganization, CFTCSwapExecutionFacility,
+    CFTCSwapDataRepository, CFTCDailySwapReport
 )
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -671,7 +673,21 @@ def load_data_to_db(df, model_class, table_name, db_session=None):
         # Convert data types using .loc to avoid SettingWithCopyWarning
         for col in potential_date_cols:
             if col in df.columns:
-                df.loc[:, col] = pd.to_datetime(df[col], errors='coerce')
+                # Try common SEC date formats first to reduce warnings
+                try:
+                    # First try ISO format (most common in SEC data)
+                    df.loc[:, col] = pd.to_datetime(df[col], format='%Y-%m-%d', errors='raise')
+                except (ValueError, TypeError):
+                    try:
+                        # Try MM/DD/YYYY format
+                        df.loc[:, col] = pd.to_datetime(df[col], format='%m/%d/%Y', errors='raise')
+                    except (ValueError, TypeError):
+                        try:
+                            # Try YYYY-MM-DD HH:MM:SS format
+                            df.loc[:, col] = pd.to_datetime(df[col], format='%Y-%m-%d %H:%M:%S', errors='raise')
+                        except (ValueError, TypeError):
+                            # Fall back to pandas inference (will still show warning but only as last resort)
+                            df.loc[:, col] = pd.to_datetime(df[col], errors='coerce')
 
         for col in potential_numeric_cols:
             if col in df.columns:
@@ -737,23 +753,23 @@ def process_sec_filings(filing_type: str, source_dir: str, **kwargs):
         source_dir: Directory containing the filing data
         **kwargs: Additional arguments specific to the filing type
     """
-    if filing_type in ['10-K', '10-Q']:
+    if filing_type.upper() == '10-K':
         return process_10k_filings(source_dir, **kwargs)
-    elif filing_type == '13F':
+    elif filing_type.upper() == '13F':
         return process_form13f_data(source_dir, **kwargs)
-    elif filing_type == 'N-MFP':
+    elif filing_type.upper() == 'N-MFP':
         return process_nmfp_data(source_dir, **kwargs)
-    elif filing_type == 'insider':
-        return process_sec_insider_data(source_dir, **kwargs)
-    elif filing_type == 'exchange_metrics':
-        return process_exchange_metrics_data(source_dir, **kwargs)
-    elif filing_type == 'N-CEN':
+    elif filing_type.upper() == 'N-CEN':
         return process_ncen_data(source_dir, **kwargs)
-    elif filing_type == 'N-PORT':
+    elif filing_type.upper() == 'N-PORT':
         return process_nport_data(source_dir, **kwargs)
+    elif filing_type.upper() == 'FORM-D':
+        return process_formd_data(source_dir, **kwargs)
+    elif filing_type.upper() == 'CFTC-SWAPS':
+        return process_cftc_swap_data(source_dir, **kwargs)
     else:
-        raise ValueError(f"Unsupported filing type: {filing_type}")
-
+        logging.warning(f"Unsupported filing type: {filing_type}")
+        return None
 
 def process_ncen_data(source_dir, db_session=None, **kwargs):
     """
@@ -945,3 +961,42 @@ def process_nport_data(source_dir, db_session=None, **kwargs):
     
     logger.info(f"N-PORT processing completed. Processed: {results['processed']}, Errors: {results['errors']}")
     return results
+
+def process_cftc_swap_data(source_dir, db_session=None, **kwargs):
+    """
+    Process CFTC swap data from JSON and CSV files.
+    
+    Args:
+        source_dir (str): Base directory containing CFTC swap data files
+        db_session: Optional database session
+        **kwargs: Additional processing options
+        
+    Returns:
+        dict: Processing results summary
+    """
+    from processor_cftc_swaps import process_all_swap_data
+    
+    # Set up database session if not provided
+    close_session = False
+    if db_session is None:
+        db_session = SessionLocal()
+        close_session = True
+    
+    try:
+        logging.info(f"Starting CFTC swap data processing from: {source_dir}")
+        
+        # Process all swap data
+        results = process_all_swap_data()
+        
+        logging.info(f"Completed CFTC swap data processing. Results: {results}")
+        return results
+        
+    except Exception as e:
+        logging.error(f"Error processing CFTC swap data: {e}", exc_info=True)
+        if db_session:
+            db_session.rollback()
+        raise
+        
+    finally:
+        if close_session and db_session:
+            db_session.close()

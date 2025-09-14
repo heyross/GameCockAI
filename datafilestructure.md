@@ -1,6 +1,82 @@
 # Data File Structures
 
-This document outlines the data structures for the various downloaded data files, based on their CSV headers.
+This document outlines the data structures for the various downloaded data files, based on their CSV headers and API responses.
+
+## CFTC Swap Data (JSON Format)
+
+### Swap Dealers and Major Swap Participants
+```json
+{
+  "legal_name": "string - Legal name of the entity",
+  "dftc_swap_dealer_id": "string - Unique identifier for swap dealers",
+  "dftc_major_swap_participant_id": "string - Unique identifier for major swap participants",
+  "dco_swap_dealer_id": "string - DCO swap dealer identifier",
+  "dco_major_swap_participant_id": "string - DCO major swap participant identifier",
+  "dcm_swap_dealer_id": "string - DCM swap dealer identifier",
+  "dcm_major_swap_participant_id": "string - DCM major swap participant identifier",
+  "swap_dealer_status": "string - Registration status as a swap dealer",
+  "major_swap_participant_status": "string - Registration status as a major swap participant",
+  "registration_status": "string - Overall registration status",
+  "registration_date": "date - Date of registration",
+  "registration_effective_date": "date - Effective date of registration",
+  "registration_withdrawal_date": "date - Date of withdrawal from registration",
+  "registration_withdrawal_effective_date": "date - Effective date of withdrawal",
+  "registration_withdrawal_reason": "string - Reason for withdrawal",
+  "registration_withdrawal_other_reason": "string - Additional withdrawal details",
+  "registration_withdrawal_comments": "string - Additional comments on withdrawal"
+}
+```
+
+### Swap Execution Facilities (SEFs)
+```json
+{
+  "legal_name": "string - Legal name of the SEF",
+  "sef_id": "string - Unique identifier for the SEF",
+  "sef_registration_status": "string - Registration status of the SEF",
+  "sef_registration_date": "date - Date of SEF registration",
+  "sef_registration_effective_date": "date - Effective date of SEF registration",
+  "sef_website": "string - Official website URL",
+  "sef_contact_name": "string - Primary contact person",
+  "sef_contact_title": "string - Title of the contact person",
+  "sef_contact_phone": "string - Contact phone number",
+  "sef_contact_email": "string - Contact email address"
+}
+```
+
+### Swap Data Repositories (SDRs)
+```json
+{
+  "legal_name": "string - Legal name of the SDR",
+  "sdr_id": "string - Unique identifier for the SDR",
+  "sdr_registration_status": "string - Registration status of the SDR",
+  "sdr_registration_date": "date - Date of SDR registration",
+  "sdr_registration_effective_date": "date - Effective date of SDR registration",
+  "sdr_website": "string - Official website URL",
+  "sdr_contact_name": "string - Primary contact person",
+  "sdr_contact_title": "string - Title of the contact person",
+  "sdr_contact_phone": "string - Contact phone number",
+  "sdr_contact_email": "string - Contact email address"
+}
+```
+
+### Daily Swap Reports (CSV Format)
+```
+- report_date: Date - Date of the report
+- asset_class: String - Asset class (e.g., Interest Rate, Credit, Equity, Commodity, FX)
+- product_type: String - Type of swap product
+- product_subtype: String - Subcategory of the swap product
+- notional_amount: Decimal - Total notional amount
+- trade_count: Integer - Number of trades
+- counterparty_type: String - Type of counterparty
+- clearing_status: String - Whether the swap is cleared
+- execution_type: String - Method of execution (e.g., Voice, Electronic, Hybrid)
+- block_trade: Boolean - Whether it's a block trade
+- block_trade_eligible: Boolean - Whether the trade is eligible for block trading
+- compression_trade: Boolean - Whether it's a compression trade
+- package_trade: Boolean - Whether it's part of a package trade
+```
+
+## CFTC Data (Equity, Credit, Commodities, Interest Rates)
 
 ## CFTC Data (Equity, Credit, Commodities, Interest Rates)
 

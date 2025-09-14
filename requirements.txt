@@ -1,9 +1,10 @@
 chardet
 pandas
-requests
+requests>=2.25.1
 bs4
 tqdm
 SQLAlchemy
 ollama>=0.2.0
 python-dotenv
 rich
+fredapi>=0.5.0
