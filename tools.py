@@ -88,20 +88,15 @@ except ImportError as e:
 
 # Import from the correct database module (GameCockAI/database.py)
 try:
-    from .database import get_db_stats, export_db_to_csv
+    from database import get_db_stats, export_db_to_csv
     DATABASE_AVAILABLE = True
-except ImportError:
-    try:
-        # Fallback for when running from GameCockAI directory
-        from database import get_db_stats, export_db_to_csv
-        DATABASE_AVAILABLE = True
-    except ImportError as e:
-        logger.warning(f"⚠️ Database not available: {e}")
-        DATABASE_AVAILABLE = False
-        def get_db_stats():
-            return {"error": "Database not available"}
-        def export_db_to_csv(path):
-            return {"error": "Database not available"}
+except ImportError as e:
+    logger.warning(f"⚠️ Database not available: {e}")
+    DATABASE_AVAILABLE = False
+    def get_db_stats():
+        return {"error": "Database not available"}
+    def export_db_to_csv(path):
+        return {"error": "Database not available"}
 
 try:
     from config import (

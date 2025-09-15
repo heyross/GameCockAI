@@ -16,7 +16,7 @@ def get_available_data_sources() -> Dict[str, Any]:
     """
     try:
         # Import from the REAL database module with all tables (GameCockAI/database.py)
-        from ..database import get_db_stats
+        from database import get_db_stats
         from ..config import (
             CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR,
             CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR,

@@ -23,10 +23,17 @@ try:
 except ImportError as e:
     print(f"⚠️ Tool-enabled Raven not available: {e}")
     TOOL_ENABLED_RAVEN = False
-    try:
-        from tools import TOOL_MAP
-    except ImportError:
-        TOOL_MAP = {}
+
+# Always try to import TOOL_MAP for tool information
+try:
+    from tools import TOOL_MAP
+    print(f"✅ Tools loaded: {len(TOOL_MAP)} available")
+except ImportError as e:
+    print(f"⚠️ Tools not available: {e}")
+    TOOL_MAP = {}
+
+# Make TOOL_MAP available as a module-level variable
+__all__ = ['ChatInterface', 'RAGSystem', 'TOOL_MAP']
 
 class RAGSystem:
     def __init__(self, model_name: str = 'all-mpnet-base-v2'):

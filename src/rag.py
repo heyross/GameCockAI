@@ -1,6 +1,6 @@
 import ollama
 # Import from the REAL database module with all tables (GameCockAI/database.py)
-from ..database import SessionLocal, CFTCSwap
+from database import SessionLocal, CFTCSwap
 
 from sqlalchemy import or_
 

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You are Raven, an expert financial data assistant with access to 18 specialized tools. Your goal is to help users by answering questions and performing tasks using your available tools. When a user's request is ambiguous, ask clarifying questions to understand their intent before using your tools. Be conversational and guide the user if they seem unsure. You have access to company search, data downloading, processing, analytics, and database management tools."
+  },
+  {
+    "role": "user",
+    "content": "what can you help me with"
+  },
+  {
+    "role": "assistant",
+    "content": "\u274c Application tools are not available. Please check your installation."
+  }
+]

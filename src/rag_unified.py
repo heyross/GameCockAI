@@ -9,7 +9,16 @@ import logging
 from typing import Dict, List, Any, Optional, Union
 from datetime import datetime
 # Import from the REAL database module with all tables (GameCockAI/database.py)
-from ..database import SessionLocal, CFTCSwap
+try:
+    from ..database import SessionLocal, CFTCSwap
+except ImportError:
+    # Fallback for when imported from different context
+    import sys
+    import os
+    parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if parent_dir not in sys.path:
+        sys.path.insert(0, parent_dir)
+    from database import SessionLocal, CFTCSwap
 from sqlalchemy import or_
 
 # Set up logging
@@ -26,7 +35,14 @@ try:
     if os.path.exists(gamecock_path) and gamecock_path not in sys.path:
         sys.path.append(gamecock_path)
     
-    from ..tools import TOOL_MAP
+    try:
+        from ..tools import TOOL_MAP
+    except ImportError:
+        # Fallback for when imported from different context
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if parent_dir not in sys.path:
+            sys.path.insert(0, parent_dir)
+        from tools import TOOL_MAP
     TOOLS_AVAILABLE = True
     logger.info(f"✅ Tools loaded: {len(TOOL_MAP)} available")
 except ImportError as e:

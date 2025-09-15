@@ -9,7 +9,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from sqlalchemy import text, and_, or_
 from sqlalchemy.orm import Session
 # Import from the REAL database module with all tables (GameCockAI/database.py)
-from ..database import SessionLocal
+from database import SessionLocal
 import ollama
 
 # Set up logging

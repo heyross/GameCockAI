@@ -1,4 +1,9 @@
-# Data sources module initialization
+"""
+Data Sources Package
+Provides access to all data source modules
+"""
+
+# Import all data source modules
 try:
     from . import cftc
     from . import sec  
@@ -9,29 +14,16 @@ try:
     __all__ = ['cftc', 'sec', 'fred', 'dtcc', 'exchange']
     
 except ImportError as e:
-    print(f"Warning: Could not import all data sources: {e}")
-    # Import what we can
-    try:
-        from . import cftc
-    except ImportError:
-        cftc = None
-        
-    try:
-        from . import sec
-    except ImportError:
-        sec = None
-        
-    try:
-        from . import fred
-    except ImportError:
-        fred = None
-        
-    try:
-        from . import dtcc
-    except ImportError:
-        dtcc = None
-        
-    try:
-        from . import exchange
-    except ImportError:
-        exchange = None
+    # Graceful fallback for missing modules
+    import logging
+    logging.warning(f"Some data source modules not available: {e}")
+    
+    # Create dummy modules to prevent crashes
+    class DummyModule:
+        def __getattr__(self, name):
+            def dummy_function(*args, **kwargs):
+                return None
+            return dummy_function
+    
+    cftc = sec = fred = dtcc = exchange = DummyModule()
+    __all__ = ['cftc', 'sec', 'fred', 'dtcc', 'exchange']

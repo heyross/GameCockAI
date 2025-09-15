@@ -16,10 +16,31 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 
-# Local imports
-from vector_db import GameCockVectorDB, VectorDBManager
-from embedding_service import FinancialEmbeddingService
-from document_processor import FinancialDocumentProcessor, DocumentType, DocumentChunk
+# Local imports with error handling
+try:
+    from .vector_db import GameCockVectorDB, VectorDBManager
+except ImportError:
+    try:
+        from vector_db import GameCockVectorDB, VectorDBManager
+    except ImportError:
+        GameCockVectorDB = VectorDBManager = None
+
+try:
+    from .embedding_service import FinancialEmbeddingService
+except ImportError:
+    try:
+        from embedding_service import FinancialEmbeddingService
+    except ImportError:
+        FinancialEmbeddingService = None
+
+try:
+    from .document_processor import FinancialDocumentProcessor, DocumentType, DocumentChunk
+except ImportError:
+    try:
+        from document_processor import FinancialDocumentProcessor, DocumentType, DocumentChunk
+    except ImportError:
+        FinancialDocumentProcessor = DocumentType = DocumentChunk = None
+
 # Import from the REAL database module with all tables (GameCockAI/database.py)
 from database import SessionLocal, CFTCSwap
 

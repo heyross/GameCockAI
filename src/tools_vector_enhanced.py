@@ -14,7 +14,7 @@ from ..company_data import TARGET_COMPANIES, save_target_companies
 from .data_sources import cftc, sec
 from .processor import process_zip_files, load_cftc_data_to_db
 # Import from the REAL database module with all tables (GameCockAI/database.py)
-from ..database import get_db_stats, export_db_to_csv
+from database import get_db_stats, export_db_to_csv
 from ..config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR,
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
