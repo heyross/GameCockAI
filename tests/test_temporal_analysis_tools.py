@@ -152,9 +152,9 @@ class TestTemporalAnalysisEngine(unittest.TestCase):
         # Verify data
         self.assertEqual(result['company_cik'], self.sample_cik)
         self.assertEqual(result['total_filings'], 3)
-        self.assertIn('2020', result['yearly_breakdown'])
-        self.assertIn('2021', result['yearly_breakdown'])
-        self.assertIn('2022', result['yearly_breakdown'])
+        self.assertIn(2020, result['yearly_breakdown'])  # Integer keys, not string
+        self.assertIn(2021, result['yearly_breakdown'])  # Integer keys, not string
+        self.assertIn(2022, result['yearly_breakdown'])  # Integer keys, not string
     
     def test_analyze_risk_evolution_no_data(self):
         """Test risk evolution analysis with no data."""
@@ -202,8 +202,8 @@ class TestTemporalAnalysisEngine(unittest.TestCase):
         # Verify data
         self.assertEqual(result['company_cik'], self.sample_cik)
         self.assertEqual(result['total_filings'], 2)
-        self.assertIn('2020', result['yearly_breakdown'])
-        self.assertIn('2021', result['yearly_breakdown'])
+        self.assertIn(2020, result['yearly_breakdown'])  # Integer keys, not string
+        self.assertIn(2021, result['yearly_breakdown'])  # Integer keys, not string
     
     def test_compare_risk_factors_across_companies(self):
         """Test comparing risk factors across multiple companies."""
@@ -504,8 +504,15 @@ class TestTemporalAnalysisIntegration(BaseIntegrationTest):
     def setUp(self):
         """Set up integration test fixtures."""
         super().setUp()
-        self.engine = TemporalAnalysisEngine(db_session=SessionLocal())
+        self.db = SessionLocal()
+        self.engine = TemporalAnalysisEngine(db_session=self.db)
         self.test_cik = "0001234567"
+    
+    def tearDown(self):
+        """Clean up database session."""
+        if hasattr(self, 'db'):
+            self.db.close()
+        super().tearDown()
     
     def test_real_database_risk_analysis(self):
         """Test risk analysis with real database operations."""
@@ -545,7 +552,7 @@ class TestTemporalAnalysisIntegration(BaseIntegrationTest):
             self.assertNotIn('error', result)
             self.assertEqual(result['company_cik'], self.test_cik)
             self.assertEqual(result['total_filings'], 1)
-            self.assertIn('2023', result['yearly_breakdown'])
+            self.assertIn(2023, result['yearly_breakdown'])  # Integer key, not string
             
         except Exception as e:
             self.fail(f"Integration test failed: {e}")

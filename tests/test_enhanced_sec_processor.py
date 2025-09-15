@@ -413,7 +413,14 @@ class TestEnhancedSECProcessorIntegration(BaseIntegrationTest):
     def setUp(self):
         """Set up integration test fixtures."""
         super().setUp()
-        self.processor = EnhancedSECProcessor(db_session=SessionLocal())
+        self.db = SessionLocal()
+        self.processor = EnhancedSECProcessor(db_session=self.db)
+    
+    def tearDown(self):
+        """Clean up database session."""
+        if hasattr(self, 'db'):
+            self.db.close()
+        super().tearDown()
     
     def test_real_database_operations(self):
         """Test actual database operations with real session."""

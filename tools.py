@@ -49,6 +49,18 @@ except ImportError as e:
     logger.warning(f"⚠️ Data sources not available: {e}")
     DATA_SOURCES_AVAILABLE = False
 
+# Enhanced Entity Resolution Tools
+try:
+    from src.enhanced_entity_tools import (
+        resolve_entity_by_identifier, get_comprehensive_entity_profile,
+        search_entities_by_name, find_related_entities, find_related_securities,
+        resolve_entity_for_ai_query
+    )
+    ENHANCED_ENTITY_TOOLS_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"⚠️ Enhanced entity tools not available: {e}")
+    ENHANCED_ENTITY_TOOLS_AVAILABLE = False
+
 try:
     from temporal_analysis_tools import (
         analyze_risk_evolution, 
@@ -581,6 +593,170 @@ def create_resilient_enhanced_analytics_tools():
 
 # This dictionary maps tool names to their corresponding functions and schema.
 # The schema is essential for the AI to understand how to use each tool.
+def create_temporal_analysis_tools():
+    """Create temporal analysis tools with error handling."""
+    if not TEMPORAL_ANALYSIS_AVAILABLE:
+        logger.warning("Temporal analysis tools not available")
+        return {}
+    
+    return {
+        "analyze_risk_evolution": {
+            "function": analyze_risk_evolution,
+            "schema": {
+                "name": "analyze_risk_evolution",
+                "description": "Analyzes how risk factors have evolved over time for a specific company. Perfect for questions like 'How has the management view of risk changed over time?'",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        },
+        "analyze_management_view_evolution": {
+            "function": analyze_management_view_evolution,
+            "schema": {
+                "name": "analyze_management_view_evolution",
+                "description": "Analyzes how management's discussion and analysis (MD&A) has evolved over time for a specific company.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        },
+        "compare_company_risks": {
+            "function": compare_company_risks,
+            "schema": {
+                "name": "compare_company_risks",
+                "description": "Compares risk factors across multiple companies for a specific year.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_ciks": {"type": "array", "items": {"type": "string"}, "description": "List of CIK identifiers for companies to compare."},
+                        "year": {"type": "integer", "description": "The year to compare risk factors across companies."}
+                    },
+                    "required": ["company_ciks", "year"]
+                }
+            }
+        },
+        "analyze_company_events": {
+            "function": analyze_company_events,
+            "schema": {
+                "name": "analyze_company_events",
+                "description": "Analyzes patterns in 8-K filings (corporate events) for a specific company over time.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "months": {"type": "integer", "description": "Number of months to look back for events (default: 12)."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        }
+    }
+
+def create_enhanced_entity_tools():
+    """Create enhanced entity resolution tools with error handling."""
+    if not ENHANCED_ENTITY_TOOLS_AVAILABLE:
+        logger.warning("Enhanced entity tools not available")
+        return {}
+    
+    return {
+        "resolve_entity_by_identifier": {
+            "function": resolve_entity_by_identifier,
+            "schema": {
+                "name": "resolve_entity_by_identifier",
+                "description": "Resolve an entity by any identifier (CIK, CUSIP, ISIN, LEI, ticker, or name). Supports partial and fuzzy matching.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "identifier": {"type": "string", "description": "The identifier to search for (CIK, CUSIP, ISIN, LEI, ticker, or name)."},
+                        "identifier_type": {"type": "string", "enum": ["auto", "cik", "cusip", "isin", "lei", "ticker", "name"], "description": "Type of identifier. Use 'auto' to auto-detect."}
+                    },
+                    "required": ["identifier"]
+                }
+            }
+        },
+        "get_comprehensive_entity_profile": {
+            "function": get_comprehensive_entity_profile,
+            "schema": {
+                "name": "get_comprehensive_entity_profile",
+                "description": "Get a comprehensive entity profile including related entities and securities.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "entity_id": {"type": "string", "description": "The entity ID (typically CIK)."}
+                    },
+                    "required": ["entity_id"]
+                }
+            }
+        },
+        "search_entities_by_name": {
+            "function": search_entities_by_name,
+            "schema": {
+                "name": "search_entities_by_name",
+                "description": "Search for entities by name or ticker symbol with fuzzy matching.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "search_term": {"type": "string", "description": "The search term (name or ticker)."},
+                        "limit": {"type": "integer", "description": "Maximum number of results (default 10)."}
+                    },
+                    "required": ["search_term"]
+                }
+            }
+        },
+        "find_related_entities": {
+            "function": find_related_entities,
+            "schema": {
+                "name": "find_related_entities",
+                "description": "Find entities related to a given entity (subsidiaries, parent companies, etc.).",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "entity_id": {"type": "string", "description": "The entity ID (typically CIK)."}
+                    },
+                    "required": ["entity_id"]
+                }
+            }
+        },
+        "find_related_securities": {
+            "function": find_related_securities,
+            "schema": {
+                "name": "find_related_securities",
+                "description": "Find securities related to a given entity (stocks, bonds, derivatives).",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "entity_id": {"type": "string", "description": "The entity ID (typically CIK)."}
+                    },
+                    "required": ["entity_id"]
+                }
+            }
+        },
+        "resolve_entity_for_ai_query": {
+            "function": resolve_entity_for_ai_query,
+            "schema": {
+                "name": "resolve_entity_for_ai_query",
+                "description": "Resolve entity from natural language query for AI agent (e.g., 'Find Apple's bonds', 'Show me swaps for CIK 1234567').",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {"type": "string", "description": "Natural language query containing entity information."}
+                    },
+                    "required": ["query"]
+                }
+            }
+        }
+    }
+
 TOOL_MAP = {
     "search_companies": {
         "function": search_companies,
@@ -676,74 +852,7 @@ TOOL_MAP = {
     # Import enhanced cross-dataset analytics tools with resilience
     **create_resilient_enhanced_analytics_tools(),
     # Import temporal analysis tools if available
-    **create_temporal_analysis_tools()
+    **create_temporal_analysis_tools(),
+    # Import enhanced entity resolution tools if available
+    **create_enhanced_entity_tools()
 }
-
-def create_temporal_analysis_tools():
-    """Create temporal analysis tools with error handling."""
-    if not TEMPORAL_ANALYSIS_AVAILABLE:
-        logger.warning("Temporal analysis tools not available")
-        return {}
-    
-    return {
-        "analyze_risk_evolution": {
-            "function": analyze_risk_evolution,
-            "schema": {
-                "name": "analyze_risk_evolution",
-                "description": "Analyzes how risk factors have evolved over time for a specific company. Perfect for questions like 'How has the management view of risk changed over time?'",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
-                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
-                    },
-                    "required": ["company_cik"]
-                }
-            }
-        },
-        "analyze_management_view_evolution": {
-            "function": analyze_management_view_evolution,
-            "schema": {
-                "name": "analyze_management_view_evolution",
-                "description": "Analyzes how management's discussion and analysis (MD&A) has evolved over time for a specific company.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
-                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
-                    },
-                    "required": ["company_cik"]
-                }
-            }
-        },
-        "compare_company_risks": {
-            "function": compare_company_risks,
-            "schema": {
-                "name": "compare_company_risks",
-                "description": "Compares risk factors across multiple companies for a specific year.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "company_ciks": {"type": "array", "items": {"type": "string"}, "description": "List of CIK identifiers for companies to compare."},
-                        "year": {"type": "integer", "description": "The year to compare risk factors across companies."}
-                    },
-                    "required": ["company_ciks", "year"]
-                }
-            }
-        },
-        "analyze_company_events": {
-            "function": analyze_company_events,
-            "schema": {
-                "name": "analyze_company_events",
-                "description": "Analyzes patterns in 8-K filings (corporate events) for a specific company over time.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
-                        "months": {"type": "integer", "description": "Number of months to look back for events (default: 12)."}
-                    },
-                    "required": ["company_cik"]
-                }
-            }
-        }
-    }

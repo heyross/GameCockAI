@@ -30,6 +30,16 @@ except ImportError as e:
             return dummy_function
     
     cftc = sec = fred = DummyModule()
+
+# Import enhanced entity search menu
+try:
+    from src.enhanced_entity_menu import enhanced_entity_search_menu
+    print("✅ Enhanced entity search menu imported successfully")
+except ImportError as e:
+    print(f"⚠️ Enhanced entity search menu not available: {e}")
+    def enhanced_entity_search_menu():
+        print("Enhanced entity search menu not available. Please check your installation.")
+
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 
@@ -72,10 +82,11 @@ def main_menu():
     while True:
         print("\n--- Main Menu ---")
         print("1. Select Target Companies")
-        print("2. Download Data")
-        print("3. Process Downloaded Data")
-        print("4. Query with Raven")
-        print("5. Database Menu")
+        print("2. Enhanced Entity Search")
+        print("3. Download Data")
+        print("4. Process Downloaded Data")
+        print("5. Query with Raven")
+        print("6. Database Menu")
         print("Q. Quit")
 
         choice = input("Enter your choice: ").strip().lower()
@@ -83,12 +94,14 @@ def main_menu():
         if choice == '1':
             select_target_companies_menu()
         elif choice == '2':
-            download_data_menu()
+            enhanced_entity_search_menu()
         elif choice == '3':
-            process_data_menu()
+            download_data_menu()
         elif choice == '4':
-            query_raven_menu()
+            process_data_menu()
         elif choice == '5':
+            query_raven_menu()
+        elif choice == '6':
             database_menu()
         elif choice == 'q':
             print("Stopping background worker and exiting...")

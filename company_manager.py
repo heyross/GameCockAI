@@ -32,13 +32,20 @@ def find_company(df, search_term):
     if df is None:
         return []
     
-    search_term_lower = search_term.lower()
+    # Handle None or empty search terms
+    if search_term is None or not search_term:
+        return []
+    
+    # Strip whitespace and convert to lowercase
+    search_term_clean = str(search_term).strip().lower()
+    if not search_term_clean:
+        return []
     
     # Search in ticker, title, and CIK columns
     results = df[
-        (df['ticker'].str.lower() == search_term_lower) | 
-        (df['title'].str.lower().str.contains(search_term_lower, na=False)) | 
-        (df['cik_str'] == search_term.zfill(10))
+        (df['ticker'].str.lower() == search_term_clean) | 
+        (df['title'].str.lower().str.contains(search_term_clean, na=False)) | 
+        (df['cik_str'] == search_term_clean.zfill(10))
     ]
     return results.to_dict('records')
 

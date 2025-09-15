@@ -23,6 +23,7 @@ class Task:
 task_queue = Queue()
 task_store = {}
 _stop_event = threading.Event()
+_worker_thread = None
 
 def worker():
     """The worker thread function that processes tasks from the queue."""
@@ -52,13 +53,30 @@ def worker():
 
 def start_worker():
     """Starts the background worker thread."""
-    print("[WorkerManager] Starting worker thread...")
-    threading.Thread(target=worker, daemon=True).start()
+    global _worker_thread
+    if _worker_thread is None or not _worker_thread.is_alive():
+        print("[WorkerManager] Starting worker thread...")
+        _stop_event.clear()  # Reset stop event
+        _worker_thread = threading.Thread(target=worker, daemon=True)
+        _worker_thread.start()
 
 def stop_worker():
     """Stops the background worker thread."""
+    global _worker_thread
     print("[WorkerManager] Stopping worker thread...")
     _stop_event.set()
+    
+    # Wait for worker thread to finish if it exists
+    if _worker_thread is not None and _worker_thread.is_alive():
+        _worker_thread.join(timeout=2.0)  # Wait up to 2 seconds
+        if _worker_thread.is_alive():
+            print("[WorkerManager] Warning: Worker thread did not stop gracefully")
+    
+    _worker_thread = None
+
+def is_worker_running():
+    """Check if the worker thread is currently running."""
+    return _worker_thread is not None and _worker_thread.is_alive()
 
 def add_task(func, *args, **kwargs):
     """Adds a new task to the queue and returns its ID."""
