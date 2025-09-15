@@ -3,6 +3,7 @@ import os
 import subprocess
 from typing import List, Tuple
 from pathlib import Path
+from datetime import datetime
 
 # Add current directory to path to ensure we import from the right modules
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,16 +16,36 @@ if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
 from ui import gamecock_ascii, gamecat_ascii
-from data_sources import cftc, sec, fred
+try:
+    from src.data_sources import cftc, sec, fred
+    print("✅ Data sources imported successfully")
+except ImportError as e:
+    print(f"⚠️ Data sources not available: {e}")
+    # Create dummy modules to prevent crashes
+    class DummyModule:
+        def __getattr__(self, name):
+            def dummy_function(*args, **kwargs):
+                print(f"Function {name} not available - data sources import failed")
+                return None
+            return dummy_function
+    
+    cftc = sec = fred = DummyModule()
 from company_manager import get_company_map, find_company
 from company_data import TARGET_COMPANIES, save_target_companies
 
 try:
-    from rag_unified import query_raven
+    from src.rag_unified import query_raven
     print("✅ Using unified RAG system")
 except ImportError as e:
     print(f"⚠️ Unified RAG not available: {e}")
-    from rag import query_raven
+    try:
+        from rag import query_raven
+        print("✅ Using basic RAG system")
+    except ImportError as e2:
+        print(f"⚠️ Basic RAG not available: {e2}")
+        # Fallback function
+        def query_raven(user_query: str, messages: list = None):
+            return "RAG system not available. Please check your installation."
 
 from src.processor import (process_zip_files, process_sec_insider_data, process_form13f_data, 
                       process_exchange_metrics_data, process_ncen_data, process_nport_data, process_formd_data)
@@ -44,6 +65,9 @@ from startup import check_dependencies, check_ollama_service, check_cuda_support
 from worker import start_worker, stop_worker
 
 def main_menu():
+    # Clear screen before showing the main menu
+    import subprocess
+    subprocess.run(['powershell', '-Command', 'Clear-Host'], capture_output=True)
     gamecock_ascii()
     while True:
         print("\n--- Main Menu ---")
@@ -166,7 +190,7 @@ def download_data_menu():
 
 def fred_download_menu():
     """Menu for downloading FRED swap rate data."""
-    from data_sources.fred import download_fred_swap_data
+    from src.data_sources.fred import download_fred_swap_data
     import os
     
     print("\n--- FRED Swap Data Download ---")
@@ -200,6 +224,153 @@ def fred_download_menu():
         print("Please check your FRED API key and try again.")
     
     input("\nPress Enter to continue...")
+
+def edgar_download_menu():
+    """Menu for downloading EDGAR filings (8-K, 10-K, S-4, etc.)"""
+    from src.data_sources.sec import download_edgar_filings
+    
+    print("\n--- EDGAR Filings Download ---")
+    print("This will download SEC filings (8-K, 10-K, S-4, etc.) for your target companies.")
+    
+    if not TARGET_COMPANIES:
+        print("\n⚠️  No target companies selected.")
+        print("Please add companies to your target list first from the main menu.")
+        input("\nPress Enter to return to the menu...")
+        return
+    
+    print(f"\nTarget companies: {len(TARGET_COMPANIES)}")
+    for company in TARGET_COMPANIES:
+        print(f"  - {company.get('title', 'Unknown')} (CIK: {company.get('cik_str', 'N/A')})")
+    
+    # Filing type selection
+    print("\nSelect filing types to download:")
+    print("1. 8-K (Current Reports)")
+    print("2. 10-K (Annual Reports)")
+    print("3. 10-Q (Quarterly Reports)")
+    print("4. S-4 (Registration Statements)")
+    print("5. DEF 14A (Proxy Statements)")
+    print("6. All of the above")
+    print("7. Custom selection")
+    
+    filing_choice = input("\nEnter your choice (1-7): ").strip()
+    
+    filing_types = []
+    if filing_choice == '1':
+        filing_types = ['8-K']
+    elif filing_choice == '2':
+        filing_types = ['10-K']
+    elif filing_choice == '3':
+        filing_types = ['10-Q']
+    elif filing_choice == '4':
+        filing_types = ['S-4']
+    elif filing_choice == '5':
+        filing_types = ['DEF 14A']
+    elif filing_choice == '6':
+        filing_types = ['8-K', '10-K', '10-Q', 'S-4', 'DEF 14A']
+    elif filing_choice == '7':
+        print("\nEnter filing types separated by commas (e.g., 8-K,10-K,S-4):")
+        custom_types = input("Filing types: ").strip()
+        filing_types = [t.strip() for t in custom_types.split(',') if t.strip()]
+    else:
+        print("Invalid choice. Using default filing types.")
+        filing_types = ['8-K', '10-K']
+    
+    # Year selection
+    current_year = datetime.now().year
+    print(f"\nSelect years to download (current year: {current_year}):")
+    print("1. Last 2 years")
+    print("2. Last 3 years")
+    print("3. Custom years")
+    
+    year_choice = input("Enter your choice (1-3): ").strip()
+    
+    if year_choice == '1':
+        years = [current_year - 1, current_year]
+    elif year_choice == '2':
+        years = [current_year - 2, current_year - 1, current_year]
+    elif year_choice == '3':
+        print(f"\nEnter years separated by commas (e.g., 2022,2023,{current_year}):")
+        custom_years = input("Years: ").strip()
+        try:
+            years = [int(y.strip()) for y in custom_years.split(',') if y.strip()]
+        except ValueError:
+            print("Invalid years. Using last 2 years.")
+            years = [current_year - 1, current_year]
+    else:
+        print("Invalid choice. Using last 2 years.")
+        years = [current_year - 1, current_year]
+    
+    # Max files per company
+    print(f"\nMaximum files per company (default: 50):")
+    max_files_input = input("Max files: ").strip()
+    try:
+        max_files = int(max_files_input) if max_files_input else 50
+    except ValueError:
+        max_files = 50
+    
+    # Confirmation
+    print(f"\n--- Download Summary ---")
+    print(f"Companies: {len(TARGET_COMPANIES)}")
+    print(f"Filing types: {', '.join(filing_types)}")
+    print(f"Years: {', '.join(map(str, years))}")
+    print(f"Max files per company: {max_files}")
+    
+    confirm = input("\nProceed with download? (y/n): ").strip().lower()
+    if confirm != 'y':
+        print("Download cancelled.")
+        input("\nPress Enter to continue...")
+        return
+    
+    try:
+        print("\nStarting EDGAR download...")
+        download_edgar_filings(
+            target_companies=TARGET_COMPANIES,
+            filing_types=filing_types,
+            years=years,
+            max_files_per_company=max_files
+        )
+        print("\n✅ EDGAR download completed!")
+        
+    except Exception as e:
+        print(f"\n❌ Error during EDGAR download: {e}")
+        print("Please check your internet connection and try again.")
+    
+    input("\nPress Enter to continue...")
+
+def download_all_edgar_filings():
+    """Automatically download all EDGAR filings for target companies without user interaction."""
+    from src.data_sources.sec import download_edgar_filings
+    
+    if not TARGET_COMPANIES:
+        print("\n⚠️  No target companies selected. Skipping EDGAR downloads.")
+        return
+    
+    print(f"\n--- Downloading All EDGAR Filings ---")
+    print(f"Target companies: {len(TARGET_COMPANIES)}")
+    
+    # Default settings for comprehensive download
+    filing_types = ['8-K', '10-K', '10-Q', 'S-4', 'DEF 14A']
+    current_year = datetime.now().year
+    years = [current_year - 2, current_year - 1, current_year]  # Last 3 years
+    max_files_per_company = 100  # Higher limit for comprehensive download
+    
+    print(f"Filing types: {', '.join(filing_types)}")
+    print(f"Years: {', '.join(map(str, years))}")
+    print(f"Max files per company: {max_files_per_company}")
+    
+    try:
+        print("\nStarting comprehensive EDGAR download...")
+        download_edgar_filings(
+            target_companies=TARGET_COMPANIES,
+            filing_types=filing_types,
+            years=years,
+            max_files_per_company=max_files_per_company
+        )
+        print("\n✅ Comprehensive EDGAR download completed!")
+        
+    except Exception as e:
+        print(f"\n❌ Error during EDGAR download: {e}")
+        print("Please check your internet connection and try again.")
 
 def cftc_download_submenu():
     while True:
@@ -278,7 +449,7 @@ def sec_download_submenu():
         elif choice == '2':
             sec.download_exchange_archives()
         elif choice == '3':
-            sec.allyourbasearebelongtous()
+            edgar_download_menu()
         elif choice == '4':
             sec.download_13F_archives()
         elif choice == '5':
@@ -293,7 +464,7 @@ def sec_download_submenu():
             print("Downloading all SEC data...")
             sec.download_insider_archives()
             sec.download_exchange_archives()
-            sec.allyourbasearebelongtous()
+            download_all_edgar_filings()
             sec.download_13F_archives()
             sec.download_nmfp_archives()
             sec.download_formd_archives()
@@ -448,176 +619,21 @@ def database_menu():
 
 def run_startup_checks():
     """Performs all startup checks and handles missing dependencies."""
-    print("\n=== Checking Dependencies ===")
+    print("\n🚀 Welcome to GameCock AI - Your Financial Data Intelligence Platform")
+    print("=" * 70)
+    print("🔧 Initializing system components...")
     
-    # Core required packages - only check for existence, not versions
-    required_packages = [
-        'sentence_transformers',
-        'sklearn',
-        'numpy',
-        'pandas',
-        'requests',
-        'bs4',
-        'tqdm',
-        'sqlalchemy',
-        'ollama',
-        'python_dotenv',
-        'rich',
-        'fredapi'
-    ]
-    
-    # Map of import names to pip package names
-    package_map = {
-        'sklearn': 'scikit-learn',
-        'bs4': 'beautifulsoup4',
-        'python_dotenv': 'python-dotenv'
-    }
-    
-    missing_packages = []
-    import importlib
-    
-    # Check each required package
-    for pkg in required_packages:
-        try:
-            importlib.import_module(pkg)
-        except ImportError:
-            # Use the mapped package name if it exists, otherwise use the import name
-            pip_name = package_map.get(pkg, pkg)
-            missing_packages.append(pip_name)
-    
-    if missing_packages:
-        print("\nThe following packages need to be installed:")
-        for pkg in missing_packages:
-            print(f"- {pkg}")
-        
-        print("\nAttempting to install missing packages...")
-        
-        try:
-            import subprocess
-            import sys
-            
-            # Install each package one by one to avoid issues with failed installations
-            for pkg in missing_packages:
-                print(f"\nInstalling {pkg}...")
-                try:
-                    # First try with the exact package name
-                    result = subprocess.run(
-                        [sys.executable, "-m", "pip", "install", "--upgrade", pkg],
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        text=True
-                    )
-                    
-                    if result.returncode != 0:
-                        # If that fails, try with --user flag
-                        result = subprocess.run(
-                            [sys.executable, "-m", "pip", "install", "--user", "--upgrade", pkg],
-                            stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            text=True
-                        )
-                    
-                    if result.returncode == 0:
-                        print(f"✅ Successfully installed {pkg}")
-                    else:
-                        print(f"❌ Failed to install {pkg}")
-                        print(f"Error: {result.stderr if result.stderr else 'Unknown error'}")
-                        print(f"\nPlease try installing it manually with:")
-                        print(f"    pip install --user --upgrade {pkg}")
-                        input("\nPress Enter to continue...")
-                        
-                    # Add a small delay to ensure the environment is updated
-                    import time
-                    time.sleep(1)
-                        
-                except Exception as e:
-                    print(f"❌ Error installing {pkg}: {str(e)}")
-                    print(f"\nPlease try installing it manually with:")
-                    print(f"    pip install --user --upgrade {pkg}")
-                    input("\nPress Enter to continue...")
-            
-            # Verify all packages were installed by checking both pip list and import
-            still_missing = []
-            import subprocess
-            
-            # Get list of installed packages from pip
-            result = subprocess.run(
-                [sys.executable, "-m", "pip", "list", "--format=freeze"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            
-            if result.returncode != 0:
-                print("\n❌ Failed to check installed packages. Will try direct imports instead.")
-                installed_packages = []
-            else:
-                installed_packages = [pkg.split('==')[0].lower() for pkg in result.stdout.split('\n') if pkg.strip()]
-            
-            # Check each package
-            for pkg in missing_packages:
-                pip_name = pkg.lower()
-                import_name = next((k for k, v in package_map.items() if v.lower() == pip_name), pip_name)
-                
-                # First check if pip thinks it's installed
-                pip_installed = pip_name in installed_packages if installed_packages else False
-                
-                # Then try to import it
-                try:
-                    importlib.invalidate_caches()
-                    importlib.import_module(import_name)
-                    import_success = True
-                except ImportError:
-                    import_success = False
-                
-                # If both checks fail, mark as missing
-                if not (pip_installed or import_success):
-                    still_missing.append(pkg)
-            
-            if still_missing:
-                print("\n❌ The following packages could not be installed:")
-                for pkg in still_missing:
-                    print(f"  - {pkg}")
-                print("\nPlease try installing them manually with:")
-                for pkg in still_missing:
-                    print(f"    pip install --upgrade {pkg}")
-                input("\nPress Enter to exit...")
-                sys.exit(1)
-            else:
-                print("\n✅ All packages installed successfully!")
-                
-        except Exception as e:
-            print(f"\n❌ An unexpected error occurred: {str(e)}")
-            print("\nPlease try installing the required packages manually:")
-            for pkg in missing_packages:
-                print(f"    pip install --upgrade {pkg}")
-            input("\nPress Enter to exit...")
-            sys.exit(1)
-    else:
-        print("✅ All dependencies are installed and up to date.")
-    
-    # Check Ollama service
-    print("\n=== Checking Ollama Service ===")
-    try:
-        import ollama
-        ollama.list()
-        print("✅ Ollama service is running.")
-    except Exception as e:
-        print(f"\n❌ Error checking Ollama service: {e}")
-        print("\nPlease ensure Ollama is installed and running.")
-        print("You can download it from: https://ollama.ai/")
-        print("After installation, run 'ollama serve' in a terminal.")
-        input("\nPress Enter to exit...")
+    # Check and install dependencies
+    if not check_dependencies():
+        print("❌ Failed to install required dependencies.")
+        print("Please install missing packages manually and restart the application.")
         sys.exit(1)
     
-    # Check CUDA support (non-blocking)
-    print("\n=== Checking CUDA Support ===")
-    cuda_available = check_cuda_support()
+    # Check the Ollama service after dependencies are confirmed
+    check_ollama_service()
     
-    if cuda_available:
-        print("🚀 CUDA acceleration enabled for optimal performance!")
-    else:
-        print("💻 Running in CPU mode - consider installing CUDA for better performance")
+    print("\n✅ All systems operational! GameCock AI is ready to assist you.")
+    print("=" * 70)
 
 def initialize_database():
     """Initialize database tables if they don't exist."""
@@ -633,7 +649,7 @@ def initialize_database():
 
 def download_dtcc_data(data_type):
     """Download DTCC data of the specified type"""
-    from data_sources.dtcc import download_dtcc_swap_data
+    from src.data_sources.dtcc import download_dtcc_swap_data
     from datetime import datetime, timedelta
     import os
     import sys

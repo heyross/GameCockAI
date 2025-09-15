@@ -16,8 +16,8 @@ try:
     if os.path.exists(gamecock_path) and gamecock_path not in sys.path:
         sys.path.append(gamecock_path)
     
-    from GameCockAI.tools import TOOL_MAP
-    from GameCockAI.company_data import TARGET_COMPANIES
+    from ..tools import TOOL_MAP
+    from ..company_data import TARGET_COMPANIES
     TOOLS_AVAILABLE = True
     
     # Verify we have all 18 tools as expected
@@ -572,7 +572,9 @@ class RAGToolOrchestrator:
             if 'error' in target_data:
                 return f"❌ Error retrieving target list: {target_data['error']}"
             
-            if not target_data or len(target_data) == 0:
+            # Extract the actual target companies list
+            companies = target_data.get('target_companies', [])
+            if not companies or len(companies) == 0:
                 return """📋 **Your Target Company List is Empty**
 
 **To add companies to your list, you can:**
@@ -586,10 +588,10 @@ class RAGToolOrchestrator:
 - Monitor their filings and activities
 - Track insider trading patterns"""
             
-            response = f"""📋 **Your Target Companies ({len(target_data)} companies)**
+            response = f"""📋 **Your Target Companies ({len(companies)} companies)**
 
 """
-            for i, company in enumerate(target_data, 1):
+            for i, company in enumerate(companies, 1):
                 name = company.get('title', 'Unknown')
                 ticker = company.get('ticker', 'N/A')
                 cik = company.get('cik_str', 'N/A')
@@ -605,7 +607,7 @@ class RAGToolOrchestrator:
 
 **Try asking:**
 - "Download SEC data for all my targets"
-- "Run comprehensive analysis for {target_data[0].get('title', 'Apple')}"
+- "Run comprehensive analysis for {companies[0].get('title', 'Apple') if companies else 'Apple'}"
 - "Show me insider activity for my companies"
 """
             return response

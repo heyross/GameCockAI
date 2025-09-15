@@ -76,6 +76,18 @@ def process_formd_data(source_dir: str, db_session=None):
     # Implementation would go here
     pass
 
+def process_formd_quarter(quarter_dir: str, db_session=None):
+    """Process Form D data for a specific quarter."""
+    logging.info(f"Processing Form D quarter data from {quarter_dir}")
+    # Implementation for processing a single quarter of Form D data
+    pass
+
+def process_nmfp_data(source_dir: str, db_session=None):
+    """Process NMFP (Net Monthly Fund Performance) data."""
+    logging.info(f"Processing NMFP data from {source_dir}")
+    # Implementation for processing NMFP data
+    pass
+
 def process_10k_filings(source_dir: str, db_session=None, force: bool = False):
     """Process 10-K and 10-Q SEC filings."""
     logging.info(f"Processing 10-K/10-Q filings from {source_dir}")

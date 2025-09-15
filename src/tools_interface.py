@@ -16,8 +16,8 @@ def get_available_data_sources() -> Dict[str, Any]:
     """
     try:
         # Import from the REAL database module with all tables (GameCockAI/database.py)
-        from GameCockAI.database import get_db_stats
-        from GameCockAI.config import (
+        from ..database import get_db_stats
+        from ..config import (
             CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR,
             CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR, INSIDER_SOURCE_DIR,
             THRTNF_SOURCE_DIR, EXCHANGE_SOURCE_DIR, NCEN_SOURCE_DIR, NPORT_SOURCE_DIR,
@@ -164,7 +164,7 @@ def get_system_capabilities() -> Dict[str, Any]:
     # Check what tools are actually available
     available_tools = []
     try:
-        from GameCockAI.tools import TOOL_MAP
+        from ..tools import TOOL_MAP
         available_tools = list(TOOL_MAP.keys())
     except ImportError:
         pass

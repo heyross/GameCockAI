@@ -20,10 +20,10 @@ from pathlib import Path
 
 # Import existing data source modules
 try:
-    from GameCockAI.data_sources.cftc import _fetch_swap_data
-    from GameCockAI.data_sources.dtcc import DTCCDownloader
-    from GameCockAI.data_sources.sec import download_insider_archives
-    from GameCockAI.database import SessionLocal, CFTCSwap
+    from .data_sources.cftc import _fetch_swap_data
+    from .data_sources.dtcc import DTCCDownloader
+    from .data_sources.sec import download_insider_archives
+    from ..database import SessionLocal, CFTCSwap
 except ImportError as e:
     logging.warning(f"Some data source modules not available: {e}")
 
@@ -55,7 +55,7 @@ class SwapDataIntegration:
         """
         try:
             # Use existing database connection
-            from GameCockAI.database import SessionLocal, CFTCSwap
+            from ..database import SessionLocal, CFTCSwap
             
             session = SessionLocal()
             query = session.query(CFTCSwap)

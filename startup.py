@@ -81,12 +81,28 @@ def check_dependencies() -> Tuple[bool, List[str]]:
         package_name = re.split(r'[<>=!~]=?', package)[0].strip()
         import_name = PACKAGE_TO_IMPORT_MAP.get(package_name, package_name)
         
-        # Special handling for packages with different import names
+        # More robust import checking
         try:
-            if not importlib.util.find_spec(import_name):
-                missing_packages.append(package)
-        except (ImportError, ModuleNotFoundError):
+            # Try to actually import the module instead of just checking if spec exists
+            importlib.import_module(import_name)
+            print(f"✅ {package_name} is available")
+        except (ImportError, ModuleNotFoundError) as e:
+            print(f"❌ {package_name} is missing: {e}")
             missing_packages.append(package)
+        except Exception as e:
+            # Special handling for sentence-transformers which has complex dependencies
+            if package_name == "sentence-transformers":
+                # Try a more lenient check for sentence-transformers
+                try:
+                    import sentence_transformers
+                    print(f"✅ {package_name} is available (with warnings)")
+                except ImportError:
+                    print(f"❌ {package_name} is missing: {e}")
+                    missing_packages.append(package)
+            else:
+                # For other packages that might have import issues but are actually installed
+                print(f"⚠️  {package_name} has import issues but may be installed: {e}")
+                # Don't add to missing packages for import issues
     
     if not missing_packages:
         print("✅ All dependencies are installed.")

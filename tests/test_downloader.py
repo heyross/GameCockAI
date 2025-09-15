@@ -8,7 +8,7 @@ from requests.exceptions import RequestException
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from downloader import download_file, download_archives
+from src.downloader import download_file, download_archives
 
 class TestDownloader(unittest.TestCase):
 

@@ -9,23 +9,23 @@ import logging
 from typing import Dict, Any, Optional
 
 # Original imports
-from GameCockAI.src.company_manager import get_company_map, find_company
-from GameCockAI.src.company_data import TARGET_COMPANIES, save_target_companies
-from GameCockAI.src.data_sources import cftc, sec
-from GameCockAI.src.processor import process_zip_files, load_cftc_data_to_db
+from ..company_manager import get_company_map, find_company
+from ..company_data import TARGET_COMPANIES, save_target_companies
+from .data_sources import cftc, sec
+from .processor import process_zip_files, load_cftc_data_to_db
 # Import from the REAL database module with all tables (GameCockAI/database.py)
-from GameCockAI.database import get_db_stats, export_db_to_csv
-from GameCockAI.config import (
+from ..database import get_db_stats, export_db_to_csv
+from ..config import (
     CFTC_CREDIT_SOURCE_DIR, CFTC_RATES_SOURCE_DIR, CFTC_EQUITY_SOURCE_DIR,
     CFTC_COMMODITIES_SOURCE_DIR, CFTC_FOREX_SOURCE_DIR
 )
-from GameCockAI.worker import add_task, get_task_status as get_task_status_from_worker
-from GameCockAI.src.analytics_tools import ANALYTICS_TOOLS
-from GameCockAI.src.enhanced_analytics_tools import ENHANCED_ANALYTICS_TOOLS
+from ..worker import add_task, get_task_status as get_task_status_from_worker
+from .analytics_tools import ANALYTICS_TOOLS
+from .enhanced_analytics_tools import ENHANCED_ANALYTICS_TOOLS
 
 # Vector enhancement imports (graceful fallback if not available)
 try:
-    from GameCockAI.src.vector_integration import (
+    from .vector_integration import (
         get_integration_manager, 
         vector_enhanced_company_analysis,
         vector_enhanced_market_analysis,

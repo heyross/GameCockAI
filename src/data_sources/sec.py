@@ -10,35 +10,19 @@ import concurrent.futures
 from datetime import datetime, timedelta
 from queue import Queue
 
-try:
-    from downloader import download_archives, download_file
-    from config import (
-        INSIDER_SOURCE_DIR,
-        EXCHANGE_SOURCE_DIR,
-        EDGAR_SOURCE_DIR,
-        CREDIT_SOURCE_DIR,
-        EQUITY_SOURCE_DIR,
-        NCEN_SOURCE_DIR,
-        NPORT_SOURCE_DIR,
-        THRTNF_SOURCE_DIR,
-        NMFP_SOURCE_DIR,
-        FORMD_SOURCE_DIR
-    )
-except ImportError:
-    # Fallback for when running from root directory
-    from GameCockAI.src.downloader import download_archives, download_file
-    from GameCockAI.config import (
-        INSIDER_SOURCE_DIR,
-        EXCHANGE_SOURCE_DIR,
-        EDGAR_SOURCE_DIR,
-        CREDIT_SOURCE_DIR,
-        EQUITY_SOURCE_DIR,
-        NCEN_SOURCE_DIR,
-        NPORT_SOURCE_DIR,
-        THRTNF_SOURCE_DIR,
-        NMFP_SOURCE_DIR,
-        FORMD_SOURCE_DIR
-    )
+from ..downloader import download_archives, download_file
+from config import (
+    INSIDER_SOURCE_DIR,
+    EXCHANGE_SOURCE_DIR,
+    EDGAR_SOURCE_DIR,
+    CREDIT_SOURCE_DIR,
+    EQUITY_SOURCE_DIR,
+    NCEN_SOURCE_DIR,
+    NPORT_SOURCE_DIR,
+    THRTNF_SOURCE_DIR,
+    NMFP_SOURCE_DIR,
+    FORMD_SOURCE_DIR
+)
 
 def download_insider_archives():
     os.makedirs(INSIDER_SOURCE_DIR, exist_ok=True)
@@ -182,77 +166,275 @@ def download_exchange_archives():
     urls = [f"{base_url}{file_name}" for file_name in file_names]
     download_archives(urls, EXCHANGE_SOURCE_DIR)
 
-def allyourbasearebelongtous():
-    file_queue = Queue()
-    idx_file = os.path.join(EDGAR_SOURCE_DIR, "master.idx")
-    log_file = os.path.join(EDGAR_SOURCE_DIR, "sec_download_log.txt")
-
-    logging.basicConfig(
-        level=logging.ERROR,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        filename='error_log.txt',
-        filemode='w'
-    )
-
-    def log_progress(message):
-        with open(log_file, 'a') as log:
-            log.write(f"{datetime.now()}: {message}\n")
-        print(message)
-
-    def download_edgar_file(url, download_directory):
+def download_edgar_filings(target_companies=None, filing_types=None, years=None, max_files_per_company=50):
+    """
+    Download EDGAR filings for target companies
+    
+    Args:
+        target_companies: List of company dictionaries with 'cik_str' key
+        filing_types: List of filing types to download (e.g., ['8-K', '10-K', 'S-4'])
+        years: List of years to download (e.g., [2023, 2024])
+        max_files_per_company: Maximum number of files to download per company
+    """
+    os.makedirs(EDGAR_SOURCE_DIR, exist_ok=True)
+    
+    # Default filing types if none specified
+    if filing_types is None:
+        filing_types = ['8-K', '10-K', '10-Q', 'S-4', 'DEF 14A']
+    
+    # Default years if none specified
+    if years is None:
+        current_year = datetime.now().year
+        years = [current_year - 1, current_year]
+    
+    # Default target companies if none specified
+    if target_companies is None:
+        # Load from company_data if available
         try:
-            headers = {'User-Agent': "anonymous/FORTHELULZ@anonyops.com"}
-            response = requests.get(url, headers=headers, stream=True, timeout=30)
-            response.raise_for_status()
+            from company_data import TARGET_COMPANIES
+            target_companies = TARGET_COMPANIES
+        except ImportError:
+            print("No target companies specified and cannot load from company_data")
+            return
+    
+    if not target_companies:
+        print("No target companies available for EDGAR download")
+        return
+    
+    print(f"Downloading EDGAR filings for {len(target_companies)} companies")
+    print(f"Filing types: {', '.join(filing_types)}")
+    print(f"Years: {', '.join(map(str, years))}")
+    
+    headers = {
+        'User-Agent': 'GameCock AI Financial Analysis Tool contact@example.com',
+        'Accept-Encoding': 'gzip, deflate',
+        'Host': 'www.sec.gov'
+    }
+    
+    downloaded_count = 0
+    error_count = 0
+    
+    for company in target_companies:
+        cik = company.get('cik_str')
+        company_name = company.get('title', 'Unknown')
+        
+        if not cik:
+            print(f"Skipping {company_name} - no CIK available")
+            continue
+            
+        print(f"\nProcessing {company_name} (CIK: {cik})")
+        
+        # Create company directory
+        company_dir = os.path.join(EDGAR_SOURCE_DIR, cik)
+        os.makedirs(company_dir, exist_ok=True)
+        
+        # Download filings for each year
+        for year in years:
+            for filing_type in filing_types:
+                try:
+                    filings = get_company_filings(cik, filing_type, year, headers)
+                    
+                    if not filings:
+                        continue
+                    
+                    # Limit number of files per company
+                    filings = filings[:max_files_per_company]
+                    
+                    for filing in filings:
+                        if download_filing_document(filing, company_dir, headers):
+                            downloaded_count += 1
+                        else:
+                            error_count += 1
+                            
+                        # Rate limiting
+                        time.sleep(0.1)
+                        
+                except Exception as e:
+                    print(f"Error processing {company_name} {filing_type} {year}: {e}")
+                    error_count += 1
+                    continue
+    
+    print(f"\nEDGAR download complete:")
+    print(f"  Downloaded: {downloaded_count} files")
+    print(f"  Errors: {error_count} files")
+    print(f"  Files saved to: {EDGAR_SOURCE_DIR}")
 
-            filename = url.split('/')[-1]
-            cik_parts = url.split('/data/')
-            if len(cik_parts) > 1:
-                cik = cik_parts[1].split('/')[0]
-                dir_path = os.path.join(download_directory, cik)
-                os.makedirs(dir_path, exist_ok=True)
-                filepath = os.path.join(dir_path, filename)
-            else:
-                filepath = os.path.join(download_directory, filename)
+def get_company_filings(cik, filing_type, year, headers):
+    """
+    Get list of filings for a company from SEC API
+    """
+    try:
+        # SEC API endpoint for company filings
+        url = f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik.zfill(10)}.json"
+        
+        # Try to get company facts first (this gives us filing information)
+        response = requests.get(url, headers=headers, timeout=30)
+        
+        if response.status_code == 404:
+            # Fallback to EDGAR search API
+            return get_filings_from_edgar_search(cik, filing_type, year, headers)
+        
+        response.raise_for_status()
+        data = response.json()
+        
+        # Extract filing information from company facts
+        filings = []
+        if 'facts' in data and 'dei' in data['facts']:
+            # This is a simplified approach - in practice you'd need to parse the full structure
+            pass
+        
+        # Fallback to EDGAR search
+        return get_filings_from_edgar_search(cik, filing_type, year, headers)
+        
+    except Exception as e:
+        print(f"Error getting filings for CIK {cik}: {e}")
+        return []
 
-            if os.path.exists(filepath):
-                # File verification logic can be added here if needed
-                print(f"FILE already downloaded: {filepath}")
-                return True, filepath
+def get_filings_from_edgar_search(cik, filing_type, year, headers):
+    """
+    Get filings using EDGAR search API
+    """
+    try:
+        # EDGAR search API
+        search_url = "https://www.sec.gov/cgi-bin/browse-edgar"
+        params = {
+            'action': 'getcompany',
+            'CIK': cik,
+            'type': filing_type,
+            'dateb': f'{year}1231',  # End date
+            'datea': f'{year}0101',  # Start date
+            'count': '100',
+            'output': 'atom'
+        }
+        
+        response = requests.get(search_url, params=params, headers=headers, timeout=30)
+        response.raise_for_status()
+        
+        # Parse the XML response
+        import xml.etree.ElementTree as ET
+        root = ET.fromstring(response.content)
+        
+        filings = []
+        for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
+            try:
+                title = entry.find('.//{http://www.w3.org/2005/Atom}title')
+                link = entry.find('.//{http://www.w3.org/2005/Atom}link[@type="text/html"]')
+                
+                if title is not None and link is not None:
+                    # Extract additional information for unique filenames
+                    filing_date = 'unknown_date'
+                    accession_number = 'unknown_accession'
+                    
+                    # Try to extract filing date from the link URL
+                    href = link.get('href', '')
+                    if '/Archives/edgar/data/' in href:
+                        # Extract accession number from URL like: /Archives/edgar/data/1234567/0001234567-23-000001/
+                        parts = href.split('/')
+                        for part in parts:
+                            if part and '-' in part and len(part) > 10:
+                                accession_number = part
+                                # Extract date from accession number (format: 0001234567-23-000001)
+                                if '-' in part:
+                                    date_part = part.split('-')[1]  # Get the year part
+                                    if len(date_part) == 2:
+                                        filing_date = f"20{date_part}"  # Convert YY to YYYY
+                                break
+                    
+                    filing_info = {
+                        'title': title.text,
+                        'url': link.get('href'),
+                        'filing_type': filing_type,
+                        'year': year,
+                        'filing_date': filing_date,
+                        'accession_number': accession_number
+                    }
+                    filings.append(filing_info)
+                    
+            except Exception as e:
+                continue
+        
+        return filings
+        
+    except Exception as e:
+        print(f"Error searching EDGAR for CIK {cik}: {e}")
+        return []
 
-            with open(filepath, 'wb') as file:
-                for chunk in response.iter_content(chunk_size=8192):
-                    file.write(chunk)
+def download_filing_document(filing_info, company_dir, headers):
+    """
+    Download a specific filing document
+    """
+    try:
+        filing_url = filing_info['url']
+        
+        # Get the filing page to find the actual document URL
+        response = requests.get(filing_url, headers=headers, timeout=30)
+        response.raise_for_status()
+        
+        # Parse HTML to find document links
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Look for document links (usually .txt files)
+        doc_links = soup.find_all('a', href=True)
+        document_urls = []
+        
+        for link in doc_links:
+            href = link.get('href')
+            if href and (href.endswith('.txt') or 'document' in href.lower()):
+                if href.startswith('/'):
+                    href = f"https://www.sec.gov{href}"
+                document_urls.append(href)
+        
+        if not document_urls:
+            print(f"No documents found for {filing_info['title']}")
+            return False
+        
+        # Download the first document (usually the main filing)
+        doc_url = document_urls[0]
+        doc_response = requests.get(doc_url, headers=headers, timeout=30)
+        doc_response.raise_for_status()
+        
+        # Create unique filename to prevent overwrites
+        safe_title = "".join(c for c in filing_info['title'] if c.isalnum() or c in (' ', '-', '_')).rstrip()
+        
+        # Include filing date and accession number for uniqueness
+        filing_date = filing_info.get('filing_date', 'unknown_date')
+        accession = filing_info.get('accession_number', 'unknown_accession')
+        
+        # Create a unique filename
+        if accession != 'unknown_accession':
+            # Use accession number for uniqueness
+            filename = f"{filing_info['year']}_{filing_info['filing_type']}_{filing_date}_{accession}_{safe_title}.txt"
+        else:
+            # Fallback to timestamp if no accession number
+            import time
+            timestamp = int(time.time() * 1000)  # milliseconds
+            filename = f"{filing_info['year']}_{filing_info['filing_type']}_{filing_date}_{timestamp}_{safe_title}.txt"
+        
+        filepath = os.path.join(company_dir, filename)
+        
+        # Check if file already exists to prevent overwrites
+        if os.path.exists(filepath):
+            print(f"  Skipping: {filename} (already exists)")
+            return True
+        
+        # Save the document
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(doc_response.text)
+        
+        print(f"  Downloaded: {filename}")
+        return True
+        
+    except Exception as e:
+        print(f"  Error downloading {filing_info.get('title', 'unknown')}: {e}")
+        return False
 
-            print(f"Downloaded: {filepath}")
-            return True, filepath
-
-        except requests.RequestException as e:
-            print(f"Error downloading {url}: {e}")
-            return False, None
-
-    def process_line(line):
-        parts = line.split('|')
-        if len(parts) >= 5:
-            filename = parts[4].strip()
-            if filename.endswith("Filename"):
-                filename = filename.rsplit('/', 1)[0]
-            url = f"https://www.sec.gov/Archives/{filename}"
-            return url
-        return None
-
-    def extract_idx_from_zip(zip_path):
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            for file_name in zip_ref.namelist():
-                if file_name.endswith('.idx'):
-                    return zip_ref.read(file_name).decode('utf-8', errors='ignore')
-        raise FileNotFoundError("No IDX file found in ZIP archive.")
-
-    # TODO: The original logic for processing EDGAR filings is complex and needs a full refactoring.
-    # This includes handling user input for selecting years/quarters, compiling a master index, 
-    # and managing the download and processing of a large number of files.
-    # This will be addressed in a future development cycle.
-    print("EDGAR processing logic is not yet fully implemented.")
+def allyourbasearebelongtous():
+    """
+    Legacy function name - now calls the new EDGAR download system
+    """
+    print("Downloading EDGAR filings using new system...")
+    download_edgar_filings()
 
 def download_credit_archives():
     os.makedirs(CREDIT_SOURCE_DIR, exist_ok=True)

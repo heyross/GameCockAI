@@ -5,6 +5,7 @@ load_dotenv()
 
 # Base directories
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.join(ROOT_DIR, "src")  # src directory
 DATA_DIR = os.path.join(ROOT_DIR, "data")
 DOWNLOADS_DIR = os.path.join(ROOT_DIR, "Downloads")
 
@@ -13,32 +14,46 @@ EDGAR_BASE_URL = "https://www.sec.gov/Archives/"
 SEC_API_KEY = os.getenv("SEC_API_KEY")
 SEC_USER_AGENT = os.getenv("SEC_USER_AGENT", "GameCockAI/1.0 (your-email@example.com)")
 
-# Data source directories
-FORMD_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "SEC", "SecFormD")
-NCEN_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "SEC", "SecNcen")
-NPORT_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "SEC", "SecNport")
-THRTNF_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "SEC", "Sec13F")
-NMFP_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "SEC", "SecNmfp")
+# SEC Data Directories (organized under Downloads/SEC/)
+SEC_BASE_DIR = os.path.join(DOWNLOADS_DIR, "SEC")
+FORMD_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "SecFormD")
+NCEN_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "SecNcen")
+NPORT_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "SecNport")
+THRTNF_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "Sec13F")
+NMFP_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "SecNmfp")
+SEC_8K_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "processed", "8k", "raw")
+SEC_10K_SOURCE_DIR = os.path.join(SEC_BASE_DIR, "processed", "10k", "raw")
 
-# CFTC Data Directories
-CREDIT_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CREDITS")
-EQUITY_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "EQUITY")
-CFTC_EQUITY_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_EQ")
-CFTC_CREDIT_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_CR")
-CFTC_COMMODITIES_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_CO")
+# CFTC Data Directories (organized under Downloads/CFTC/)
+CFTC_BASE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC")
+CREDIT_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "CREDITS")
+EQUITY_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "EQUITY")
+CFTC_EQUITY_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_EQ")
+CFTC_CREDIT_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_CR")
+CFTC_COMMODITIES_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_CO")
 CFTC_FOREX_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "FOREX")
-CFTC_RATES_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_IR")
+CFTC_RATES_SOURCE_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_IR")
 
 # Additional Swap Data Directories
-CFTC_SWAP_DEALER_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_SWAP_DEALER")
-CFTC_SWAP_EXECUTION_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_SWAP_EXECUTION")
-CFTC_SWAP_DATA_REPOSITORY_DIR = os.path.join(DOWNLOADS_DIR, "CFTC", "CFTC_SWAP_DATA_REPOSITORY")
+CFTC_SWAP_DEALER_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_SWAP_DEALER")
+CFTC_SWAP_EXECUTION_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_SWAP_EXECUTION")
+CFTC_SWAP_DATA_REPOSITORY_DIR = os.path.join(CFTC_BASE_DIR, "CFTC_SWAP_DATA_REPOSITORY")
 
 # Other Directories
 EDGAR_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "EDGAR")
 EXCHANGE_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "EXCHANGE")
 INSIDER_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "INSIDERS")
-SEC_8K_SOURCE_DIR = os.path.join(DATA_DIR, 'sec', '8k', 'raw')
+
+# FRED Data Directory
+FRED_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "FRED")
+
+# DTCC Data Directory
+DTCC_SOURCE_DIR = os.path.join(DOWNLOADS_DIR, "DTCC")
+
+# Cache directories
+CACHE_DIR = os.path.join(ROOT_DIR, "cache")
+EMBEDDING_CACHE_DIR = os.path.join(CACHE_DIR, "embeddings")
+VECTOR_CACHE_DIR = os.path.join(CACHE_DIR, "vectors")
 
 # CFTC API Base URLs
 CFTC_BASE_URL = "https://www.cftc.gov/api/v2/"
@@ -55,3 +70,6 @@ CFTC_SWAP_EXECUTION_URL = "https://www.cftc.gov/IndustryOversight/TradingOrganiz
 # Swap Data Repositories
 CFTC_SWAP_DATA_REPOSITORY_URL = "https://www.cftc.gov/IndustryOversight/DataRepositories/index.htm"
 
+# Legacy paths for backward compatibility (will be deprecated)
+# These point to the same locations but maintain old variable names
+ROOT_DIR_LEGACY = "./"  # For root directory imports

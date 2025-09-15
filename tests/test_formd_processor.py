@@ -13,7 +13,7 @@ sys.path.append(gamecock_dir)  # Add GameCockAI/ to path
 sys.path.append(root_dir)      # Add root/ to path for other dependencies
 
 from src.processor import process_formd_data, process_formd_quarter
-from downloader import extract_formd_filings
+from src.downloader import extract_formd_filings
 # Import from the correct database module (GameCockAI/database.py)
 from database import (SessionLocal, FormDSubmission, FormDIssuer, FormDOffering, 
                       FormDRecipient, FormDRelatedPerson, FormDSignature)
@@ -123,7 +123,7 @@ class TestFormDProcessor(unittest.TestCase):
         
         return zip_path
 
-    @patch('downloader.FORMD_SOURCE_DIR')
+    @patch('GameCockAI.config.FORMD_SOURCE_DIR')
     def test_extract_formd_filings(self, mock_formd_source_dir):
         """Test the extraction of Form D quarterly archives."""
         # Mock the FORMD_SOURCE_DIR to use our test directory
@@ -134,7 +134,7 @@ class TestFormDProcessor(unittest.TestCase):
         zip_path = self.create_mock_quarterly_archive('2020q1_d')
         
         # Test extraction with mocked source directory
-        with patch('downloader.FORMD_SOURCE_DIR', self.test_source_dir):
+        with patch('GameCockAI.config.FORMD_SOURCE_DIR', self.test_source_dir):
             extract_formd_filings(zip_path)
         
         # Verify extraction - check for the extracted directory
@@ -151,7 +151,7 @@ class TestFormDProcessor(unittest.TestCase):
         # Verify we found at least some TSV files
         self.assertTrue(len(tsv_files_found) >= 3, f"Expected TSV files not found. Found: {tsv_files_found}")
 
-    @patch('processor.SessionLocal')
+    @patch('database.SessionLocal')
     def test_process_formd_quarter(self, mock_session_local):
         """Test processing of a single Form D quarter."""
         # Create mock quarterly directory structure (quarter_dir contains a subdirectory)
@@ -186,8 +186,8 @@ class TestFormDProcessor(unittest.TestCase):
         # Verify commit was called
         mock_session.commit.assert_called()
 
-    @patch('processor.SessionLocal')
-    @patch('downloader.FORMD_SOURCE_DIR')
+    @patch('database.SessionLocal')
+    @patch('GameCockAI.config.FORMD_SOURCE_DIR')
     def test_process_formd_data_integration(self, mock_formd_source_dir, mock_session_local):
         """Test the complete Form D data processing pipeline."""
         # Mock the FORMD_SOURCE_DIR to use our test directory
@@ -224,7 +224,7 @@ class TestFormDProcessor(unittest.TestCase):
         mock_session_local.return_value = mock_session
         
         # Test complete processing with mocked FORMD_SOURCE_DIR
-        with patch('downloader.FORMD_SOURCE_DIR', self.test_source_dir):
+        with patch('GameCockAI.config.FORMD_SOURCE_DIR', self.test_source_dir):
             process_formd_data(self.test_source_dir, mock_session)
         
         # Verify processing occurred
@@ -268,7 +268,7 @@ class TestFormDProcessor(unittest.TestCase):
             f.write('ACCESSIONNUMBER\n')  # Header only
         
         # Mock database session
-        with patch('processor.SessionLocal') as mock_session_local:
+        with patch('database.SessionLocal') as mock_session_local:
             mock_session = MagicMock()
             mock_session_local.return_value = mock_session
             
@@ -285,7 +285,7 @@ class TestFormDProcessor(unittest.TestCase):
         os.makedirs(quarter_dir, exist_ok=True)
         
         # Mock database session
-        with patch('processor.SessionLocal') as mock_session_local:
+        with patch('database.SessionLocal') as mock_session_local:
             mock_session = MagicMock()
             mock_session_local.return_value = mock_session
             

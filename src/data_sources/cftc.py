@@ -8,37 +8,20 @@ from zipfile import ZipFile
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
 
-try:
-    from downloader import download_archives
-    from config import (
-        CFTC_CREDIT_SOURCE_DIR,
-        CFTC_COMMODITIES_SOURCE_DIR,
-        CFTC_RATES_SOURCE_DIR,
-        CFTC_EQUITY_SOURCE_DIR,
-        CFTC_FOREX_SOURCE_DIR,
-        CFTC_SWAP_DEALER_DIR,
-        CFTC_SWAP_EXECUTION_DIR,
-        CFTC_SWAP_DATA_REPOSITORY_DIR,
-        CFTC_SWAP_DEALER_URL,
-        CFTC_SWAP_EXECUTION_URL,
-        CFTC_SWAP_DATA_REPOSITORY_URL,
-    )
-except ImportError:
-    # Fallback for when running from root directory
-    from GameCockAI.src.downloader import download_archives
-    from GameCockAI.config import (
-        CFTC_CREDIT_SOURCE_DIR,
-        CFTC_COMMODITIES_SOURCE_DIR,
-        CFTC_RATES_SOURCE_DIR,
-        CFTC_EQUITY_SOURCE_DIR,
-        CFTC_FOREX_SOURCE_DIR,
-        CFTC_SWAP_DEALER_DIR,
-        CFTC_SWAP_EXECUTION_DIR,
-        CFTC_SWAP_DATA_REPOSITORY_DIR,
-        CFTC_SWAP_DEALER_URL,
-        CFTC_SWAP_EXECUTION_URL,
-        CFTC_SWAP_DATA_REPOSITORY_URL,
-    )
+from ..downloader import download_archives
+from config import (
+    CFTC_CREDIT_SOURCE_DIR,
+    CFTC_COMMODITIES_SOURCE_DIR,
+    CFTC_RATES_SOURCE_DIR,
+    CFTC_EQUITY_SOURCE_DIR,
+    CFTC_FOREX_SOURCE_DIR,
+    CFTC_SWAP_DEALER_DIR,
+    CFTC_SWAP_EXECUTION_DIR,
+    CFTC_SWAP_DATA_REPOSITORY_DIR,
+    CFTC_SWAP_DEALER_URL,
+    CFTC_SWAP_EXECUTION_URL,
+    CFTC_SWAP_DATA_REPOSITORY_URL,
+)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
