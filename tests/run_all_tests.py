@@ -56,6 +56,12 @@ class TestSuiteRunner:
                 "critical": True
             },
             {
+                "name": "Enhanced SEC Processing Tests",
+                "function": self._run_enhanced_sec_tests,
+                "description": "Tests for enhanced SEC section extraction and temporal analysis",
+                "critical": True
+            },
+            {
                 "name": "Performance Benchmarks", 
                 "function": run_performance_benchmarks,
                 "description": "Performance and scalability benchmarks",
@@ -114,6 +120,47 @@ class TestSuiteRunner:
         
         self.test_results["environment"] = env_info
         return env_info
+    
+    def _run_enhanced_sec_tests(self) -> bool:
+        """Run enhanced SEC processing and temporal analysis tests."""
+        try:
+            import unittest
+            from test_enhanced_sec_processor import TestEnhancedSECProcessor, TestEnhancedSECProcessorIntegration
+            from test_temporal_analysis_tools import (
+                TestTemporalAnalysisEngine, 
+                TestTemporalAnalysisConvenienceFunctions,
+                TestTemporalAnalysisIntegration
+            )
+            from test_integration_workflow import TestIntegrationWorkflow
+            
+            # Create test suite
+            test_suite = unittest.TestSuite()
+            
+            # Add test classes
+            test_classes = [
+                TestEnhancedSECProcessor,
+                TestEnhancedSECProcessorIntegration,
+                TestTemporalAnalysisEngine,
+                TestTemporalAnalysisConvenienceFunctions,
+                TestTemporalAnalysisIntegration,
+                TestIntegrationWorkflow
+            ]
+            
+            for test_class in test_classes:
+                test_suite.addTest(unittest.makeSuite(test_class))
+            
+            # Run tests
+            runner = unittest.TextTestRunner(verbosity=1, stream=open(os.devnull, 'w'))
+            result = runner.run(test_suite)
+            
+            return result.wasSuccessful()
+            
+        except ImportError as e:
+            print(f"⚠️ Enhanced SEC tests not available: {e}")
+            return False
+        except Exception as e:
+            print(f"❌ Enhanced SEC tests failed: {e}")
+            return False
     
     def run_all_tests(self, 
                      skip_performance: bool = False,

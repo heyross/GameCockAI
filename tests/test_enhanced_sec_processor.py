@@ -25,6 +25,7 @@ if gamecock_dir not in sys.path:
 try:
     from enhanced_sec_processor import EnhancedSECProcessor
     from database import SessionLocal, Sec10KDocument, Sec8KItem, Sec10KSubmission, Sec8KSubmission
+    from test_base import BaseIntegrationTest
     IMPORTS_AVAILABLE = True
 except ImportError as e:
     print(f"Import error: {e}")
@@ -406,22 +407,13 @@ class TestEnhancedSECProcessor(unittest.TestCase):
             self.assertGreater(len(content), 100)  # Minimum content length
 
 
-class TestEnhancedSECProcessorIntegration(unittest.TestCase):
+class TestEnhancedSECProcessorIntegration(BaseIntegrationTest):
     """Integration tests for EnhancedSECProcessor with real database."""
     
     def setUp(self):
         """Set up integration test fixtures."""
-        self.temp_dir = tempfile.mkdtemp()
-        
-        # Use real database session for integration tests
-        self.db = SessionLocal()
-        self.processor = EnhancedSECProcessor(db_session=self.db)
-    
-    def tearDown(self):
-        """Clean up integration test fixtures."""
-        shutil.rmtree(self.temp_dir, ignore_errors=True)
-        if hasattr(self.db, 'close'):
-            self.db.close()
+        super().setUp()
+        self.processor = EnhancedSECProcessor(db_session=SessionLocal())
     
     def test_real_database_operations(self):
         """Test actual database operations with real session."""
