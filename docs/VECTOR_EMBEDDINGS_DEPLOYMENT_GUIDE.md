@@ -321,7 +321,7 @@ Create `vector_config.json`:
     "collections": {
       "sec_filings": {"type": "chromadb", "metric": "cosine"},
       "cftc_data": {"type": "chromadb", "metric": "cosine"},
-      "company_profiles": {"type": "faiss", "dimension": 768}
+      "company_profiles": {"type": "faiss", "dimension": 384}
     }
   },
   "rag_system": {

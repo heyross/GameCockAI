@@ -454,7 +454,7 @@ def create_test_vector_collection(embeddings_data: List[Dict] = None, collection
         
         # Generate fake embeddings (for testing without actual models)
         import numpy as np
-        fake_embeddings = np.random.random((len(documents), 768)).tolist()
+        fake_embeddings = np.random.random((len(documents), 384)).tolist()
         
         # Return data dictionary for performance tests
         return {
@@ -472,7 +472,7 @@ def create_test_vector_collection(embeddings_data: List[Dict] = None, collection
             "documents": [f"Mock document {i}" for i in range(100)],
             "metadatas": [{"type": "mock", "id": i} for i in range(100)],
             "ids": [f"mock_{i}" for i in range(100)],
-            "embeddings": [[0.1] * 768 for _ in range(100)],
+            "embeddings": [[0.1] * 384 for _ in range(100)],
             "collection": None
         }
 

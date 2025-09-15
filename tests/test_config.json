@@ -9,7 +9,7 @@
     "cleanup_after_tests": true
   },
   "vector_settings": {
-    "embedding_dimension": 768,
+    "embedding_dimension": 384,
     "batch_size": 32,
     "enable_caching": true,
     "cache_directory": "./test_cache",

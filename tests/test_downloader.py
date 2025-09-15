@@ -21,15 +21,14 @@ class TestDownloader(unittest.TestCase):
         """Clean up the temporary directory after tests."""
         shutil.rmtree(self.test_dir)
 
-    @patch('downloader.requests.get')
+    @patch('src.downloader.requests.get')
     def test_download_file_success(self, mock_get):
         """Test successful download of a single file."""
         # Mock the requests.get call to return a successful response
         mock_response = MagicMock()
         mock_response.raise_for_status.return_value = None
-        mock_response.iter_content.return_value = [b'testdata']
-        # To properly mock a context manager, we need to set the return value of __enter__
-        mock_get.return_value.__enter__.return_value = mock_response
+        mock_response.iter_content.return_value = iter([b'testdata'])
+        mock_get.return_value = mock_response
 
         url = "http://example.com/testfile.zip"
         result = download_file(url, self.test_dir)
@@ -49,12 +48,12 @@ class TestDownloader(unittest.TestCase):
             f.write('original data')
 
         # The download_file function should return True without trying to download
-        with patch('downloader.requests.get') as mock_get:
+        with patch('src.downloader.requests.get') as mock_get:
             result = download_file("http://example.com/existing.zip", self.test_dir)
             self.assertTrue(result)
             mock_get.assert_not_called() # Ensure no network request was made
 
-    @patch('downloader.requests.get')
+    @patch('src.downloader.requests.get')
     def test_download_file_failure(self, mock_get):
         """Test handling of a failed download."""
         # Mock requests.get to raise an exception
@@ -65,7 +64,7 @@ class TestDownloader(unittest.TestCase):
         # Ensure the failed file was not created
         self.assertFalse(os.path.exists(os.path.join(self.test_dir, "fail.zip")))
 
-    @patch('downloader.download_file')
+    @patch('src.downloader.download_file')
     def test_download_archives(self, mock_download_file):
         """Test the parallel downloading of multiple archives."""
         mock_download_file.return_value = True
@@ -79,7 +78,7 @@ class TestDownloader(unittest.TestCase):
 
         # Check that download_file was called for each URL
         self.assertEqual(mock_download_file.call_count, len(urls))
-        expected_calls = [call(url=url, destination_folder=self.test_dir, rate_limit_delay=0) for url in urls]
+        expected_calls = [call(url, self.test_dir, 0) for url in urls]
         mock_download_file.assert_has_calls(expected_calls, any_order=True)
 
 if __name__ == '__main__':

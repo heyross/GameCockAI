@@ -120,10 +120,10 @@ class PerformanceBenchmarks(unittest.TestCase):
             def mock_encode(batch_texts, **kwargs):
                 # Simulate realistic encoding time
                 time.sleep(len(batch_texts) * 0.01)  # 10ms per document
-                return np.random.rand(len(batch_texts), 768)
+                return np.random.rand(len(batch_texts), 384)
             
             mock_model.encode = mock_encode
-            mock_model.get_sentence_embedding_dimension.return_value = 768
+            mock_model.get_sentence_embedding_dimension.return_value = 384
             mock_model.device = "cpu"
             mock_st.return_value = mock_model
             
@@ -191,7 +191,7 @@ class PerformanceBenchmarks(unittest.TestCase):
         vector_db.create_collection(
             faiss_collection, 
             collection_type="faiss", 
-            dimension=768
+            dimension=384
         )
         
         vectors = np.array(embeddings)
@@ -223,7 +223,10 @@ class PerformanceBenchmarks(unittest.TestCase):
         
         # Set up test collection with data
         collection_name = "search_perf_test"
-        vector_db.create_collection(collection_name, collection_type="chroma", embedding_dimension=768)
+        # Use default embedding function for ChromaDB
+        from chromadb.utils import embedding_functions
+        embedding_function = embedding_functions.DefaultEmbeddingFunction()
+        vector_db.create_collection(collection_name, collection_type="chroma", embedding_function=embedding_function)
         
         test_data = create_test_vector_collection()
         documents = test_data["documents"][:200]  # Larger dataset for search testing
@@ -340,7 +343,7 @@ class PerformanceBenchmarks(unittest.TestCase):
                         mock_vdb.return_value = mock_vdb_instance
                         
                         mock_emb_instance = Mock()
-                        mock_emb_instance.embed_financial_documents.return_value = np.random.rand(1, 768)
+                        mock_emb_instance.embed_financial_documents.return_value = np.random.rand(1, 384)
                         mock_emb.return_value = mock_emb_instance
                         
                         # Mock search results
@@ -434,7 +437,7 @@ class PerformanceBenchmarks(unittest.TestCase):
                         mock_vdb.return_value = mock_vdb_instance
                         
                         mock_emb_instance = Mock()
-                        mock_emb_instance.embed_financial_documents.return_value = np.random.rand(1, 768)
+                        mock_emb_instance.embed_financial_documents.return_value = np.random.rand(1, 384)
                         mock_emb.return_value = mock_emb_instance
                         
                         rag_system = EnhancedRAGSystem(vector_store_path=self.test_dir)
@@ -473,7 +476,7 @@ class PerformanceBenchmarks(unittest.TestCase):
                             total_time = time.time() - start_time
                             
                             avg_query_time = statistics.mean(query_times)
-                            throughput = num_concurrent / total_time
+                            throughput = num_concurrent / max(total_time, 0.001)  # Avoid division by zero
                             
                             print(f"  Concurrent {num_concurrent:2d}: {avg_query_time:.3f}s avg, {throughput:.1f} queries/sec total")
                             
@@ -554,7 +557,10 @@ class PerformanceBenchmarks(unittest.TestCase):
         
         vector_db = GameCockVectorDB(persist_directory=self.test_dir)
         collection_name = "scalability_test"
-        vector_db.create_collection(collection_name, collection_type="chroma", embedding_dimension=768)
+        # Use default embedding function for ChromaDB
+        from chromadb.utils import embedding_functions
+        embedding_function = embedding_functions.DefaultEmbeddingFunction()
+        vector_db.create_collection(collection_name, collection_type="chroma", embedding_function=embedding_function)
         
         # Test with increasing document counts
         document_counts = [100, 500, 1000, 2000]
@@ -567,7 +573,7 @@ class PerformanceBenchmarks(unittest.TestCase):
             documents = [f"Scalability test document {i} with financial content" for i in range(doc_count)]
             metadatas = [{"doc_id": i, "batch": doc_count} for i in range(doc_count)]
             ids = [f"scale_{doc_count}_{i}" for i in range(doc_count)]
-            embeddings = self.generator.generate_test_embeddings(768, doc_count)
+            embeddings = self.generator.generate_test_embeddings(384, doc_count)
             
             # Measure insertion time
             start_time = time.time()

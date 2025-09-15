@@ -101,7 +101,7 @@ class GameCockVectorDB:
                          name: str, 
                          embedding_function: Any = None,
                          collection_type: str = "chroma",
-                         dimension: int = 768,
+                         dimension: int = 384,
                          distance_metric: str = "cosine") -> bool:
         """
         Create a new vector collection
@@ -569,7 +569,7 @@ class VectorDBManager:
         
         # Numerical data collections (FAISS)
         numerical_collections = [
-            ("cftc_numerical", 768),
+            ("cftc_numerical", 384),
             ("market_indicators", 512), 
             ("company_profiles", 1024)
         ]

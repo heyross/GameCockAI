@@ -446,8 +446,8 @@ class FinancialEmbeddingService:
         elif len(new_embeddings) > 0:
             embedding_dim = new_embeddings.shape[1]
         else:
-            # Default dimension for FinBERT
-            embedding_dim = 768
+            # Default dimension for all-MiniLM-L6-v2
+            embedding_dim = 384
         
         # Initialize result array
         result = np.zeros((len(texts), embedding_dim))

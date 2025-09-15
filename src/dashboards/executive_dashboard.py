@@ -25,11 +25,11 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text, and_, or_
 
 # Import existing modules
-from ..enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
-from ..swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, RiskLevel
-from ..cross_filing_analysis.cross_filing_correlation_engine import CrossFilingCorrelationEngine
-from ..obligation_tracking.obligation_tracking_system import ObligationTrackingSystem
-from ..credit_risk.credit_risk_tracker import CreditRiskTracker
+from src.enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
+from src.swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, RiskLevel
+from src.cross_filing_analysis.cross_filing_correlation_engine import CrossFilingCorrelationEngine
+from src.obligation_tracking.obligation_tracking_system import ObligationTrackingSystem
+from src.credit_risk.credit_risk_tracker import CreditRiskTracker
 
 logger = logging.getLogger(__name__)
 

@@ -19,12 +19,12 @@ from typing import Dict, List, Any, Optional, Union
 from sqlalchemy.orm import Session
 
 # Import all swap analysis modules
-from .swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, SinglePartyRiskProfile
-from .cross_filing_analysis.cross_filing_correlation_engine import CrossFilingCorrelationEngine, ConsolidatedRiskProfile
-from .obligation_tracking.obligation_tracking_system import ObligationTrackingSystem, ObligationSummary
-from .credit_risk.credit_risk_tracker import CreditRiskTracker, CreditRiskProfile
-from .dashboards.executive_dashboard import ExecutiveDashboard
-from .enhanced_entity_resolver import EnhancedEntityResolver, IdentifierType
+from src.swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, SinglePartyRiskProfile
+from src.cross_filing_analysis.cross_filing_correlation_engine import CrossFilingCorrelationEngine, ConsolidatedRiskProfile
+from src.obligation_tracking.obligation_tracking_system import ObligationTrackingSystem, ObligationSummary
+from src.credit_risk.credit_risk_tracker import CreditRiskTracker, CreditRiskProfile
+from src.dashboards.executive_dashboard import ExecutiveDashboard
+from src.enhanced_entity_resolver import EnhancedEntityResolver, IdentifierType
 
 logger = logging.getLogger(__name__)
 

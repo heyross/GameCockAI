@@ -103,7 +103,7 @@ class VectorIntegrationManager:
             
             # Numerical collections for FAISS
             numerical_collections = [
-                ("company_financial_vectors", 768),
+                ("company_financial_vectors", 384),
                 ("market_indicator_vectors", 512),
                 ("risk_profile_vectors", 384),
                 ("correlation_vectors", 1024)

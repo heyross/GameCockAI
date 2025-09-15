@@ -41,6 +41,9 @@ class TestIntegrationWorkflow(BaseIntegrationTest):
         super().setUp()
         self.db = SessionLocal()
         
+        # Create temporary directory for test files
+        self.temp_dir = tempfile.mkdtemp()
+        
         # Create test filing content
         self.test_filing_content = """
 <SEC-HEADER>

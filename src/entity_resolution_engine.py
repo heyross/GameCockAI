@@ -205,26 +205,38 @@ class EntityResolutionEngine:
                     matched_fields.append('ticker')
                     confidence_scores.append(0.9)
             
-            # Name fuzzy match
+            # Name fuzzy match - only if no conflicting identifiers
             if target_entity.get('name') and search_entity.get('name'):
-                name_similarity = self._calculate_name_similarity(
-                    target_entity['name'], 
-                    search_entity['name']
-                )
-                if name_similarity > 0.8:
-                    matched_fields.append('name')
-                    confidence_scores.append(name_similarity)
+                # Check for conflicting identifiers first
+                has_conflicting_identifiers = False
+                for identifier in ['lei', 'cik', 'cusip']:
+                    target_val = target_entity.get(identifier)
+                    search_val = search_entity.get(identifier)
+                    if target_val and search_val and target_val != search_val:
+                        has_conflicting_identifiers = True
+                        break
+                
+                # Only do name matching if no conflicting identifiers
+                if not has_conflicting_identifiers:
+                    name_similarity = self._calculate_name_similarity(
+                        target_entity['name'], 
+                        search_entity['name']
+                    )
+                    if name_similarity > 0.8:
+                        matched_fields.append('name')
+                        confidence_scores.append(name_similarity)
             
-            # Alias matching
-            target_aliases = target_entity.get('aliases', [])
-            search_aliases = search_entity.get('aliases', [])
-            
-            for target_alias in target_aliases:
-                for search_alias in search_aliases:
-                    alias_similarity = self._calculate_name_similarity(target_alias, search_alias)
-                    if alias_similarity > 0.85:
-                        matched_fields.append('alias')
-                        confidence_scores.append(alias_similarity * 0.8)
+            # Alias matching - only if no conflicting identifiers
+            if not has_conflicting_identifiers:
+                target_aliases = target_entity.get('aliases', [])
+                search_aliases = search_entity.get('aliases', [])
+                
+                for target_alias in target_aliases:
+                    for search_alias in search_aliases:
+                        alias_similarity = self._calculate_name_similarity(target_alias, search_alias)
+                        if alias_similarity > 0.85:
+                            matched_fields.append('alias')
+                            confidence_scores.append(alias_similarity * 0.8)
             
             if not matched_fields:
                 return None
@@ -232,9 +244,15 @@ class EntityResolutionEngine:
             # Calculate overall confidence score
             overall_confidence = np.mean(confidence_scores)
             
-            # Determine match type
-            if overall_confidence >= 0.95:
-                match_type = "exact"
+            # Determine match type based on matched fields
+            # If we have exact matches on key identifiers (LEI, CIK, CUSIP), it's exact
+            if any(field in matched_fields for field in ['lei', 'cik', 'cusip']):
+                # Check if we have multiple exact identifier matches
+                exact_identifier_matches = [field for field in matched_fields if field in ['lei', 'cik', 'cusip']]
+                if len(exact_identifier_matches) >= 1 and all(score == 1.0 for i, score in enumerate(confidence_scores) if matched_fields[i] in ['lei', 'cik', 'cusip']):
+                    match_type = "exact"
+                else:
+                    match_type = "fuzzy"
             elif overall_confidence >= 0.8:
                 match_type = "fuzzy"
             else:

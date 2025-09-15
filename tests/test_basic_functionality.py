@@ -42,7 +42,9 @@ class TestBasicFunctionality(unittest.TestCase):
         
         # Check we're in the right directory
         self.assertTrue(current_dir.name == "tests")
-        self.assertTrue(current_dir.parent.name == "GameCockAI")
+        # Allow for different directory structures (GameCockAI or gamecockai)
+        parent_name = current_dir.parent.name.lower()
+        self.assertTrue(parent_name in ["gamecockai", "gamecock_final"])
         
         # Check test files exist
         expected_files = [

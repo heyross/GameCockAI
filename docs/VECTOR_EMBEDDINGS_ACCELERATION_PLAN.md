@@ -39,7 +39,7 @@ This plan outlines a comprehensive strategy to implement vector embeddings in th
 ```
 Financial Documents → Chunking → Embeddings → Vector DB
      ↓
-[SEC 10-K] → [512-token chunks] → [768-dim vectors] → ChromaDB
+[SEC 10-K] → [512-token chunks] → [384-dim vectors] → ChromaDB
 [CFTC Data] → [Transaction summaries] → [Embeddings] → FAISS Index
 [Form D] → [Filing summaries] → [Embeddings] → Hybrid Storage
 ```
@@ -88,7 +88,7 @@ Financial Concepts → Domain-Specific Embeddings → Concept Space
 ```python
 # Hugging Face: ProsusAI/finbert
 - Context Length: 512 tokens
-- Vector Dimension: 768
+- Vector Dimension: 384
 - Specialization: Financial language understanding
 - Performance: 95% accuracy on financial NLP tasks
 ```

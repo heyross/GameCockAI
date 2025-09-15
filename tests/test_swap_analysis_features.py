@@ -69,6 +69,7 @@ class TestSinglePartyRiskAnalyzer(unittest.TestCase):
             net_exposure=0.0,
             maturity_date=datetime.utcnow() + timedelta(days=365),
             effective_date=datetime.utcnow(),
+            termination_date=datetime.utcnow() + timedelta(days=365),
             data_source="TEST"
         )
         
@@ -123,9 +124,9 @@ class TestCrossFilingCorrelationEngine(unittest.TestCase):
     def test_disclosure_patterns_initialization(self):
         """Test disclosure patterns are properly initialized."""
         patterns = self.engine.disclosure_patterns
-        self.assertIn("FORM_10K", [ft.value for ft in patterns.keys()])
-        self.assertIn("FORM_10Q", [ft.value for ft in patterns.keys()])
-        self.assertIn("FORM_8K", [ft.value for ft in patterns.keys()])
+        self.assertIn("10-K", [ft.value for ft in patterns.keys()])
+        self.assertIn("10-Q", [ft.value for ft in patterns.keys()])
+        self.assertIn("8-K", [ft.value for ft in patterns.keys()])
     
     def test_filing_type_enum(self):
         """Test FilingType enum values."""
@@ -343,6 +344,7 @@ class TestIntegrationAndCompatibility(unittest.TestCase):
             net_exposure=0.0,
             maturity_date=datetime.utcnow() + timedelta(days=365),
             effective_date=datetime.utcnow(),
+            termination_date=datetime.utcnow() + timedelta(days=365),
             data_source="TEST"
         )
         

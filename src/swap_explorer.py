@@ -347,10 +347,15 @@ class SwapExplorer:
             counterparty_count = len(counterparty_df)
             
             # Calculate upcoming obligations
-            upcoming_obligations = obligations_df[
-                (obligations_df['due_date'] <= datetime.now() + timedelta(days=30)) &
-                (obligations_df['status'] == 'pending')
-            ] if not obligations_df.empty else pd.DataFrame()
+            if not obligations_df.empty:
+                # Ensure due_date is datetime type
+                obligations_df['due_date'] = pd.to_datetime(obligations_df['due_date'])
+                upcoming_obligations = obligations_df[
+                    (obligations_df['due_date'] <= datetime.now() + timedelta(days=30)) &
+                    (obligations_df['status'] == 'pending')
+                ]
+            else:
+                upcoming_obligations = pd.DataFrame()
             
             upcoming_amount = upcoming_obligations['amount'].sum() if not upcoming_obligations.empty else 0
             

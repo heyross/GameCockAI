@@ -94,13 +94,13 @@ class TestVectorDatabase(unittest.TestCase):
         success = self.vector_db.create_collection(
             name="test_faiss",
             collection_type="faiss",
-            dimension=768,
+            dimension=384,
             distance_metric="cosine"
         )
         
         self.assertTrue(success)
         self.assertIn("test_faiss", self.vector_db.faiss_indexes)
-        self.assertEqual(self.vector_db.faiss_metadata["test_faiss"]["dimension"], 768)
+        self.assertEqual(self.vector_db.faiss_metadata["test_faiss"]["dimension"], 384)
     
     def test_document_addition_and_search(self):
         """Test adding documents and searching"""
@@ -199,8 +199,8 @@ class TestEmbeddingService(unittest.TestCase):
         # Mock the sentence transformers to avoid downloading models in tests
         with patch('embedding_service.SentenceTransformer') as mock_st:
             mock_model = Mock()
-            mock_model.encode.return_value = np.random.rand(3, 768)  # Mock embeddings
-            mock_model.get_sentence_embedding_dimension.return_value = 768
+            mock_model.encode.return_value = np.random.rand(3, 384)  # Mock embeddings
+            mock_model.get_sentence_embedding_dimension.return_value = 384
             mock_model.device = "cpu"
             mock_st.return_value = mock_model
             
@@ -224,7 +224,7 @@ class TestEmbeddingService(unittest.TestCase):
         embeddings = self.embedding_service.embed_financial_documents(texts)
         
         self.assertEqual(embeddings.shape[0], 2)
-        self.assertEqual(embeddings.shape[1], 768)
+        self.assertEqual(embeddings.shape[1], 384)
         self.assertIsInstance(embeddings, np.ndarray)
     
     def test_embedding_caching(self):
@@ -556,8 +556,8 @@ class TestPerformance(unittest.TestCase):
         # Mock embedding service for performance testing
         with patch('embedding_service.SentenceTransformer') as mock_st:
             mock_model = Mock()
-            mock_model.encode.return_value = np.random.rand(100, 768)
-            mock_model.get_sentence_embedding_dimension.return_value = 768
+            mock_model.encode.return_value = np.random.rand(100, 384)
+            mock_model.get_sentence_embedding_dimension.return_value = 384
             mock_st.return_value = mock_model
             
             service = FinancialEmbeddingService()

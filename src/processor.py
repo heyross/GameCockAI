@@ -4,6 +4,7 @@ This module coordinates calls to specialized processor modules.
 """
 
 import logging
+import os
 from typing import List, Dict, Any, Optional
 
 # Import database models
@@ -16,77 +17,186 @@ except ImportError:
     from database import SessionLocal
 
 # Import specialized processors
-from .processor_10k import SEC10KProcessor
-from .processor_8k import SEC8KProcessor
-from .processor_cftc_swaps import process_all_swap_data
-from .processor_dtcc import DTCCProcessor
+from src.processor_10k import SEC10KProcessor
+from src.processor_8k import SEC8KProcessor
+from src.processor_cftc_swaps import process_all_swap_data
+from src.processor_dtcc import DTCCProcessor
+from src.processor_ncen import process_ncen_data
+from src.processor_nport import process_nport_data
+from src.processor_formd import process_formd_data
+from src.processor_form13f import process_form13f_data
+from src.processor_sec import process_sec_insider_data
+from src.processor_exchange_metrics import process_exchange_metrics_data
+from src.processor_nmfp import process_nmfp_data
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = None, 
                      search_term: Optional[str] = None, load_to_db: bool = False):
     """
-    Process zip files from a directory.
-    This is a placeholder that delegates to appropriate specialized processors.
+    Process zip files from a directory by delegating to appropriate specialized processors.
+    
+    Args:
+        source_dir: Directory containing zip files to process
+        target_companies: Optional list of target companies to filter by
+        search_term: Optional search term to filter data
+        load_to_db: If True, loads the data into the database
+        
+    Returns:
+        DataFrame containing the processed data, or None if no data was found
     """
+    import glob
+    import pandas as pd
+    from zipfile import ZipFile
+    
     logging.info(f"Processing zip files from {source_dir}")
-    # This would delegate to appropriate specialized processors based on file type
-    # For now, return None as this is handled by specialized processors
-    return None
+    
+    if not os.path.exists(source_dir):
+        logging.error(f"Source directory does not exist: {source_dir}")
+        return None
+    
+    zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
+    if not zip_files:
+        logging.warning(f"No zip files found in {source_dir}")
+        return None
+    
+    all_data = []
+    
+    for zip_file in zip_files:
+        try:
+            with ZipFile(zip_file, 'r') as zip_ref:
+                # Get list of files in the zip
+                file_list = zip_ref.namelist()
+                
+                # Determine file type based on contents
+                file_type = _detect_file_type(file_list)
+                logging.info(f"Detected file type: {file_type} for {zip_file}")
+                
+                # Delegate to appropriate specialized processor
+                if file_type == 'CFTC':
+                    result = process_cftc_swap_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'N-CEN':
+                    result = process_ncen_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'N-PORT':
+                    result = process_nport_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'FORM-D':
+                    result = process_formd_data(source_dir, load_to_db=load_to_db)
+                elif file_type == '13F':
+                    result = process_form13f_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'SEC-INSIDER':
+                    result = process_sec_insider_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'EXCHANGE-METRICS':
+                    result = process_exchange_metrics_data(source_dir, load_to_db=load_to_db)
+                elif file_type == 'N-MFP':
+                    result = process_nmfp_data(source_dir, load_to_db=load_to_db)
+                else:
+                    logging.warning(f"Unknown file type for {zip_file}, skipping")
+                    continue
+                
+                # Only append DataFrame results, skip dictionaries or other types
+                if result is not None and hasattr(result, 'shape'):  # Check if it's a DataFrame
+                    all_data.append(result)
+                elif result is not None:
+                    logging.info(f"Processor returned non-DataFrame result: {type(result)}")
+                    
+        except Exception as e:
+            logging.error(f"Error processing {zip_file}: {e}")
+            continue
+    
+    # Combine all results into a single DataFrame if any data was processed
+    if all_data:
+        try:
+            combined_df = pd.concat(all_data, ignore_index=True)
+            logging.info(f"Successfully processed {len(combined_df)} records from {len(zip_files)} zip files")
+            return combined_df
+        except Exception as e:
+            logging.error(f"Error combining results: {e}")
+            return None
+    else:
+        logging.warning("No data was processed from any zip files")
+        return None
+
+def _detect_file_type(file_list):
+    """Detect the type of data based on file names in the zip."""
+    file_list_lower = [f.lower() for f in file_list]
+    
+    # CFTC swap data detection
+    if any('cftc' in f or 'swap' in f for f in file_list_lower):
+        return 'CFTC'
+    
+    # N-CEN detection
+    if any('ncen' in f or 'submission' in f or 'registrant' in f for f in file_list_lower):
+        return 'N-CEN'
+    
+    # N-PORT detection
+    if any('nport' in f or 'holding' in f or 'derivative' in f for f in file_list_lower):
+        return 'N-PORT'
+    
+    # Form D detection
+    if any('formd' in f or 'form_d' in f for f in file_list_lower):
+        return 'FORM-D'
+    
+    # 13F detection
+    if any('13f' in f or 'form13f' in f for f in file_list_lower):
+        return '13F'
+    
+    # SEC insider trading detection
+    if any('insider' in f or 'form345' in f for f in file_list_lower):
+        return 'SEC-INSIDER'
+    
+    # Exchange metrics detection
+    if any('exchange' in f or 'metrics' in f for f in file_list_lower):
+        return 'EXCHANGE-METRICS'
+    
+    # N-MFP detection
+    if any('nmfp' in f or 'n-mfp' in f for f in file_list_lower):
+        return 'N-MFP'
+    
+    # Default to CFTC for generic CSV files
+    if any(f.endswith('.csv') for f in file_list):
+        return 'CFTC'
+    
+    return 'UNKNOWN'
 
 def process_sec_insider_data(source_dir: str, db_session=None):
     """Process SEC insider trading data."""
-    logging.info(f"Processing SEC insider data from {source_dir}")
-    # Delegate to specialized SEC processor
-    # Implementation would go here
-    pass
+    from src.processor_sec import process_sec_insider_data as _process_sec_insider_data
+    return _process_sec_insider_data(source_dir, db_session)
 
 def process_form13f_data(source_dir: str, db_session=None):
     """Process Form 13F data."""
-    logging.info(f"Processing Form 13F data from {source_dir}")
-    # Delegate to specialized 13F processor
-    # Implementation would go here
-    pass
+    from src.processor_form13f import process_form13f_data as _process_form13f_data
+    return _process_form13f_data(source_dir, db_session)
 
 def process_exchange_metrics_data(source_dir: str, db_session=None):
     """Process SEC exchange metrics data."""
-    logging.info(f"Processing exchange metrics data from {source_dir}")
-    # Delegate to specialized exchange metrics processor
-    # Implementation would go here
-    pass
+    from src.processor_exchange_metrics import process_exchange_metrics_data as _process_exchange_metrics_data
+    return _process_exchange_metrics_data(source_dir, db_session)
 
 def process_ncen_data(source_dir: str, db_session=None, **kwargs):
     """Process N-CEN filing data."""
-    logging.info(f"Processing N-CEN data from {source_dir}")
-    # Delegate to specialized N-CEN processor
-    # Implementation would go here
-    pass
+    from src.processor_ncen import process_ncen_data as _process_ncen_data
+    return _process_ncen_data(source_dir, db_session, **kwargs)
 
 def process_nport_data(source_dir: str, db_session=None, **kwargs):
     """Process N-PORT filing data."""
-    logging.info(f"Processing N-PORT data from {source_dir}")
-    # Delegate to specialized N-PORT processor
-    # Implementation would go here
-    pass
+    from src.processor_nport import process_nport_data as _process_nport_data
+    return _process_nport_data(source_dir, db_session, **kwargs)
 
 def process_formd_data(source_dir: str, db_session=None):
     """Process Form D data."""
-    logging.info(f"Processing Form D data from {source_dir}")
-    # Delegate to specialized Form D processor
-    # Implementation would go here
-    pass
+    from src.processor_formd import process_formd_data as _process_formd_data
+    return _process_formd_data(source_dir, db_session)
 
 def process_formd_quarter(quarter_dir: str, db_session=None):
     """Process Form D data for a specific quarter."""
-    logging.info(f"Processing Form D quarter data from {quarter_dir}")
-    # Implementation for processing a single quarter of Form D data
-    pass
+    from src.processor_formd import process_formd_quarter as _process_formd_quarter
+    return _process_formd_quarter(quarter_dir, db_session)
 
 def process_nmfp_data(source_dir: str, db_session=None):
     """Process NMFP (Net Monthly Fund Performance) data."""
-    logging.info(f"Processing NMFP data from {source_dir}")
-    # Implementation for processing NMFP data
-    pass
+    from src.processor_nmfp import process_nmfp_data as _process_nmfp_data
+    return _process_nmfp_data(source_dir, db_session)
 
 def process_10k_filings(source_dir: str, db_session=None, force: bool = False):
     """Process 10-K and 10-Q SEC filings with section extraction."""
@@ -338,3 +448,32 @@ def sanitize_column_names(df):
     df.columns = df.columns.str.replace(r'^_+|_+$', '', regex=True)
     df.columns = [''.join(c if c.isalnum() or c == '_' else '_' for c in col) for col in df.columns]
     return df
+
+def load_data_to_db(data, table_name: str, db_session=None):
+    """Load data to database table."""
+    try:
+        if db_session is None:
+            db_session = SessionLocal()
+        
+        # Convert DataFrame to list of dictionaries
+        if hasattr(data, 'to_dict'):
+            records = data.to_dict('records')
+        else:
+            records = data if isinstance(data, list) else [data]
+        
+        # Use bulk insert for efficiency
+        if records:
+            db_session.bulk_insert_mappings(table_name, records)
+            db_session.commit()
+            logger.info(f"Loaded {len(records)} records to {table_name}")
+            return True
+        return False
+        
+    except Exception as e:
+        logger.error(f"Error loading data to {table_name}: {e}")
+        if db_session:
+            db_session.rollback()
+        return False
+    finally:
+        if db_session:
+            db_session.close()

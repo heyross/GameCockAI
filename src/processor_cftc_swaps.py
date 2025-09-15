@@ -76,8 +76,9 @@ def process_swap_dealer_data(file_path: str, session: Optional[Session] = None) 
                             setattr(existing, key, value)
                     existing.last_updated = datetime.utcnow()
                 else:
-                    # Create new record
-                    dealer = CFTCDerivativesDealer(**item)
+                    # Create new record - filter out invalid fields
+                    valid_fields = {k: v for k, v in item.items() if hasattr(CFTCDerivativesDealer, k)}
+                    dealer = CFTCDerivativesDealer(**valid_fields)
                     session.add(dealer)
                 
                 count += 1
@@ -133,8 +134,9 @@ def process_swap_execution_facility_data(file_path: str, session: Optional[Sessi
                             setattr(existing, key, value)
                     existing.last_updated = datetime.utcnow()
                 else:
-                    # Create new record
-                    facility = CFTCSwapExecutionFacility(**item)
+                    # Create new record - filter out invalid fields
+                    valid_fields = {k: v for k, v in item.items() if hasattr(CFTCSwapExecutionFacility, k)}
+                    facility = CFTCSwapExecutionFacility(**valid_fields)
                     session.add(facility)
                 
                 count += 1
@@ -190,8 +192,9 @@ def process_swap_data_repository_data(file_path: str, session: Optional[Session]
                             setattr(existing, key, value)
                     existing.last_updated = datetime.utcnow()
                 else:
-                    # Create new record
-                    repo = CFTCSwapDataRepository(**item)
+                    # Create new record - filter out invalid fields
+                    valid_fields = {k: v for k, v in item.items() if hasattr(CFTCSwapDataRepository, k)}
+                    repo = CFTCSwapDataRepository(**valid_fields)
                     session.add(repo)
                 
                 count += 1

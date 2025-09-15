@@ -26,10 +26,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text, and_, or_
 
 # Import existing modules
-from ..enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
-from ..data_sources.cftc import download_all_swap_data
-from ..data_sources.dtcc import download_dtcc_swap_data
-from ..data_sources.sec import download_edgar_filings
+from src.enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
+from src.data_sources.cftc import download_all_swap_data
+from src.data_sources.dtcc import download_dtcc_swap_data
+from src.data_sources.sec import download_edgar_filings
 
 logger = logging.getLogger(__name__)
 
@@ -150,6 +150,10 @@ class SinglePartyRiskAnalyzer:
         self.high_risk_threshold = 0.8  # 80% of credit limit
         self.critical_risk_threshold = 0.95  # 95% of credit limit
         self.margin_call_threshold = 0.7  # 70% of collateral threshold
+        
+        # Entity matching thresholds
+        self.fuzzy_threshold = 0.8  # Fuzzy matching threshold
+        self.partial_threshold = 0.6  # Partial matching threshold
         
     def analyze_single_party_risk(self, entity_identifier: str, 
                                 identifier_type: IdentifierType = IdentifierType.AUTO) -> Optional[SinglePartyRiskProfile]:

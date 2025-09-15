@@ -25,8 +25,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text, and_, or_
 
 # Import existing modules
-from ..enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
-from ..swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, SwapExposure, RiskLevel
+from src.enhanced_entity_resolver import EnhancedEntityResolver, EntityProfile, IdentifierType
+from src.swap_analysis.single_party_risk_analyzer import SinglePartyRiskAnalyzer, SwapExposure, RiskLevel
 
 logger = logging.getLogger(__name__)
 

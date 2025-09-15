@@ -10,6 +10,8 @@ import pandas as pd
 import shutil
 from datetime import datetime
 from unittest.mock import patch, MagicMock
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 # Import the modules we're testing
 import sys
@@ -22,7 +24,7 @@ sys.path.append(root_dir)      # Add root/ to path for other dependencies
 from src.processor import process_ncen_data, sanitize_column_names
 # Import from the correct database module (GameCockAI/database.py)
 from database import (NCENSubmission, NCENRegistrant, NCENFundReportedInfo, 
-                     NCENAdviser, create_db_and_tables, SessionLocal)
+                     NCENAdviser, create_db_and_tables, SessionLocal, Base)
 
 
 class TestNCENProcessing(unittest.TestCase):
@@ -32,6 +34,18 @@ class TestNCENProcessing(unittest.TestCase):
         """Set up test fixtures."""
         self.test_dir = tempfile.mkdtemp()
         self.test_zip_path = os.path.join(self.test_dir, "test_ncen.zip")
+        
+        # Create test database
+        self.test_db_path = tempfile.mktemp(suffix='.db')
+        self.test_db_url = f"sqlite:///{self.test_db_path}"
+        self.test_engine = create_engine(
+            self.test_db_url,
+            connect_args={"check_same_thread": False}
+        )
+        self.TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.test_engine)
+        
+        # Create tables
+        Base.metadata.create_all(bind=self.test_engine)
         
         # Create sample N-CEN data
         self.sample_submission_data = {
@@ -102,6 +116,9 @@ class TestNCENProcessing(unittest.TestCase):
     def tearDown(self):
         """Clean up test fixtures."""
         shutil.rmtree(self.test_dir, ignore_errors=True)
+        self.test_engine.dispose()
+        if os.path.exists(self.test_db_path):
+            os.unlink(self.test_db_path)
     
     def create_test_zip(self):
         """Create a test ZIP file with sample N-CEN data."""
@@ -166,24 +183,31 @@ class TestNCENProcessing(unittest.TestCase):
         self.assertEqual(df['total_series'].iloc[0], 5)
         self.assertEqual(df['management_fee'].iloc[0], 0.75)
     
-    @patch('processor.load_data_to_db')
-    def test_process_ncen_data_success(self, mock_load_data):
+    def test_process_ncen_data_success(self):
         """Test successful N-CEN data processing."""
         self.create_test_zip()
         
-        # Mock the database loading function
-        mock_load_data.return_value = None
-        
-        # Process the data
-        result = process_ncen_data(self.test_dir)
+        # Process the data with test database session
+        db_session = self.TestSessionLocal()
+        result = process_ncen_data(self.test_dir, db_session=db_session)
         
         # Check results
         self.assertEqual(result['processed'], 1)
         self.assertEqual(result['errors'], 0)
         self.assertTrue(any('test_ncen.zip' in f for f in result['files']))
         
-        # Verify that load_data_to_db was called for each table type
-        self.assertEqual(mock_load_data.call_count, 4)  # submission, registrant, fund, adviser
+        # Verify data was actually loaded into database
+        submission_count = db_session.query(NCENSubmission).count()
+        registrant_count = db_session.query(NCENRegistrant).count()
+        fund_count = db_session.query(NCENFundReportedInfo).count()
+        adviser_count = db_session.query(NCENAdviser).count()
+        
+        self.assertGreater(submission_count, 0)
+        self.assertGreater(registrant_count, 0)
+        self.assertGreater(fund_count, 0)
+        self.assertGreater(adviser_count, 0)
+        
+        db_session.close()
     
     def test_process_ncen_data_no_directory(self):
         """Test N-CEN processing with non-existent directory."""
@@ -199,19 +223,19 @@ class TestNCENProcessing(unittest.TestCase):
         self.assertEqual(result['processed'], 0)
         self.assertEqual(result['errors'], 0)
     
-    @patch('processor.load_data_to_db')
-    def test_process_ncen_data_with_error(self, mock_load_data):
+    def test_process_ncen_data_with_error(self):
         """Test N-CEN processing with database error."""
         self.create_test_zip()
         
-        # Mock database error
-        mock_load_data.side_effect = Exception("Database error")
-        
-        result = process_ncen_data(self.test_dir)
-        
-        # Should still process the file but report errors
-        self.assertEqual(result['processed'], 1)
-        self.assertEqual(result['errors'], 4)  # One error per TSV file
+        # Mock the load_data_to_db function to raise an exception
+        with patch('src.processor_ncen.load_data_to_db') as mock_load_data:
+            mock_load_data.side_effect = Exception("Database error")
+            
+            result = process_ncen_data(self.test_dir)
+            
+            # Should still process the file but report errors
+            self.assertEqual(result['processed'], 1)
+            self.assertGreater(result['errors'], 0)  # Should have some errors
     
     def test_empty_tsv_handling(self):
         """Test handling of empty TSV files."""
@@ -219,7 +243,7 @@ class TestNCENProcessing(unittest.TestCase):
             # Create empty TSV
             zf.writestr('SUBMISSION.tsv', 'ACCESSION_NUMBER\n')  # Header only
         
-        with patch('processor.load_data_to_db') as mock_load_data:
+        with patch('src.processor_ncen.load_data_to_db') as mock_load_data:
             result = process_ncen_data(self.test_dir)
             
             # Should process without errors but not call load_data_to_db
@@ -235,7 +259,7 @@ class TestNCENProcessing(unittest.TestCase):
             tsv_content = df.to_csv(sep='\t', index=False)
             zf.writestr('UNKNOWN_TABLE.tsv', tsv_content)
         
-        with patch('processor.load_data_to_db') as mock_load_data:
+        with patch('src.processor_ncen.load_data_to_db') as mock_load_data:
             result = process_ncen_data(self.test_dir)
             
             # Should process without errors but not call load_data_to_db

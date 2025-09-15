@@ -385,7 +385,7 @@ class TestEntityResolutionEngine(unittest.TestCase):
             }
         ]
         
-        matches = self.engine.find_matches("ENTITY_A", search_entities)
+        matches = self.engine.find_matches("ENTITY_A_SIMILAR", search_entities)
         
         # Should find exact match
         self.assertGreater(len(matches), 0)
@@ -393,6 +393,7 @@ class TestEntityResolutionEngine(unittest.TestCase):
         # Should have high confidence
         best_match = matches[0]
         self.assertGreater(best_match.confidence_score, 0.9)
+        # With matching LEI and CIK, this should be exact match
         self.assertEqual(best_match.match_type, "exact")
         self.assertIn('lei', best_match.matched_fields)
         self.assertIn('cik', best_match.matched_fields)

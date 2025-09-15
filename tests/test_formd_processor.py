@@ -134,7 +134,7 @@ class TestFormDProcessor(unittest.TestCase):
         zip_path = self.create_mock_quarterly_archive('2020q1_d')
         
         # Test extraction with mocked source directory
-        with patch('GameCockAI.config.FORMD_SOURCE_DIR', self.test_source_dir):
+        with patch('src.downloader.FORMD_SOURCE_DIR', self.test_source_dir):
             extract_formd_filings(zip_path)
         
         # Verify extraction - check for the extracted directory
