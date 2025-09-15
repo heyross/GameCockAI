@@ -191,24 +191,201 @@ class EnhancedEntityResolver:
             return ' '.join(identifier.split())
     
     def _search_entity(self, identifier: str, identifier_type: IdentifierType) -> Optional[EntityProfile]:
-        """Search for entity in database and external sources."""
-        # Try exact match first
-        entity_profile = self._exact_match_search(identifier, identifier_type)
-        if entity_profile and entity_profile.confidence_score >= self.fuzzy_threshold:
-            return entity_profile
-        
-        # Try fuzzy match if exact match not found or low confidence
-        fuzzy_profile = self._fuzzy_match_search(identifier, identifier_type)
-        if fuzzy_profile and fuzzy_profile.confidence_score > entity_profile.confidence_score:
-            entity_profile = fuzzy_profile
-        
-        # Try partial match if still not found
-        if not entity_profile or entity_profile.confidence_score < self.partial_threshold:
-            partial_profile = self._partial_match_search(identifier, identifier_type)
-            if partial_profile and partial_profile.confidence_score > entity_profile.confidence_score:
-                entity_profile = partial_profile
-        
-        return entity_profile
+        """Search for entity using SEC API for company data, database for security identifiers."""
+        try:
+            # For CUSIP, ISIN, LEI - use database as SEC API doesn't have security identifiers
+            if identifier_type in [IdentifierType.CUSIP, IdentifierType.ISIN, IdentifierType.LEI]:
+                return self._search_security_identifier(identifier, identifier_type)
+            
+            # For CIK, NAME, TICKER - use SEC API
+            if identifier_type in [IdentifierType.CIK, IdentifierType.NAME, IdentifierType.TICKER]:
+                return self._search_company_identifier(identifier, identifier_type)
+            
+            # For AUTO - try to detect and search accordingly
+            if identifier_type == IdentifierType.AUTO:
+                detected_type = self._detect_identifier_type(identifier)
+                return self._search_entity(identifier, detected_type)
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error searching entity: {str(e)}")
+            return None
+    
+    def _search_company_identifier(self, identifier: str, identifier_type: IdentifierType) -> Optional[EntityProfile]:
+        """Search for company using SEC API with EDGAR fallback."""
+        try:
+            # Use SEC API for company data
+            import sys
+            import os
+            sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+            from company_manager import get_company_map, find_company
+            
+            company_map = get_company_map()
+            if company_map is None:
+                logger.error("Could not retrieve company data from SEC API")
+                return None
+            
+            results = find_company(company_map, identifier)
+            
+            if results:
+                # Use the first (best) match
+                result = results[0]
+                entity_profile = EntityProfile(
+                    entity_id=result['cik_str'],
+                    entity_name=result.get('title', 'Unknown'),
+                    confidence_score=0.95,  # High confidence for SEC API results
+                    last_updated=datetime.utcnow()
+                )
+                
+                # Add primary identifiers
+                entity_profile.primary_identifiers["cik"] = result['cik_str']
+                if result.get('ticker'):
+                    entity_profile.primary_identifiers["ticker"] = result['ticker']
+                if result.get('title'):
+                    entity_profile.primary_identifiers["name"] = result['title']
+                
+                # Add data sources
+                entity_profile.data_sources.append("SEC_API")
+                
+                return entity_profile
+            
+            # If not found in SEC API, try EDGAR fallback for CIK searches
+            if identifier_type == IdentifierType.CIK:
+                return self._search_edgar_fallback(identifier)
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error searching company via SEC API: {str(e)}")
+            return None
+    
+    def _search_edgar_fallback(self, cik: str) -> Optional[EntityProfile]:
+        """Fallback to EDGAR web scraping for CIKs not in SEC API."""
+        try:
+            import requests
+            from config import SEC_USER_AGENT
+            
+            # Clean CIK format
+            clean_cik = cik.zfill(10)
+            
+            # Try EDGAR company lookup
+            url = f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={clean_cik}&owner=exclude&count=1"
+            headers = {'User-Agent': SEC_USER_AGENT}
+            
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                # Parse the response to extract company name
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Look for company name in the page
+                company_name = None
+                title_tag = soup.find('span', class_='companyName')
+                if title_tag:
+                    company_name = title_tag.get_text(strip=True)
+                    # Clean up the company name - remove extra text after CIK
+                    if 'CIK#' in company_name:
+                        company_name = company_name.split('CIK#')[0].strip()
+                    if '(see all company filings)' in company_name:
+                        company_name = company_name.replace('(see all company filings)', '').strip()
+                
+                if company_name:
+                    entity_profile = EntityProfile(
+                        entity_id=clean_cik,
+                        entity_name=company_name,
+                        confidence_score=0.8,  # Lower confidence for EDGAR fallback
+                        last_updated=datetime.utcnow()
+                    )
+                    
+                    # Add primary identifiers
+                    entity_profile.primary_identifiers["cik"] = clean_cik
+                    entity_profile.primary_identifiers["name"] = company_name
+                    
+                    # Add data sources
+                    entity_profile.data_sources.append("EDGAR_FALLBACK")
+                    
+                    logger.info(f"Found company via EDGAR fallback: {company_name} (CIK: {clean_cik})")
+                    return entity_profile
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error in EDGAR fallback search: {str(e)}")
+            return None
+    
+    def _search_security_identifier(self, identifier: str, identifier_type: IdentifierType) -> Optional[EntityProfile]:
+        """Search for security using database (CUSIP, ISIN, LEI)."""
+        try:
+            if not self.db_session:
+                logger.error("Database session not available for security identifier search")
+                return None
+            
+            # Search in Form 13F holdings for CUSIP
+            if identifier_type == IdentifierType.CUSIP:
+                query = text("""
+                    SELECT DISTINCT 
+                        f.nameofissuer as name,
+                        f.cusip,
+                        NULL as cik,
+                        NULL as ticker
+                    FROM form13f_info_tables f
+                    WHERE f.cusip = :identifier
+                    LIMIT 1
+                """)
+            # Search in N-MFP portfolio securities for CUSIP, ISIN, LEI
+            elif identifier_type in [IdentifierType.ISIN, IdentifierType.LEI]:
+                if identifier_type == IdentifierType.ISIN:
+                    where_clause = "n.isin = :identifier"
+                else:  # LEI
+                    where_clause = "n.lei = :identifier"
+                
+                query = text(f"""
+                    SELECT DISTINCT 
+                        n.name_of_issuer as name,
+                        n.cusip_number as cusip,
+                        n.cik,
+                        NULL as ticker
+                    FROM nmfp_sch_portfolio_securities n
+                    WHERE {where_clause}
+                    LIMIT 1
+                """)
+            else:
+                return None
+            
+            result = self.db_session.execute(query, {"identifier": identifier}).fetchone()
+            
+            if result:
+                entity_profile = EntityProfile(
+                    entity_id=result.cik or identifier,  # Use CIK if available, otherwise use identifier
+                    entity_name=result.name or "Unknown",
+                    confidence_score=0.85,  # Good confidence for database results
+                    last_updated=datetime.utcnow()
+                )
+                
+                # Add primary identifiers
+                if result.cik:
+                    entity_profile.primary_identifiers["cik"] = result.cik
+                if result.cusip:
+                    entity_profile.primary_identifiers["cusip"] = result.cusip
+                if result.ticker:
+                    entity_profile.primary_identifiers["ticker"] = result.ticker
+                if result.name:
+                    entity_profile.primary_identifiers["name"] = result.name
+                
+                # Add the searched identifier
+                entity_profile.primary_identifiers[identifier_type.value] = identifier
+                
+                # Add data sources
+                entity_profile.data_sources.append("DATABASE")
+                
+                return entity_profile
+            
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error searching security identifier: {str(e)}")
+            return None
     
     def _exact_match_search(self, identifier: str, identifier_type: IdentifierType) -> Optional[EntityProfile]:
         """Search for exact matches in database."""
@@ -216,30 +393,23 @@ class EnhancedEntityResolver:
             if not self.db_session:
                 return None
             
-            # Build query based on identifier type
+            # Build query based on identifier type - use available data sources
             if identifier_type == IdentifierType.CIK:
                 query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE issuercik = :identifier
-                    LIMIT 1
-                """)
-            elif identifier_type == IdentifierType.TICKER:
-                query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuertradingsymbol) = UPPER(:identifier)
+                    SELECT DISTINCT cik, entityname as name, NULL as ticker
+                    FROM formd_issuers 
+                    WHERE cik = :identifier
                     LIMIT 1
                 """)
             elif identifier_type == IdentifierType.NAME:
                 query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuername) = UPPER(:identifier)
+                    SELECT DISTINCT cik, entityname as name, NULL as ticker
+                    FROM formd_issuers 
+                    WHERE UPPER(entityname) = UPPER(:identifier)
                     LIMIT 1
                 """)
             else:
-                # For CUSIP, ISIN, LEI - would need additional tables
+                # For TICKER, CUSIP, ISIN, LEI - would need additional tables
                 return None
             
             result = self.db_session.execute(query, {"identifier": identifier}).fetchone()
@@ -259,11 +429,12 @@ class EnhancedEntityResolver:
             if not self.db_session or identifier_type != IdentifierType.NAME:
                 return None
             
-            # Get all company names for fuzzy matching
+            # Get all company names for fuzzy matching from available data
             query = text("""
-                SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                FROM sec_submissions 
-                WHERE issuername IS NOT NULL
+                SELECT DISTINCT cik, entityname as name, NULL as ticker
+                FROM formd_issuers 
+                WHERE entityname IS NOT NULL
+                LIMIT 1000
             """)
             
             results = self.db_session.execute(query).fetchall()
@@ -293,20 +464,12 @@ class EnhancedEntityResolver:
             if not self.db_session:
                 return None
             
-            # Build query for partial matching
+            # Build query for partial matching using available data
             if identifier_type == IdentifierType.NAME:
                 query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuername) LIKE UPPER(:identifier)
-                    LIMIT 10
-                """)
-                search_term = f"%{identifier}%"
-            elif identifier_type == IdentifierType.TICKER:
-                query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuertradingsymbol) LIKE UPPER(:identifier)
+                    SELECT DISTINCT cik, entityname as name, NULL as ticker
+                    FROM formd_issuers 
+                    WHERE UPPER(entityname) LIKE UPPER(:identifier)
                     LIMIT 10
                 """)
                 search_term = f"%{identifier}%"
@@ -478,7 +641,7 @@ class EnhancedEntityResolver:
     
     def search_entities(self, search_term: str, limit: int = 10) -> List[EntityMatch]:
         """
-        Search for multiple entities matching a search term.
+        Search for multiple entities matching a search term using SEC API.
         
         Args:
             search_term: The search term
@@ -489,50 +652,31 @@ class EnhancedEntityResolver:
         """
         try:
             matches = []
-            identifier_type = self._detect_identifier_type(search_term)
-            clean_term = self._clean_identifier(search_term, identifier_type)
             
-            if not self.db_session:
+            # Use SEC API instead of database
+            import sys
+            import os
+            sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+            from company_manager import get_company_map, find_company
+            
+            company_map = get_company_map()
+            if company_map is None:
+                logger.error("Could not retrieve company data from SEC API")
                 return matches
             
-            # Build search query
-            if identifier_type == IdentifierType.NAME:
-                query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuername) LIKE UPPER(:search_term)
-                    ORDER BY issuername
-                    LIMIT :limit
-                """)
-                search_param = f"%{clean_term}%"
-            elif identifier_type == IdentifierType.TICKER:
-                query = text("""
-                    SELECT DISTINCT issuercik as cik, issuername as name, issuertradingsymbol as ticker
-                    FROM sec_submissions 
-                    WHERE UPPER(issuertradingsymbol) LIKE UPPER(:search_term)
-                    ORDER BY issuertradingsymbol
-                    LIMIT :limit
-                """)
-                search_param = f"%{clean_term}%"
-            else:
-                return matches
+            results = find_company(company_map, search_term)
             
-            results = self.db_session.execute(query, {
-                "search_term": search_param,
-                "limit": limit
-            }).fetchall()
-            
-            for result in results:
-                if result.cik:
+            for result in results[:limit]:
+                if result.get('cik_str'):
                     match = EntityMatch(
-                        entity_id=result.cik,
-                        confidence_score=0.8,  # Default confidence for search results
-                        match_type="search",
-                        matched_fields=["name", "ticker"],
+                        entity_id=result['cik_str'],
+                        confidence_score=0.9,  # High confidence for SEC API results
+                        match_type="api_search",
+                        matched_fields=["name", "ticker", "cik"],
                         matched_identifiers={
-                            "cik": result.cik,
-                            "name": result.name or "",
-                            "ticker": result.ticker or ""
+                            "cik": result['cik_str'],
+                            "name": result.get('title', ''),
+                            "ticker": result.get('ticker', '')
                         }
                     )
                     matches.append(match)

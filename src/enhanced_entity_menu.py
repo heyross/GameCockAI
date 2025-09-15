@@ -15,6 +15,9 @@ from .enhanced_entity_resolver import (
     EnhancedEntityResolver, EntityProfile, EntityMatch, 
     IdentifierType, EntityType
 )
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from database import SessionLocal
 
 logger = logging.getLogger(__name__)
@@ -114,7 +117,11 @@ class EnhancedEntityMenu:
                 self._display_entity_profile(entity_profile)
             else:
                 print(f"❌ No entity found for CIK '{cik}'")
-                print("💡 Check the CIK format (4-10 digits)")
+                print("💡 This CIK may not exist or may be for a company that:")
+                print("   • Is no longer actively trading")
+                print("   • Has been delisted or acquired")
+                print("   • Is a private company with limited filings")
+                print("   • Has been removed from SEC API but exists in EDGAR")
         
         except Exception as e:
             print(f"❌ Error searching by CIK: {str(e)}")
@@ -134,7 +141,9 @@ class EnhancedEntityMenu:
                 self._display_entity_profile(entity_profile)
             else:
                 print(f"❌ No entity found for CUSIP '{cusip}'")
-                print("💡 Check the CUSIP format (6-9 alphanumeric characters)")
+                print("💡 CUSIP search requires data in the local database.")
+                print("   This CUSIP may not be in the current dataset or the")
+                print("   database may need to be populated with Form 13F or N-MFP data.")
         
         except Exception as e:
             print(f"❌ Error searching by CUSIP: {str(e)}")
