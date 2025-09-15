@@ -48,6 +48,18 @@ try:
 except ImportError as e:
     logger.warning(f"⚠️ Data sources not available: {e}")
     DATA_SOURCES_AVAILABLE = False
+
+try:
+    from temporal_analysis_tools import (
+        analyze_risk_evolution, 
+        analyze_management_view_evolution, 
+        compare_company_risks, 
+        analyze_company_events
+    )
+    TEMPORAL_ANALYSIS_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"⚠️ Temporal analysis tools not available: {e}")
+    TEMPORAL_ANALYSIS_AVAILABLE = False
     cftc = None
     sec = None
 
@@ -662,5 +674,76 @@ TOOL_MAP = {
     # Import analytics tools with resilience
     **create_resilient_analytics_tools(),
     # Import enhanced cross-dataset analytics tools with resilience
-    **create_resilient_enhanced_analytics_tools()
+    **create_resilient_enhanced_analytics_tools(),
+    # Import temporal analysis tools if available
+    **create_temporal_analysis_tools()
 }
+
+def create_temporal_analysis_tools():
+    """Create temporal analysis tools with error handling."""
+    if not TEMPORAL_ANALYSIS_AVAILABLE:
+        logger.warning("Temporal analysis tools not available")
+        return {}
+    
+    return {
+        "analyze_risk_evolution": {
+            "function": analyze_risk_evolution,
+            "schema": {
+                "name": "analyze_risk_evolution",
+                "description": "Analyzes how risk factors have evolved over time for a specific company. Perfect for questions like 'How has the management view of risk changed over time?'",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        },
+        "analyze_management_view_evolution": {
+            "function": analyze_management_view_evolution,
+            "schema": {
+                "name": "analyze_management_view_evolution",
+                "description": "Analyzes how management's discussion and analysis (MD&A) has evolved over time for a specific company.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "years": {"type": "array", "items": {"type": "integer"}, "description": "Optional list of years to analyze. If not provided, analyzes last 5 years."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        },
+        "compare_company_risks": {
+            "function": compare_company_risks,
+            "schema": {
+                "name": "compare_company_risks",
+                "description": "Compares risk factors across multiple companies for a specific year.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_ciks": {"type": "array", "items": {"type": "string"}, "description": "List of CIK identifiers for companies to compare."},
+                        "year": {"type": "integer", "description": "The year to compare risk factors across companies."}
+                    },
+                    "required": ["company_ciks", "year"]
+                }
+            }
+        },
+        "analyze_company_events": {
+            "function": analyze_company_events,
+            "schema": {
+                "name": "analyze_company_events",
+                "description": "Analyzes patterns in 8-K filings (corporate events) for a specific company over time.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "company_cik": {"type": "string", "description": "The CIK identifier of the company to analyze."},
+                        "months": {"type": "integer", "description": "Number of months to look back for events (default: 12)."}
+                    },
+                    "required": ["company_cik"]
+                }
+            }
+        }
+    }

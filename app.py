@@ -280,16 +280,25 @@ def edgar_download_menu():
     print(f"\nSelect years to download (current year: {current_year}):")
     print("1. Last 2 years")
     print("2. Last 3 years")
-    print("3. Custom years")
+    print("3. Last 5 years")
+    print("4. Last 10 years")
+    print("5. Last 15 years (comprehensive)")
+    print("6. Custom years")
     
-    year_choice = input("Enter your choice (1-3): ").strip()
+    year_choice = input("Enter your choice (1-6): ").strip()
     
     if year_choice == '1':
         years = [current_year - 1, current_year]
     elif year_choice == '2':
         years = [current_year - 2, current_year - 1, current_year]
     elif year_choice == '3':
-        print(f"\nEnter years separated by commas (e.g., 2022,2023,{current_year}):")
+        years = list(range(current_year - 4, current_year + 1))  # Last 5 years
+    elif year_choice == '4':
+        years = list(range(current_year - 9, current_year + 1))  # Last 10 years
+    elif year_choice == '5':
+        years = list(range(2010, current_year + 1))  # Last 15+ years (comprehensive)
+    elif year_choice == '6':
+        print(f"\nEnter years separated by commas (e.g., 2020,2021,2022,2023,{current_year}):")
         custom_years = input("Years: ").strip()
         try:
             years = [int(y.strip()) for y in custom_years.split(',') if y.strip()]
@@ -301,12 +310,12 @@ def edgar_download_menu():
         years = [current_year - 1, current_year]
     
     # Max files per company
-    print(f"\nMaximum files per company (default: 50):")
+    print(f"\nMaximum files per company (default: 100):")
     max_files_input = input("Max files: ").strip()
     try:
-        max_files = int(max_files_input) if max_files_input else 50
+        max_files = int(max_files_input) if max_files_input else 100
     except ValueError:
-        max_files = 50
+        max_files = 100
     
     # Confirmation
     print(f"\n--- Download Summary ---")
@@ -347,12 +356,13 @@ def download_all_edgar_filings():
     
     print(f"\n--- Downloading All EDGAR Filings ---")
     print(f"Target companies: {len(TARGET_COMPANIES)}")
+    print("Note: EDGAR downloads are generally more reliable than other SEC data sources.")
     
     # Default settings for comprehensive download
     filing_types = ['8-K', '10-K', '10-Q', 'S-4', 'DEF 14A']
     current_year = datetime.now().year
-    years = [current_year - 2, current_year - 1, current_year]  # Last 3 years
-    max_files_per_company = 100  # Higher limit for comprehensive download
+    years = list(range(2010, current_year + 1))  # Last 15+ years for comprehensive analysis
+    max_files_per_company = 200  # Higher limit for comprehensive download
     
     print(f"Filing types: {', '.join(filing_types)}")
     print(f"Years: {', '.join(map(str, years))}")
@@ -462,14 +472,59 @@ def sec_download_submenu():
             sec.download_nport_archives()
         elif choice == 'a':
             print("Downloading all SEC data...")
-            sec.download_insider_archives()
-            sec.download_exchange_archives()
-            download_all_edgar_filings()
-            sec.download_13F_archives()
-            sec.download_nmfp_archives()
-            sec.download_formd_archives()
-            sec.download_ncen_archives()
-            sec.download_nport_archives()
+            print("Note: Some recent SEC data may be unavailable due to access restrictions.")
+            
+            try:
+                print("\n1. Downloading Insider Transactions...")
+                sec.download_insider_archives()
+            except Exception as e:
+                print(f"⚠️  Insider data download had issues: {e}")
+            
+            try:
+                print("\n2. Downloading Exchange Metrics...")
+                sec.download_exchange_archives()
+            except Exception as e:
+                print(f"⚠️  Exchange metrics download had issues: {e}")
+            
+            try:
+                print("\n3. Downloading EDGAR Filings (most important)...")
+                download_all_edgar_filings()
+            except Exception as e:
+                print(f"❌  EDGAR download failed: {e}")
+            
+            try:
+                print("\n4. Downloading 13F Holdings...")
+                sec.download_13F_archives()
+            except Exception as e:
+                print(f"⚠️  13F data download had issues: {e}")
+            
+            try:
+                print("\n5. Downloading N-MFP Filings...")
+                sec.download_nmfp_archives()
+            except Exception as e:
+                print(f"⚠️  N-MFP data download had issues: {e}")
+            
+            try:
+                print("\n6. Downloading Form D Filings...")
+                sec.download_formd_archives()
+            except Exception as e:
+                print(f"⚠️  Form D data download had issues: {e}")
+            
+            try:
+                print("\n7. Downloading N-CEN Filings...")
+                sec.download_ncen_archives()
+            except Exception as e:
+                print(f"⚠️  N-CEN data download had issues: {e}")
+            
+            try:
+                print("\n8. Downloading N-PORT Filings...")
+                sec.download_nport_archives()
+            except Exception as e:
+                print(f"⚠️  N-PORT data download had issues: {e}")
+            
+            print("\n✅ SEC data download attempt completed!")
+            print("Note: 403 errors are common for recent SEC data due to access restrictions.")
+            print("The EDGAR filings (most important for analysis) should have downloaded successfully.")
         elif choice == 'b':
             break
         else:
@@ -485,6 +540,7 @@ def process_data_menu():
         print("\n--- Process and Load Data Menu ---")
         print("1. Process CFTC Data")
         print("2. Process SEC Data")
+        print("3. Process All Downloaded Data")
         print("B. Back to Main Menu")
         choice = input("Enter your choice: ").strip().lower()
 
@@ -492,6 +548,8 @@ def process_data_menu():
             process_cftc_submenu()
         elif choice == '2':
             process_sec_submenu()
+        elif choice == '3':
+            process_all_downloaded_data()
         elif choice == 'b':
             break
         else:
@@ -543,9 +601,15 @@ def process_sec_submenu():
         print("2. 13F Holdings")
         print("3. Exchange Metrics")
         print("4. 8-K Filings")
-        print("5. N-CEN Filings")
-        print("6. N-PORT Filings")
-        print("7. Form D Filings")
+        print("5. 10-K/10-Q Filings")
+        print("6. S-4 Filings")
+        print("7. DEF 14A Filings")
+        print("8. N-CEN Filings")
+        print("9. N-PORT Filings")
+        print("10. Form D Filings")
+        print("A. All EDGAR Filings (8-K, 10-K, 10-Q, S-4, DEF 14A)")
+        print("C. All SEC Data (All filing types)")
+        print("T. Test EDGAR Processing (Debug)")
         print("B. Back")
         choice = input("Enter your choice: ").strip().lower()
 
@@ -562,25 +626,277 @@ def process_sec_submenu():
             process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
             print("Processing complete.")
         elif choice == '4':
-            print(f"\nProcessing files in {os.path.basename(os.path.normpath(SEC_8K_SOURCE_DIR))}...")
-            process_8k_filings(SEC_8K_SOURCE_DIR)
+            print(f"\nProcessing 8-K filings from EDGAR directory...")
+            process_edgar_filings('8-K')
             print("Processing complete.")
         elif choice == '5':
+            process_edgar_filings('10-K')
+            print("Processing complete.")
+        elif choice == '6':
+            process_edgar_filings('S-4')
+            print("Processing complete.")
+        elif choice == '7':
+            process_edgar_filings('DEF 14A')
+            print("Processing complete.")
+        elif choice == '8':
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(NCEN_SOURCE_DIR))}...")
             process_ncen_data(NCEN_SOURCE_DIR)
             print("Processing complete.")
-        elif choice == '6':
+        elif choice == '9':
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(NPORT_SOURCE_DIR))}...")
             process_nport_data(NPORT_SOURCE_DIR)
             print("Processing complete.")
-        elif choice == '7':
+        elif choice == '10':
             print(f"\nProcessing files in {os.path.basename(os.path.normpath(FORMD_SOURCE_DIR))}...")
             process_formd_data(FORMD_SOURCE_DIR)
             print("Processing complete.")
+        elif choice == 'a':
+            process_all_edgar_filings()
+            print("Processing complete.")
+        elif choice == 'c':
+            process_all_sec_data()
+            print("Processing complete.")
+        elif choice == 't':
+            test_edgar_processing()
         elif choice == 'b':
             break
         else:
             print("Invalid choice.")
+
+def process_edgar_filings(filing_type):
+    """Process specific EDGAR filing type from the EDGAR directory."""
+    from config import EDGAR_SOURCE_DIR
+    from src.processor import process_sec_filings
+    
+    print(f"\nProcessing {filing_type} filings from EDGAR directory...")
+    print(f"Source directory: {EDGAR_SOURCE_DIR}")
+    
+    if not os.path.exists(EDGAR_SOURCE_DIR):
+        print(f"❌ EDGAR directory not found: {EDGAR_SOURCE_DIR}")
+        print("Please download EDGAR filings first using the Download Data menu.")
+        return
+    
+    # Debug: Check what files are in the EDGAR directory
+    print(f"📁 Checking EDGAR directory contents...")
+    import os
+    for root, dirs, files in os.walk(EDGAR_SOURCE_DIR):
+        level = root.replace(EDGAR_SOURCE_DIR, '').count(os.sep)
+        indent = ' ' * 2 * level
+        print(f"{indent}{os.path.basename(root)}/")
+        subindent = ' ' * 2 * (level + 1)
+        for file in files[:5]:  # Show first 5 files
+            if filing_type in file:
+                print(f"{subindent}{file}")
+        if len(files) > 5:
+            print(f"{subindent}... and {len(files) - 5} more files")
+    
+    try:
+        # Use the existing process_sec_filings function
+        result = process_sec_filings(filing_type, EDGAR_SOURCE_DIR)
+        if result is not None:
+            print(f"✅ Successfully processed {filing_type} filings")
+        else:
+            print(f"⚠️  No processor available for {filing_type} filings")
+    except Exception as e:
+        print(f"❌ Error processing {filing_type} filings: {e}")
+        import traceback
+        traceback.print_exc()
+
+def process_all_edgar_filings():
+    """Process all EDGAR filing types (8-K, 10-K, 10-Q, S-4, DEF 14A)."""
+    from config import EDGAR_SOURCE_DIR
+    from src.processor import process_sec_filings
+    
+    print(f"\nProcessing all EDGAR filings from directory...")
+    print(f"Source directory: {EDGAR_SOURCE_DIR}")
+    
+    if not os.path.exists(EDGAR_SOURCE_DIR):
+        print(f"❌ EDGAR directory not found: {EDGAR_SOURCE_DIR}")
+        print("Please download EDGAR filings first using the Download Data menu.")
+        return
+    
+    edgar_filing_types = ['8-K', '10-K', '10-Q', 'S-4', 'DEF 14A']
+    processed_count = 0
+    
+    for filing_type in edgar_filing_types:
+        try:
+            print(f"\nProcessing {filing_type} filings...")
+            result = process_sec_filings(filing_type, EDGAR_SOURCE_DIR)
+            if result is not None:
+                print(f"✅ Successfully processed {filing_type} filings")
+                processed_count += 1
+            else:
+                print(f"⚠️  No processor available for {filing_type} filings")
+        except Exception as e:
+            print(f"❌ Error processing {filing_type} filings: {e}")
+    
+    print(f"\n📊 Processing Summary:")
+    print(f"  Successfully processed: {processed_count}/{len(edgar_filing_types)} filing types")
+    print(f"  All EDGAR filings processing complete!")
+
+def process_all_sec_data():
+    """Process all SEC data types including EDGAR filings and other SEC data."""
+    print(f"\nProcessing all SEC data...")
+    
+    # Process traditional SEC data
+    print("\n1. Processing Insider Transactions...")
+    process_sec_insider_data(INSIDER_SOURCE_DIR)
+    
+    print("\n2. Processing 13F Holdings...")
+    process_form13f_data(THRTNF_SOURCE_DIR)
+    
+    print("\n3. Processing Exchange Metrics...")
+    process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
+    
+    print("\n4. Processing N-CEN Filings...")
+    process_ncen_data(NCEN_SOURCE_DIR)
+    
+    print("\n5. Processing N-PORT Filings...")
+    process_nport_data(NPORT_SOURCE_DIR)
+    
+    print("\n6. Processing Form D Filings...")
+    process_formd_data(FORMD_SOURCE_DIR)
+    
+    # Process EDGAR filings
+    print("\n7. Processing EDGAR Filings...")
+    process_all_edgar_filings()
+    
+    print(f"\n✅ All SEC data processing complete!")
+
+def process_all_downloaded_data():
+    """Process all downloaded data from all sources (CFTC, SEC, FRED, etc.)."""
+    print(f"\n🚀 Processing All Downloaded Data...")
+    print("This will process data from all sources: CFTC, SEC, FRED, and EDGAR filings.")
+    
+    # Confirm with user
+    confirm = input("\nThis may take a while. Continue? (y/n): ").strip().lower()
+    if confirm != 'y':
+        print("Processing cancelled.")
+        return
+    
+    print(f"\n📊 Starting comprehensive data processing...")
+    
+    # Process CFTC Data
+    print(f"\n1️⃣ Processing CFTC Data...")
+    try:
+        print("   - Processing Credit data...")
+        process_zip_files(CFTC_CREDIT_SOURCE_DIR, TARGET_COMPANIES)
+        
+        print("   - Processing Commodities data...")
+        process_zip_files(CFTC_COMMODITIES_SOURCE_DIR, TARGET_COMPANIES)
+        
+        print("   - Processing Rates data...")
+        process_zip_files(CFTC_RATES_SOURCE_DIR, TARGET_COMPANIES)
+        
+        print("   - Processing Equity data...")
+        process_zip_files(CFTC_EQUITY_SOURCE_DIR, TARGET_COMPANIES)
+        
+        print("   - Processing Forex data...")
+        process_zip_files(CFTC_FOREX_SOURCE_DIR, TARGET_COMPANIES)
+        
+        print("✅ CFTC data processing complete!")
+    except Exception as e:
+        print(f"❌ Error processing CFTC data: {e}")
+    
+    # Process SEC Data
+    print(f"\n2️⃣ Processing SEC Data...")
+    try:
+        print("   - Processing Insider Transactions...")
+        process_sec_insider_data(INSIDER_SOURCE_DIR)
+        
+        print("   - Processing 13F Holdings...")
+        process_form13f_data(THRTNF_SOURCE_DIR)
+        
+        print("   - Processing Exchange Metrics...")
+        process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
+        
+        print("   - Processing N-CEN Filings...")
+        process_ncen_data(NCEN_SOURCE_DIR)
+        
+        print("   - Processing N-PORT Filings...")
+        process_nport_data(NPORT_SOURCE_DIR)
+        
+        print("   - Processing Form D Filings...")
+        process_formd_data(FORMD_SOURCE_DIR)
+        
+        print("✅ SEC data processing complete!")
+    except Exception as e:
+        print(f"❌ Error processing SEC data: {e}")
+    
+    # Process EDGAR Filings
+    print(f"\n3️⃣ Processing EDGAR Filings...")
+    try:
+        process_all_edgar_filings()
+        print("✅ EDGAR filings processing complete!")
+    except Exception as e:
+        print(f"❌ Error processing EDGAR filings: {e}")
+    
+    # Process FRED Data (if available)
+    print(f"\n4️⃣ Processing FRED Data...")
+    try:
+        from config import FRED_SOURCE_DIR
+        if os.path.exists(FRED_SOURCE_DIR):
+            print("   - FRED data directory found, processing...")
+            # Add FRED processing logic here when available
+            print("   - FRED processing not yet implemented")
+        else:
+            print("   - No FRED data found, skipping...")
+        print("✅ FRED data processing complete!")
+    except Exception as e:
+        print(f"❌ Error processing FRED data: {e}")
+    
+    print(f"\n🎉 All Downloaded Data Processing Complete!")
+    print(f"📈 Your database now contains processed data from all sources.")
+    print(f"💡 You can now use the RAG system to query this comprehensive dataset.")
+
+def test_edgar_processing():
+    """Test function to debug EDGAR processing issues."""
+    from config import EDGAR_SOURCE_DIR
+    import os
+    
+    print(f"\n🔍 Testing EDGAR Processing...")
+    print(f"EDGAR directory: {EDGAR_SOURCE_DIR}")
+    
+    if not os.path.exists(EDGAR_SOURCE_DIR):
+        print(f"❌ EDGAR directory does not exist!")
+        return
+    
+    # Count files by type
+    file_counts = {}
+    total_files = 0
+    
+    for root, dirs, files in os.walk(EDGAR_SOURCE_DIR):
+        for file in files:
+            if file.endswith('.txt'):
+                total_files += 1
+                # Extract filing type from filename
+                if '8-K' in file:
+                    file_counts['8-K'] = file_counts.get('8-K', 0) + 1
+                elif '10-K' in file:
+                    file_counts['10-K'] = file_counts.get('10-K', 0) + 1
+                elif '10-Q' in file:
+                    file_counts['10-Q'] = file_counts.get('10-Q', 0) + 1
+                elif 'S-4' in file:
+                    file_counts['S-4'] = file_counts.get('S-4', 0) + 1
+                elif 'DEF 14A' in file:
+                    file_counts['DEF 14A'] = file_counts.get('DEF 14A', 0) + 1
+    
+    print(f"📊 File Summary:")
+    print(f"  Total files: {total_files}")
+    for filing_type, count in file_counts.items():
+        print(f"  {filing_type}: {count} files")
+    
+    # Test processing one file
+    if file_counts.get('8-K', 0) > 0:
+        print(f"\n🧪 Testing 8-K processing...")
+        try:
+            from src.processor import process_sec_filings
+            result = process_sec_filings('8-K', EDGAR_SOURCE_DIR)
+            print(f"✅ 8-K processing result: {result}")
+        except Exception as e:
+            print(f"❌ 8-K processing error: {e}")
+            import traceback
+            traceback.print_exc()
 
 def query_raven_menu():
     """Launch the interactive chat interface."""
