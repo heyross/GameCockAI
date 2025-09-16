@@ -8,7 +8,9 @@ from the SEC EDGAR database. It extracts structured data and other relevant info
 import os
 import re
 import json
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_8k')
 import zipfile
 import requests
 import pandas as pd
@@ -29,8 +31,8 @@ from database import SessionLocal, Sec8KSubmission, Sec8KItem
 from config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+logger.basicConfig(level=logger.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logger
 
 # Constants
 SEC_FORMS = ['8-K', '8-K/A']
@@ -255,6 +257,9 @@ def process_8k_filings(source_dir: str, force: bool = False) -> None:
 
 if __name__ == "__main__":
     import argparse
+    from src.logging_utils import get_processor_logger
+
+    logger = get_processor_logger('processor_8k')
     
     parser = argparse.ArgumentParser(description='Process 8-K SEC filings')
     parser.add_argument('source_dir', help='Directory containing 8-K filings')

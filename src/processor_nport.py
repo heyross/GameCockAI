@@ -6,7 +6,9 @@ N-PORT is the monthly portfolio holdings report for registered investment compan
 """
 
 import glob
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_nport')
 import os
 import pandas as pd
 import zipfile
@@ -15,7 +17,7 @@ from database import (
     NPORTDerivative, SessionLocal
 )
 
-logger = logging.getLogger(__name__)
+logger = logger
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -100,6 +102,11 @@ def process_nport_data(source_dir, db_session=None, **kwargs):
         dict: Processing results summary
     """
     logger.info(f"Processing N-PORT files from {source_dir}")
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_nport')
+
     
     if not os.path.exists(source_dir):
         logger.error(f"N-PORT source directory does not exist: {source_dir}")

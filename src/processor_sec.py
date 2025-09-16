@@ -6,7 +6,9 @@ SEC insider trading data includes Form 4, 3, and 5 filings.
 """
 
 import glob
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_sec')
 import os
 import pandas as pd
 from zipfile import ZipFile
@@ -15,7 +17,7 @@ from database import (
     SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, SessionLocal
 )
 
-logger = logging.getLogger(__name__)
+logger = logger
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -27,6 +29,11 @@ def sanitize_column_names(df):
 
 def process_sec_insider_data(source_dir, db_session=None):
     """Processes SEC insider trading data from zip files and loads it into the database."""
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_sec')
+
     zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
     db = db_session if db_session else SessionLocal()
 
@@ -48,7 +55,7 @@ def process_sec_insider_data(source_dir, db_session=None):
 
     try:
         for zip_file in zip_files:
-            logging.info(f"Processing SEC insider file: {zip_file}")
+            logger.info(f"Processing SEC insider file: {zip_file}")
             try:
                 with ZipFile(zip_file, 'r') as zip_ref:
                     for file_name, model in table_map.items():
@@ -74,10 +81,10 @@ def process_sec_insider_data(source_dir, db_session=None):
                                 # Load data into the database
                                 records = df.where(pd.notna(df), None).to_dict(orient='records')
                                 db.bulk_insert_mappings(model, records)
-                                logging.info(f"Loading {len(records)} records into {model.__tablename__}")
+                                logger.info(f"Loading {len(records)} records into {model.__tablename__}")
                 db.commit()
             except Exception as e:
-                logging.error(f"Error processing file {zip_file}: {e}")
+                logger.error(f"Error processing file {zip_file}: {e}")
                 db.rollback()
     finally:
         if not db_session:

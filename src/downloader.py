@@ -34,19 +34,38 @@ def download_file(url, destination_folder, rate_limit_delay=0):
             time.sleep(rate_limit_delay)
         return True
 
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            logging.warning(f"File not found (404): {filename} - skipping")
+            return True  # Return True to continue processing other files
+        else:
+            logging.error(f"HTTP error {e.response.status_code} downloading {url}: {e}")
+            return False
     except requests.RequestException as e:
         logging.error(f"Failed to download {url}: {e}")
         return False
 
 def download_archives(urls, destination_folder, max_workers=16, rate_limit_delay=0):
     """Downloads a list of archives from URLs in parallel."""
+    successful_downloads = 0
+    failed_downloads = 0
+    skipped_downloads = 0
+    
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {executor.submit(download_file, url, destination_folder, rate_limit_delay): url for url in urls}
         for future in tqdm(as_completed(futures), total=len(urls), desc="Downloading archives"):
             try:
-                future.result()
+                result = future.result()
+                if result:
+                    successful_downloads += 1
+                else:
+                    failed_downloads += 1
             except Exception as e:
                 logging.error(f"Error downloading {futures[future]}: {e}")
+                failed_downloads += 1
+    
+    logging.info(f"Download summary: {successful_downloads} successful, {failed_downloads} failed, {skipped_downloads} skipped")
+    return successful_downloads, failed_downloads
 
 def extract_formd_filings(archive_path):
     """Extracts Form D filings from a quarterly archive.

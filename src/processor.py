@@ -3,9 +3,15 @@ Modular processor orchestrator for GameCock AI.
 This module coordinates calls to specialized processor modules.
 """
 
-import logging
 import os
+import sys
 from typing import List, Dict, Any, Optional
+
+# Set up logging
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor')
 
 # Import database models
 try:
@@ -29,7 +35,7 @@ from src.processor_sec import process_sec_insider_data
 from src.processor_exchange_metrics import process_exchange_metrics_data
 from src.processor_nmfp import process_nmfp_data
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Logging is now configured in logging_utils.py
 
 def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = None, 
                      search_term: Optional[str] = None, load_to_db: bool = False):
@@ -49,15 +55,15 @@ def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = 
     import pandas as pd
     from zipfile import ZipFile
     
-    logging.info(f"Processing zip files from {source_dir}")
+    logger.info(f"Processing zip files from {source_dir}")
     
     if not os.path.exists(source_dir):
-        logging.error(f"Source directory does not exist: {source_dir}")
+        logger.error(f"Source directory does not exist: {source_dir}")
         return None
     
     zip_files = sorted(glob.glob(os.path.join(source_dir, '**/*.zip'), recursive=True))
     if not zip_files:
-        logging.warning(f"No zip files found in {source_dir}")
+        logger.warning(f"No zip files found in {source_dir}")
         return None
     
     all_data = []
@@ -70,7 +76,7 @@ def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = 
                 
                 # Determine file type based on contents
                 file_type = _detect_file_type(file_list)
-                logging.info(f"Detected file type: {file_type} for {zip_file}")
+                logger.info(f"Detected file type: {file_type} for {zip_file}")
                 
                 # Delegate to appropriate specialized processor
                 if file_type == 'CFTC':
@@ -90,30 +96,31 @@ def process_zip_files(source_dir: str, target_companies: Optional[List[Dict]] = 
                 elif file_type == 'N-MFP':
                     result = process_nmfp_data(source_dir, load_to_db=load_to_db)
                 else:
-                    logging.warning(f"Unknown file type for {zip_file}, skipping")
+                    logger.warning(f"Unknown file type for {zip_file}, skipping")
                     continue
                 
                 # Only append DataFrame results, skip dictionaries or other types
                 if result is not None and hasattr(result, 'shape'):  # Check if it's a DataFrame
                     all_data.append(result)
                 elif result is not None:
-                    logging.info(f"Processor returned non-DataFrame result: {type(result)}")
+                    logger.info(f"Processor returned non-DataFrame result: {type(result)}")
                     
         except Exception as e:
-            logging.error(f"Error processing {zip_file}: {e}")
+            logger.error(f"Error processing {zip_file}: {e}", exc_info=True)
             continue
     
     # Combine all results into a single DataFrame if any data was processed
     if all_data:
         try:
             combined_df = pd.concat(all_data, ignore_index=True)
-            logging.info(f"Successfully processed {len(combined_df)} records from {len(zip_files)} zip files")
+            logger.info(f"Processed {len(all_data)} records from {len(zip_files)} zip files")
             return combined_df
         except Exception as e:
-            logging.error(f"Error combining results: {e}")
+            logger.error(f"Error combining results: {e}")
             return None
     else:
-        logging.warning("No data was processed from any zip files")
+        logger.warning("No data was processed from any zip files")
+        logger.warning("No data was processed from any zip files")
         return None
 
 def _detect_file_type(file_list):

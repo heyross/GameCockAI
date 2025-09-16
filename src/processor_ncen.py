@@ -6,7 +6,9 @@ N-CEN is the annual report for registered investment companies.
 """
 
 import glob
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_ncen')
 import os
 import pandas as pd
 import zipfile
@@ -15,7 +17,7 @@ from database import (
     NCENAdviser, SessionLocal
 )
 
-logger = logging.getLogger(__name__)
+logger = logger
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -100,6 +102,11 @@ def process_ncen_data(source_dir, db_session=None, **kwargs):
         dict: Processing results summary
     """
     logger.info(f"Processing N-CEN files from {source_dir}")
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_ncen')
+
     
     if not os.path.exists(source_dir):
         logger.error(f"N-CEN source directory does not exist: {source_dir}")

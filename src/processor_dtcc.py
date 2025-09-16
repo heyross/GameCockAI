@@ -4,15 +4,16 @@ DTCC Data Processor
 This module handles the processing of DTCC data files and loading them into the database.
 """
 import os
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_dtcc')
 import pandas as pd
 from datetime import datetime, timezone
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logger
 
 class DTCCProcessor:
     """Processes DTCC data files and loads them into the database."""
@@ -224,6 +225,11 @@ class DTCCProcessor:
     def _get_or_create_organization(self, lei, name=None):
         """Get an existing organization or create a new one if it doesn't exist."""
         from dtcc_models import DTCCOrganization
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_dtcc')
+
         
         if not lei:
             raise ValueError("LEI is required for organization lookup")

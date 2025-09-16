@@ -206,15 +206,30 @@ def download_edgar_filings(target_companies=None, filing_types=None, years=None,
     print(f"Years: {', '.join(map(str, years))}")
     
     headers = {
-        'User-Agent': 'GameCock AI Financial Analysis Tool contact@example.com',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
         'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
         'Host': 'www.sec.gov'
     }
     
     downloaded_count = 0
     error_count = 0
+    consecutive_403_errors = 0
+    max_consecutive_403 = 3  # Circuit breaker threshold
     
     for company in target_companies:
+        # Circuit breaker - if too many consecutive 403 errors, skip remaining companies
+        if consecutive_403_errors >= max_consecutive_403:
+            print(f"\n⚠️  Too many consecutive 403 errors ({consecutive_403_errors}). SEC may be blocking requests.")
+            print("Skipping remaining companies to avoid further blocking.")
+            break
+        # Rate limiting - SEC requires delays between requests
+        if downloaded_count > 0:
+            print("  Rate limiting: waiting 1 second...")
+            time.sleep(1)
         cik = company.get('cik_str')
         company_name = company.get('title', 'Unknown')
         
@@ -228,11 +243,22 @@ def download_edgar_filings(target_companies=None, filing_types=None, years=None,
         company_dir = os.path.join(EDGAR_SOURCE_DIR, cik)
         os.makedirs(company_dir, exist_ok=True)
         
+        company_downloaded = 0
+        
         # Download filings for each year
+        company_blocked = False
         for year in years:
+            if company_blocked:
+                break
             for filing_type in filing_types:
+                if company_blocked:
+                    break
                 try:
                     filings = get_company_filings(cik, filing_type, year, headers)
+                    
+                    if filings == "403_ERROR":
+                        company_blocked = True
+                        break
                     
                     if not filings:
                         continue
@@ -243,6 +269,7 @@ def download_edgar_filings(target_companies=None, filing_types=None, years=None,
                     for filing in filings:
                         if download_filing_document(filing, company_dir, headers):
                             downloaded_count += 1
+                            company_downloaded += 1
                         else:
                             error_count += 1
                             
@@ -253,6 +280,13 @@ def download_edgar_filings(target_companies=None, filing_types=None, years=None,
                     print(f"Error processing {company_name} {filing_type} {year}: {e}")
                     error_count += 1
                     continue
+        
+        # Track 403 errors - if no files downloaded for this company, likely 403 error
+        if company_downloaded == 0:
+            consecutive_403_errors += 1
+            print(f"  No files downloaded for {company_name} - possible 403 error (consecutive: {consecutive_403_errors})")
+        else:
+            consecutive_403_errors = 0  # Reset counter if we got some data
     
     print(f"\nEDGAR download complete:")
     print(f"  Downloaded: {downloaded_count} files")
@@ -268,11 +302,15 @@ def get_company_filings(cik, filing_type, year, headers):
         url = f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik.zfill(10)}.json"
         
         # Try to get company facts first (this gives us filing information)
-        response = requests.get(url, headers=headers, timeout=30)
+        response = requests.get(url, headers=headers, timeout=60)
         
         if response.status_code == 404:
             # Fallback to EDGAR search API
             return get_filings_from_edgar_search(cik, filing_type, year, headers)
+        
+        if response.status_code == 403:
+            print(f"SEC API access forbidden (403) for CIK {cik} - skipping this company")
+            return "403_ERROR"
         
         response.raise_for_status()
         data = response.json()
@@ -286,6 +324,13 @@ def get_company_filings(cik, filing_type, year, headers):
         # Fallback to EDGAR search
         return get_filings_from_edgar_search(cik, filing_type, year, headers)
         
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 403:
+            print(f"SEC API access forbidden (403) for CIK {cik} - skipping this company")
+            return "403_ERROR"
+        else:
+            print(f"HTTP error {e.response.status_code} getting filings for CIK {cik}: {e}")
+            return []
     except Exception as e:
         print(f"Error getting filings for CIK {cik}: {e}")
         return []
@@ -307,7 +352,12 @@ def get_filings_from_edgar_search(cik, filing_type, year, headers):
             'output': 'atom'
         }
         
-        response = requests.get(search_url, params=params, headers=headers, timeout=30)
+        response = requests.get(search_url, params=params, headers=headers, timeout=60)
+        
+        if response.status_code == 403:
+            print(f"EDGAR search access forbidden (403) for CIK {cik} - skipping")
+            return "403_ERROR"
+        
         response.raise_for_status()
         
         # Parse the XML response
@@ -367,7 +417,7 @@ def download_filing_document(filing_info, company_dir, headers):
         filing_url = filing_info['url']
         
         # Get the filing page to find the actual document URL
-        response = requests.get(filing_url, headers=headers, timeout=30)
+        response = requests.get(filing_url, headers=headers, timeout=60)
         response.raise_for_status()
         
         # Parse HTML to find document links
@@ -391,8 +441,32 @@ def download_filing_document(filing_info, company_dir, headers):
         
         # Download the first document (usually the main filing)
         doc_url = document_urls[0]
-        doc_response = requests.get(doc_url, headers=headers, timeout=30)
-        doc_response.raise_for_status()
+        
+        # Retry mechanism for downloads
+        max_retries = 3
+        retry_delay = 2
+        
+        for attempt in range(max_retries):
+            try:
+                print(f"  Downloading document (attempt {attempt + 1}/{max_retries})...")
+                doc_response = requests.get(doc_url, headers=headers, timeout=120)
+                doc_response.raise_for_status()
+                break
+            except requests.exceptions.Timeout:
+                print(f"  Timeout on attempt {attempt + 1}, retrying in {retry_delay} seconds...")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+                else:
+                    print(f"  Failed to download after {max_retries} attempts: {doc_url}")
+                    return False
+            except requests.exceptions.RequestException as e:
+                print(f"  Request error on attempt {attempt + 1}: {e}")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                else:
+                    print(f"  Failed to download after {max_retries} attempts: {doc_url}")
+                    return False
         
         # Create unique filename to prevent overwrites
         safe_title = "".join(c for c in filing_info['title'] if c.isalnum() or c in (' ', '-', '_')).rstrip()

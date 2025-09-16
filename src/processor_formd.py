@@ -6,7 +6,9 @@ Form D is used for notice of sales of securities under Regulation D.
 """
 
 import glob
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_formd')
 import os
 import pandas as pd
 from zipfile import ZipFile
@@ -17,7 +19,7 @@ from database import (
     FormDRelatedPerson, FormDSignature, SessionLocal
 )
 
-logger = logging.getLogger(__name__)
+logger = logger
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -151,6 +153,11 @@ def process_formd_quarter(quarter_dir, db_session):
             if records:
                 db_session.bulk_insert_mappings(model, records)
                 logger.info(f"Inserted {len(records)} records from {file_name}")
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_formd')
+
             
         except Exception as e:
             logger.error(f"Error processing {file_name}: {e}")

@@ -6,13 +6,15 @@ Exchange Metrics data contains trading statistics and market data.
 """
 
 import glob
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_exchange_metrics')
 import os
 import pandas as pd
 from zipfile import ZipFile
 from database import SecExchangeMetrics, SessionLocal
 
-logger = logging.getLogger(__name__)
+logger = logger
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -37,7 +39,7 @@ def process_exchange_metrics_data(source_dir, db_session=None):
 
     try:
         for zip_file in zip_files:
-            logging.info(f"Processing Exchange Metrics file: {zip_file}")
+            logger.info(f"Processing Exchange Metrics file: {zip_file}")
             try:
                 with ZipFile(zip_file, 'r') as zip_ref:
                     for csv_filename in zip_ref.namelist():
@@ -76,10 +78,15 @@ def process_exchange_metrics_data(source_dir, db_session=None):
 
                             records = df.where(pd.notna(df), None).to_dict(orient='records')
                             db.bulk_insert_mappings(SecExchangeMetrics, records)
-                            logging.info(f"Loading {len(records)} records into {SecExchangeMetrics.__tablename__} from {csv_filename}")
+                            logger.info(f"Loading {len(records)} records into {SecExchangeMetrics.__tablename__} from {csv_filename}")
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_exchange_metrics')
+
                 db.commit()
             except Exception as e:
-                logging.error(f"Error processing file {zip_file}: {e}")
+                logger.error(f"Error processing file {zip_file}: {e}")
                 db.rollback()
     finally:
         if not db_session:

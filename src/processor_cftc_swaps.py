@@ -5,7 +5,9 @@ Handles processing and loading of CFTC swap data into the database.
 
 import os
 import json
-import logging
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('cftc_swaps')
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 import pandas as pd
@@ -33,9 +35,7 @@ from config import (
     CFTC_SWAP_DATA_REPOSITORY_DIR
 )
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# Logging is configured in logging_utils.py
 
 def process_swap_dealer_data(file_path: str, session: Optional[Session] = None) -> int:
     """
@@ -86,15 +86,16 @@ def process_swap_dealer_data(file_path: str, session: Optional[Session] = None) 
                     session.commit()
                     
             except Exception as e:
-                logger.error(f"Error processing swap dealer record: {e}")
-                session.rollback()
+                logger.error(f"Error processing swap dealer data: {e}", exc_info=True)
+                raise
+            session.rollback()
         
         session.commit()
         logger.info(f"Processed {count} swap dealer records from {file_path}")
         return count
         
     except Exception as e:
-        logger.error(f"Error processing swap dealer file {file_path}: {e}")
+        logger.error(f"Error processing swap dealer file {file_path}: {e}", exc_info=True)
         session.rollback()
         return 0
         
@@ -144,15 +145,16 @@ def process_swap_execution_facility_data(file_path: str, session: Optional[Sessi
                     session.commit()
                     
             except Exception as e:
-                logger.error(f"Error processing swap execution facility record: {e}")
-                session.rollback()
+                logger.error(f"Error processing swap execution facility data: {e}", exc_info=True)
+                raise
+            session.rollback()
         
         session.commit()
         logger.info(f"Processed {count} swap execution facility records from {file_path}")
         return count
         
     except Exception as e:
-        logger.error(f"Error processing swap execution facility file {file_path}: {e}")
+        logger.error(f"Error processing swap execution facility file {file_path}: {e}", exc_info=True)
         session.rollback()
         return 0
         
@@ -202,15 +204,16 @@ def process_swap_data_repository_data(file_path: str, session: Optional[Session]
                     session.commit()
                     
             except Exception as e:
-                logger.error(f"Error processing swap data repository record: {e}")
-                session.rollback()
+                logger.error(f"Error processing swap data repository data: {e}", exc_info=True)
+                raise
+            session.rollback()
         
         session.commit()
         logger.info(f"Processed {count} swap data repository records from {file_path}")
         return count
         
     except Exception as e:
-        logger.error(f"Error processing swap data repository file {file_path}: {e}")
+        logger.error(f"Error processing swap data repository file {file_path}: {e}", exc_info=True)
         session.rollback()
         return 0
         
@@ -273,15 +276,21 @@ def process_daily_swap_report_data(file_path: str, session: Optional[Session] = 
                     session.commit()
                     
             except Exception as e:
-                logger.error(f"Error processing daily swap report record: {e}")
-                session.rollback()
+                logger.error(f"Error processing daily swap report data: {e}", exc_info=True)
+                raise
+            session.rollback()
         
         session.commit()
         logger.info(f"Processed {count} daily swap report records from {file_path}")
+
+from src.logging_utils import get_processor_logger
+
+logger = get_processor_logger('processor_cftc_swaps')
+
         return count
         
     except Exception as e:
-        logger.error(f"Error processing daily swap report file {file_path}: {e}")
+        logger.error(f"Error processing daily swap report file {file_path}: {e}", exc_info=True)
         session.rollback()
         return 0
         
@@ -337,7 +346,8 @@ def process_all_swap_data() -> Dict[str, int]:
         return results
         
     except Exception as e:
-        logger.error(f"Error processing swap data: {e}")
+        logger.error(f"Error in process_all_swap_data: {e}", exc_info=True)
+        raise
         session.rollback()
         return results
         

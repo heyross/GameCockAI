@@ -5,17 +5,17 @@ from typing import List, Tuple
 from pathlib import Path
 from datetime import datetime
 
-# Add current directory to path to ensure we import from the right modules
-current_dir = os.path.dirname(os.path.abspath(__file__))
-if current_dir not in sys.path:
-    sys.path.insert(0, current_dir)
-
-# Add parent directory to path for unified RAG
-parent_dir = os.path.dirname(os.path.dirname(__file__))
+# Add parent directory to path for absolute imports
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
+    sys.path.insert(0, parent_dir)
 
-from ui import gamecock_ascii, gamecat_ascii
+# Import UI components
+try:
+    from GameCockAI.ui import gamecock_ascii, gamecat_ascii
+except ImportError:
+    # Fallback for direct execution
+    from ui import gamecock_ascii, gamecat_ascii
 try:
     from src.data_sources import cftc, sec, fred
     print("✅ Data sources imported successfully")
@@ -776,90 +776,127 @@ def process_all_sec_data():
     
     print(f"\n✅ All SEC data processing complete!")
 
+def setup_logging():
+    """Set up logging configuration."""
+    from datetime import datetime
+    import os
+    
+    # Import using absolute path
+    from GameCockAI.src.logging_utils import get_processor_logger
+    
+    # Get the logger
+    logger = get_processor_logger('app')
+    
+    # Create logs directory if it doesn't exist
+    log_dir = os.path.join(os.path.dirname(__file__), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+    
+    # Create a timestamped log file
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = os.path.join(log_dir, f'data_processing_{timestamp}.log')
+    
+    return logger, log_file
+
 def process_all_downloaded_data():
     """Process all downloaded data from all sources (CFTC, SEC, FRED, etc.)."""
-    print(f"\n🚀 Processing All Downloaded Data...")
-    print("This will process data from all sources: CFTC, SEC, FRED, and EDGAR filings.")
+    # Set up logging
+    logger, log_file = setup_logging()
+    
+    logger.info("🚀 Starting processing of all downloaded data...")
+    logger.info("This will process data from all sources: CFTC, SEC, FRED, and EDGAR filings.")
     
     # Confirm with user
     confirm = input("\nThis may take a while. Continue? (y/n): ").strip().lower()
     if confirm != 'y':
+        logger.info("Processing cancelled by user.")
         print("Processing cancelled.")
         return
     
-    print(f"\n📊 Starting comprehensive data processing...")
+    logger.info("📊 Starting comprehensive data processing...")
     
     # Process CFTC Data
-    print(f"\n1️⃣ Processing CFTC Data...")
+    logger.info("\n1️⃣ Processing CFTC Data...")
     try:
-        print("   - Processing Credit data...")
+        logger.info("Processing Credit data...")
         process_zip_files(CFTC_CREDIT_SOURCE_DIR, TARGET_COMPANIES)
         
-        print("   - Processing Commodities data...")
+        logger.info("Processing Commodities data...")
         process_zip_files(CFTC_COMMODITIES_SOURCE_DIR, TARGET_COMPANIES)
         
-        print("   - Processing Rates data...")
+        logger.info("Processing Rates data...")
         process_zip_files(CFTC_RATES_SOURCE_DIR, TARGET_COMPANIES)
         
-        print("   - Processing Equity data...")
+        logger.info("Processing Equity data...")
         process_zip_files(CFTC_EQUITY_SOURCE_DIR, TARGET_COMPANIES)
         
-        print("   - Processing Forex data...")
+        logger.info("Processing Forex data...")
         process_zip_files(CFTC_FOREX_SOURCE_DIR, TARGET_COMPANIES)
         
-        print("✅ CFTC data processing complete!")
+        logger.info("✅ CFTC data processing complete!")
     except Exception as e:
-        print(f"❌ Error processing CFTC data: {e}")
+        error_msg = f"❌ Error processing CFTC data: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        print(error_msg)
     
     # Process SEC Data
-    print(f"\n2️⃣ Processing SEC Data...")
+    logger.info("\n2️⃣ Processing SEC Data...")
     try:
-        print("   - Processing Insider Transactions...")
+        logger.info("Processing Insider Transactions...")
         process_sec_insider_data(INSIDER_SOURCE_DIR)
         
-        print("   - Processing 13F Holdings...")
+        logger.info("Processing 13F Holdings...")
         process_form13f_data(THRTNF_SOURCE_DIR)
         
-        print("   - Processing Exchange Metrics...")
+        logger.info("Processing Exchange Metrics...")
         process_exchange_metrics_data(EXCHANGE_SOURCE_DIR)
         
-        print("   - Processing N-CEN Filings...")
+        logger.info("Processing N-CEN Filings...")
         process_ncen_data(NCEN_SOURCE_DIR)
         
-        print("   - Processing N-PORT Filings...")
+        logger.info("Processing N-PORT Filings...")
         process_nport_data(NPORT_SOURCE_DIR)
         
-        print("   - Processing Form D Filings...")
+        logger.info("Processing Form D Filings...")
         process_formd_data(FORMD_SOURCE_DIR)
         
-        print("✅ SEC data processing complete!")
+        logger.info("✅ SEC data processing complete!")
     except Exception as e:
-        print(f"❌ Error processing SEC data: {e}")
+        error_msg = f"❌ Error processing SEC data: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        print(error_msg)
     
     # Process EDGAR Filings
-    print(f"\n3️⃣ Processing EDGAR Filings...")
+    logger.info("\n3️⃣ Processing EDGAR Filings...")
     try:
         process_all_edgar_filings()
-        print("✅ EDGAR filings processing complete!")
+        logger.info("✅ EDGAR filings processing complete!")
     except Exception as e:
-        print(f"❌ Error processing EDGAR filings: {e}")
+        error_msg = f"❌ Error processing EDGAR filings: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        print(error_msg)
     
     # Process FRED Data (if available)
-    print(f"\n4️⃣ Processing FRED Data...")
+    logger.info("\n4️⃣ Processing FRED Data...")
     try:
         from config import FRED_SOURCE_DIR
         if os.path.exists(FRED_SOURCE_DIR):
-            print("   - FRED data directory found, processing...")
+            logger.info("FRED data directory found, processing...")
             # Add FRED processing logic here when available
-            print("   - FRED processing not yet implemented")
+            logger.info("FRED processing not yet implemented")
         else:
-            print("   - No FRED data found, skipping...")
-        print("✅ FRED data processing complete!")
+            logger.info("No FRED data found, skipping...")
+        logger.info("✅ FRED data processing complete!")
     except Exception as e:
-        print(f"❌ Error processing FRED data: {e}")
+        error_msg = f"❌ Error processing FRED data: {str(e)}"
+        logger.error(error_msg, exc_info=True)
+        print(error_msg)
     
-    print(f"\n🎉 All Downloaded Data Processing Complete!")
-    print(f"📈 Your database now contains processed data from all sources.")
+    completion_msg = "\n🎉 All Downloaded Data Processing Complete!"
+    completion_msg += "\n📈 Your database now contains processed data from all sources."
+    completion_msg += f"\n📝 Detailed logs saved to: {os.path.abspath(log_file)}"
+    
+    logger.info(completion_msg)
+    print(completion_msg)
     print(f"💡 You can now use the RAG system to query this comprehensive dataset.")
 
 def test_edgar_processing():

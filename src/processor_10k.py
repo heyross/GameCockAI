@@ -9,7 +9,6 @@ and other relevant information from these filings.
 import os
 import re
 import json
-import logging
 import zipfile
 import requests
 import pandas as pd
@@ -17,21 +16,26 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from typing import Dict, List, Optional, Tuple, Union
 from sqlalchemy.orm import Session
-
-# Import from the correct database module (GameCockAI/database.py)
 import sys
-import os
-# Add the parent directory to the path to import from GameCockAI/database.py
+
+# Set up the Python path
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from database import SessionLocal, Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
-from config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
+# Import local modules
+try:
+    from GameCockAI.src.logging_utils import get_processor_logger
+    from GameCockAI.database import SessionLocal, Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
+    from GameCockAI.config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
+except ImportError:
+    # Fallback for direct execution
+    from src.logging_utils import get_processor_logger
+    from database import SessionLocal, Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
+    from config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# Initialize logger
+logger = get_processor_logger('processor_10k')
 
 # Constants
 SEC_FORMS = ['10-K', '10-Q', '10-K/A', '10-Q/A']
@@ -591,6 +595,9 @@ def process_10k_filings(source_dir: str, force: bool = False) -> None:
 
 if __name__ == "__main__":
     import argparse
+    from src.logging_utils import get_processor_logger
+
+    logger = get_processor_logger('processor_10k')
     
     parser = argparse.ArgumentParser(description='Process 10-K/10-Q SEC filings')
     parser.add_argument('source_dir', help='Directory containing 10-K/10-Q filings')
