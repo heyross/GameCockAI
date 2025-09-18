@@ -5,20 +5,46 @@ This module handles processing of Form 13F filing data from ZIP archives.
 Form 13F is used for quarterly institutional investment manager holdings reports.
 """
 
+# Standard library imports
 import glob
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_form13f')
+import logging
 import os
-import pandas as pd
+import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 from zipfile import ZipFile
-from database import (
-    Form13FSubmission, Form13FCoverPage, Form13FOtherManager, 
-    Form13FSignature, Form13FSummaryPage, Form13FOtherManager2, 
-    Form13FInfoTable, SessionLocal
-)
 
-logger = logger
+# Third-party imports
+import pandas as pd
+from sqlalchemy.orm import Session
+
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+# Local application imports
+try:
+    from database import (
+        Form13FSubmission, Form13FCoverPage, Form13FOtherManager, 
+        Form13FSignature, Form13FSummaryPage, Form13FOtherManager2, 
+        Form13FInfoTable, SessionLocal
+    )
+    logger = logging.getLogger('processor_form13f')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        from GameCockAI.database import (
+            Form13FSubmission, Form13FCoverPage, Form13FOtherManager,
+            Form13FSignature, Form13FSummaryPage, Form13FOtherManager2,
+            Form13FInfoTable, SessionLocal
+        )
+        logger = logging.getLogger('processor_form13f')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_form13f')
+        logger.warning('Failed to import some database modules: %s', e)
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -30,11 +56,6 @@ def sanitize_column_names(df):
 
 def process_form13f_data(source_dir, db_session=None):
     """Processes Form 13F data from zip files and loads it into the database."""
-
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_form13f')
-
     zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
     db = db_session if db_session else SessionLocal()
 

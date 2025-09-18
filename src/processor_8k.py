@@ -5,34 +5,46 @@ This module provides functionality to download, parse, and process 8-K filings
 from the SEC EDGAR database. It extracts structured data and other relevant information from these filings.
 """
 
+# Standard library imports
+import json
+import logging
 import os
 import re
-import json
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_8k')
+import sys
 import zipfile
-import requests
-import pandas as pd
 from datetime import datetime
-from bs4 import BeautifulSoup
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
+
+# Third-party imports
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 from sqlalchemy.orm import Session
 
-# Import from the correct database module (GameCockAI/database.py)
-import sys
-import os
-# Add the parent directory to the path to import from GameCockAI/database.py
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from database import SessionLocal, Sec8KSubmission, Sec8KItem
-from config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
-
-# Configure logging
-logger.basicConfig(level=logger.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logger
+# Local application imports
+try:
+    from config import DATA_DIR, EDGAR_BASE_URL, SEC_API_KEY
+    from database import SessionLocal, Sec8KItem, Sec8KSubmission
+    logger = logging.getLogger('processor_8k')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    # Fallback for direct execution or testing
+    try:
+        from GameCockAI.config import DATA_DIR, EDGAR_BASE_URL, SEC_API_KEY
+        from GameCockAI.database import SessionLocal, Sec8KItem, Sec8KSubmission
+        logger = logging.getLogger('processor_8k')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        import logging
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_8k')
+        logger.warning('Failed to import some modules: %s', e)
 
 # Constants
 SEC_FORMS = ['8-K', '8-K/A']

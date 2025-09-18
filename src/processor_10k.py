@@ -6,28 +6,41 @@ from the SEC EDGAR database. It extracts structured data, financial statements,
 and other relevant information from these filings.
 """
 
+# Standard library imports
+import json
 import os
 import re
-import json
-import zipfile
-import requests
-import pandas as pd
-from datetime import datetime
-from bs4 import BeautifulSoup
-from typing import Dict, List, Optional, Tuple, Union
-from sqlalchemy.orm import Session
 import sys
+import zipfile
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple, Union
 
-# Set up the Python path
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Third-party imports
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+from sqlalchemy.orm import Session
+
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-# Import local modules
+# Local application imports
 try:
+    from GameCockAI.config import DATA_DIR, EDGAR_BASE_URL, SEC_API_KEY
+    from GameCockAI.database import (
+        Sec10KDocument, Sec10KExhibits, Sec10KFinancials, Sec10KMetadata,
+        Sec10KSubmission, SessionLocal
+    )
     from GameCockAI.src.logging_utils import get_processor_logger
-    from GameCockAI.database import SessionLocal, Sec10KSubmission, Sec10KDocument, Sec10KFinancials, Sec10KExhibits, Sec10KMetadata
-    from GameCockAI.config import EDGAR_BASE_URL, SEC_API_KEY, DATA_DIR
+    logger = get_processor_logger('processor_10k')
+except ImportError as e:
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('processor_10k')
+    logger.warning('Failed to import some modules: %s', e)
 except ImportError:
     # Fallback for direct execution
     from src.logging_utils import get_processor_logger

@@ -780,16 +780,26 @@ def setup_logging():
     """Set up logging configuration."""
     from datetime import datetime
     import os
-    
-    # Import using absolute path
-    from GameCockAI.src.logging_utils import get_processor_logger
-    
-    # Get the logger
-    logger = get_processor_logger('app')
+    import logging
     
     # Create logs directory if it doesn't exist
     log_dir = os.path.join(os.path.dirname(__file__), 'logs')
     os.makedirs(log_dir, exist_ok=True)
+    
+    # Set up basic logging configuration
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[
+            logging.FileHandler(os.path.join(log_dir, 'app.log')),
+            logging.StreamHandler()
+        ]
+    )
+    
+    # Get the logger
+    logger = logging.getLogger('app')
+    return logger
     
     # Create a timestamped log file
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -800,7 +810,7 @@ def setup_logging():
 def process_all_downloaded_data():
     """Process all downloaded data from all sources (CFTC, SEC, FRED, etc.)."""
     # Set up logging
-    logger, log_file = setup_logging()
+    logger = setup_logging()
     
     logger.info("🚀 Starting processing of all downloaded data...")
     logger.info("This will process data from all sources: CFTC, SEC, FRED, and EDGAR filings.")
@@ -985,6 +995,7 @@ def database_menu():
 
 def run_startup_checks():
     """Performs all startup checks and handles missing dependencies."""
+    import sys  # Added import for sys.exit()
     print("\n🚀 Welcome to GameCock AI - Your Financial Data Intelligence Platform")
     print("=" * 70)
     print("🔧 Initializing system components...")
@@ -1273,6 +1284,7 @@ def dtcc_download_submenu():
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
+    from worker import start_worker
     run_startup_checks()
     initialize_database()
     start_worker()

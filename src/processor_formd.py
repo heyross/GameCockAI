@@ -5,21 +5,47 @@ This module handles processing of Form D filing data from ZIP archives.
 Form D is used for notice of sales of securities under Regulation D.
 """
 
+# Standard library imports
 import glob
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_formd')
+import logging
 import os
-import pandas as pd
+import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 from zipfile import ZipFile
-from src.downloader import extract_formd_filings
-from config import FORMD_SOURCE_DIR
-from database import (
-    FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient, 
-    FormDRelatedPerson, FormDSignature, SessionLocal
-)
 
-logger = logger
+# Third-party imports
+import pandas as pd
+
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+# Local application imports
+try:
+    from config import FORMD_SOURCE_DIR
+    from database import (
+        FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient,
+        FormDRelatedPerson, FormDSignature, SessionLocal
+    )
+    from src.downloader import extract_formd_filings
+    logger = logging.getLogger('processor_formd')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        from GameCockAI.config import FORMD_SOURCE_DIR
+        from GameCockAI.database import (
+            FormDSubmission, FormDIssuer, FormDOffering, FormDRecipient,
+            FormDRelatedPerson, FormDSignature, SessionLocal
+        )
+        from GameCockAI.src.downloader import extract_formd_filings
+        logger = logging.getLogger('processor_formd')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_formd')
+        logger.warning('Failed to import some modules: %s', e)
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -154,11 +180,6 @@ def process_formd_quarter(quarter_dir, db_session):
                 db_session.bulk_insert_mappings(model, records)
                 logger.info(f"Inserted {len(records)} records from {file_name}")
 
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_formd')
-
-            
         except Exception as e:
             logger.error(f"Error processing {file_name}: {e}")
             continue

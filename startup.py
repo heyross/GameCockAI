@@ -112,6 +112,11 @@ def check_dependencies() -> Tuple[bool, List[str]]:
     for pkg in missing_packages:
         print(f"  - {pkg}")
     
+    # Attempt to install missing packages
+    success, message = install_packages(missing_packages)
+    if success:
+        print("✅ Successfully installed all missing packages")
+        return True, []
     return False, missing_packages
 
 def check_ollama_service():

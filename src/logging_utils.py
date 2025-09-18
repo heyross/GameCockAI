@@ -29,9 +29,17 @@ class ProcessingLogger:
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.log_file = os.path.join(self.log_dir, f'processing_{timestamp}.log')
         
-        # Configure root logger
+        # Configure root logger if not already configured
+        if not logging.getLogger().hasHandlers():
+            logging.basicConfig(level=logging.INFO)
+        
+        # Create our own logger
         self.logger = logging.getLogger('gamecock_processor')
         self.logger.setLevel(logging.INFO)
+        
+        # Remove any existing handlers to avoid duplicate logs
+        if self.logger.hasHandlers():
+            self.logger.handlers.clear()
         
         # Create formatter
         formatter = logging.Formatter(
@@ -51,6 +59,9 @@ class ProcessingLogger:
         # Add handlers
         self.logger.addHandler(file_handler)
         self.logger.addHandler(console_handler)
+        
+        # Prevent the logger from propagating to the root logger
+        self.logger.propagate = False
         
         self._initialized = True
 

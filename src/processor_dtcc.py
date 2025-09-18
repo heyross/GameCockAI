@@ -3,17 +3,40 @@ DTCC Data Processor
 
 This module handles the processing of DTCC data files and loading them into the database.
 """
-import os
-from src.logging_utils import get_processor_logger
 
-logger = get_processor_logger('processor_dtcc')
-import pandas as pd
+# Standard library imports
+import logging
+import os
 from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+# Third-party imports
+import pandas as pd
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound
 
-# Set up logging
-logger = logger
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+# Local application imports
+try:
+    from database import SessionLocal, DTCCTrade, DTCCPosition
+    logger = logging.getLogger('processor_dtcc')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        from GameCockAI.database import SessionLocal, DTCCTrade, DTCCPosition
+        logger = logging.getLogger('processor_dtcc')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        import sys
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_dtcc')
+        logger.warning('Failed to import some database modules: %s', e)
 
 class DTCCProcessor:
     """Processes DTCC data files and loads them into the database."""
@@ -225,11 +248,6 @@ class DTCCProcessor:
     def _get_or_create_organization(self, lei, name=None):
         """Get an existing organization or create a new one if it doesn't exist."""
         from dtcc_models import DTCCOrganization
-
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_dtcc')
-
         
         if not lei:
             raise ValueError("LEI is required for organization lookup")

@@ -5,19 +5,45 @@ This module handles processing of SEC insider trading data from ZIP archives.
 SEC insider trading data includes Form 4, 3, and 5 filings.
 """
 
+# Standard library imports
 import glob
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_sec')
+import logging
 import os
-import pandas as pd
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 from zipfile import ZipFile
-from database import (
-    SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
-    SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, SessionLocal
-)
 
-logger = logger
+# Third-party imports
+import pandas as pd
+
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+# Local application imports
+try:
+    from database import (
+        SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
+        SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, SessionLocal
+    )
+    logger = logging.getLogger('processor_sec')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        # Fall back to absolute import if relative import fails
+        from GameCockAI.database import (
+            SecSubmission, SecReportingOwner, SecNonDerivTrans, SecNonDerivHolding,
+            SecDerivTrans, SecDerivHolding, SecFootnote, SecOwnerSignature, SessionLocal
+        )
+        logger = logging.getLogger('processor_sec')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        import logging
+        import sys
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_sec')
+        logger.warning('Failed to import some database modules: %s', e)
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -29,11 +55,6 @@ def sanitize_column_names(df):
 
 def process_sec_insider_data(source_dir, db_session=None):
     """Processes SEC insider trading data from zip files and loads it into the database."""
-
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_sec')
-
     zip_files = sorted(glob.glob(os.path.join(source_dir, '*.zip')))
     db = db_session if db_session else SessionLocal()
 

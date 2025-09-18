@@ -1,39 +1,73 @@
 """
 Processor module for CFTC Swap Data
+
 Handles processing and loading of CFTC swap data into the database.
 """
 
-import os
+# Standard library imports
 import json
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('cftc_swaps')
+import logging
+import os
+import sys
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+# Third-party imports
 import pandas as pd
 from sqlalchemy.orm import Session
 
-# Import from the correct database module (GameCockAI/database.py)
-import sys
-import os
-# Add the parent directory to the path to import from GameCockAI/database.py
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from database import (
-    SessionLocal,
-    CFTCDerivativesDealer,
-    CFTCDerivativesClearingOrganization,
-    CFTCSwapExecutionFacility,
-    CFTCSwapDataRepository,
-    CFTCDailySwapReport
-)
-from config import (
-    CFTC_SWAP_DEALER_DIR,
-    CFTC_SWAP_EXECUTION_DIR,
-    CFTC_SWAP_DATA_REPOSITORY_DIR
-)
+# Local application imports
+try:
+    from database import (
+        SessionLocal,
+        CFTCDerivativesDealer,
+        CFTCDerivativesClearingOrganization,
+        CFTCSwapExecutionFacility,
+        CFTCSwapDataRepository,
+        CFTCDailySwapReport
+    )
+    logger = logging.getLogger('processor_cftc_swaps')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        from GameCockAI.database import (
+            SessionLocal,
+            CFTCDerivativesDealer,
+            CFTCDerivativesClearingOrganization,
+            CFTCSwapExecutionFacility,
+            CFTCSwapDataRepository,
+            CFTCDailySwapReport
+        )
+        logger = logging.getLogger('processor_cftc_swaps')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_cftc_swaps')
+        logger.warning('Failed to import some database modules: %s', e)
+
+# Import configuration
+try:
+    from config import (
+        CFTC_SWAP_DEALER_DIR,
+        CFTC_SWAP_EXECUTION_DIR,
+        CFTC_SWAP_DATA_REPOSITORY_DIR
+    )
+except ImportError as e:
+    try:
+        from GameCockAI.config import (
+            CFTC_SWAP_DEALER_DIR,
+            CFTC_SWAP_EXECUTION_DIR,
+            CFTC_SWAP_DATA_REPOSITORY_DIR
+        )
+    except ImportError:
+        logger.error('Failed to import configuration: %s', e)
+        raise
 
 # Logging is configured in logging_utils.py
 
@@ -277,21 +311,17 @@ def process_daily_swap_report_data(file_path: str, session: Optional[Session] = 
                     
             except Exception as e:
                 logger.error(f"Error processing daily swap report data: {e}", exc_info=True)
+                session.rollback()
                 raise
-            session.rollback()
         
         session.commit()
         logger.info(f"Processed {count} daily swap report records from {file_path}")
-
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_cftc_swaps')
-
         return count
         
     except Exception as e:
         logger.error(f"Error processing daily swap report file {file_path}: {e}", exc_info=True)
-        session.rollback()
+        if session:
+            session.rollback()
         return 0
         
     finally:

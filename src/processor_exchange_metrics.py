@@ -5,16 +5,38 @@ This module handles processing of SEC Exchange Metrics data from ZIP archives.
 Exchange Metrics data contains trading statistics and market data.
 """
 
+# Standard library imports
 import glob
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_exchange_metrics')
+import logging
 import os
-import pandas as pd
+import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 from zipfile import ZipFile
-from database import SecExchangeMetrics, SessionLocal
 
-logger = logger
+# Third-party imports
+import pandas as pd
+from sqlalchemy.orm import Session
+
+# Add parent directory to path for local imports
+parent_dir = str(Path(__file__).parent.parent.absolute())
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+# Local application imports
+try:
+    from database import SecExchangeMetrics, SessionLocal
+    logger = logging.getLogger('processor_exchange_metrics')
+    logger.setLevel(logging.INFO)
+except ImportError as e:
+    try:
+        from GameCockAI.database import SecExchangeMetrics, SessionLocal
+        logger = logging.getLogger('processor_exchange_metrics')
+        logger.setLevel(logging.INFO)
+    except ImportError:
+        logging.basicConfig(level=logging.INFO)
+        logger = logging.getLogger('processor_exchange_metrics')
+        logger.warning('Failed to import some database modules: %s', e)
 
 def sanitize_column_names(df):
     """Sanitizes DataFrame column names to be valid Python identifiers."""
@@ -79,15 +101,14 @@ def process_exchange_metrics_data(source_dir, db_session=None):
                             records = df.where(pd.notna(df), None).to_dict(orient='records')
                             db.bulk_insert_mappings(SecExchangeMetrics, records)
                             logger.info(f"Loading {len(records)} records into {SecExchangeMetrics.__tablename__} from {csv_filename}")
-
-from src.logging_utils import get_processor_logger
-
-logger = get_processor_logger('processor_exchange_metrics')
-
-                db.commit()
+                    db.commit()
             except Exception as e:
                 logger.error(f"Error processing file {zip_file}: {e}")
                 db.rollback()
+    except Exception as e:
+        logger.error(f"Error during processing: {e}")
+        raise
     finally:
         if not db_session:
             db.close()
+
